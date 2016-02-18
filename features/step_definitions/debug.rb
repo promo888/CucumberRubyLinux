@@ -92,36 +92,6 @@ Given /^Code Tested$/  do
       avg_indicators.push current_bar_avg
      end
 
-     #signal entry above/below avg after 1and2nd bar close in signal direction
-
-     if(j+2+1<=source_hash.length && j>2+1+avg_bars_period)
-       current_close=avg_indicators.select{|elem| elem['period_last_bar_index']==j}
-       next_bar_close=avg_indicators.select{|elem| elem['period_last_bar_index']==j+1}
-       next_next_bar_close=avg_indicators.select{|elem| elem['period_last_bar_index']==j+2}
-
-       #single_avg_signals={'bar_index'=>0,'percent_above_avg'=>false,'_percent_below_avg'=>false,'open'=>0,'high'=>0,'low'=>0,'close'=>0}
-       current_signal={}
-       #LongEntry
-       if current_close['close']>current_close['avg_close_price'] && next_bar_close['close']>current_close['close'] && next_next_bar_close['close']>next_bar_close['close']
-         current_signal['bar_index'] = source_hash[j]['bar_index']
-             current_signal['open'] = source_hash[j]['open']
-                 current_signal['high'] = source_hash[j]['high']
-                     current_signal['low'] = source_hash[j]['low']
-                         current_signal['percent_above_avg'] = source_hash[j]['close']
-                             current_signal['points_above_avg'] = source_hash[j]['bar_index']
-                                 current_signal['percent_below_avg'] = source_hash[j]['bar_index']
-                                     current_signal['points_below_avg'] = source_hash[j]['bar_index']
-                                         current_signal['avg_period'] = source_hash[j]['bar_index']
-                                             current_signal['avg_value'] = source_hash[j]['bar_index']
-       end
-
-       #ShortEntry
-       if current_close['close']<current_close['avg_close_price'] && next_bar_close['close']<current_close['close'] && next_next_bar_close['close']<next_bar_close['close']
-
-       end
-
-#dummy
-     end
 
 
    end
@@ -151,6 +121,44 @@ Given /^Code Tested$/  do
 
 
 
+end
+
+
+
+signals_ma1_arr=[]
+def addSignalForCrossMa1(current_bar_index,bars_array,avg_period)
+  #signal entry above/below avg after 1and2nd bar close in signal direction - entry on close
+  if(current_bar_index+1+1<=bars_array.length && current_bar_index>1+1+avg_period) #additional +1 - at least 1/next day exist in order to test profit/loss
+    current_close=bars_array.select{|elem| elem['period_last_bar_index']==current_bar_index}
+    before_bar_close=bars_array.select{|elem| elem['period_last_bar_index']==current_bar_index-1}
+    next_bar_close=bars_array.select{|elem| elem['period_last_bar_index']==current_bar_index+1}
+
+    #single_avg_signals={'bar_index'=>0,'percent_above_avg'=>false,'_percent_below_avg'=>false,'open'=>0,'high'=>0,'low'=>0,'close'=>0}
+    current_signal={}
+    #LongEntry
+    if current_close['close']>before_bar_close['avg_close_price'] && next_bar_close['close']>current_close['close']
+      current_signal['bar_index'] = next_bar_close['bar_index']
+      current_signal['open'] = next_bar_close['open']
+      current_signal['high'] = next_bar_close['high']
+      current_signal['low'] = next_bar_close['low']
+
+      # current close/above previous day close avg
+      current_signal['percent_above_avg'] = (next_bar_close['close']-before_bar_close['avg_close_price']/before_bar_close['avg_close_price']*100).to_f.round(2)
+      #current_signal['points_above_avg'] = (next_bar_close['close']-before_bar_close['avg_close_price']).to_f.round(2) #will fill between trades
+      #current_signal['percent_below_avg'] = source_hash[j]['bar_index']
+      #current_signal['points_below_avg'] = source_hash[j]['bar_index']
+      current_signal['avg_period'] = avg_period
+      current_signal['avg_value'] = source_hash[j]['bar_index']
+      #
+    end
+
+    #ShortEntry
+    if current_close['close']<current_close['avg_close_price'] && next_bar_close['close']<current_close['close'] && next_next_bar_close['close']<next_bar_close['close']
+
+    end
+
+
+  end
 end
 
 
