@@ -1,0 +1,316 @@
+93: set -o errexit
+94: set -o pipefail
+95: set -o nounset
+98: userPermitted=oracle
+999: id -g -n oracle
+99: userPermittedGroup=oinstall
+100: argFirst=-n
+101: argSecond=db_sdata_1.3.21.0.tgz
+102: argsQty=2
+103: untarWhereTo=/export/home/oracle/Automation/packages
+104: create_user_scriptPath=/export/home/oracle/Automation
+105: create_user_scriptName=buildSchema_sdata1.sh
+106: create_user_script=/export/home/oracle/Automation/buildSchema_sdata1.sh
+107: storageLocalPath=/export/home/oracle/tmp_storage_sdata1
+108: storagePath=/export/home/oracle/build_server/Releases/db_sdata
+109: db_config_sdata_exampleName=db_config_sdata1_example.sql
+110: db_config_sdata_examplePath=/export/home/oracle/Automation/db_config_sdata1_example.sql
+111: verboseMode=
+112: pathGiven=
+113: errorMsg=
+114: COLOR=
+115: getLastPackageName=
+116: getPackageName=
+117: installationPath=
+120: '[' -f /export/home/oracle/Automation/db_config_sdata1_example.sql ']'
+714: readParam
+173: '[' 2 -lt 3 ']'
+174: '[' 2 -eq 2 ']'
+175: [[ -n == \-\v ]]
+175: [[ -n == \-\v\e\r\b\o\s\e ]]
+181: [[ -n == \-\p ]]
+181: [[ -n == \-\p\v ]]
+196: [[ -n == \-\f ]]
+196: [[ -n == \-\f\v ]]
+235: [[ -n == \-\n ]]
+2237: cd /export/home/oracle/build_server/Releases/db_sdata
+2237: egrep db_sdata_1.3.21.0.tgz
+2237: find db_sdata_1.3.0.0.tgz db_sdata_1.3.0.1.tgz db_sdata_1.3.0.2.tgz db_sdata_1.3.0.3.tgz db_sdata_1.3.10.0.tgz db_sdata_1.3.11.0.tgz db_sdata_1.3.12.0.tgz db_sdata_1.3.13.0.tgz db_sdata_1.3.14.0.tgz db_sdata_1.3.15.0.tgz db_sdata_1.3.16.0.tgz db_sdata_1.3.17.0.tgz db_sdata_1.3.18.0.tgz db_sdata_1.3.19.0.tgz db_sdata_1.3.20.0.tgz db_sdata_1.3.21.0.tgz db_sdata_1.3.22.0.tgz db_sdata_1.3.23.0.tgz db_sdata_1.3.4.0.tgz db_sdata_1.3.5.0.tgz db_sdata_1.3.6.0.tgz db_sdata_1.3.7.0.tgz db_sdata_1.3.8.0.tgz db_sdata_1.3.9.0.tgz sdata_1.2.3.0.tgz sdata_1.2.4.0.tgz sdata_1.2.5.0.tgz sdata_1.2.7.0.tgz sdata_1.2.8.0.tgz sdata_v1.2.1.0.tgz sdata_V1.2.2.0.tgz -type f -printf '%p\n'
+237: '[' db_sdata_1.3.21.0.tgz ']'
+238: '[' -n == -nv ']'
+241: verboseMode=
+2243: cd /export/home/oracle/build_server/Releases/db_sdata
+2243: egrep db_sdata_1.3.21.0.tgz
+2243: find db_sdata_1.3.0.0.tgz db_sdata_1.3.0.1.tgz db_sdata_1.3.0.2.tgz db_sdata_1.3.0.3.tgz db_sdata_1.3.10.0.tgz db_sdata_1.3.11.0.tgz db_sdata_1.3.12.0.tgz db_sdata_1.3.13.0.tgz db_sdata_1.3.14.0.tgz db_sdata_1.3.15.0.tgz db_sdata_1.3.16.0.tgz db_sdata_1.3.17.0.tgz db_sdata_1.3.18.0.tgz db_sdata_1.3.19.0.tgz db_sdata_1.3.20.0.tgz db_sdata_1.3.21.0.tgz db_sdata_1.3.22.0.tgz db_sdata_1.3.23.0.tgz db_sdata_1.3.4.0.tgz db_sdata_1.3.5.0.tgz db_sdata_1.3.6.0.tgz db_sdata_1.3.7.0.tgz db_sdata_1.3.8.0.tgz db_sdata_1.3.9.0.tgz sdata_1.2.3.0.tgz sdata_1.2.4.0.tgz sdata_1.2.5.0.tgz sdata_1.2.7.0.tgz sdata_1.2.8.0.tgz sdata_v1.2.1.0.tgz sdata_V1.2.2.0.tgz -type f -printf '%p\n'
+243: getPackageName=db_sdata_1.3.21.0.tgz
+251: [[ -f /export/home/oracle/build_server/Releases/db_sdata/db_sdata_1.3.21.0.tgz ]]
+251: [[ /export/home/oracle/build_server/Releases/db_sdata/db_sdata_1.3.21.0.tgz =~ \.t?gz$ ]]
+252: archiveName=db_sdata_1.3.21.0.tgz
+253: pathGiven=/export/home/oracle/build_server/Releases/db_sdata/db_sdata_1.3.21.0.tgz
+717: '[' '' = v ']'
+720: exec
+7723: date +%Y-%m-%d_%H:%M:%S,%3N
+723: echo '2015-12-29_18:08:08,696 -- Started'
+724: echo -e '\n---Writing regular output to log /export/home/oracle/Automation/logs_SDATA1/sdata_schema1_install_automatic.sh.log---'
+725: echo -e '***Writing debug output to log /export/home/oracle/Automation/logs_SDATA1/sdata_schema1_install_automatic.sh.log***\n'
+728: checkCurrentUser
+163: local userId
+1164: id -u oracle
+164: userId=100
+1165: id -u
+165: '[' 100 '!=' 100 ']'
+731: getPackage
+4452: date +%Y-%m-%d_%H:%M:%S,%3N
+452: echoColoured '2015-12-29_18:08:08,700 -- Getting package...' yellow
+329: '[' 2 = 2 ']'
+330: '[' yellow = yellow ']'
+331: COLOR=33
+341: '[' -z 33 ']'
+344: echo -e '\e[33m2015-12-29_18:08:08,700 -- Getting package...\e[0m'
+455: errorMsg='Error while getting package, installation not finished'
+457: mkdir -p /export/home/oracle/Automation/packages
+460: '[' /export/home/oracle/build_server/Releases/db_sdata/db_sdata_1.3.21.0.tgz '!=' '' ']'
+461: echoColoured 'Path to package was given explicitly, getting /export/home/oracle/build_server/Releases/db_sdata/db_sdata_1.3.21.0.tgz' yellow
+329: '[' 2 = 2 ']'
+330: '[' yellow = yellow ']'
+331: COLOR=33
+341: '[' -z 33 ']'
+344: echo -e '\e[33mPath to package was given explicitly, getting /export/home/oracle/build_server/Releases/db_sdata/db_sdata_1.3.21.0.tgz\e[0m'
+464: cmp -s /export/home/oracle/build_server/Releases/db_sdata/db_sdata_1.3.21.0.tgz /export/home/oracle/Automation/packages/db_sdata_1.3.21.0.tgz
+467: cp -fv /export/home/oracle/build_server/Releases/db_sdata/db_sdata_1.3.21.0.tgz /export/home/oracle/Automation/packages
+4468: date +%Y-%m-%d_%H:%M:%S,%3N
+468: echo '2015-12-29_18:08:08,759 -- Copying finished'
+496: echo 'setting env variable AUTOMATION_PACKAGE_NAME_sdata1 in .bashrc'
+497: set_replace_env_global AUTOMATION_PACKAGE_NAME_sdata1 db_sdata_1.3.21.0.tgz
+436: '[' 2 -eq 2 ']'
+437: grep -q 'export AUTOMATION_PACKAGE_NAME_sdata1=' /export/home/oracle/.bashrc
+438: sed -i -e 's/export AUTOMATION_PACKAGE_NAME_sdata1=.*/export AUTOMATION_PACKAGE_NAME_sdata1=db_sdata_1.3.21.0.tgz/g' /export/home/oracle/.bashrc
+442: return 0
+500: errorMsg=
+734: extractPackage
+505: local tarPath=
+506: local installationFolderNameSlash=
+507: local installationFolderName1=
+508: local installationFolderName=
+509: local db_config_qa_ptrade_Path=
+5512: date +%Y-%m-%d_%H:%M:%S,%3N
+512: echoColoured '\n2015-12-29_18:08:08,764 -- Extracting db_sdata_1.3.21.0.tgz to /export/home/oracle/Automation/packages...\n' yellow
+329: '[' 2 = 2 ']'
+330: '[' yellow = yellow ']'
+331: COLOR=33
+341: '[' -z 33 ']'
+344: echo -e '\e[33m\n2015-12-29_18:08:08,764 -- Extracting db_sdata_1.3.21.0.tgz to /export/home/oracle/Automation/packages...\n\e[0m'
+515: errorMsg='Error while extracting package, installation not finished'
+517: '[' /export/home/oracle/build_server/Releases/db_sdata/db_sdata_1.3.21.0.tgz '!=' '' ']'
+518: tarPath=/export/home/oracle/Automation/packages/db_sdata_1.3.21.0.tgz
+521: '[' -s /export/home/oracle/Automation/packages/db_sdata_1.3.21.0.tgz ']'
+5531: tar '--exclude=*/*' -tf /export/home/oracle/Automation/packages/db_sdata_1.3.21.0.tgz
+5531: wc -l
+531: '[' 1 '!=' 1 ']'
+5535: tar '--exclude=*/*' -tf /export/home/oracle/Automation/packages/db_sdata_1.3.21.0.tgz
+535: installationFolderNameSlash=db_sdata_1.3.21.0/
+538: installationFolderName1=db_sdata_1.3.21.0
+539: installationFolderName=db_sdata_1.3.21.0_sdata1
+540: installationPath=/export/home/oracle/Automation/packages/db_sdata_1.3.21.0_sdata1
+541: db_config_sdata_Path=/export/home/oracle/Automation/packages/db_sdata_1.3.21.0_sdata1/db_config_sdata.sql
+570: errorMsg='Error while removing directory with the same version, installation not finished'
+573: '[' -d /export/home/oracle/Automation/packages/db_sdata_1.3.21.0_sdata1 ']'
+580: errorMsg='Error while extracting package, installation not finished'
+583: mkdir /export/home/oracle/Automation/packages/db_sdata_1.3.21.0_sdata1
+583: tar xzvf /export/home/oracle/Automation/packages/db_sdata_1.3.21.0.tgz -C /export/home/oracle/Automation/packages/db_sdata_1.3.21.0_sdata1 --strip-components 1
+585: echoColoured '"db_sdata_1.3.21.0" from the package "db_sdata_1.3.21.0.tgz" was extracted in /export/home/oracle/Automation/packages as "db_sdata_1.3.21.0_sdata1"' green
+329: '[' 2 = 2 ']'
+330: '[' green = yellow ']'
+332: '[' green = red ']'
+334: '[' green = green ']'
+335: COLOR=32
+341: '[' -z 32 ']'
+344: echo -e '\e[32m"db_sdata_1.3.21.0" from the package "db_sdata_1.3.21.0.tgz" was extracted in /export/home/oracle/Automation/packages as "db_sdata_1.3.21.0_sdata1"\e[0m'
+588: errorMsg='Error while replacing db config file, installation not finished'
+591: '[' -f /export/home/oracle/Automation/packages/db_sdata_1.3.21.0_sdata1/db_config_sdata.sql ']'
+592: cat /export/home/oracle/Automation/db_config_sdata1_example.sql
+593: echo -e '\e[32m/export/home/oracle/Automation/packages/db_sdata_1.3.21.0_sdata1/db_config_sdata.sql was set for sdata1:\n\e[0m'
+594: cat /export/home/oracle/Automation/packages/db_sdata_1.3.21.0_sdata1/db_config_sdata.sql
+595: echo ''
+602: errorMsg=
+7737: date +%Y-%m-%d_%H:%M:%S,%3N
+737: echoColoured '\n2015-12-29_18:08:08,897 -- Starting installation...' yellow
+329: '[' 2 = 2 ']'
+330: '[' yellow = yellow ']'
+331: COLOR=33
+341: '[' -z 33 ']'
+344: echo -e '\e[33m\n2015-12-29_18:08:08,897 -- Starting installation...\e[0m'
+740: provideRmanAnswers
+6608: date +%Y-%m-%d_%H:%M:%S,%3N
+608: echoColoured '\n2015-12-29_18:08:08,899 -- Removing oracle archive logs with RMAN...\n' yellow
+329: '[' 2 = 2 ']'
+330: '[' yellow = yellow ']'
+331: COLOR=33
+341: '[' -z 33 ']'
+344: echo -e '\e[33m\n2015-12-29_18:08:08,899 -- Removing oracle archive logs with RMAN...\n\e[0m'
+611: echoColoured '\nsetting PTS_AUTOMATION_LOGS_HOME' yellow
+329: '[' 2 = 2 ']'
+330: '[' yellow = yellow ']'
+331: COLOR=33
+341: '[' -z 33 ']'
+344: echo -e '\e[33m\nsetting PTS_AUTOMATION_LOGS_HOME\e[0m'
+612: export PTS_AUTOMATION_LOGS_HOME=/export/home/oracle/Automation/logs_SDATA1
+612: PTS_AUTOMATION_LOGS_HOME=/export/home/oracle/Automation/logs_SDATA1
+613: echo 'set PTS_AUTOMATION_LOGS_HOME: /export/home/oracle/Automation/logs_SDATA1'
+615: echoColoured '\nsetting PTS_AUTOMATION_USERNAME' yellow
+329: '[' 2 = 2 ']'
+330: '[' yellow = yellow ']'
+331: COLOR=33
+341: '[' -z 33 ']'
+344: echo -e '\e[33m\nsetting PTS_AUTOMATION_USERNAME\e[0m'
+616: export PTS_AUTOMATION_USERNAME=sdata1
+616: PTS_AUTOMATION_USERNAME=sdata1
+617: echo -e 'set PTS_AUTOMATION_USERNAME: sdata1\n'
+620: errorMsg='Timeout or inner expect error while executing rman, installation not finished'
+622: msg=
+623: automation_logs_home=
+624: automation_script_username=
+625: expect -c '
+log_user 1
+set timeout 5
+
+proc err_exit {msg} {
+    puts stderr ""
+	send "0\r"
+    exit 1
+}
+
+puts "Reading PTS_AUTOMATION_LOGS_HOME"
+
+if {[info exists env(PTS_AUTOMATION_LOGS_HOME)]} {
+    set automation_logs_home $::env(PTS_AUTOMATION_LOGS_HOME)
+	puts "Found PTS_AUTOMATION_LOGS_HOME"
+} else {
+	err_exit "Error while reading env variable PTS_AUTOMATION_LOGS_HOME"
+}
+
+puts "Reading PTS_AUTOMATION_USERNAME"
+
+if {[info exists env(PTS_AUTOMATION_USERNAME)]} {
+    set automation_script_username $::env(PTS_AUTOMATION_USERNAME)
+	puts "Found PTS_AUTOMATION_USERNAME"
+} else {
+	err_exit "Error while reading env variable PTS_AUTOMATION_USERNAME"
+}
+
+exp_internal -f $automation_logs_home/expect_rman_debug_$automation_script_username.log 0
+
+spawn bash
+
+send "rman\r"
+sleep 2
+expect {
+    "*Recovery Manager: Release*" {
+        send "connect target\r"
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+sleep 2
+expect {
+    "*connected to target database:*" {
+        send "delete force archivelog all completed before '\''sysdate -2/24'\'';\r"
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+sleep 2
+
+expect {
+    "*Do you really want to delete the above objects (enter YES or NO)*" {
+        send "YES\r"
+    }
+	"*specification does not match any archived log in the repo*" {
+        send "exit\r"
+		exit 0
+    }
+	"*using target database control file instead of recovery catalog*" {
+        send "exit\r"
+		exit 0
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+sleep 3
+expect {
+    "*Deleted*objects" {
+        send "exit\r"
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+
+expect eof
+'
+708: errorMsg=
+7710: date +%Y-%m-%d_%H:%M:%S,%3N
+710: echoColoured '\n2015-12-29_18:08:14,914 -- Finished RMAN\n' green
+329: '[' 2 = 2 ']'
+330: '[' green = yellow ']'
+332: '[' green = red ']'
+334: '[' green = green ']'
+335: COLOR=32
+341: '[' -z 32 ']'
+344: echo -e '\e[32m\n2015-12-29_18:08:14,914 -- Finished RMAN\n\e[0m'
+743: drop_user
+3350: date +%Y-%m-%d_%H:%M:%S,%3N
+350: echoColoured '\n2015-12-29_18:08:14,916 -- Dropping user sdata1' yellow
+329: '[' 2 = 2 ']'
+330: '[' yellow = yellow ']'
+331: COLOR=33
+341: '[' -z 33 ']'
+344: echo -e '\e[33m\n2015-12-29_18:08:14,916 -- Dropping user sdata1\e[0m'
+353: errorMsg='Error while dropping user, installation not finished'
+356: sqlplus / as sysdba
+404: errorMsg=
+4406: date +%Y-%m-%d_%H:%M:%S,%3N
+406: echoColoured '2015-12-29_18:08:58,485 -- Dropping user "sdata1" finished' green
+329: '[' 2 = 2 ']'
+330: '[' green = yellow ']'
+332: '[' green = red ']'
+334: '[' green = green ']'
+335: COLOR=32
+341: '[' -z 32 ']'
+344: echo -e '\e[32m2015-12-29_18:08:58,485 -- Dropping user "sdata1" finished\e[0m'
+407: echoColoured ''
+329: '[' 1 = 2 ']'
+341: '[' -z 32 ']'
+344: echo -e '\e[32m\e[0m'
+746: create_user1
+413: errorMsg='Error while creating user, installation not finished'
+4415: date +%Y-%m-%d_%H:%M:%S,%3N
+415: echoColoured '2015-12-29_18:08:58,488 -- Creating user sdata1...' yellow
+329: '[' 2 = 2 ']'
+330: '[' yellow = yellow ']'
+331: COLOR=33
+341: '[' -z 33 ']'
+344: echo -e '\e[33m2015-12-29_18:08:58,488 -- Creating user sdata1...\e[0m'
+418: [[ -x /export/home/oracle/Automation/buildSchema_sdata1.sh ]]
+422: echoColoured 'Error: script for creating user "/export/home/oracle/Automation/buildSchema_sdata1.sh" does not exist or is not executable, exiting' red
+329: '[' 2 = 2 ']'
+330: '[' red = yellow ']'
+332: '[' red = red ']'
+333: COLOR=31
+341: '[' -z 31 ']'
+344: echo -e '\e[31mError: script for creating user "/export/home/oracle/Automation/buildSchema_sdata1.sh" does not exist or is not executable, exiting\e[0m'
+423: exit 1
+1: giveErrorMsg
+20: exit_status=1
+21: '[' 1 -ne 0 ']'
+22: '[' '' = v ']'
+25: tee /dev/stderr
+225: date +%Y-%m-%d_%H:%M:%S,%3N
+25: echo -e '\n\e[31m2015-12-29_18:08:58,491 -- Error while creating user, installation not finished\e[0m'
+27: echo 'exit_status: 1'
+28: rm -f /export/home/oracle/Automation/pid_sdata1.log
+29: echo -e '/export/home/oracle/Automation/pid_sdata1.log removed\n'
+30: exit 1

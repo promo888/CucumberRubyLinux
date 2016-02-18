@@ -1,0 +1,33 @@
+started at 2016-01-26_07-15-16
+----------------------------------
+Logger debug: main appenders: [com.ebs.jrt.logging.appenders.AsyncConsoleAppender@9f70c54, com.ebs.jrt.logging.appenders.AsyncFileAppender@234bef66] monitor appenders: []
+26-01-16 07:15:17.238	PTS-C10	INFO	JVM arguments:
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/export/home/ptrade/Automation/PTS/logs/
+-Xms1024m
+-Xmx8g
+-Dconfig.file=/export/home/ptrade/Automation/PTS/config/prod.conf
+-DconfigPath=/export/home/ptrade/Automation/PTS/config
+-Dpts.module.name=http
+26-01-16 07:15:17.242	PTS-C10	INFO	Starting PTS HTTP Service  [Version: 1.4.2.0  build: 488 build time: 2016-01-11 12:32]
+26-01-16 07:16:07.69	PTS-C103	INFO	Component OracleConnectionFactory [JDBC version: JDBC 4.1; Oracle Driver version: 12.1.0.1.0; DB version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production] initialized & started. Effective configuration:
+{
+    "connectTimeout" : 3000,
+    "primary" : {
+        "host" : "10.20.42.50",
+        "port" : 1521
+    },
+    "readTimeout" : 15000,
+    "schema" : "ptrade",
+    "service" : "PTDB_NYCAPDB01M_TLVP.am.icap.com"
+}
+
+26-01-16 07:16:07.234	PTS-C105	INFO	Static Data - 799 floors successfully loaded
+26-01-16 07:16:07.301	PTS-C103	INFO	Component Ticket PDF Service [/0.0.0.0:8888] initialized & started. Effective configuration:
+{
+    "host" : null,
+    "id" : 1,
+    "port" : 8888
+}
+
+26-01-16 07:16:07.302	PTS-C101	INFO	Post-Trade Service PTS_Http [instance: 1] started

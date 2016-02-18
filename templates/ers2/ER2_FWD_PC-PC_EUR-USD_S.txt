@@ -1,0 +1,88 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-2500-0003"
+clOrdId: "LN2-1446730510994-3"
+securityId: 1683636551714
+securityType: FX_FWD
+symbol: "EUR/USD"
+marketSegmentId: EBSD_RFQ
+instrumentLeg {
+  tenorType: M
+  tenorValue: 6
+  settlDate: 16930
+}
+isTermCcy: false
+orderLeg {
+  legSide: SELL
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  orderPx {
+    mantissa: 112664000
+    exponent: -8
+  }
+}
+ordType: LIMIT
+accessMethod: SAPPHIRE
+clQuoteReqId: 51557007106
+quoteReqId: 72057594658684931
+execId: "FF0A-0014-0000-14"
+secondaryExecId: "48911009_3"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 1
+    exponent: 6
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 112664000000
+    exponent: -11
+  }
+}
+transactTime: 1446730511008
+tradeDate: 16744
+spotSettlDate: 16748
+tradeLeg {
+  tradePx {
+    mantissa: 112664000
+    exponent: -8
+  }
+  tradeSpotRate {
+    mantissa: 112660
+    exponent: -5
+  }
+  tradeForwardPoints {
+    mantissa: 4000
+    exponent: -8
+  }
+  tradeQty {
+    mantissa: 1
+    exponent: 6
+  }
+  tradeContraQty {
+    mantissa: 112664000
+    exponent: -2
+  }
+  legSide: SELL
+}
+executingParty {
+  floorKey: 4369 
+  floorCode: "RA77"
+  traderId: "LN2"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4200
+  floorCode: "R4MA"
+  partyType: FLOOR
+}
+clientOrderSubmitTime: 1446730511008
+lpOrderSubmitTime: 1446730511010
+lpOrderResponseTime: 1446730511015
+aggressorIndicator: true

@@ -1,0 +1,144 @@
+ptrade1:
+      VERBOSE: false
+      AUTOMATION_HOST: 10.20.42.86
+      WAIT_FOR_MSL_PROCESSING_SECS: 60
+      WAIT_FOR_ONE_THREAD_SDATA: 20
+      WAIT_FOR_ONE_THREAD_PTRADE: 60
+      DEPLOYMENT_TIMEOUT: 600
+      DEPLOY_SDATA: true
+      JENKINS_URL: http://10.20.30.168:8080
+      JENKINS_JOB_NAME: CPT-Sanity
+      LOCAL_TEMPLATE_DIR_PATH: /templates
+      REMOTE_HOME: /export/home
+      REMOTE_ORACLE_TEMPLATE_DIR_PATH: /export/home/oracle/Automation
+      REMOTE_PTRADE_TEMPLATE_DIR_PATH: /export/home/ptrade/Automation
+      REMOTE_PTRADE1_TEMPLATE_DIR_PATH: /export/home/ptrade1/Automation
+      REMOTE_REDIS_TEMPLATE_DIR_PATH: /export/home/ptrade/Automation
+      REMOTE_REDIS1_TEMPLATE_DIR_PATH: /export/home/ptrade1/Automation
+      REMOTE_PTRADE_DIR_PATH: /export/home/ptrade/PTS #we will override prod.conf in order to start MSL recovery
+      SSH_PORT: 22
+      MOUNT_HOST:
+      MOUNT_USER:
+      MOUNT_PWD:
+      CORE_HOST:
+      CORE_HOST_IP:
+      CORE_HOST_USER: ptrade
+      CORE_HOST_USER1: ptrade1
+      CORE_HOST_PWD: ptrade1
+      MSL_HOST: 10.20.32.60
+      MSL_HOST_CUSTOM_IP:
+      MSL_HOST_USER: msl
+      MSL_HOST_PWD: msl1
+      MSL_HOST_IP: 10.20.32.60
+      MSL_HOST2_IP: 10.20.32.63
+      ORACLE_HOST_TEMPLATE: 10.20.42.50 #10.20.34.141
+      ORACLE_HOST_TEMPLATE_PORT: 1521
+      ORACLE_HOST_TEMPLATE_USER: ptrade
+      ORACLE_HOST_TEMPLATE_PWD: ptrade
+      ORACLE_HOST_TEMPLATE_SERVICE: PTDB_NYCAPDB01M_TLVP.am.icap.com #PTDB.ap.icap.com
+      ORACLE_HOST_TEMPLATE_SCHEMA: PTRADE1
+      ORACLE_HOST_BKP_SCHEMA: PTRADE_BKP
+      ORACLE_TABLES_TO_COMPARE: # Tables below will be used for compare between 2 schemas
+           - FX_DEAL:
+             - ORDER_BY: ORDER BY EXEC_ID
+           - FX_DEAL_LEG:
+             - ORDER_BY: ORDER BY EXEC_ID
+           - FX_TICKET_LEG:
+             - ORDER_BY: ORDER BY ID
+      ORACLE_TABLES_COMPARE_RESULTS_DIR: /templates/db # compare results for sql minus between 2 schemas are stored here - locally on automation host.
+                                                              #SCHEMA_DB_TABLE_NAME _SOURCE.csv and SCHEMA_DB_TABLE_NAME_TARGET.csv  produced for Diff respectively
+                                                              #local automation folder contents deleted before each run
+      ORACLE_HOST_SCHEMA: PTRADE
+      ORACLE_HOST:
+      ORACLE_HOST_IP:
+      ORACLE_HOST_PORT: 1521
+      ORACLE_HOST_USER: oracle
+      ORACLE_HOST_PWD: oracle1
+      ORACLE_DB_USER: ptrade
+      ORACLE_DB_PWD: ptrade
+      ORACLE_HOST_SERVICE: PTDB_NYCAPDB01M_TLVP.am.icap.com #PTDB.ap.icap.com
+      ORACLE_HOST_TABLES:
+            - FX_DEAL
+            - FX_DEAL_LEG
+            - FX_TICKET_LEG
+      ORACLE_HOST_TABLES_EXCLUDED_COLUMNS:
+            - FX_DEAL:
+                  - ID
+                  - TXN_TIME
+            - FX_DEAL_LEG:
+                  - ID
+            - FX_TICKET_LEG:
+                  - ID
+                  - TXN_TIME
+      ORACLE_HOST_TABLES_FILES_DIR:  /templates/db
+      ORACLE_HOST_TABLES_FILES: #those files are db select output for a given table after performing required scenarios
+            - FX_DEAL.csv
+            - FX_DEAL_LEG.csv
+            - FX_TICKET_LEG.csv
+      ORACLE_SDATA_DB_USER: sdata
+      ORACLE_SDATA_DB_PWD: sdata
+      SDATA_OLD_SCHEMA_VERSION: db_sdata_1.3.18.0.tgz #Parcipany version in order to compare vs last Lab version or for upgrade
+      SDATA_NEW_SCHEMA_VERSION_OU:
+      PTRADE_SCHEMA: #currently ptrade or ptrade1
+      PTRADE_OLD_SCHEMA_VERSION: #Production version in order to compare vs latest Lab version
+      PTRADE_OLD_APP_VERSION: #Production version in order to compare vs latest Lab version
+      PTRADE_NEW_SCHEMA_VERSION_OU:  # Production version in order to upgrade with latest Lab version if omitted
+      PTRADE_NEW_APP_VERSION_OU:  # Production version in order to upgrade with latest Lab version if omitted
+      ORACLE_SDATA_HOST_SCHEMA: SDATA #New Schema
+      ORACLE_SDATA_HOST_TEMPLATE_SCHEMA: SDATA1 #SDATA_BKP # Previous Version Schema
+      ORACLE_SDATA_EXCLUDED_TYPES: ['CLOB','BLOB','XMLTYPE']
+      ORACLE_SDATA_EXCLUDED_TABLES: ['TMP_','LOG_']
+      SDATA_EXTRACT_FOLDER:
+      PTRADE_DB_EXTRACT_FOLDER:
+      PTRADE_APP_EXTRACT_FOLDER:
+      PTRADE_APP_INSTALL_FOLDER: /export/home/ptrade
+      PTRADE_DB1_EXTRACT_FOLDER:
+      PTRADE_APP1_EXTRACT_FOLDER:
+      PTRADE_APP1_INSTALL_FOLDER: /export/home/ptrade1
+      MYT_CSV_REMOTE_DIR_PATH: /export/home/ptrade/Automation/data/tickets
+      MYT_CSV_REMOTE_DIR_PATH1: /export/home/ptrade1/Automation/data/tickets
+      MYT_CSV_LOCAL_SOURCE_DIR_PATH: /templates/myt/source
+      MYT_CSV_LOCAL_TARGET_DIR_PATH: /templates/myt/target
+      MYT_CSV_EXCLUDED_COLUMNS:
+          - DEAL_DATE
+          - TICKET_ID
+      TRAIANA_CSV_EXCLUDED_COLUMNS:
+      SAPHIRE_REDIS_HOST1: 10.20.42.86 #10.20.34.158
+      SAPHIRE_REMOTE_HOST1_USER: ptrade
+      SAPHIRE_REMOTE_HOST1_PWD: ptrade1
+      SAPHIRE_REDIS_HOST1_USER: redis
+      SAPHIRE_REDIS_HOST1_PWD: redis1
+      SAPHIRE_REDIS1_HOST1_MONITOR_PORT: 23670
+      SAPPHIRE_JSON_REMOTE_FILE_PATH: /export/home/ptrade/Automation
+      SAPPHIRE_JSON_LOCAL_SOURCE_FILE_PATH: /templates/sapphire/source
+      SAPPHIRE_JSON_LOCAL_TARGET_DIR_PATH: /templates/sapphire/target
+      SAPPHIRE_JSON_LOCAL_TARGET_FILE_PATH: /templates/sapphire/target
+      SAPPHIRE_JSON_FILE_NAME: RedisMonitor.txt
+      SAPPHIRE_JSON_EXCLUDED_FIELDS:
+          - sequence
+          - TXN_TIME
+      SAPHIRE_REDIS_HOST2: 10.20.42.44
+      SAPHIRE_REDIS_HOST2_USER: redis
+      SAPHIRE_REDIS_HOST2_PWD: redis1
+      SAPHIRE_REDIS1_HOST2_MONITOR_PORT: 23670
+      GATEWAY_HOST: 10.20.30.19
+      GATEWAY_HOST_USER: gw
+      GATEWAY_HOST_PWD: gw1
+      KAFKA_HOST: 10.20.34.191
+      KAFKA_HOST_USER: kafka
+      KAFKA_HOST_PWD: kafka1
+      KAFKA_MONITOR_PORT: 9092
+      KAFKA_MONITOR_TOPIC: MSGTOPIC.ZZ.PTS_PROD
+      MBR_HOST: 10.20.34.193
+      MBR_HOST_USER: mbr
+      MBR_HOST_PWD: mbr1
+      TRAIANA_HOST: 10.20.30.89
+      TRAIANA_HOST_MONITOR_PORT: 1414
+      TRAIANA_HOST_USER: NOT_DEFINED
+      TRAIANA_HOST_PWD: NOT_DEFINED
+      TRAIANA_HOST_QUEUE: EBS_QUEUE_1
+      TRAIANA_HOST_QUEUEMGR: EBS.QMGR
+      TRAIANA_HOST_CHANNEL: EBS_CHANNEL
+      TOF_ADAPTER: NOT_DEFINED
+ptrade2:
+   app_host: http://www.google.com

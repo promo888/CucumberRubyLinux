@@ -1,0 +1,144 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-2400-0030"
+clOrdId: "LN2-1446728783373-12"
+securityId: 38280974798520349
+securityType: FX_SWAP
+symbol: "USD/CNH"
+marketSegmentId: EBSD_RFQ
+instrumentLeg {
+  tenorType: SP
+  tenorValue: 1
+  settlDate: 16748
+}
+instrumentLeg {
+  tenorType: M
+  tenorValue: 2
+  settlDate: 16811
+}
+isTermCcy: true
+orderRoot {
+  rootSide: BUY
+  rootSwapPoints {
+    mantissa: 19950000
+    exponent: -8
+  }
+}
+orderLeg {
+  legSide: SELL
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+}
+orderLeg {
+  legSide: BUY
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+}
+ordType: LIMIT
+accessMethod: SAPPHIRE
+clQuoteReqId: 47262048002
+quoteReqId: 72057594641907764
+execId: "FF0A-0014-0000-0D"
+secondaryExecId: "47183389_1"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 1
+    exponent: 6
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 619292000000
+    exponent: -11
+  }
+}
+orderStatusLeg {
+  cumQty {
+    mantissa: 1
+    exponent: 6
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 639242000000
+    exponent: -11
+  }
+}
+transactTime: 1446728783380
+tradeDate: 16744
+spotSettlDate: 16748
+tradeSwapPoints {
+  mantissa: 19950000
+  exponent: -8
+}
+tradeLeg {
+  tradePx {
+    mantissa: 619292000
+    exponent: -8
+  }
+  tradeSpotRate {
+    mantissa: 619292
+    exponent: -5
+  }
+  tradeForwardPoints {
+    mantissa: 0
+    exponent: -8
+  }
+  tradeQty {
+    mantissa: 1
+    exponent: 6
+  }
+  tradeContraQty {
+    mantissa: 16147472
+    exponent: -2
+  }
+  legSide: SELL
+}
+tradeLeg {
+  tradePx {
+    mantissa: 639242000
+    exponent: -8
+  }
+  tradeSpotRate {
+    mantissa: 619292
+    exponent: -5
+  }
+  tradeForwardPoints {
+    mantissa: 19950000
+    exponent: -8
+  }
+  tradeQty {
+    mantissa: 1
+    exponent: 6
+  }
+  tradeContraQty {
+    mantissa: 15643528
+    exponent: -2
+  }
+  legSide: BUY
+}
+executingParty {
+  floorKey: 3916
+  floorCode: "LCPO"
+  traderId: "L10"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4264
+  floorCode: "PL02"
+  partyType: FLOOR
+}
+clientOrderSubmitTime: 1446728783380
+lpOrderSubmitTime: 1446728783389
+lpOrderResponseTime: 1446728783393
+aggressorIndicator: true

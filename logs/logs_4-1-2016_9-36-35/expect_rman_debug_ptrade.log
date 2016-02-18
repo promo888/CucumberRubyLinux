@@ -1,0 +1,166 @@
+spawn bash
+parent: waiting for sync byte
+parent: telling child to go ahead
+parent: now unsynchronized from child
+spawn: returns {12567}
+send: sending "rman\r" to { exp4 }
+
+expect: does "" (spawn_id exp4) match glob pattern "*Recovery Manager: Release*"? no
+rman
+[oracle@tyobpdb01m-tlvq ~]$ rman
+
+Recovery Manager: Release 12.1.0.2.0 - Production on Mon Jan 4 07:37:12 2016
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+RMAN> 
+expect: does "rman\r\n[oracle@tyobpdb01m-tlvq ~]$ rman\r\n\r\nRecovery Manager: Release 12.1.0.2.0 - Production on Mon Jan 4 07:37:12 2016\r\n\r\nCopyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.\r\n\r\nRMAN> " (spawn_id exp4) match glob pattern "*Recovery Manager: Release*"? yes
+expect: set expect_out(0,string) "rman\r\n[oracle@tyobpdb01m-tlvq ~]$ rman\r\n\r\nRecovery Manager: Release 12.1.0.2.0 - Production on Mon Jan 4 07:37:12 2016\r\n\r\nCopyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.\r\n\r\nRMAN> "
+expect: set expect_out(spawn_id) "exp4"
+expect: set expect_out(buffer) "rman\r\n[oracle@tyobpdb01m-tlvq ~]$ rman\r\n\r\nRecovery Manager: Release 12.1.0.2.0 - Production on Mon Jan 4 07:37:12 2016\r\n\r\nCopyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.\r\n\r\nRMAN> "
+send: sending "connect target\r" to { exp4 }
+
+expect: does "" (spawn_id exp4) match glob pattern "*connected to target database:*"? no
+connect target
+
+connected to target database: PTDB (DBID=1589690390)
+
+RMAN> 
+expect: does "connect target\r\n\r\nconnected to target database: PTDB (DBID=1589690390)\r\n\r\nRMAN> " (spawn_id exp4) match glob pattern "*connected to target database:*"? yes
+expect: set expect_out(0,string) "connect target\r\n\r\nconnected to target database: PTDB (DBID=1589690390)\r\n\r\nRMAN> "
+expect: set expect_out(spawn_id) "exp4"
+expect: set expect_out(buffer) "connect target\r\n\r\nconnected to target database: PTDB (DBID=1589690390)\r\n\r\nRMAN> "
+send: sending "delete force archivelog all completed before 'sysdate -2/24';\r" to { exp4 }
+
+expect: does "" (spawn_id exp4) match glob pattern "*Do you really want to delete the above objects (enter YES or NO)*"? no
+"*specification does not match any archived log in the repo*"? no
+"*using target database control file instead of recovery catalog*"? no
+delete force archivelog all completed before 'sysdate -2/24';
+
+using target database control file instead of recovery catalog
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=259 device type=DISK
+List of Archived Log Copies for database with db_unique_name PTDB_TYOBPDB01M_TLVQ
+=====================================================================
+
+Key     Thrd Seq     S Low Time 
+------- ---- ------- - ---------
+169     1    174     A 03-JAN-16
+        Name: +FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_03/thread_1_seq_174.268.900185731
+
+170     1    175     A 03-JAN-16
+        Name: +FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_04/thread_1_seq_175.311.900201663
+
+
+Do you really want to delete the above objects (enter YES or NO)? 
+expect: does "delete force archivelog all completed before 'sysdate -2/24';\r\n\r\nusing target database control file instead of recovery catalog\r\nallocated channel: ORA_DISK_1\r\nchannel ORA_DISK_1: SID=259 device type=DISK\r\nList of Archived Log Copies for database with db_unique_name PTDB_TYOBPDB01M_TLVQ\r\n=====================================================================\r\n\r\nKey     Thrd Seq     S Low Time \r\n------- ---- ------- - ---------\r\n169     1    174     A 03-JAN-16\r\n        Name: +FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_03/thread_1_seq_174.268.900185731\r\n\r\n170     1    175     A 03-JAN-16\r\n        Name: +FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_04/thread_1_seq_175.311.900201663\r\n\r\n\r\nDo you really want to delete the above objects (enter YES or NO)? " (spawn_id exp4) match glob pattern "*Do you really want to delete the above objects (enter YES or NO)*"? yes
+expect: set expect_out(0,string) "delete force archivelog all completed before 'sysdate -2/24';\r\n\r\nusing target database control file instead of recovery catalog\r\nallocated channel: ORA_DISK_1\r\nchannel ORA_DISK_1: SID=259 device type=DISK\r\nList of Archived Log Copies for database with db_unique_name PTDB_TYOBPDB01M_TLVQ\r\n=====================================================================\r\n\r\nKey     Thrd Seq     S Low Time \r\n------- ---- ------- - ---------\r\n169     1    174     A 03-JAN-16\r\n        Name: +FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_03/thread_1_seq_174.268.900185731\r\n\r\n170     1    175     A 03-JAN-16\r\n        Name: +FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_04/thread_1_seq_175.311.900201663\r\n\r\n\r\nDo you really want to delete the above objects (enter YES or NO)? "
+expect: set expect_out(spawn_id) "exp4"
+expect: set expect_out(buffer) "delete force archivelog all completed before 'sysdate -2/24';\r\n\r\nusing target database control file instead of recovery catalog\r\nallocated channel: ORA_DISK_1\r\nchannel ORA_DISK_1: SID=259 device type=DISK\r\nList of Archived Log Copies for database with db_unique_name PTDB_TYOBPDB01M_TLVQ\r\n=====================================================================\r\n\r\nKey     Thrd Seq     S Low Time \r\n------- ---- ------- - ---------\r\n169     1    174     A 03-JAN-16\r\n        Name: +FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_03/thread_1_seq_174.268.900185731\r\n\r\n170     1    175     A 03-JAN-16\r\n        Name: +FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_04/thread_1_seq_175.311.900201663\r\n\r\n\r\nDo you really want to delete the above objects (enter YES or NO)? "
+send: sending "YES\r" to { exp4 }
+
+expect: does "" (spawn_id exp4) match glob pattern "*Deleted*objects"? no
+YES
+deleted archived log
+archived log file name=+FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_03/thread_1_seq_174.268.900185731 RECID=169 STAMP=900185752
+deleted archived log
+archived log file name=+FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_04/thread_1_seq_175.311.900201663 RECID=170 STAMP=900201695
+Deleted 2 objects
+
+
+RMAN> 
+expect: does "YES\r\ndeleted archived log\r\narchived log file name=+FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_03/thread_1_seq_174.268.900185731 RECID=169 STAMP=900185752\r\ndeleted archived log\r\narchived log file name=+FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_04/thread_1_seq_175.311.900201663 RECID=170 STAMP=900201695\r\nDeleted 2 objects\r\n\r\n\r\nRMAN> " (spawn_id exp4) match glob pattern "*Deleted*objects"? yes
+expect: set expect_out(0,string) "YES\r\ndeleted archived log\r\narchived log file name=+FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_03/thread_1_seq_174.268.900185731 RECID=169 STAMP=900185752\r\ndeleted archived log\r\narchived log file name=+FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_04/thread_1_seq_175.311.900201663 RECID=170 STAMP=900201695\r\nDeleted 2 objects"
+expect: set expect_out(spawn_id) "exp4"
+expect: set expect_out(buffer) "YES\r\ndeleted archived log\r\narchived log file name=+FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_03/thread_1_seq_174.268.900185731 RECID=169 STAMP=900185752\r\ndeleted archived log\r\narchived log file name=+FLSH/PTDB_TYOBPDB01M_TLVQ/ARCHIVELOG/2016_01_04/thread_1_seq_175.311.900201663 RECID=170 STAMP=900201695\r\nDeleted 2 objects"
+send: sending "exit\r" to { exp4 }
+exit
+
+
+Recovery Manager complete.
+[oracle@tyobpdb01m-tlvq ~]$ expect: timed out
+argv[0] = expect  argv[1] = -c  argv[2] = 
+log_user 1
+set timeout 5
+
+proc err_exit {msg} {
+	puts ---
+    puts stderr "$msg"
+	send "exit status: $?\r"
+    exit 1
+}
+
+puts "Reading PTS_AUTOMATION_LOGS_HOME"
+
+if {[info exists env(PTS_AUTOMATION_LOGS_HOME)]} {
+    set automation_logs_home $::env(PTS_AUTOMATION_LOGS_HOME)
+	puts "Found PTS_AUTOMATION_LOGS_HOME"
+} else {
+	err_exit "Error while reading env variable PTS_AUTOMATION_LOGS_HOME"
+}
+
+puts "Reading PTS_AUTOMATION_USERNAME"
+
+if {[info exists env(PTS_AUTOMATION_USERNAME)]} {
+    set automation_script_username $::env(PTS_AUTOMATION_USERNAME)
+	puts "Found PTS_AUTOMATION_USERNAME"
+} else {
+	err_exit "Error while reading env variable PTS_AUTOMATION_USERNAME"
+}
+
+exp_internal -f $automation_logs_home/expect_rman_debug_$automation_script_username.log 0
+
+spawn bash
+
+send "rman\r"
+sleep 2
+expect {
+    "*Recovery Manager: Release*" {
+        send "connect target\r"
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+sleep 2
+expect {
+    "*connected to target database:*" {
+        send "delete force archivelog all completed before 'sysdate -2/24';\r"
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+sleep 2
+
+expect {
+    "*Do you really want to delete the above objects (enter YES or NO)*" {
+        send "YES\r"
+    }
+	"*specification does not match any archived log in the repo*" {
+        send "exit\r"
+		exit 0
+    }
+	"*using target database control file instead of recovery catalog*" {
+        send "exit\r"
+		exit 0
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+sleep 3
+expect {
+    "*Deleted*objects" {
+        send "exit\r"
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+
+expect eof
+  
+set argc 0
+set argv0 "expect"
+set argv ""

@@ -1,0 +1,50 @@
+spawn bash
+parent: waiting for sync byte
+parent: telling child to go ahead
+parent: now unsynchronized from child
+spawn: returns {31565}
+send: sending "rman\r" to { exp4 }
+
+expect: does "" (spawn_id exp4) match glob pattern "*Recovery Manager: Release*"? no
+rman
+[oracle@tyobpdb01m-tlvq ~]$ rman
+
+Recovery Manager: Release 12.1.0.2.0 - Production on Tue Dec 29 18:08:08 2015
+
+Copyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.
+
+RMAN> 
+expect: does "rman\r\n[oracle@tyobpdb01m-tlvq ~]$ rman\r\n\r\nRecovery Manager: Release 12.1.0.2.0 - Production on Tue Dec 29 18:08:08 2015\r\n\r\nCopyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.\r\n\r\nRMAN> " (spawn_id exp4) match glob pattern "*Recovery Manager: Release*"? yes
+expect: set expect_out(0,string) "rman\r\n[oracle@tyobpdb01m-tlvq ~]$ rman\r\n\r\nRecovery Manager: Release 12.1.0.2.0 - Production on Tue Dec 29 18:08:08 2015\r\n\r\nCopyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.\r\n\r\nRMAN> "
+expect: set expect_out(spawn_id) "exp4"
+expect: set expect_out(buffer) "rman\r\n[oracle@tyobpdb01m-tlvq ~]$ rman\r\n\r\nRecovery Manager: Release 12.1.0.2.0 - Production on Tue Dec 29 18:08:08 2015\r\n\r\nCopyright (c) 1982, 2014, Oracle and/or its affiliates.  All rights reserved.\r\n\r\nRMAN> "
+send: sending "connect target\r" to { exp4 }
+
+expect: does "" (spawn_id exp4) match glob pattern "*connected to target database:*"? no
+connect target
+
+connected to target database: PTDB (DBID=1589690390)
+
+RMAN> 
+expect: does "connect target\r\n\r\nconnected to target database: PTDB (DBID=1589690390)\r\n\r\nRMAN> " (spawn_id exp4) match glob pattern "*connected to target database:*"? yes
+expect: set expect_out(0,string) "connect target\r\n\r\nconnected to target database: PTDB (DBID=1589690390)\r\n\r\nRMAN> "
+expect: set expect_out(spawn_id) "exp4"
+expect: set expect_out(buffer) "connect target\r\n\r\nconnected to target database: PTDB (DBID=1589690390)\r\n\r\nRMAN> "
+send: sending "delete force archivelog all completed before 'sysdate -2/24';\r" to { exp4 }
+
+expect: does "" (spawn_id exp4) match glob pattern "*Do you really want to delete the above objects (enter YES or NO)*"? no
+"*specification does not match any archived log in the repo*"? no
+"*using target database control file instead of recovery catalog*"? no
+delete force archivelog all completed before 'sysdate -2/24';
+
+using target database control file instead of recovery catalog
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=18 device type=DISK
+
+expect: does "delete force archivelog all completed before 'sysdate -2/24';\r\n\r\nusing target database control file instead of recovery catalog\r\nallocated channel: ORA_DISK_1\r\nchannel ORA_DISK_1: SID=18 device type=DISK\r\n" (spawn_id exp4) match glob pattern "*Do you really want to delete the above objects (enter YES or NO)*"? no
+"*specification does not match any archived log in the repo*"? no
+"*using target database control file instead of recovery catalog*"? yes
+expect: set expect_out(0,string) "delete force archivelog all completed before 'sysdate -2/24';\r\n\r\nusing target database control file instead of recovery catalog\r\nallocated channel: ORA_DISK_1\r\nchannel ORA_DISK_1: SID=18 device type=DISK\r\n"
+expect: set expect_out(spawn_id) "exp4"
+expect: set expect_out(buffer) "delete force archivelog all completed before 'sysdate -2/24';\r\n\r\nusing target database control file instead of recovery catalog\r\nallocated channel: ORA_DISK_1\r\nchannel ORA_DISK_1: SID=18 device type=DISK\r\n"
+send: sending "exit\r" to { exp4 }

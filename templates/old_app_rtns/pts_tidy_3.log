@@ -1,0 +1,1158 @@
+10-02-16 14:17:11.42	PTS-C10	INFO	JVM arguments:
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/export/home/ptrade1/Automation/PTS/logs/
+-Xms1024m
+-Xmx8g
+-Dconfig.file=/export/home/ptrade1/Automation/PTS/config/prod.conf
+-DconfigPath=/export/home/ptrade1/Automation/PTS/config
+-Dpts.module.name=tidy
+10-02-16 14:17:11.46	PTS-C10	INFO	Starting PTS Tidy Service  [Version: 1.4.3.0  build: 500 build time: 2016-02-02 16:59]
+10-02-16 14:18:26.89	PTS-C103	INFO	Component OracleConnectionFactory [JDBC version: JDBC 4.1; Oracle Driver version: 12.1.0.1.0; DB version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production] initialized & started. Effective configuration:
+{
+    "connectTimeout" : 3000,
+    "primary" : {
+        "host" : "10.20.42.50",
+        "port" : 1521
+    },
+    "readTimeout" : 15000,
+    "schema" : "ptrade1",
+    "service" : "PTDB.am.icap.com"
+}
+
+10-02-16 14:18:26.260	PTS-C105	INFO	Static Data - 943 floors successfully loaded
+10-02-16 14:18:26.372	PTS-C5100	INFO	Binding port: 5559	-> client configuration: c1 was allowed
+10-02-16 14:18:26.373	PTS-C5100	INFO	Binding port: 5560	-> client configuration: c2 was allowed
+10-02-16 14:18:26.737	PTS-C10	INFO	Processor capacity: 1024
+10-02-16 14:18:26.738	PTS-C213	WARNING	No messages for feeder #787 found in the DB
+10-02-16 14:18:26.738	PTS-C103	INFO	Component MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] initialized & started. Effective configuration:
+{
+    "allowSubdirs" : "yes",
+    "id" : 100,
+    "retryInterval" : 3000,
+    "target" : "/export/home/ptrade1/Automation/data/tickets/myt"
+}
+
+10-02-16 14:18:26.739	PTS-C103	INFO	Component COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] initialized & started. Effective configuration:
+{
+    "allowSubdirs" : "yes",
+    "id" : 101,
+    "retryInterval" : 3000,
+    "target" : "/export/home/ptrade1/Automation/data/tickets/common"
+}
+
+10-02-16 14:18:26.743	PTS-C103	INFO	Component Sapphire Adapter [Persistent RedisSender] initialized & started. Effective configuration:
+{
+    "host" : "10.20.42.86",
+    "id" : 300,
+    "port" : 6389,
+    "retryInterval" : 3000,
+    "topic" : "ebs:gc:tickets:{fp.institutionKey}:{to_upper(fp.trader)}"
+}
+
+10-02-16 14:18:26.744	PTS-C7100	INFO	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: FIX initiator starting
+10-02-16 14:18:26.901	PTS-C7307	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: event: [Session FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS schedule is daily, 00:00:00-UTC - 00:00:00-UTC (daily, 00:00:00-GMT - 00:00:00-GMT)]
+10-02-16 14:18:26.901	PTS-C7307	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: event: [Created session: FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]
+10-02-16 14:18:26.901	PTS-C7300	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: onCreate invoked
+10-02-16 14:18:26.941	PTS-C103	INFO	Component RTNS FIX Adapter initialized & started. Effective configuration:
+{
+    "beginString" : "FIXT.1.1",
+    "cnfgDir" : "/export/home/ptrade1/Automation/PTS/config/fix/rtns",
+    "cnfgFile" : "qfj.cfg",
+    "debug" : {
+        "enabled" : "yes",
+        "spotDict" : "rtns/FIX50SP1-TCR-Spot.xml",
+        "swapDict" : "rtns/FIX50SP1-TCR-Swap.xml"
+    },
+    "host" : "10.20.42.86",
+    "id" : 600,
+    "port" : 16005,
+    "retryInterval" : 3000,
+    "senderCompId" : "AUTOMATION1",
+    "targetCompId" : "QA_RTNS"
+}
+
+10-02-16 14:18:26.942	PTS-C103	INFO	Component DisruptorBasedProcessor initialized & started. Effective configuration:
+{
+    "capacity" : 1024
+}
+
+10-02-16 14:18:27.52	PTS-C211	INFO	Feeder #787 [TidyMSLFeeder] recovery start point: time 10-02-16 14:18:27.52
+10-02-16 14:18:27.58	PTS-C103	INFO	Component TidyMSLFeeder Feeder initialized & started. Effective configuration:
+{
+    "acceptTypes" : [
+        {
+            "ns" : 4,
+            "type" : 1
+        }
+    ],
+    "client" : "CPTT",
+    "host" : "10.20.32.60",
+    "id" : 787,
+    "moniker" : "CPT-TIDY-3-10.20.42.86",
+    "port" : 6379,
+    "queue" : "destQ"
+}
+
+10-02-16 14:18:27.59	PTS-C101	INFO	Post-Trade Service PTS_Tidy [instance: 3] started
+10-02-16 14:18:27.66	PTS-C309	DEBUG	Received MSL notification: Disconnected
+10-02-16 14:18:27.972	PTS-C7310	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message going to be sent, message type: [Logon(A)]
+10-02-16 14:18:27.996	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=8235=A34=149=AUTOMATION152=20160210-14:18:2756=QA_RTNS98=0108=30141=Y1137=810=092]
+10-02-16 14:18:28.004	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=8635=A34=149=QA_RTNS52=20160210-14:18:28.00156=AUTOMATION198=0108=30141=Y1137=810=032]
+10-02-16 14:18:28.005	PTS-C7307	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: event: [Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1]
+10-02-16 14:18:28.006	PTS-C7313	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message received, message type: [Logon(A)]
+10-02-16 14:18:28.006	PTS-C7307	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: event: [Received logon]
+10-02-16 14:18:28.27	PTS-C7301	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Logon established
+10-02-16 14:18:28.61	PTS-C7307	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: event: [Initiated logon request]
+10-02-16 14:18:30.66	PTS-C309	DEBUG	Received MSL notification: ReplayTransition
+10-02-16 14:18:30.147	PTS-C308	DEBUG	Received MSL control message: ReplayResponse [requestId: 8781339816098654953]
+10-02-16 14:18:58.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6135=034=249=QA_RTNS52=20160210-14:18:58.53756=AUTOMATION110=146]
+10-02-16 14:18:58.538	PTS-C7313	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message received, message type: [Heartbeat(0)]
+10-02-16 14:18:58.561	PTS-C7310	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message going to be sent, message type: [Heartbeat(0)]
+10-02-16 14:18:58.561	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5735=034=249=AUTOMATION152=20160210-14:18:5856=QA_RTNS10=202]
+10-02-16 14:19:28.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6135=034=349=QA_RTNS52=20160210-14:19:28.53756=AUTOMATION110=145]
+10-02-16 14:19:28.538	PTS-C7313	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message received, message type: [Heartbeat(0)]
+10-02-16 14:19:28.559	PTS-C7310	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message going to be sent, message type: [Heartbeat(0)]
+10-02-16 14:19:28.559	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5735=034=349=AUTOMATION152=20160210-14:19:2856=QA_RTNS10=201]
+10-02-16 14:19:44.512	PTS-C306	DEBUG	Received MSL message #1: RedurHdr{session=1, sequence=6}  SrcMessage{session=13, seq=1, namespace=4, type=1, time=10/02/2016 14:19:42}   VariMsgPrefix{blockType=3, len=939}
+10-02-16 14:19:44.521	PTS-C306	DEBUG	Received MSL message #2: RedurHdr{session=1, sequence=7}  SrcMessage{session=13, seq=2, namespace=4, type=1, time=10/02/2016 14:19:42}   VariMsgPrefix{blockType=3, len=1925}
+10-02-16 14:19:44.521	PTS-C306	DEBUG	Received MSL message #3: RedurHdr{session=1, sequence=8}  SrcMessage{session=13, seq=3, namespace=4, type=1, time=10/02/2016 14:19:42}   VariMsgPrefix{blockType=3, len=1913}
+10-02-16 14:19:44.521	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 6, srcSid: 1, srcMid: 1, execId: A7E8-2770-E32E-3A, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:44.526	PTS-C601	TRACE	Message [sid: 1, mid: 6, srcSid: 1, srcMid: 1, execId: A7E8-2770-E32E-3A, status: OK]: Ticket [LCRI/LCRI/A7E8-2770-E32E-3A-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+10-02-16 14:19:44.538	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:19:44.539	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:19:44.540	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:MYT
+10-02-16 14:19:44.540	PTS-C601	TRACE	Message [sid: 1, mid: 6, srcSid: 1, srcMid: 1, execId: A7E8-2770-E32E-3A, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:44.545	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:6, srcSid:1, srcMid:1]
+10-02-16 14:19:44.546	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:6, srcSid:1, srcMid:1]
+10-02-16 14:19:44.546	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 7, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:44.546	PTS-C601	TRACE	Message [sid: 1, mid: 7, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-04-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:44.547	PTS-C601	TRACE	Message [sid: 1, mid: 7, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-04-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:44.547	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:7, srcSid:1, srcMid:2]
+10-02-16 14:19:44.547	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 8, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:44.547	PTS-C601	TRACE	Message [sid: 1, mid: 7, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [RA78/RA78/FF0A-0014-0000-04-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:44.548	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:8, srcSid:1, srcMid:3]
+10-02-16 14:19:44.548	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:7, srcSid:1, srcMid:2]
+10-02-16 14:19:44.549	PTS-C601	TRACE	Message [sid: 1, mid: 8, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-13-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:44.549	PTS-C601	TRACE	Message [sid: 1, mid: 8, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-13-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:44.550	PTS-C601	TRACE	Message [sid: 1, mid: 8, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [RA77/RA77/FF0A-0014-0000-13-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:44.551	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:8, srcSid:1, srcMid:3]
+10-02-16 14:19:44.561	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:6, srcSid:1, srcMid:1]
+10-02-16 14:19:44.562	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+10-02-16 14:19:44.562	PTS-C601	TRACE	Message [sid: 1, mid: 7, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:44.564	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+10-02-16 14:19:44.564	PTS-C601	TRACE	Message [sid: 1, mid: 7, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:44.569	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1053:IS1
+10-02-16 14:19:44.569	PTS-C601	TRACE	Message [sid: 1, mid: 7, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:44.570	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:7, srcSid:1, srcMid:2]
+10-02-16 14:19:44.571	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+10-02-16 14:19:44.571	PTS-C601	TRACE	Message [sid: 1, mid: 8, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:44.575	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+10-02-16 14:19:44.575	PTS-C601	TRACE	Message [sid: 1, mid: 8, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:44.576	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1052:LN2
+10-02-16 14:19:44.576	PTS-C601	TRACE	Message [sid: 1, mid: 8, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:44.577	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:8, srcSid:1, srcMid:3]
+10-02-16 14:19:45.449	PTS-C306	DEBUG	Received MSL message #4: RedurHdr{session=1, sequence=18}  SrcMessage{session=13, seq=4, namespace=4, type=1, time=10/02/2016 14:19:43}   VariMsgPrefix{blockType=3, len=920}
+10-02-16 14:19:45.449	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 18, srcSid: 1, srcMid: 4, execId: FF0A-0014-0000-1B, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:45.449	PTS-C306	DEBUG	Received MSL message #5: RedurHdr{session=1, sequence=19}  SrcMessage{session=13, seq=5, namespace=4, type=1, time=10/02/2016 14:19:43}   VariMsgPrefix{blockType=3, len=1913}
+10-02-16 14:19:45.450	PTS-C601	TRACE	Message [sid: 1, mid: 18, srcSid: 1, srcMid: 4, execId: FF0A-0014-0000-1B, status: OK]: Ticket [LCPN/LCPN/FF0A-0014-0000-1B-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.450	PTS-C306	DEBUG	Received MSL message #6: RedurHdr{session=1, sequence=20}  SrcMessage{session=13, seq=6, namespace=4, type=1, time=10/02/2016 14:19:43}   VariMsgPrefix{blockType=3, len=918}
+10-02-16 14:19:45.451	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:18, srcSid:1, srcMid:4]
+10-02-16 14:19:45.451	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 19, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:45.451	PTS-C306	DEBUG	Received MSL message #7: RedurHdr{session=1, sequence=21}  SrcMessage{session=13, seq=7, namespace=4, type=1, time=10/02/2016 14:19:43}   VariMsgPrefix{blockType=3, len=918}
+10-02-16 14:19:45.451	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:18, srcSid:1, srcMid:4]
+10-02-16 14:19:45.451	PTS-C306	DEBUG	Received MSL message #8: RedurHdr{session=1, sequence=22}  SrcMessage{session=13, seq=8, namespace=4, type=1, time=10/02/2016 14:19:43}   VariMsgPrefix{blockType=3, len=1787}
+10-02-16 14:19:45.451	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:19, srcSid:1, srcMid:5]
+10-02-16 14:19:45.451	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 20, srcSid: 1, srcMid: 9, execId: FF0A-0014-0000-1A, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:45.452	PTS-C306	DEBUG	Received MSL message #9: RedurHdr{session=1, sequence=23}  SrcMessage{session=13, seq=9, namespace=4, type=1, time=10/02/2016 14:19:43}   VariMsgPrefix{blockType=3, len=1787}
+10-02-16 14:19:45.452	PTS-C601	TRACE	Message [sid: 1, mid: 19, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [LPRP/1PRP/FF0A-0014-0000-0A-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.452	PTS-C601	TRACE	Message [sid: 1, mid: 19, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [LPRP/1PRP/FF0A-0014-0000-0A-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.452	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:20, srcSid:1, srcMid:9]
+10-02-16 14:19:45.452	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 21, srcSid: 1, srcMid: 10, execId: FF0A-0014-0000-16, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:45.453	PTS-C306	DEBUG	Received MSL message #10: RedurHdr{session=1, sequence=24}  SrcMessage{session=13, seq=10, namespace=4, type=1, time=10/02/2016 14:19:43}   VariMsgPrefix{blockType=3, len=1791}
+10-02-16 14:19:45.453	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN2
+10-02-16 14:19:45.453	PTS-C601	TRACE	Message [sid: 1, mid: 18, srcSid: 1, srcMid: 4, execId: FF0A-0014-0000-1B, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.453	PTS-C601	TRACE	Message [sid: 1, mid: 19, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [PL22/PL22/FF0A-0014-0000-0A-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.453	PTS-C306	DEBUG	Received MSL message #11: RedurHdr{session=1, sequence=25}  SrcMessage{session=13, seq=11, namespace=4, type=1, time=10/02/2016 14:19:43}   VariMsgPrefix{blockType=3, len=1791}
+10-02-16 14:19:45.453	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:21, srcSid:1, srcMid:10]
+10-02-16 14:19:45.453	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 22, srcSid: 1, srcMid: 11, execId: FF64-0E70-0005-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:45.454	PTS-C306	DEBUG	Received MSL message #12: RedurHdr{session=1, sequence=26}  SrcMessage{session=13, seq=12, namespace=4, type=1, time=10/02/2016 14:19:43}   VariMsgPrefix{blockType=3, len=895}
+10-02-16 14:19:45.454	PTS-C306	DEBUG	Received MSL message #13: RedurHdr{session=1, sequence=27}  SrcMessage{session=13, seq=13, namespace=4, type=1, time=10/02/2016 14:19:43}   VariMsgPrefix{blockType=3, len=852}
+10-02-16 14:19:45.454	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:18, srcSid:1, srcMid:4]
+10-02-16 14:19:45.454	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:22, srcSid:1, srcMid:11]
+10-02-16 14:19:45.454	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:19, srcSid:1, srcMid:5]
+10-02-16 14:19:45.454	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 23, srcSid: 1, srcMid: 12, execId: FF64-0E70-0006-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:45.455	PTS-C601	TRACE	Message [sid: 1, mid: 20, srcSid: 1, srcMid: 9, execId: FF0A-0014-0000-1A, status: OK]: Ticket [LCLH/LCLH/FF0A-0014-0000-1A-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.455	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:23, srcSid:1, srcMid:12]
+10-02-16 14:19:45.455	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 24, srcSid: 1, srcMid: 13, execId: FF64-0E70-0003-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:45.455	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:973:
+10-02-16 14:19:45.455	PTS-C601	TRACE	Message [sid: 1, mid: 19, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.456	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:20, srcSid:1, srcMid:9]
+10-02-16 14:19:45.456	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:24, srcSid:1, srcMid:13]
+10-02-16 14:19:45.456	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 25, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:45.456	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:973:
+10-02-16 14:19:45.456	PTS-C601	TRACE	Message [sid: 1, mid: 19, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.456	PTS-C601	TRACE	Message [sid: 1, mid: 21, srcSid: 1, srcMid: 10, execId: FF0A-0014-0000-16, status: OK]: Ticket [LCLI/LCLI/FF0A-0014-0000-16-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.457	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:25, srcSid:1, srcMid:14]
+10-02-16 14:19:45.457	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1133:LN2
+10-02-16 14:19:45.457	PTS-C601	TRACE	Message [sid: 1, mid: 19, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.457	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:21, srcSid:1, srcMid:10]
+10-02-16 14:19:45.457	PTS-C601	TRACE	Message [sid: 1, mid: 26, srcSid: 1, srcMid: 15, execId: FF0A-0012-0000-2D, status: OK]: Ticket [LCPJ/LCPJ/FF0A-0012-0000-2D-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+10-02-16 14:19:45.458	PTS-C601	TRACE	Message [sid: 1, mid: 22, srcSid: 1, srcMid: 11, execId: FF64-0E70-0005-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0005-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.458	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:19, srcSid:1, srcMid:5]
+10-02-16 14:19:45.458	PTS-C601	TRACE	Message [sid: 1, mid: 22, srcSid: 1, srcMid: 11, execId: FF64-0E70-0005-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0005-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.458	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:26, srcSid:1, srcMid:15]
+10-02-16 14:19:45.458	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 27, srcSid: 1, srcMid: 16, execId: FF64-0E70-0001-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:45.458	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1166:LN2
+10-02-16 14:19:45.459	PTS-C601	TRACE	Message [sid: 1, mid: 20, srcSid: 1, srcMid: 9, execId: FF0A-0014-0000-1A, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.459	PTS-C601	TRACE	Message [sid: 1, mid: 22, srcSid: 1, srcMid: 11, execId: FF64-0E70-0005-00, status: OK]: Ticket [RA99/RA99/FF64-0E70-0005-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.459	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:27, srcSid:1, srcMid:16]
+10-02-16 14:19:45.459	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:20, srcSid:1, srcMid:9]
+10-02-16 14:19:45.460	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:22, srcSid:1, srcMid:11]
+10-02-16 14:19:45.460	PTS-C601	TRACE	Message [sid: 1, mid: 23, srcSid: 1, srcMid: 12, execId: FF64-0E70-0006-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0006-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.460	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1167:LN0
+10-02-16 14:19:45.460	PTS-C601	TRACE	Message [sid: 1, mid: 21, srcSid: 1, srcMid: 10, execId: FF0A-0014-0000-16, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.461	PTS-C601	TRACE	Message [sid: 1, mid: 23, srcSid: 1, srcMid: 12, execId: FF64-0E70-0006-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0006-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.461	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:21, srcSid:1, srcMid:10]
+10-02-16 14:19:45.461	PTS-C601	TRACE	Message [sid: 1, mid: 23, srcSid: 1, srcMid: 12, execId: FF64-0E70-0006-00, status: OK]: Ticket [RB01/RB01/FF64-0E70-0006-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.462	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:45.462	PTS-C601	TRACE	Message [sid: 1, mid: 22, srcSid: 1, srcMid: 11, execId: FF64-0E70-0005-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.462	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:23, srcSid:1, srcMid:12]
+10-02-16 14:19:45.463	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:45.463	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 13, execId: FF64-0E70-0003-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0003-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.463	PTS-C601	TRACE	Message [sid: 1, mid: 22, srcSid: 1, srcMid: 11, execId: FF64-0E70-0005-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.463	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 13, execId: FF64-0E70-0003-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0003-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.464	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 13, execId: FF64-0E70-0003-00, status: OK]: Ticket [R3E1/R3E1/FF64-0E70-0003-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.465	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:24, srcSid:1, srcMid:13]
+10-02-16 14:19:45.465	PTS-C601	TRACE	Message [sid: 1, mid: 25, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0004-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.466	PTS-C601	TRACE	Message [sid: 1, mid: 25, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0004-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.466	PTS-C601	TRACE	Message [sid: 1, mid: 25, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [R3E2/R3E2/FF64-0E70-0004-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.467	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:25, srcSid:1, srcMid:14]
+10-02-16 14:19:45.467	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 26, srcSid: 1, srcMid: 15, execId: FF0A-0012-0000-2D, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:45.468	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:26, srcSid:1, srcMid:15]
+10-02-16 14:19:45.469	PTS-C601	TRACE	Message [sid: 1, mid: 27, srcSid: 1, srcMid: 16, execId: FF64-0E70-0001-00, status: OK]: Ticket [LCPN/LCPN/FF64-0E70-0001-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:45.470	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:27, srcSid:1, srcMid:16]
+10-02-16 14:19:45.481	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1074:LN2
+10-02-16 14:19:45.481	PTS-C601	TRACE	Message [sid: 1, mid: 22, srcSid: 1, srcMid: 11, execId: FF64-0E70-0005-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.482	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:22, srcSid:1, srcMid:11]
+10-02-16 14:19:45.483	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:45.483	PTS-C601	TRACE	Message [sid: 1, mid: 23, srcSid: 1, srcMid: 12, execId: FF64-0E70-0006-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.484	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:45.484	PTS-C601	TRACE	Message [sid: 1, mid: 23, srcSid: 1, srcMid: 12, execId: FF64-0E70-0006-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.485	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1075:LN2
+10-02-16 14:19:45.485	PTS-C601	TRACE	Message [sid: 1, mid: 23, srcSid: 1, srcMid: 12, execId: FF64-0E70-0006-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.486	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:23, srcSid:1, srcMid:12]
+10-02-16 14:19:45.486	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+10-02-16 14:19:45.486	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 13, execId: FF64-0E70-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.487	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+10-02-16 14:19:45.487	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 13, execId: FF64-0E70-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.488	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1097:LN5
+10-02-16 14:19:45.488	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 13, execId: FF64-0E70-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.488	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:24, srcSid:1, srcMid:13]
+10-02-16 14:19:45.489	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+10-02-16 14:19:45.489	PTS-C601	TRACE	Message [sid: 1, mid: 25, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.490	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+10-02-16 14:19:45.490	PTS-C601	TRACE	Message [sid: 1, mid: 25, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.490	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1098:LN6
+10-02-16 14:19:45.491	PTS-C601	TRACE	Message [sid: 1, mid: 25, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.491	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:25, srcSid:1, srcMid:14]
+10-02-16 14:19:45.492	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:944:MT7
+10-02-16 14:19:45.492	PTS-C601	TRACE	Message [sid: 1, mid: 26, srcSid: 1, srcMid: 15, execId: FF0A-0012-0000-2D, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.493	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:26, srcSid:1, srcMid:15]
+10-02-16 14:19:45.494	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN1
+10-02-16 14:19:45.494	PTS-C601	TRACE	Message [sid: 1, mid: 27, srcSid: 1, srcMid: 16, execId: FF64-0E70-0001-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:45.494	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:27, srcSid:1, srcMid:16]
+10-02-16 14:19:46.453	PTS-C306	DEBUG	Received MSL message #14: RedurHdr{session=1, sequence=38}  SrcMessage{session=13, seq=14, namespace=4, type=1, time=10/02/2016 14:19:44}   VariMsgPrefix{blockType=3, len=852}
+10-02-16 14:19:46.453	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 38, srcSid: 1, srcMid: 17, execId: FF64-0E70-0002-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:46.453	PTS-C306	DEBUG	Received MSL message #15: RedurHdr{session=1, sequence=39}  SrcMessage{session=13, seq=15, namespace=4, type=1, time=10/02/2016 14:19:44}   VariMsgPrefix{blockType=3, len=850}
+10-02-16 14:19:46.454	PTS-C306	DEBUG	Received MSL message #16: RedurHdr{session=1, sequence=40}  SrcMessage{session=13, seq=16, namespace=4, type=1, time=10/02/2016 14:19:44}   VariMsgPrefix{blockType=3, len=874}
+10-02-16 14:19:46.454	PTS-C601	TRACE	Message [sid: 1, mid: 38, srcSid: 1, srcMid: 17, execId: FF64-0E70-0002-00, status: OK]: Ticket [LCPO/LCPO/FF64-0E70-0002-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.454	PTS-C306	DEBUG	Received MSL message #17: RedurHdr{session=1, sequence=41}  SrcMessage{session=13, seq=17, namespace=4, type=1, time=10/02/2016 14:19:44}   VariMsgPrefix{blockType=3, len=901}
+10-02-16 14:19:46.454	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:LN4
+10-02-16 14:19:46.454	PTS-C601	TRACE	Message [sid: 1, mid: 38, srcSid: 1, srcMid: 17, execId: FF64-0E70-0002-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.455	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:38, srcSid:1, srcMid:17]
+10-02-16 14:19:46.455	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 39, srcSid: 1, srcMid: 28, execId: FF64-0E6D-000A-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:46.455	PTS-C306	DEBUG	Received MSL message #18: RedurHdr{session=1, sequence=42}  SrcMessage{session=13, seq=18, namespace=4, type=1, time=10/02/2016 14:19:44}   VariMsgPrefix{blockType=3, len=865}
+10-02-16 14:19:46.455	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:38, srcSid:1, srcMid:17]
+10-02-16 14:19:46.455	PTS-C306	DEBUG	Received MSL message #19: RedurHdr{session=1, sequence=43}  SrcMessage{session=13, seq=19, namespace=4, type=1, time=10/02/2016 14:19:44}   VariMsgPrefix{blockType=3, len=3586}
+10-02-16 14:19:46.455	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:39, srcSid:1, srcMid:28]
+10-02-16 14:19:46.455	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:38, srcSid:1, srcMid:17]
+10-02-16 14:19:46.455	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 40, srcSid: 1, srcMid: 29, execId: FF64-0E70-002E-04, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:46.456	PTS-C601	TRACE	Message [sid: 1, mid: 39, srcSid: 1, srcMid: 28, execId: FF64-0E6D-000A-00, status: OK]: Ticket [LCPL/LCPL/FF64-0E6D-000A-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.456	PTS-C306	DEBUG	Received MSL message #20: RedurHdr{session=1, sequence=44}  SrcMessage{session=13, seq=20, namespace=4, type=1, time=10/02/2016 14:19:44}   VariMsgPrefix{blockType=3, len=3575}
+10-02-16 14:19:46.456	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:946:LN2
+10-02-16 14:19:46.456	PTS-C601	TRACE	Message [sid: 1, mid: 39, srcSid: 1, srcMid: 28, execId: FF64-0E6D-000A-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.456	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:40, srcSid:1, srcMid:29]
+10-02-16 14:19:46.457	PTS-C601	TRACE	Message [sid: 1, mid: 41, srcSid: 1, srcMid: 30, execId: FF0A-0012-0000-24, status: OK]: Ticket [LCPH/LCPH/FF0A-0012-0000-24-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+10-02-16 14:19:46.457	PTS-C306	DEBUG	Received MSL message #21: RedurHdr{session=1, sequence=45}  SrcMessage{session=13, seq=21, namespace=4, type=1, time=10/02/2016 14:19:44}   VariMsgPrefix{blockType=3, len=3575}
+10-02-16 14:19:46.457	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:39, srcSid:1, srcMid:28]
+10-02-16 14:19:46.457	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:39, srcSid:1, srcMid:28]
+10-02-16 14:19:46.457	PTS-C601	TRACE	Message [sid: 1, mid: 40, srcSid: 1, srcMid: 29, execId: FF64-0E70-002E-04, status: OK]: Ticket [LCPM/LCPM/FF64-0E70-002E-04-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.458	PTS-C306	DEBUG	Received MSL message #22: RedurHdr{session=1, sequence=46}  SrcMessage{session=13, seq=22, namespace=4, type=1, time=10/02/2016 14:19:44}   VariMsgPrefix{blockType=3, len=1565}
+10-02-16 14:19:46.458	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:41, srcSid:1, srcMid:30]
+10-02-16 14:19:46.458	PTS-C306	DEBUG	Received MSL message #23: RedurHdr{session=1, sequence=47}  SrcMessage{session=13, seq=23, namespace=4, type=1, time=10/02/2016 14:19:44}   VariMsgPrefix{blockType=3, len=1559}
+10-02-16 14:19:46.458	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:947:L02
+10-02-16 14:19:46.458	PTS-C601	TRACE	Message [sid: 1, mid: 40, srcSid: 1, srcMid: 29, execId: FF64-0E70-002E-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.458	PTS-C601	TRACE	Message [sid: 1, mid: 42, srcSid: 1, srcMid: 31, execId: FF64-0E72-0003-00, status: OK]: Ticket [LCPI/LCPI/FF64-0E72-0003-00-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+10-02-16 14:19:46.459	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:40, srcSid:1, srcMid:29]
+10-02-16 14:19:46.459	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 41, srcSid: 1, srcMid: 30, execId: FF0A-0012-0000-24, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:46.459	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:40, srcSid:1, srcMid:29]
+10-02-16 14:19:46.459	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:42, srcSid:1, srcMid:31]
+10-02-16 14:19:46.459	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 43, srcSid: 1, srcMid: 32, execId: FF0A-0014-0000-1F, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:46.460	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT1
+10-02-16 14:19:46.460	PTS-C601	TRACE	Message [sid: 1, mid: 41, srcSid: 1, srcMid: 30, execId: FF0A-0012-0000-24, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.460	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:41, srcSid:1, srcMid:30]
+10-02-16 14:19:46.460	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 42, srcSid: 1, srcMid: 31, execId: FF64-0E72-0003-00, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:46.460	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:41, srcSid:1, srcMid:30]
+10-02-16 14:19:46.460	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:43, srcSid:1, srcMid:32]
+10-02-16 14:19:46.460	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 44, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:46.461	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:42, srcSid:1, srcMid:31]
+10-02-16 14:19:46.461	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT2
+10-02-16 14:19:46.461	PTS-C601	TRACE	Message [sid: 1, mid: 42, srcSid: 1, srcMid: 31, execId: FF64-0E72-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.461	PTS-C601	TRACE	Message [sid: 1, mid: 43, srcSid: 1, srcMid: 32, execId: FF0A-0014-0000-1F, status: OK]: Ticket [1PSE/1PDE/FF0A-0014-0000-1F-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.462	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:44, srcSid:1, srcMid:33]
+10-02-16 14:19:46.462	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 45, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:46.462	PTS-C601	TRACE	Message [sid: 1, mid: 43, srcSid: 1, srcMid: 32, execId: FF0A-0014-0000-1F, status: OK]: Ticket [1PSE/1PDE/FF0A-0014-0000-1F-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.462	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:42, srcSid:1, srcMid:31]
+10-02-16 14:19:46.462	PTS-C601	TRACE	Message [sid: 1, mid: 43, srcSid: 1, srcMid: 32, execId: FF0A-0014-0000-1F, status: OK]: Ticket [RA81/RA81/FF0A-0014-0000-1F-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.463	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:46.463	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:45, srcSid:1, srcMid:34]
+10-02-16 14:19:46.463	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:46.463	PTS-C601	TRACE	Message [sid: 1, mid: 43, srcSid: 1, srcMid: 32, execId: FF0A-0014-0000-1F, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.463	PTS-C601	TRACE	Message [sid: 1, mid: 46, srcSid: 1, srcMid: 35, execId: 7E4B-D159-2E3F-51, status: OK]: Ticket [LCPK/LCPK/7E4B-D159-2E3F-51-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+10-02-16 14:19:46.464	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:43, srcSid:1, srcMid:32]
+10-02-16 14:19:46.464	PTS-C601	TRACE	Message [sid: 1, mid: 44, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-08-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.464	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:46, srcSid:1, srcMid:35]
+10-02-16 14:19:46.464	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 47, srcSid: 1, srcMid: 36, execId: FF0A-0014-0000-0B, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:46.465	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:46.465	PTS-C601	TRACE	Message [sid: 1, mid: 44, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-08-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.465	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:47, srcSid:1, srcMid:36]
+10-02-16 14:19:46.465	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:46.465	PTS-C601	TRACE	Message [sid: 1, mid: 44, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [R4J1/R4J1/FF0A-0014-0000-08-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.465	PTS-C601	TRACE	Message [sid: 1, mid: 43, srcSid: 1, srcMid: 32, execId: FF0A-0014-0000-1F, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.466	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1056:RA1
+10-02-16 14:19:46.467	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:44, srcSid:1, srcMid:33]
+10-02-16 14:19:46.467	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1056:RA1
+10-02-16 14:19:46.467	PTS-C601	TRACE	Message [sid: 1, mid: 43, srcSid: 1, srcMid: 32, execId: FF0A-0014-0000-1F, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.467	PTS-C601	TRACE	Message [sid: 1, mid: 45, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-07-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.468	PTS-C601	TRACE	Message [sid: 1, mid: 45, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-07-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.468	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:43, srcSid:1, srcMid:32]
+10-02-16 14:19:46.468	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:46.468	PTS-C601	TRACE	Message [sid: 1, mid: 45, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [R4J2/R4J2/FF0A-0014-0000-07-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.469	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:46.469	PTS-C601	TRACE	Message [sid: 1, mid: 44, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.469	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:45, srcSid:1, srcMid:34]
+10-02-16 14:19:46.469	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 46, srcSid: 1, srcMid: 35, execId: 7E4B-D159-2E3F-51, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:46.469	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:46.470	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:46, srcSid:1, srcMid:35]
+10-02-16 14:19:46.470	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:46.470	PTS-C601	TRACE	Message [sid: 1, mid: 44, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.471	PTS-C601	TRACE	Message [sid: 1, mid: 47, srcSid: 1, srcMid: 36, execId: FF0A-0014-0000-0B, status: OK]: Ticket [LCPN/LCPN/FF0A-0014-0000-0B-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:46.471	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:892:L12
+10-02-16 14:19:46.471	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:892:L12
+10-02-16 14:19:46.471	PTS-C601	TRACE	Message [sid: 1, mid: 44, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.472	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:47, srcSid:1, srcMid:36]
+10-02-16 14:19:46.472	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:44, srcSid:1, srcMid:33]
+10-02-16 14:19:46.473	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:46.473	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:46.473	PTS-C601	TRACE	Message [sid: 1, mid: 45, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.474	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:46.475	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:46.475	PTS-C601	TRACE	Message [sid: 1, mid: 45, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.475	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:893:L14
+10-02-16 14:19:46.476	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:893:L14
+10-02-16 14:19:46.476	PTS-C601	TRACE	Message [sid: 1, mid: 45, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.477	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:45, srcSid:1, srcMid:34]
+10-02-16 14:19:46.477	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:945:M12
+10-02-16 14:19:46.478	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:945:M12
+10-02-16 14:19:46.478	PTS-C601	TRACE	Message [sid: 1, mid: 46, srcSid: 1, srcMid: 35, execId: 7E4B-D159-2E3F-51, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.479	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:46, srcSid:1, srcMid:35]
+10-02-16 14:19:46.479	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN9
+10-02-16 14:19:46.480	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN9
+10-02-16 14:19:46.480	PTS-C601	TRACE	Message [sid: 1, mid: 47, srcSid: 1, srcMid: 36, execId: FF0A-0014-0000-0B, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:46.481	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:47, srcSid:1, srcMid:36]
+10-02-16 14:19:47.459	PTS-C306	DEBUG	Received MSL message #24: RedurHdr{session=1, sequence=53}  SrcMessage{session=13, seq=24, namespace=4, type=1, time=10/02/2016 14:19:45}   VariMsgPrefix{blockType=3, len=1559}
+10-02-16 14:19:47.460	PTS-C309	DEBUG	Received MSL notification: RealTimeTransition
+10-02-16 14:19:47.460	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 53, srcSid: 1, srcMid: 37, execId: FF0A-0014-0000-0C, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:47.461	PTS-C601	TRACE	Message [sid: 1, mid: 53, srcSid: 1, srcMid: 37, execId: FF0A-0014-0000-0C, status: OK]: Ticket [LCPO/LCPO/FF0A-0014-0000-0C-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:47.461	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:L10
+10-02-16 14:19:47.461	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:53, srcSid:1, srcMid:37]
+10-02-16 14:19:47.462	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:L10
+10-02-16 14:19:47.462	PTS-C601	TRACE	Message [sid: 1, mid: 53, srcSid: 1, srcMid: 37, execId: FF0A-0014-0000-0C, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:47.462	PTS-C306	DEBUG	Received MSL message #25: RedurHdr{session=1, sequence=54}  SrcMessage{session=13, seq=25, namespace=4, type=1, time=10/02/2016 14:19:45}   VariMsgPrefix{blockType=3, len=1557}
+10-02-16 14:19:47.462	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:53, srcSid:1, srcMid:37]
+10-02-16 14:19:47.462	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 54, srcSid: 1, srcMid: 48, execId: FF0A-0014-0000-10, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:47.462	PTS-C309	DEBUG	Received MSL notification: RealTimeLatency [avgLatency: 1726.0; samples: 1]
+10-02-16 14:19:47.462	PTS-C306	DEBUG	Received MSL message #26: RedurHdr{session=1, sequence=55}  SrcMessage{session=13, seq=26, namespace=4, type=1, time=10/02/2016 14:19:45}   VariMsgPrefix{blockType=3, len=1544}
+10-02-16 14:19:47.462	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:53, srcSid:1, srcMid:37]
+10-02-16 14:19:47.463	PTS-C601	TRACE	Message [sid: 1, mid: 54, srcSid: 1, srcMid: 48, execId: FF0A-0014-0000-10, status: OK]: Ticket [LCRI/LCRI/FF0A-0014-0000-10-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:47.463	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:54, srcSid:1, srcMid:48]
+10-02-16 14:19:47.463	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:LN7
+10-02-16 14:19:47.463	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 55, srcSid: 1, srcMid: 49, execId: FF0A-0014-0000-0F, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:47.463	PTS-C306	DEBUG	Received MSL message #27: RedurHdr{session=1, sequence=56}  SrcMessage{session=13, seq=27, namespace=4, type=1, time=10/02/2016 14:19:45}   VariMsgPrefix{blockType=3, len=1551}
+10-02-16 14:19:47.463	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:LN7
+10-02-16 14:19:47.463	PTS-C601	TRACE	Message [sid: 1, mid: 54, srcSid: 1, srcMid: 48, execId: FF0A-0014-0000-10, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:47.464	PTS-C306	DEBUG	Received MSL message #28: RedurHdr{session=1, sequence=57}  SrcMessage{session=13, seq=28, namespace=4, type=1, time=10/02/2016 14:19:45}   VariMsgPrefix{blockType=3, len=1545}
+10-02-16 14:19:47.464	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:54, srcSid:1, srcMid:48]
+10-02-16 14:19:47.464	PTS-C306	DEBUG	Received MSL message #29: RedurHdr{session=1, sequence=58}  SrcMessage{session=13, seq=29, namespace=4, type=1, time=10/02/2016 14:19:45}   VariMsgPrefix{blockType=3, len=1565}
+10-02-16 14:19:47.464	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:55, srcSid:1, srcMid:49]
+10-02-16 14:19:47.464	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 56, srcSid: 1, srcMid: 50, execId: FF0A-0012-0000-61, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:47.464	PTS-C601	TRACE	Message [sid: 1, mid: 55, srcSid: 1, srcMid: 49, execId: FF0A-0014-0000-0F, status: OK]: Ticket [LCRJ/LCRJ/FF0A-0014-0000-0F-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:47.465	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:54, srcSid:1, srcMid:48]
+10-02-16 14:19:47.465	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:56, srcSid:1, srcMid:50]
+10-02-16 14:19:47.465	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 57, srcSid: 1, srcMid: 51, execId: FF0A-0012-0000-86, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:47.465	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:910:LN8
+10-02-16 14:19:47.465	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:55, srcSid:1, srcMid:49]
+10-02-16 14:19:47.466	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:910:LN8
+10-02-16 14:19:47.466	PTS-C601	TRACE	Message [sid: 1, mid: 55, srcSid: 1, srcMid: 49, execId: FF0A-0014-0000-0F, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:47.466	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:57, srcSid:1, srcMid:51]
+10-02-16 14:19:47.466	PTS-C601	TRACE	Message [sid: 1, mid: 58, srcSid: 1, srcMid: 52, execId: E330-E7B0-C26B-52, status: OK]: Ticket [LCLA/LCLA/E330-E7B0-C26B-52-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+10-02-16 14:19:47.466	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:55, srcSid:1, srcMid:49]
+10-02-16 14:19:47.466	PTS-C601	TRACE	Message [sid: 1, mid: 56, srcSid: 1, srcMid: 50, execId: FF0A-0012-0000-61, status: OK]: Ticket [LCPH/LCPH/FF0A-0012-0000-61-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:47.467	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT6
+10-02-16 14:19:47.467	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:58, srcSid:1, srcMid:52]
+10-02-16 14:19:47.468	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT6
+10-02-16 14:19:47.468	PTS-C601	TRACE	Message [sid: 1, mid: 56, srcSid: 1, srcMid: 50, execId: FF0A-0012-0000-61, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:47.468	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:56, srcSid:1, srcMid:50]
+10-02-16 14:19:47.468	PTS-C601	TRACE	Message [sid: 1, mid: 57, srcSid: 1, srcMid: 51, execId: FF0A-0012-0000-86, status: OK]: Ticket [LCPI/LCPI/FF0A-0012-0000-86-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+10-02-16 14:19:47.468	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:56, srcSid:1, srcMid:50]
+10-02-16 14:19:47.469	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT7
+10-02-16 14:19:47.469	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:57, srcSid:1, srcMid:51]
+10-02-16 14:19:47.469	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 58, srcSid: 1, srcMid: 52, execId: E330-E7B0-C26B-52, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:47.470	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT7
+10-02-16 14:19:47.470	PTS-C601	TRACE	Message [sid: 1, mid: 57, srcSid: 1, srcMid: 51, execId: FF0A-0012-0000-86, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:47.470	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:58, srcSid:1, srcMid:52]
+10-02-16 14:19:47.470	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:57, srcSid:1, srcMid:51]
+10-02-16 14:19:47.471	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:905:MYT
+10-02-16 14:19:47.472	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:905:MYT
+10-02-16 14:19:47.472	PTS-C601	TRACE	Message [sid: 1, mid: 58, srcSid: 1, srcMid: 52, execId: E330-E7B0-C26B-52, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:47.473	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:58, srcSid:1, srcMid:52]
+10-02-16 14:19:47.540	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:19:47.541	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:19:50.541	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:19:50.541	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:19:53.542	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:19:53.542	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:19:56.543	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:19:56.543	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:19:58.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6135=034=449=QA_RTNS52=20160210-14:19:58.53756=AUTOMATION110=149]
+10-02-16 14:19:58.538	PTS-C7313	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message received, message type: [Heartbeat(0)]
+10-02-16 14:19:58.560	PTS-C7310	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message going to be sent, message type: [Heartbeat(0)]
+10-02-16 14:19:58.561	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5735=034=449=AUTOMATION152=20160210-14:19:5856=QA_RTNS10=205]
+10-02-16 14:19:59.543	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:19:59.544	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:02.544	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:02.544	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:05.545	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:05.545	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:08.546	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:08.546	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:11.546	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:11.546	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:14.547	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:14.547	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:17.547	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:17.547	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:20.547	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:20.548	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:23.548	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:23.548	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:26.549	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:26.549	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:28.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6135=034=549=QA_RTNS52=20160210-14:20:28.53756=AUTOMATION110=139]
+10-02-16 14:20:28.538	PTS-C7313	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message received, message type: [Heartbeat(0)]
+10-02-16 14:20:28.559	PTS-C7310	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message going to be sent, message type: [Heartbeat(0)]
+10-02-16 14:20:28.559	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5735=034=549=AUTOMATION152=20160210-14:20:2856=QA_RTNS10=195]
+10-02-16 14:20:29.550	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:29.550	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:32.550	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:32.550	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:35.550	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:35.551	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:38.551	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:38.551	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:41.551	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:41.551	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:44.552	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:44.552	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:47.552	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:47.552	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:50.553	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:50.553	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:53.553	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:53.554	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:56.554	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:56.554	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:20:58.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6135=034=649=QA_RTNS52=20160210-14:20:58.53756=AUTOMATION110=143]
+10-02-16 14:20:58.538	PTS-C7313	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message received, message type: [Heartbeat(0)]
+10-02-16 14:20:58.560	PTS-C7310	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: admin message going to be sent, message type: [Heartbeat(0)]
+10-02-16 14:20:58.561	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5735=034=649=AUTOMATION152=20160210-14:20:5856=QA_RTNS10=199]
+10-02-16 14:20:59.555	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:20:59.555	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:21:02.556	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:21:02.556	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:21:05.556	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:21:05.556	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:21:08.556	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:21:08.557	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+10-02-16 14:21:11.557	PTS-C7002	ERROR	FIX session [FIXT.1.1:AUTOMATION1->QA_RTNS:RTNS]: Message [8=FIXT.1.19=45935=AE15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:41.95963=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=214] dictionary validation failed: quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+10-02-16 14:21:11.557	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: 2] (will retry in 3000 millis) : quickfix.IncorrectTagValue: Field [452] contains an incorrect tag value.
+quickfix.DataDictionary.checkValue(DataDictionary.java:750)
+quickfix.DataDictionary.iterate(DataDictionary.java:640)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.iterate(DataDictionary.java:654)
+quickfix.DataDictionary.validate(DataDictionary.java:623)
+quickfix.DataDictionary.validate(DataDictionary.java:590)
+com.ebs.fix.adapter.RTNSFixSender.validate(RTNSFixSender.java:135)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:145)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+

@@ -1,0 +1,143 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-2800-0003"
+clOrdId: "IS1-1446734757962-9"
+securityId: 1209498352892084253
+securityType: FX_SWAP
+symbol: "USD/RUB"
+marketSegmentId: EBSD_RFQ
+instrumentLeg {
+  tenorType: SP
+  tenorValue: 1
+  settlDate: 16745
+}
+instrumentLeg {
+  tenorType: B
+  settlDate: 16758
+}
+isTermCcy: false
+orderRoot {
+  rootSide: BUY
+  rootSwapPoints {
+    mantissa: 102000
+    exponent: -6
+  }
+}
+orderLeg {
+  legSide: SELL
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+}
+orderLeg {
+  legSide: BUY
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+}
+ordType: LIMIT
+accessMethod: SAPPHIRE
+clQuoteReqId: 47262043650
+quoteReqId: 72057594709016579
+execId: "FF0A-0014-0000-1G"
+secondaryExecId: "53157996_15"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 1
+    exponent: 6
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 52799000000
+    exponent: -9
+  }
+}
+orderStatusLeg {
+  cumQty {
+    mantissa: 1
+    exponent: 6
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 52701000000
+    exponent: -9
+  }
+}
+transactTime: 1446734757977
+tradeDate: 16744
+spotSettlDate: 16745
+tradeSwapPoints {
+  mantissa: -98000
+  exponent: -6
+}
+tradeLeg {
+  tradePx {
+    mantissa: 52799000
+    exponent: -6
+  }
+  tradeSpotRate {
+    mantissa: 527990
+    exponent: -4
+  }
+  tradeForwardPoints {
+    mantissa: 0
+    exponent: -6
+  }
+  tradeQty {
+    mantissa: 1
+    exponent: 6
+  }
+  tradeContraQty {
+    mantissa: 5279900000
+    exponent: -2
+  }
+  legSide: SELL
+}
+tradeLeg {
+  tradePx {
+    mantissa: 52701000
+    exponent: -6
+  }
+  tradeSpotRate {
+    mantissa: 527990
+    exponent: -4
+  }
+  tradeForwardPoints {
+    mantissa: -98000
+    exponent: -6
+  }
+  tradeQty {
+    mantissa: 1
+    exponent: 6
+  }
+  tradeContraQty {
+    mantissa: 5270100000
+    exponent: -2
+  }
+  legSide: BUY
+}
+executingParty {
+  floorKey: 4373
+  floorCode: "RA81"
+  traderId: "RA1"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4086
+  floorCode: "R1DC"
+  partyType: FLOOR
+}
+clientOrderSubmitTime: 1446734757977
+lpOrderSubmitTime: 1446734757100
+lpOrderResponseTime: 1446734758004
+aggressorIndicator: true

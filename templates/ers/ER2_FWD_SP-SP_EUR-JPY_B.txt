@@ -1,0 +1,88 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-2700-0007"
+clOrdId: "LN2-1446733008758-5"
+securityId: 335016427554
+securityType: FX_FWD
+symbol: "EUR/JPY"
+marketSegmentId: EBSD_RFQ
+instrumentLeg {
+  tenorType: IMM_Q
+  tenorValue: 1
+  settlDate: 16793
+}
+isTermCcy: false
+orderLeg {
+  legSide: BUY
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  orderPx {
+    mantissa: 129220000
+    exponent: -6
+  }
+}
+ordType: LIMIT
+accessMethod: SAPPHIRE
+clQuoteReqId: 51590569985
+quoteReqId: 72057594692239366
+execId: "FF0A-0014-0000-1A"
+secondaryExecId: "51408775_13"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 1
+    exponent: 6
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 129220000000
+    exponent: -9
+  }
+}
+transactTime: 1446733008767
+tradeDate: 16744
+spotSettlDate: 16748
+tradeLeg {
+  tradePx {
+    mantissa: 129220000
+    exponent: -6
+  }
+  tradeSpotRate {
+    mantissa: 129220
+    exponent: -3
+  }
+  tradeForwardPoints {
+    mantissa: 0
+    exponent: -6
+  }
+  tradeQty {
+    mantissa: 1
+    exponent: 6
+  }
+  tradeContraQty {
+    mantissa: 12922000000
+    exponent: -2
+  }
+  legSide: BUY
+}
+executingParty {
+  floorKey: 4397
+  floorCode: "LCLH"
+  traderId: "LN2"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4077
+  floorCode: "LPRE"
+partyType: FLOOR
+}
+clientOrderSubmitTime: 1446733008767
+lpOrderSubmitTime: 1446733008778
+lpOrderResponseTime: 1446733008781
+aggressorIndicator: true

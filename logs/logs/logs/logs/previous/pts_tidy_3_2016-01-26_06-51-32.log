@@ -1,0 +1,41 @@
+26-01-16 06:51:32.654	PTS-C10	INFO	Starting PTS Tidy Service  [Version: 1.3.13.0  build: 407 build time: 2015-11-17 11:59]
+26-01-16 06:51:33.53	PTS-C103	INFO	Component OracleConnectionFactory [JDBC version: JDBC 4.1; Oracle Driver version: 12.1.0.2.0; DB version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production] initialized & started. Effective configuration:
+{
+    "connectTimeout" : 3000,
+    "primary" : {
+        "host" : "10.20.42.50",
+        "port" : 1521
+    },
+    "readTimeout" : 15000,
+    "schema" : "ptrade",
+    "service" : "PTDB.am.icap.com"
+}
+
+26-01-16 06:51:33.165	PTS-C106	ERROR	Static Data - Floors data loading failed: java.sql.SQLException: ORA-04063: view "PTRADE.V_SD_FLOORS" has errors
+
+26-01-16 06:51:33.165	PTS-C100	ERROR	Post-Trade Service failed to start: com.ebs.pts.core.data.sd.RepositoryException: java.sql.SQLException: ORA-04063: view "PTRADE.V_SD_FLOORS" has errors
+
+com.ebs.pts.core.data.sd.FloorDataRepository.loadFromDB(FloorDataRepository.java:56)
+com.ebs.pts.core.data.sd.StaticDataService.loadData(StaticDataService.java:15)
+com.ebs.pts.ExecutableModule.start(ExecutableModule.java:96)
+com.ebs.pts.PTS_Tidy.main(PTS_Tidy.java:31)
+Caused by: java.sql.SQLException: ORA-04063: view "PTRADE.V_SD_FLOORS" has errors
+
+oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:450)
+oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:399)
+oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1059)
+oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:522)
+oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:257)
+oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:587)
+oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:210)
+oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:30)
+oracle.jdbc.driver.T4CStatement.executeForDescribe(T4CStatement.java:762)
+oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:925)
+oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1111)
+oracle.jdbc.driver.OracleStatement.executeQuery(OracleStatement.java:1309)
+oracle.jdbc.driver.OracleStatementWrapper.executeQuery(OracleStatementWrapper.java:422)
+com.ebs.pts.core.data.sd.FloorDataRepository.loadFromDB(FloorDataRepository.java:40)
+com.ebs.pts.core.data.sd.StaticDataService.loadData(StaticDataService.java:15)
+com.ebs.pts.ExecutableModule.start(ExecutableModule.java:96)
+com.ebs.pts.PTS_Tidy.main(PTS_Tidy.java:31)
+

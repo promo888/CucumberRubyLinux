@@ -1,0 +1,143 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0500-6000-000D"
+clOrdId: "NOS-24b5b405-e3e0-4f80-8ff0-746c28ec7674"
+securityId: 1114448
+securityType: FX_SWAP
+symbol: "USD/CAD"
+marketSegmentId: EBSD_RFQ
+instrumentLeg {
+  tenorType: SP
+  settlDate: 16589
+}
+instrumentLeg {
+  tenorType: W
+  tenorValue: 1
+  settlDate: 16596
+}
+isTermCcy: false
+orderRoot {
+  rootSide: BUY
+  rootSwapPoints {
+    mantissa: 20015
+    exponent: -5
+  }
+}
+orderLeg {
+  legSide: SELL
+  orderQty {
+    mantissa: 11000000
+    exponent: -1
+  }
+}
+orderLeg {
+  legSide: BUY
+  orderQty {
+    mantissa: 11000000
+    exponent: -1
+  }
+}
+ordType: LIMIT
+accessMethod: MY_TREASURIES
+clQuoteReqId: 2
+quoteReqId: 360287971800252429
+execId: "E330-E7B0-C26B-52"
+secondaryExecId: "44335627_5"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 11
+    exponent: 5
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 10757
+    exponent: -4
+  }
+}
+orderStatusLeg {
+  cumQty {
+    mantissa: 11
+    exponent: 5
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 107620
+    exponent: -5
+  }
+}
+transactTime: 1433074735202
+tradeDate: 16587
+spotSettlDate: 16589
+tradeSwapPoints {
+  mantissa: 50000
+  exponent: -8
+}
+tradeLeg {
+  tradePx {
+    mantissa: 107570000
+    exponent: -8
+  }
+  tradeSpotRate {
+    mantissa: 10757
+    exponent: -4
+  }
+  tradeForwardPoints {
+    mantissa: 0
+    exponent: -4
+  }
+  tradeQty {
+    mantissa: 11
+    exponent: 5
+  }
+  tradeContraQty {
+    mantissa: 118327000
+    exponent: -2
+  }
+  legSide: SELL
+}
+tradeLeg {
+  tradePx {
+    mantissa: 107620000
+    exponent: -8
+  }
+  tradeSpotRate {
+    mantissa: 10757
+    exponent: -4
+  }
+  tradeForwardPoints {
+    mantissa: 50
+    exponent: -5
+  }
+  tradeQty {
+    mantissa: 11
+    exponent: 5
+  }
+  tradeContraQty {
+    mantissa: 118382000
+    exponent: -2
+  }
+  legSide: BUY
+}
+executingParty {
+  floorKey: 3946
+  floorCode: "LCLA"
+  traderId: "MYT"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4165
+  floorCode: "LPRL"
+  partyType: FLOOR
+}
+clientOrderSubmitTime: 1433074735202
+lpOrderSubmitTime: 1433074735570
+lpOrderResponseTime: 1433074736046
+aggressorIndicator: true

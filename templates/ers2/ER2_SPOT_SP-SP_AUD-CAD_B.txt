@@ -1,0 +1,74 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-2400-000B"
+clOrdId: "LN2-1446716515210-9"
+securityId: 196739
+securityType: FX_SPOT
+symbol: "AUD/CAD"
+marketSegmentId: EBSD
+instrumentLeg {
+  tenorType: SP
+  tenorValue: 1
+  settlDate: 16748
+}
+isTermCcy: false
+orderLeg {
+  legSide: BUY
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  orderPx {
+    mantissa: 102440
+    exponent: -5
+  }
+}
+ordType: LIMIT
+accessMethod: SAPPHIRE
+execId: "FF64-0E6D-000A-01"
+secondaryExecId: "9"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 102440000
+    exponent: -8
+  }
+}
+transactTime: 1446716515220
+tradeDate: 16744
+tradeLeg {
+  tradePx {
+    mantissa: 102440
+    exponent: -5
+  }
+  tradeQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  tradeContraQty {
+    mantissa: 102440000
+    exponent: -2
+  }
+  legSide: BUY
+}
+executingParty {
+  floorKey: 3913
+  floorCode: "LCPL"
+  traderId: "LN2"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4073
+  floorCode: "LPRA"
+  partyType: FLOOR
+}
+aggressorIndicator: true

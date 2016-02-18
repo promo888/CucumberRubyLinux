@@ -1,0 +1,7 @@
+.idea
+.idea/*
+report.html
+report.json
+rerun.txt
+features/scenarios/debug.feature
+features/step_definitions/debug.rb

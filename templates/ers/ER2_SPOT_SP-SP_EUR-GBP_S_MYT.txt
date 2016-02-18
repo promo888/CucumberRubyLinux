@@ -1,0 +1,76 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-3300-0003"
+clOrdId: "LN2-1447148910874-3"
+securityId: 2228359
+securityType: FX_SPOT
+symbol: "EUR/GBP"
+marketSegmentId: EBSD
+instrumentLeg {
+  tenorType: SP
+  tenorValue: 1
+  settlDate: 16751
+}
+isTermCcy: false
+orderLeg {
+  legSide: SELL
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  orderPx {
+    mantissa: 135332
+    exponent: -5
+  }
+}
+ordType: LIMIT
+accessMethod: MY_TREASURIES 
+clQuoteReqId: 3
+quoteReqId: 72057594558021644
+execId: "FF64-0E72-0003-00"
+secondaryExecId: "35310894_6"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 135979000
+    exponent: -8
+  }
+}
+transactTime: 1447148910891
+tradeDate: 16749
+tradeLeg {
+  tradePx {
+    mantissa: 135979
+    exponent: -5
+  }
+  tradeQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  tradeContraQty {
+    mantissa: 135979000
+    exponent: -2
+  }
+  legSide: SELL
+}
+executingParty {
+  floorKey: 3876
+  floorCode: "LCPI"
+  traderId: "MT2"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4080
+  floorCode: "LPRH"
+  partyType: FLOOR
+}
+aggressorIndicator: true

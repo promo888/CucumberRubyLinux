@@ -1,0 +1,74 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-2400-0014"
+clOrdId: "LN2-1446722296089-3"
+securityId: 1900685
+securityType: FX_SPOT
+symbol: "USD/RUB"
+marketSegmentId: EBSD
+instrumentLeg {
+  tenorType: SP
+  tenorValue: 1
+  settlDate: 16745
+}
+isTermCcy: false
+orderLeg {
+  legSide: BUY
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  orderPx {
+    mantissa: 528604
+    exponent: -4
+  }
+}
+ordType: LIMIT
+accessMethod: SAPPHIRE
+execId: "FF64-0E70-0003-00"
+secondaryExecId: "3"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 528604000
+    exponent: -7
+  }
+}
+transactTime: 1446722296097
+tradeDate: 16744
+tradeLeg {
+  tradePx {
+    mantissa: 528604
+    exponent: -4
+  }
+  tradeQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  tradeContraQty {
+    mantissa: 5286040000
+    exponent: -2
+  }
+  legSide: BUY
+}
+executingParty {
+  floorKey: 4184
+  floorCode: "R3E1"
+  traderId: "LN5"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4075
+  floorCode: "LPRC"
+  partyType: FLOOR
+}
+aggressorIndicator: true

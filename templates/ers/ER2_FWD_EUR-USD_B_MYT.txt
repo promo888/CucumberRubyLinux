@@ -1,0 +1,88 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-0A00-0013"
+clOrdId: "NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332"
+securityId: 2223335
+securityType: FX_FWD
+symbol: "EUR/USD"
+marketSegmentId: EBSD_RFQ
+instrumentLeg {
+  tenorType: T
+  tenorValue: 1
+  settlDate: 16582
+}
+isTermCcy: false
+orderLeg {
+  legSide: BUY
+  orderQty {
+    mantissa: 11
+    exponent: 6
+  }
+  orderPx {
+    mantissa: 107565
+    exponent: -5
+  }
+}
+ordType: LIMIT
+accessMethod: MY_TREASURIES
+clQuoteReqId: 4
+quoteReqId: 72057594205700117
+execId: "A7E8-2770-E32E-3A"
+secondaryExecId: "53125668_1"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 11
+    exponent: 6
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 107536
+    exponent: -5
+  }
+}
+transactTime: 1432651525201
+tradeDate: 16581
+spotSettlDate: 16583
+tradeLeg {
+  tradePx {
+    mantissa: 107536000
+    exponent: -8
+  }
+  tradeSpotRate {
+    mantissa: 107536
+    exponent: -5
+  }
+  tradeForwardPoints {
+    mantissa: 0
+    exponent: 0
+  }
+  tradeQty {
+    mantissa: 11
+    exponent: 6
+  }
+  tradeContraQty {
+    mantissa: 1182896000
+    exponent: -2
+  }
+  legSide: BUY
+}
+executingParty {
+  floorKey: 4160
+  floorCode: "LCRI"
+  traderId: "MYT"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4199
+  floorCode: "R4LA"
+  partyType: FLOOR
+}
+clientOrderSubmitTime: 1432651525201
+lpOrderSubmitTime: 1432651525591
+lpOrderResponseTime: 1432651525906
+aggressorIndicator: true

@@ -1,0 +1,52 @@
+module Config
+
+  LOCAL_TICKETS_FOLDER_NAME = 'automation'
+  LOCAL_TICKETS_FOLDER_DIR = 'tmp'
+  REMOTE_TICKETS_FOLDER_NAME = 'automation'
+  REMOTE_TICKETS_FOLDER_DIR = '~/tmp'
+  REMOTE_OUTPUT_DIR = '~/tmp/automation'
+  REMOTE_OUTPUT_FOLDER_NAME = 'tempdata'
+  SSH_PORT = '22'
+  CORE_HOST = '10.20.34.158'
+  CORE_HOST_USER = 'ptrade'
+  CORE_HOST_PWD = 'ptrade1'
+  MSL_HOST = '10.20.30.69'
+  MSL_HOST_USER = 'msl'
+  MSL_HOST_PWD = 'msl1'
+  ORACLE_HOST = '10.20.34.140'
+  ORACLE_HOST_PORT = '1521'
+  ORACLE_HOST_USER = 'ptrade'
+  ORACLE_HOST_PWD = 'ptrade'
+  ORACLE_HOST_SERVICE = 'PTDB.am.icap.com'
+  SAPHIRE_REDIS_HOST1 = '10.20.42.87'
+  SAPHIRE_REDIS_HOST1_USER = 'redis'
+  SAPHIRE_REDIS_HOST1_PWD = 'redis1'
+  SAPHIRE_REDIS1_HOST1_MONITOR_PORT = '23670' #Monitor Service Console
+  SAPHIRE_REDIS1_HOST1_TOPIC = "ebs:gc:tickets:{fp.institutionKey}:{to_upper(fp.trader)}" # uncomment to use topic other than the default #Filter Output by trader or institution
+  SAPHIRE_REDIS_HOST2 = '10.20.42.44'
+  SAPHIRE_REDIS_HOST2_USER = 'redis'
+  SAPHIRE_REDIS_HOST2_PWD = 'redis1'
+  SAPHIRE_REDIS1_HOST2_MONITOR_PORT = '23670' #Monitor Service Console
+  SAPHIRE_REDIS1_HOST2_TOPIC = "ebs:gc:tickets:{fp.institutionKey}:{to_upper(fp.trader)}" # uncomment to use topic other than the default #Filter Output by trader or institution
+  GATEWAY_HOST = '10.20.30.19'
+  GATEWAY_HOST_USER = 'gw'
+  GATEWAY_HOST_PWD = 'gw1'
+  KAFKA_HOST = '10.20.34.191'
+  KAFKA_HOST_USER = 'kafka'
+  KAFKA_HOST_PWD = 'kafka1'
+  KAFKA_MONITOR_PORT = '9092' #For file polling
+  KAFKA_MONITOR_TOPIC = 'MSGTOPIC.ZZ.PTS_PROD'
+  MBR_HOST = '10.20.34.193'
+  MBR_HOST_USER = 'mbr'
+  MBR_HOST_PWD = 'mbr1'
+  TRAIANA_HOST = '10.20.30.89'
+  TRAIANA_HOST_MONITOR_PORT= 1414 #JMS Port
+  TRAIANA_HOST_USER = 'NOT_DEFINED NOT_DEFINED NOT_DEFINED NOT_DEFINED NOT_DEFINED NOT_DEFINED'
+  TRAIANA_HOST_PWD = 'NOT_DEFINED NOT_DEFINED NOT_DEFINED NOT_DEFINED NOT_DEFINED NOT_DEFINED'
+  TRAIANA_HOST_QUEUE = 'EBS_QUEUE_1'
+  TRAIANA_HOST_QUEUEMGR = 'EBS.QMGR'
+  TRAIANA_HOST_CHANNEL = "EBS_CHANNE'L"
+  TRAIANA_HOST_CCSID = '819'
+  TOF_ADAPTER = 'NOT_DEFINED NOT_DEFINED NOT_DEFINED NOT_DEFINED NOT_DEFINED NOT_DEFINED'
+
+end

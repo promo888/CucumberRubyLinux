@@ -1,0 +1,74 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-2400-0013"
+clOrdId: "LN2-1446721464277-2"
+securityId: 1900676
+securityType: FX_SPOT
+symbol: "USD/CHF"
+marketSegmentId: EBSD
+instrumentLeg {
+  tenorType: SP
+  tenorValue: 1
+  settlDate: 16748
+}
+isTermCcy: false
+orderLeg {
+  legSide: SELL
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  orderPx {
+    mantissa: 99008
+    exponent: -5
+  }
+}
+ordType: LIMIT
+accessMethod: SAPPHIRE
+execId: "FF64-0E70-0002-00"
+secondaryExecId: "2"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 99008000
+    exponent: -8
+  }
+}
+transactTime: 1446721464294
+tradeDate: 16744
+tradeLeg {
+  tradePx {
+    mantissa: 99008
+    exponent: -5
+  }
+  tradeQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  tradeContraQty {
+    mantissa: 99008000
+    exponent: -2
+  }
+  legSide: SELL
+}
+executingParty {
+  floorKey: 3916
+  floorCode: "LCPO"
+  traderId: "LN4"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4264
+  floorCode: "PL22"
+  partyType: FLOOR
+}
+aggressorIndicator: true

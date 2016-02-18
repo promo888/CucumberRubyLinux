@@ -1,0 +1,39 @@
+21-01-16 12:07:12.832	PTS-C10	INFO	JVM arguments:
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/export/home/ptrade/Automation/PTS/logs/
+-Xms1024m
+-Xmx8g
+-Dconfig.file=/export/home/ptrade/Automation/PTS/config/prod.conf
+-DconfigPath=/export/home/ptrade/Automation/PTS/config
+-Dpts.module.name=http
+21-01-16 12:07:12.841	PTS-C10	INFO	Starting PTS HTTP Service  [Version: 1.4.3.0  build: 489 build time: 2016-01-19 11:17]
+21-01-16 12:07:13.747	PTS-C103	INFO	Component OracleConnectionFactory [JDBC version: JDBC 4.1; Oracle Driver version: 12.1.0.1.0; DB version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production] initialized & started. Effective configuration:
+{
+    "connectTimeout" : 3000,
+    "primary" : {
+        "host" : "10.20.34.141",
+        "port" : 1521
+    },
+    "readTimeout" : 15000,
+    "schema" : "ptrade",
+    "service" : "PTDB.ap.icap.com"
+}
+
+21-01-16 12:07:14.545	PTS-C105	INFO	Static Data - 799 floors successfully loaded
+21-01-16 12:07:14.578	PTS-C100	ERROR	Post-Trade Service failed to start: java.net.BindException: Address already in use
+sun.nio.ch.Net.bind0(Native Method)
+sun.nio.ch.Net.bind(Unknown Source)
+sun.nio.ch.Net.bind(Unknown Source)
+sun.nio.ch.ServerSocketChannelImpl.bind(Unknown Source)
+sun.nio.ch.ServerSocketAdaptor.bind(Unknown Source)
+sun.net.httpserver.ServerImpl.<init>(Unknown Source)
+sun.net.httpserver.HttpServerImpl.<init>(Unknown Source)
+sun.net.httpserver.DefaultHttpServerProvider.createHttpServer(Unknown Source)
+com.sun.net.httpserver.HttpServer.create(Unknown Source)
+com.ebs.pts.util.transport.PdfHttpService.<init>(PdfHttpService.java:49)
+com.ebs.pts.config.ComponentFactory.getPdfService(ComponentFactory.java:344)
+com.ebs.pts.PTS_Http.doInit(PTS_Http.java:28)
+com.ebs.pts.ExecutableModule.init(ExecutableModule.java:179)
+com.ebs.pts.ExecutableModule.start(ExecutableModule.java:98)
+com.ebs.pts.PTS_Http.main(PTS_Http.java:23)
+

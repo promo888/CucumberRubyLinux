@@ -1,0 +1,656 @@
+10-02-16 14:16:47.421	PTS-C10	INFO	JVM arguments:
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/export/home/ptrade/Automation/PTS/logs/
+-Xms1024m
+-Xmx8g
+-Dconfig.file=/export/home/ptrade/Automation/PTS/config/prod.conf
+-DconfigPath=/export/home/ptrade/Automation/PTS/config
+-Dpts.module.name=tidy
+10-02-16 14:16:47.425	PTS-C10	INFO	Starting PTS Tidy Service  [Version: 1.4.4.0  build: 512 build time: 2016-02-09 15:48]
+10-02-16 14:16:47.705	PTS-C103	INFO	Component OracleConnectionFactory [JDBC version: JDBC 4.1; Oracle Driver version: 12.1.0.1.0; DB version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production] initialized & started. Effective configuration:
+{
+    "connectTimeout" : 3000,
+    "primary" : {
+        "host" : "10.20.42.50",
+        "port" : 1521
+    },
+    "readTimeout" : 15000,
+    "schema" : "ptrade",
+    "service" : "PTDB.am.icap.com"
+}
+
+10-02-16 14:16:47.876	PTS-C105	INFO	Static Data - 943 floors successfully loaded
+10-02-16 14:16:47.885	PTS-C107	INFO	Static Data - 46 CCY pairs successfully loaded
+10-02-16 14:16:47.969	PTS-C5100	INFO	Binding port: 5559	-> client configuration: c1 was allowed
+10-02-16 14:16:47.969	PTS-C5100	INFO	Binding port: 5560	-> client configuration: c2 was allowed
+10-02-16 14:16:48.333	PTS-C10	INFO	Processor capacity: 1024
+10-02-16 14:16:48.334	PTS-C213	WARNING	No messages for feeder #787 found in the DB
+10-02-16 14:16:48.334	PTS-C103	INFO	Component MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] initialized & started. Effective configuration:
+{
+    "allowSubdirs" : "yes",
+    "id" : 100,
+    "retryInterval" : 3000,
+    "target" : "/export/home/ptrade/Automation/data/tickets/myt"
+}
+
+10-02-16 14:16:48.334	PTS-C103	INFO	Component COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] initialized & started. Effective configuration:
+{
+    "allowSubdirs" : "yes",
+    "id" : 101,
+    "retryInterval" : 3000,
+    "target" : "/export/home/ptrade/Automation/data/tickets/common"
+}
+
+10-02-16 14:16:48.339	PTS-C103	INFO	Component Sapphire Adapter [Persistent RedisSender] initialized & started. Effective configuration:
+{
+    "host" : "10.20.42.86",
+    "id" : 300,
+    "port" : 6399,
+    "retryInterval" : 3000,
+    "topic" : "ebs:gc:tickets:{fp.institutionKey}:{to_upper(fp.trader)}"
+}
+
+10-02-16 14:16:48.340	PTS-C7100	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: FIX initiator starting
+10-02-16 14:16:48.765	PTS-C7307	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: event: [Session FIXT.1.1:AUTOMATION->QA_RTNS:RTNS schedule is daily, 00:00:00-UTC - 00:00:00-UTC (daily, 00:00:00-GMT - 00:00:00-GMT)]
+10-02-16 14:16:48.766	PTS-C7307	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: event: [Created session: FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]
+10-02-16 14:16:48.766	PTS-C7300	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: onCreate invoked
+10-02-16 14:16:48.807	PTS-C103	INFO	Component RTNS FIX Adapter initialized & started. Effective configuration:
+{
+    "beginString" : "FIXT.1.1",
+    "cnfgDir" : "/export/home/ptrade/Automation/PTS/config/fix/rtns",
+    "cnfgFile" : "qfj.cfg",
+    "debug" : {
+        "enabled" : "yes",
+        "spotDict" : "rtns/FIX50SP1-TCR-Spot.xml",
+        "swapDict" : "rtns/FIX50SP1-TCR-Swap.xml"
+    },
+    "host" : "10.20.42.86",
+    "id" : 600,
+    "port" : 16005,
+    "retryInterval" : 3000,
+    "senderCompId" : "AUTOMATION",
+    "targetCompId" : "QA_RTNS"
+}
+
+10-02-16 14:16:48.808	PTS-C103	INFO	Component DisruptorBasedProcessor initialized & started. Effective configuration:
+{
+    "capacity" : 1024
+}
+
+10-02-16 14:16:48.915	PTS-C211	INFO	Feeder #787 [TidyMSLFeeder] recovery start point: time 10-02-16 14:16:48.915
+10-02-16 14:16:48.921	PTS-C103	INFO	Component TidyMSLFeeder Feeder initialized & started. Effective configuration:
+{
+    "acceptTypes" : [
+        {
+            "ns" : 4,
+            "type" : 1
+        }
+    ],
+    "client" : "CPTT",
+    "host" : "10.20.32.63",
+    "id" : 787,
+    "moniker" : "CPT-TIDY-3-10.20.42.86",
+    "port" : 6379,
+    "queue" : "destQ"
+}
+
+10-02-16 14:16:48.922	PTS-C101	INFO	Post-Trade Service PTS_Tidy [instance: 3] started
+10-02-16 14:16:48.927	PTS-C309	DEBUG	Received MSL notification: Disconnected
+10-02-16 14:16:49.838	PTS-C7310	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin message going to be sent, message type: [Logon(A)]
+10-02-16 14:16:49.864	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=8135=A34=149=AUTOMATION52=20160210-14:16:4956=QA_RTNS98=0108=30141=Y1137=810=044]
+10-02-16 14:16:49.871	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=8535=A34=149=QA_RTNS52=20160210-14:16:49.86956=AUTOMATION98=0108=30141=Y1137=810=005]
+10-02-16 14:16:49.873	PTS-C7307	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: event: [Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1]
+10-02-16 14:16:49.873	PTS-C7313	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin message received, message type: [Logon(A)]
+10-02-16 14:16:49.873	PTS-C7307	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: event: [Received logon]
+10-02-16 14:16:49.894	PTS-C7301	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Session established
+10-02-16 14:16:49.921	PTS-C7307	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: event: [Initiated logon request]
+10-02-16 14:16:51.926	PTS-C309	DEBUG	Received MSL notification: ReplayTransition
+10-02-16 14:16:52.009	PTS-C308	DEBUG	Received MSL control message: ReplayResponse [requestId: -4234143187485746899]
+10-02-16 14:17:20.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6035=034=249=QA_RTNS52=20160210-14:17:20.53756=AUTOMATION10=084]
+10-02-16 14:17:20.562	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5635=034=249=AUTOMATION52=20160210-14:17:2056=QA_RTNS10=140]
+10-02-16 14:17:50.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6035=034=349=QA_RTNS52=20160210-14:17:50.53756=AUTOMATION10=088]
+10-02-16 14:17:50.559	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5635=034=349=AUTOMATION52=20160210-14:17:5056=QA_RTNS10=144]
+10-02-16 14:18:20.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6035=034=449=QA_RTNS52=20160210-14:18:20.53756=AUTOMATION10=087]
+10-02-16 14:18:20.567	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5635=034=449=AUTOMATION52=20160210-14:18:2056=QA_RTNS10=143]
+10-02-16 14:18:50.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6035=034=549=QA_RTNS52=20160210-14:18:50.53756=AUTOMATION10=091]
+10-02-16 14:18:50.562	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5635=034=549=AUTOMATION52=20160210-14:18:5056=QA_RTNS10=147]
+10-02-16 14:19:20.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6035=034=649=QA_RTNS52=20160210-14:19:20.53856=AUTOMATION10=091]
+10-02-16 14:19:20.560	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5635=034=649=AUTOMATION52=20160210-14:19:2056=QA_RTNS10=146]
+10-02-16 14:19:20.847	PTS-C306	DEBUG	Received MSL message #1: RedurHdr{session=1, sequence=11}  SrcMessage{session=14, seq=1, namespace=4, type=1, time=10/02/2016 14:19:20}   VariMsgPrefix{blockType=3, len=939}
+10-02-16 14:19:20.855	PTS-C306	DEBUG	Received MSL message #2: RedurHdr{session=1, sequence=12}  SrcMessage{session=14, seq=2, namespace=4, type=1, time=10/02/2016 14:19:20}   VariMsgPrefix{blockType=3, len=1925}
+10-02-16 14:19:20.856	PTS-C306	DEBUG	Received MSL message #3: RedurHdr{session=1, sequence=13}  SrcMessage{session=14, seq=3, namespace=4, type=1, time=10/02/2016 14:19:20}   VariMsgPrefix{blockType=3, len=1913}
+10-02-16 14:19:20.856	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 11, srcSid: 1, srcMid: 1, execId: A7E8-2770-E32E-3A, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:20.861	PTS-C601	TRACE	Message [sid: 1, mid: 11, srcSid: 1, srcMid: 1, execId: A7E8-2770-E32E-3A, status: OK]: Ticket [LCRI/LCRI/A7E8-2770-E32E-3A-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+10-02-16 14:19:20.875	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [7]
+10-02-16 14:19:20.875	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=51035=AE34=749=AUTOMATION52=20160210-14:19:2056=QA_RTNS15=EUR31=1.0753600032=1100000055=EUR/USD60=20160210-14:19:18.73463=264=2016021065=OR75=20160210150=F167=FOR194=1.07536195=0.0000460=4571=A7E8-2770-E32E-3A-1000001003=A7E8-2770-E32E-3A1056=11828960.00552=154=137=A7E8-2770-E32E-3A-10000011=NOS-e3cafd0d-8fb3-4737-a4af-ad83d3b5e332453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y10=049]
+10-02-16 14:19:20.875	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:MYT
+10-02-16 14:19:20.875	PTS-C601	TRACE	Message [sid: 1, mid: 11, srcSid: 1, srcMid: 1, execId: A7E8-2770-E32E-3A, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:20.877	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12435=AR34=749=QA_RTNS52=20160210-14:19:20.87656=AUTOMATION55=EUR/USD571=A7E8-2770-E32E-3A-100000751=0939=0552=154=110=125]
+10-02-16 14:19:20.878	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [7]
+10-02-16 14:19:20.878	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:11, srcSid:1, srcMid:1]
+10-02-16 14:19:20.879	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:11, srcSid:1, srcMid:1]
+10-02-16 14:19:20.879	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 12, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:20.879	PTS-C601	TRACE	Message [sid: 1, mid: 12, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-04-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:20.880	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:12, srcSid:1, srcMid:2]
+10-02-16 14:19:20.880	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 13, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:20.880	PTS-C601	TRACE	Message [sid: 1, mid: 12, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-04-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:20.880	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:13, srcSid:1, srcMid:3]
+10-02-16 14:19:20.881	PTS-C601	TRACE	Message [sid: 1, mid: 12, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [RA78/RA78/FF0A-0014-0000-04-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:20.882	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:12, srcSid:1, srcMid:2]
+10-02-16 14:19:20.882	PTS-C601	TRACE	Message [sid: 1, mid: 13, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-13-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:20.883	PTS-C601	TRACE	Message [sid: 1, mid: 13, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-13-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:20.884	PTS-C601	TRACE	Message [sid: 1, mid: 13, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [RA77/RA77/FF0A-0014-0000-13-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:20.885	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:13, srcSid:1, srcMid:3]
+10-02-16 14:19:20.902	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:11, srcSid:1, srcMid:1]
+10-02-16 14:19:20.903	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+10-02-16 14:19:20.904	PTS-C601	TRACE	Message [sid: 1, mid: 12, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:20.905	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+10-02-16 14:19:20.905	PTS-C601	TRACE	Message [sid: 1, mid: 12, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:20.911	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1053:IS1
+10-02-16 14:19:20.911	PTS-C601	TRACE	Message [sid: 1, mid: 12, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:20.912	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:12, srcSid:1, srcMid:2]
+10-02-16 14:19:20.913	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+10-02-16 14:19:20.913	PTS-C601	TRACE	Message [sid: 1, mid: 13, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:20.916	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+10-02-16 14:19:20.916	PTS-C601	TRACE	Message [sid: 1, mid: 13, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:20.917	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1052:LN2
+10-02-16 14:19:20.917	PTS-C601	TRACE	Message [sid: 1, mid: 13, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:20.918	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:13, srcSid:1, srcMid:3]
+10-02-16 14:19:20.933	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:11, srcSid:1, srcMid:1]
+10-02-16 14:19:20.934	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-04-100000], SeqNo: [8]
+10-02-16 14:19:20.934	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48735=AE34=849=AUTOMATION52=20160210-14:19:2056=QA_RTNS15=EUR31=1.1276600032=354313555=EUR/USD60=20160210-14:19:18.75363=164=2016021065=OR75=20160210150=F167=FOR194=1.12762195=0.4000460=4571=FF0A-0014-0000-04-1000001003=FF0A-0014-0000-041056=3995451.61552=154=137=FF0A-0014-0000-04-10000011=IS1-1446726366281-1453=4448=LPRK447=D452=1802=1523=LPRKLPRK803=4019448=1PSD447=D452=3802=1523=PDD1PDD1803=4019448=N/A447=D452=11448=EBSX447=D452=161057=Y10=092]
+10-02-16 14:19:20.935	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12435=AR34=849=QA_RTNS52=20160210-14:19:20.93556=AUTOMATION55=EUR/USD571=FF0A-0014-0000-04-100000751=0939=0552=154=110=056]
+10-02-16 14:19:20.935	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-04-100000], SeqNo: [8]
+10-02-16 14:19:20.976	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-04-1BC000], SeqNo: [9]
+10-02-16 14:19:20.977	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=50835=AE34=949=AUTOMATION52=20160210-14:19:2056=QA_RTNS15=EUR31=1.1276600032=354313555=EUR/USD60=20160210-14:19:18.75363=164=2016021065=OR75=20160210150=F167=FOR194=1.12762195=0.4000460=4571=FF0A-0014-0000-04-1BC0001003=FF0A-0014-0000-041056=3995451.61552=154=237=FF0A-0014-0000-04-1BC00011=IS1-1446726366281-1453=5448=RA78447=D452=1802=1523=RA78RA78803=4019448=1PSD447=D452=3802=1523=PDD1PDD1803=4019448=N/A447=D452=11448=IS1447=D452=12448=EBSX447=D452=161057=N10=251]
+10-02-16 14:19:20.978	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12435=AR34=949=QA_RTNS52=20160210-14:19:20.97856=AUTOMATION55=EUR/USD571=FF0A-0014-0000-04-1BC000751=0939=0552=154=210=102]
+10-02-16 14:19:20.979	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-04-1BC000], SeqNo: [9]
+10-02-16 14:19:21.15	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-04-1CA000], SeqNo: [10]
+10-02-16 14:19:21.15	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48835=AE34=1049=AUTOMATION52=20160210-14:19:2156=QA_RTNS15=EUR31=1.1276600032=354313555=EUR/USD60=20160210-14:19:18.75363=164=2016021065=OR75=20160210150=F167=FOR194=1.12762195=0.4000460=4571=FF0A-0014-0000-04-1CA0001003=FF0A-0014-0000-041056=3995451.61552=154=137=FF0A-0014-0000-04-1CA00011=IS1-1446726366281-1453=4448=LPDD447=D452=1802=1523=LPDDLPDD803=4019448=RA78447=D452=3802=1523=RA78RA78803=4019448=IS1447=D452=11448=EBSX447=D452=161057=Y10=123]
+10-02-16 14:19:21.16	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=1049=QA_RTNS52=20160210-14:19:21.01556=AUTOMATION55=EUR/USD571=FF0A-0014-0000-04-1CA000751=0939=0552=154=110=124]
+10-02-16 14:19:21.16	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-04-1CA000], SeqNo: [10]
+10-02-16 14:19:21.52	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:12, srcSid:1, srcMid:2]
+10-02-16 14:19:21.53	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-13-100000], SeqNo: [11]
+10-02-16 14:19:21.53	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48935=AE34=1149=AUTOMATION52=20160210-14:19:2156=QA_RTNS15=EUR31=1.1266400032=100000055=EUR/USD60=20160210-14:19:18.76063=M664=2016021065=OR75=20160210150=F167=FOR194=1.12660195=0.4000460=4571=FF0A-0014-0000-13-1000001003=FF0A-0014-0000-131056=1126640.00552=154=237=FF0A-0014-0000-13-10000011=LN2-1446730510994-2453=4448=XXYY447=D452=1802=1523=LPRMLPRM803=4019448=1PSD447=D452=3802=1523=PDD1PDD1803=4019448=N/A447=D452=11448=EBSX447=D452=161057=Y10=208]
+10-02-16 14:19:21.54	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=1149=QA_RTNS52=20160210-14:19:21.05456=AUTOMATION55=EUR/USD571=FF0A-0014-0000-13-100000751=0939=0552=154=210=093]
+10-02-16 14:19:21.54	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-13-100000], SeqNo: [11]
+10-02-16 14:19:21.90	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-13-1BC000], SeqNo: [12]
+10-02-16 14:19:21.90	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=51035=AE34=1249=AUTOMATION52=20160210-14:19:2156=QA_RTNS15=EUR31=1.1266400032=100000055=EUR/USD60=20160210-14:19:18.76063=M664=2016021065=OR75=20160210150=F167=FOR194=1.12660195=0.4000460=4571=FF0A-0014-0000-13-1BC0001003=FF0A-0014-0000-131056=1126640.00552=154=137=FF0A-0014-0000-13-1BC00011=LN2-1446730510994-2453=5448=RA77447=D452=1802=1523=RA77RA77803=4019448=1PSD447=D452=3802=1523=PDD1PDD1803=4019448=N/A447=D452=11448=LN2447=D452=12448=EBSX447=D452=161057=N10=051]
+10-02-16 14:19:21.91	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=1249=QA_RTNS52=20160210-14:19:21.09156=AUTOMATION55=EUR/USD571=FF0A-0014-0000-13-1BC000751=0939=0552=154=110=131]
+10-02-16 14:19:21.91	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-13-1BC000], SeqNo: [12]
+10-02-16 14:19:21.139	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-13-1CA000], SeqNo: [13]
+10-02-16 14:19:21.139	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48935=AE34=1349=AUTOMATION52=20160210-14:19:2156=QA_RTNS15=EUR31=1.1266400032=100000055=EUR/USD60=20160210-14:19:18.76063=M664=2016021065=OR75=20160210150=F167=FOR194=1.12660195=0.4000460=4571=FF0A-0014-0000-13-1CA0001003=FF0A-0014-0000-131056=1126640.00552=154=237=FF0A-0014-0000-13-1CA00011=LN2-1446730510994-2453=4448=LPDD447=D452=1802=1523=LPDDLPDD803=4019448=RA77447=D452=3802=1523=RA77RA77803=4019448=LN2447=D452=11448=EBSX447=D452=161057=Y10=149]
+10-02-16 14:19:21.140	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=1349=QA_RTNS52=20160210-14:19:21.14056=AUTOMATION55=EUR/USD571=FF0A-0014-0000-13-1CA000751=0939=0552=154=210=127]
+10-02-16 14:19:21.141	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-13-1CA000], SeqNo: [13]
+10-02-16 14:19:21.176	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:13, srcSid:1, srcMid:3]
+10-02-16 14:19:21.785	PTS-C306	DEBUG	Received MSL message #4: RedurHdr{session=1, sequence=23}  SrcMessage{session=14, seq=4, namespace=4, type=1, time=10/02/2016 14:19:21}   VariMsgPrefix{blockType=3, len=920}
+10-02-16 14:19:21.786	PTS-C306	DEBUG	Received MSL message #5: RedurHdr{session=1, sequence=24}  SrcMessage{session=14, seq=5, namespace=4, type=1, time=10/02/2016 14:19:21}   VariMsgPrefix{blockType=3, len=1913}
+10-02-16 14:19:21.787	PTS-C306	DEBUG	Received MSL message #6: RedurHdr{session=1, sequence=25}  SrcMessage{session=14, seq=6, namespace=4, type=1, time=10/02/2016 14:19:21}   VariMsgPrefix{blockType=3, len=918}
+10-02-16 14:19:21.787	PTS-C601	TRACE	Message [sid: 1, mid: 23, srcSid: 1, srcMid: 4, execId: FF0A-0014-0000-1B, status: OK]: Ticket [LCPN/LCPN/FF0A-0014-0000-1B-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.787	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-1B-100000], SeqNo: [14]
+10-02-16 14:19:21.787	PTS-C306	DEBUG	Received MSL message #7: RedurHdr{session=1, sequence=26}  SrcMessage{session=14, seq=7, namespace=4, type=1, time=10/02/2016 14:19:21}   VariMsgPrefix{blockType=3, len=918}
+10-02-16 14:19:21.787	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=49435=AE34=1449=AUTOMATION52=20160210-14:19:2156=QA_RTNS15=USD31=119.91300032=2500000055=USD/JPY60=20160210-14:19:18.77163=M1264=2016021065=OR75=20160210150=F167=FOR194=119.913195=0.0000460=4571=FF0A-0014-0000-1B-1000001003=FF0A-0014-0000-1B1056=2997825000.00552=154=137=FF0A-0014-0000-1B-10000011=LN2-1446733626696-6453=4448=XXYY447=D452=1802=1523=LPRMLPRM803=4019448=LCPN447=D452=3802=1523=LCPNLCPN803=4019448=LN2447=D452=11448=EBSX447=D452=161057=Y10=142]
+10-02-16 14:19:21.787	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 23, srcSid: 1, srcMid: 4, execId: FF0A-0014-0000-1B, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:21.787	PTS-C306	DEBUG	Received MSL message #8: RedurHdr{session=1, sequence=27}  SrcMessage{session=14, seq=8, namespace=4, type=1, time=10/02/2016 14:19:21}   VariMsgPrefix{blockType=3, len=1787}
+10-02-16 14:19:21.788	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:23, srcSid:1, srcMid:4]
+10-02-16 14:19:21.788	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:23, srcSid:1, srcMid:4]
+10-02-16 14:19:21.788	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 24, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:21.788	PTS-C306	DEBUG	Received MSL message #9: RedurHdr{session=1, sequence=28}  SrcMessage{session=14, seq=9, namespace=4, type=1, time=10/02/2016 14:19:21}   VariMsgPrefix{blockType=3, len=1787}
+10-02-16 14:19:21.788	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=1449=QA_RTNS52=20160210-14:19:21.78856=AUTOMATION55=USD/JPY571=FF0A-0014-0000-1B-100000751=0939=0552=154=110=131]
+10-02-16 14:19:21.788	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [LPRP/1PRP/FF0A-0014-0000-0A-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.789	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-1B-100000], SeqNo: [14]
+10-02-16 14:19:21.789	PTS-C306	DEBUG	Received MSL message #10: RedurHdr{session=1, sequence=29}  SrcMessage{session=14, seq=10, namespace=4, type=1, time=10/02/2016 14:19:21}   VariMsgPrefix{blockType=3, len=1791}
+10-02-16 14:19:21.789	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [LPRP/1PRP/FF0A-0014-0000-0A-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.789	PTS-C306	DEBUG	Received MSL message #11: RedurHdr{session=1, sequence=30}  SrcMessage{session=14, seq=11, namespace=4, type=1, time=10/02/2016 14:19:21}   VariMsgPrefix{blockType=3, len=1791}
+10-02-16 14:19:21.789	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:24, srcSid:1, srcMid:5]
+10-02-16 14:19:21.789	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 25, srcSid: 1, srcMid: 6, execId: FF0A-0014-0000-1A, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:21.789	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN2
+10-02-16 14:19:21.789	PTS-C601	TRACE	Message [sid: 1, mid: 23, srcSid: 1, srcMid: 4, execId: FF0A-0014-0000-1B, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.790	PTS-C306	DEBUG	Received MSL message #12: RedurHdr{session=1, sequence=31}  SrcMessage{session=14, seq=12, namespace=4, type=1, time=10/02/2016 14:19:21}   VariMsgPrefix{blockType=3, len=895}
+10-02-16 14:19:21.790	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [PL22/PL22/FF0A-0014-0000-0A-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.790	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:25, srcSid:1, srcMid:6]
+10-02-16 14:19:21.790	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 26, srcSid: 1, srcMid: 7, execId: FF0A-0014-0000-16, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:21.790	PTS-C306	DEBUG	Received MSL message #13: RedurHdr{session=1, sequence=32}  SrcMessage{session=14, seq=13, namespace=4, type=1, time=10/02/2016 14:19:21}   VariMsgPrefix{blockType=3, len=852}
+10-02-16 14:19:21.791	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:23, srcSid:1, srcMid:4]
+10-02-16 14:19:21.791	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:24, srcSid:1, srcMid:5]
+10-02-16 14:19:21.791	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:26, srcSid:1, srcMid:7]
+10-02-16 14:19:21.791	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 27, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:21.791	PTS-C601	TRACE	Message [sid: 1, mid: 25, srcSid: 1, srcMid: 6, execId: FF0A-0014-0000-1A, status: OK]: Ticket [LCLH/LCLH/FF0A-0014-0000-1A-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.792	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:973:
+10-02-16 14:19:21.792	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.792	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:27, srcSid:1, srcMid:8]
+10-02-16 14:19:21.792	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 28, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:21.792	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:25, srcSid:1, srcMid:6]
+10-02-16 14:19:21.792	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:973:
+10-02-16 14:19:21.793	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.793	PTS-C601	TRACE	Message [sid: 1, mid: 26, srcSid: 1, srcMid: 7, execId: FF0A-0014-0000-16, status: OK]: Ticket [LCLI/LCLI/FF0A-0014-0000-16-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.793	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:28, srcSid:1, srcMid:9]
+10-02-16 14:19:21.793	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 29, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:21.793	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1133:LN2
+10-02-16 14:19:21.793	PTS-C601	TRACE	Message [sid: 1, mid: 24, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.793	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:26, srcSid:1, srcMid:7]
+10-02-16 14:19:21.794	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:29, srcSid:1, srcMid:10]
+10-02-16 14:19:21.794	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 30, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:21.794	PTS-C601	TRACE	Message [sid: 1, mid: 27, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0005-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.794	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:24, srcSid:1, srcMid:5]
+10-02-16 14:19:21.794	PTS-C601	TRACE	Message [sid: 1, mid: 27, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0005-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.794	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:30, srcSid:1, srcMid:14]
+10-02-16 14:19:21.795	PTS-C601	TRACE	Message [sid: 1, mid: 31, srcSid: 1, srcMid: 15, execId: FF0A-0012-0000-2D, status: OK]: Ticket [LCPJ/LCPJ/FF0A-0012-0000-2D-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+10-02-16 14:19:21.795	PTS-C601	TRACE	Message [sid: 1, mid: 27, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [RA99/RA99/FF64-0E70-0005-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.795	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1166:LN2
+10-02-16 14:19:21.795	PTS-C601	TRACE	Message [sid: 1, mid: 25, srcSid: 1, srcMid: 6, execId: FF0A-0014-0000-1A, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.796	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:31, srcSid:1, srcMid:15]
+10-02-16 14:19:21.796	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 32, srcSid: 1, srcMid: 16, execId: FF64-0E70-0001-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:21.796	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:25, srcSid:1, srcMid:6]
+10-02-16 14:19:21.797	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:32, srcSid:1, srcMid:16]
+10-02-16 14:19:21.797	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:27, srcSid:1, srcMid:8]
+10-02-16 14:19:21.797	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1167:LN0
+10-02-16 14:19:21.797	PTS-C601	TRACE	Message [sid: 1, mid: 26, srcSid: 1, srcMid: 7, execId: FF0A-0014-0000-16, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.798	PTS-C601	TRACE	Message [sid: 1, mid: 28, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0006-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.798	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:26, srcSid:1, srcMid:7]
+10-02-16 14:19:21.798	PTS-C601	TRACE	Message [sid: 1, mid: 28, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0006-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.799	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:21.799	PTS-C601	TRACE	Message [sid: 1, mid: 27, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.799	PTS-C601	TRACE	Message [sid: 1, mid: 28, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [RB01/RB01/FF64-0E70-0006-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.800	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:21.800	PTS-C601	TRACE	Message [sid: 1, mid: 27, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.800	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:28, srcSid:1, srcMid:9]
+10-02-16 14:19:21.800	PTS-C601	TRACE	Message [sid: 1, mid: 29, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0003-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.801	PTS-C601	TRACE	Message [sid: 1, mid: 29, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0003-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.801	PTS-C601	TRACE	Message [sid: 1, mid: 29, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [R3E1/R3E1/FF64-0E70-0003-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.802	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:29, srcSid:1, srcMid:10]
+10-02-16 14:19:21.802	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0004-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.803	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0004-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.803	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [R3E2/R3E2/FF64-0E70-0004-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.804	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:30, srcSid:1, srcMid:14]
+10-02-16 14:19:21.804	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 31, srcSid: 1, srcMid: 15, execId: FF0A-0012-0000-2D, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:21.805	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:31, srcSid:1, srcMid:15]
+10-02-16 14:19:21.806	PTS-C601	TRACE	Message [sid: 1, mid: 32, srcSid: 1, srcMid: 16, execId: FF64-0E70-0001-00, status: OK]: Ticket [LCPN/LCPN/FF64-0E70-0001-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:21.807	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:32, srcSid:1, srcMid:16]
+10-02-16 14:19:21.817	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1074:LN2
+10-02-16 14:19:21.817	PTS-C601	TRACE	Message [sid: 1, mid: 27, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.818	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:27, srcSid:1, srcMid:8]
+10-02-16 14:19:21.820	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:21.820	PTS-C601	TRACE	Message [sid: 1, mid: 28, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.820	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:21.820	PTS-C601	TRACE	Message [sid: 1, mid: 28, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.821	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1075:LN2
+10-02-16 14:19:21.821	PTS-C601	TRACE	Message [sid: 1, mid: 28, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.822	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:28, srcSid:1, srcMid:9]
+10-02-16 14:19:21.822	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+10-02-16 14:19:21.822	PTS-C601	TRACE	Message [sid: 1, mid: 29, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.823	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+10-02-16 14:19:21.823	PTS-C601	TRACE	Message [sid: 1, mid: 29, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.824	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1097:LN5
+10-02-16 14:19:21.824	PTS-C601	TRACE	Message [sid: 1, mid: 29, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.825	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:29, srcSid:1, srcMid:10]
+10-02-16 14:19:21.825	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+10-02-16 14:19:21.825	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.826	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+10-02-16 14:19:21.826	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.826	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:23, srcSid:1, srcMid:4]
+10-02-16 14:19:21.827	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1098:LN6
+10-02-16 14:19:21.827	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 14, execId: FF64-0E70-0004-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.827	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-0A-100000], SeqNo: [15]
+10-02-16 14:19:21.827	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=49135=AE34=1549=AUTOMATION52=20160210-14:19:2156=QA_RTNS15=USD31=119.97000032=100000055=USD/JPY60=20160210-14:19:18.77963=W264=2016021065=OR75=20160210150=F167=FOR194=119.970195=0.0000460=4571=FF0A-0014-0000-0A-1000001003=FF0A-0014-0000-0A1056=119970000.00552=154=237=FF0A-0014-0000-0A-10000011=LN2-1446727896678-9453=4448=LPRJ447=D452=1802=1523=LPRJLPRJ803=4019448=LPRP447=D452=3802=1523=PRP1PRP1803=4019448=N/A447=D452=11448=EBSX447=D452=161057=Y10=199]
+10-02-16 14:19:21.827	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:30, srcSid:1, srcMid:14]
+10-02-16 14:19:21.828	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:944:MT7
+10-02-16 14:19:21.828	PTS-C601	TRACE	Message [sid: 1, mid: 31, srcSid: 1, srcMid: 15, execId: FF0A-0012-0000-2D, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.828	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=1549=QA_RTNS52=20160210-14:19:21.82856=AUTOMATION55=USD/JPY571=FF0A-0014-0000-0A-100000751=0939=0552=154=210=126]
+10-02-16 14:19:21.829	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-0A-100000], SeqNo: [15]
+10-02-16 14:19:21.829	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:31, srcSid:1, srcMid:15]
+10-02-16 14:19:21.829	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN1
+10-02-16 14:19:21.830	PTS-C601	TRACE	Message [sid: 1, mid: 32, srcSid: 1, srcMid: 16, execId: FF64-0E70-0001-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:21.831	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:32, srcSid:1, srcMid:16]
+10-02-16 14:19:21.864	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-0A-1BC000], SeqNo: [16]
+10-02-16 14:19:21.864	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=51235=AE34=1649=AUTOMATION52=20160210-14:19:2156=QA_RTNS15=USD31=119.97000032=100000055=USD/JPY60=20160210-14:19:18.77963=W264=2016021065=OR75=20160210150=F167=FOR194=119.970195=0.0000460=4571=FF0A-0014-0000-0A-1BC0001003=FF0A-0014-0000-0A1056=119970000.00552=154=137=FF0A-0014-0000-0A-1BC00011=LN2-1446727896678-9453=5448=PL22447=D452=1802=1523=PL22PL22803=4019448=LPRP447=D452=3802=1523=PRP1PRP1803=4019448=N/A447=D452=11448=LN2447=D452=12448=EBSX447=D452=161057=N10=096]
+10-02-16 14:19:21.865	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=1649=QA_RTNS52=20160210-14:19:21.86556=AUTOMATION55=USD/JPY571=FF0A-0014-0000-0A-1BC000751=0939=0552=154=110=164]
+10-02-16 14:19:21.865	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-0A-1BC000], SeqNo: [16]
+10-02-16 14:19:21.900	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-0A-1CA000], SeqNo: [17]
+10-02-16 14:19:21.901	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=49135=AE34=1749=AUTOMATION52=20160210-14:19:2156=QA_RTNS15=USD31=119.97000032=100000055=USD/JPY60=20160210-14:19:18.77963=W264=2016021065=OR75=20160210150=F167=FOR194=119.970195=0.0000460=4571=FF0A-0014-0000-0A-1CA0001003=FF0A-0014-0000-0A1056=119970000.00552=154=237=FF0A-0014-0000-0A-1CA00011=LN2-1446727896678-9453=4448=LPRP447=D452=1802=1523=LPRPLPRP803=4019448=PL22447=D452=3802=1523=PL22PL22803=4019448=LN2447=D452=11448=EBSX447=D452=161057=Y10=173]
+10-02-16 14:19:21.901	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=1749=QA_RTNS52=20160210-14:19:21.90156=AUTOMATION55=USD/JPY571=FF0A-0014-0000-0A-1CA000751=0939=0552=154=210=156]
+10-02-16 14:19:21.902	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-0A-1CA000], SeqNo: [17]
+10-02-16 14:19:21.936	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:24, srcSid:1, srcMid:5]
+10-02-16 14:19:21.937	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-1A-100000], SeqNo: [18]
+10-02-16 14:19:21.937	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=49035=AE34=1849=AUTOMATION52=20160210-14:19:2156=QA_RTNS15=EUR31=129.22000032=100000055=EUR/JPY60=20160210-14:19:18.78563=B64=2016021065=OR75=20160210150=F167=FOR194=129.220195=0.0000460=4571=FF0A-0014-0000-1A-1000001003=FF0A-0014-0000-1A1056=129220000.00552=154=137=FF0A-0014-0000-1A-10000011=LN2-1446733008758-5453=4448=LPRE447=D452=1802=1523=LPRELPRE803=4019448=LCLH447=D452=3802=1523=LCLHLCLH803=4019448=LN2447=D452=11448=EBSX447=D452=161057=Y10=045]
+10-02-16 14:19:21.938	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=1849=QA_RTNS52=20160210-14:19:21.93756=AUTOMATION55=EUR/JPY571=FF0A-0014-0000-1A-100000751=0939=0552=154=110=130]
+10-02-16 14:19:21.938	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-1A-100000], SeqNo: [18]
+10-02-16 14:19:21.985	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:25, srcSid:1, srcMid:6]
+10-02-16 14:19:21.986	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-16-100000], SeqNo: [19]
+10-02-16 14:19:21.986	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=49035=AE34=1949=AUTOMATION52=20160210-14:19:2156=QA_RTNS15=EUR31=129.20000032=100000055=EUR/JPY60=20160210-14:19:18.79263=164=2016021065=OR75=20160210150=F167=FOR194=129.160195=4.0000460=4571=FF0A-0014-0000-16-1000001003=FF0A-0014-0000-161056=129200000.00552=154=237=FF0A-0014-0000-16-10000011=LN2-1446731537258-4453=4448=LPRF447=D452=1802=1523=LPRFLPRF803=4019448=LCLI447=D452=3802=1523=LCLILCLI803=4019448=LN0447=D452=11448=EBSX447=D452=161057=Y10=001]
+10-02-16 14:19:21.987	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=1949=QA_RTNS52=20160210-14:19:21.98756=AUTOMATION55=EUR/JPY571=FF0A-0014-0000-16-100000751=0939=0552=154=210=126]
+10-02-16 14:19:21.987	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0014-0000-16-100000], SeqNo: [19]
+10-02-16 14:19:22.24	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:26, srcSid:1, srcMid:7]
+10-02-16 14:19:22.25	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0005-00-100000], SeqNo: [20]
+10-02-16 14:19:22.25	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=47935=AE34=2049=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=GBP31=180.17732=100000055=GBP/JPY60=20160210-14:19:18.80063=064=2016021065=SP75=20160210150=F167=FOR194=180.177195=0460=4571=FF64-0E70-0005-00-1000001003=FF64-0E70-0005-001056=180177000552=154=137=FF64-0E70-0005-00-10000011=LN2-1446723245475-1453=4448=LPLL447=D452=1802=1523=LPLLLPLL803=4019448=1PSE447=D452=3802=1523=PDE1PDE1803=4019448=N/A447=D452=11448=EBSX447=D452=161057=Y10=180]
+10-02-16 14:19:22.26	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=2049=QA_RTNS52=20160210-14:19:22.02656=AUTOMATION55=GBP/JPY571=FF64-0E70-0005-00-100000751=0939=0552=154=110=097]
+10-02-16 14:19:22.26	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0005-00-100000], SeqNo: [20]
+10-02-16 14:19:22.68	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0005-00-1BC000], SeqNo: [21]
+10-02-16 14:19:22.68	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=50035=AE34=2149=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=GBP31=180.17732=100000055=GBP/JPY60=20160210-14:19:18.80063=064=2016021065=SP75=20160210150=F167=FOR194=180.177195=0460=4571=FF64-0E70-0005-00-1BC0001003=FF64-0E70-0005-001056=180177000552=154=237=FF64-0E70-0005-00-1BC00011=LN2-1446723245475-1453=5448=RA99447=D452=1802=1523=RA99RA99803=4019448=1PSE447=D452=3802=1523=PDE1PDE1803=4019448=N/A447=D452=11448=LN2447=D452=12448=EBSX447=D452=161057=N10=097]
+10-02-16 14:19:22.69	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=2149=QA_RTNS52=20160210-14:19:22.06956=AUTOMATION55=GBP/JPY571=FF64-0E70-0005-00-1BC000751=0939=0552=154=210=143]
+10-02-16 14:19:22.69	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0005-00-1BC000], SeqNo: [21]
+10-02-16 14:19:22.105	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0005-00-1CA000], SeqNo: [22]
+10-02-16 14:19:22.105	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=47935=AE34=2249=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=GBP31=180.17732=100000055=GBP/JPY60=20160210-14:19:18.80063=064=2016021065=SP75=20160210150=F167=FOR194=180.177195=0460=4571=FF64-0E70-0005-00-1CA0001003=FF64-0E70-0005-001056=180177000552=154=137=FF64-0E70-0005-00-1CA00011=LN2-1446723245475-1453=4448=LPDE447=D452=1802=1523=LPDELPDE803=4019448=RA99447=D452=3802=1523=RA99RA99803=4019448=LN2447=D452=11448=EBSX447=D452=161057=Y10=193]
+10-02-16 14:19:22.106	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=2249=QA_RTNS52=20160210-14:19:22.10656=AUTOMATION55=GBP/JPY571=FF64-0E70-0005-00-1CA000751=0939=0552=154=110=134]
+10-02-16 14:19:22.106	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0005-00-1CA000], SeqNo: [22]
+10-02-16 14:19:22.147	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:27, srcSid:1, srcMid:8]
+10-02-16 14:19:22.148	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0006-00-100000], SeqNo: [23]
+10-02-16 14:19:22.148	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=47935=AE34=2349=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=GBP31=180.12932=100000055=GBP/JPY60=20160210-14:19:18.80663=064=2016021065=SP75=20160210150=F167=FOR194=180.129195=0460=4571=FF64-0E70-0006-00-1000001003=FF64-0E70-0006-001056=180129000552=154=237=FF64-0E70-0006-00-10000011=LN2-1446723330227-2453=4448=LPLK447=D452=1802=1523=LPLKLPLK803=4019448=1PSE447=D452=3802=1523=PDE1PDE1803=4019448=N/A447=D452=11448=EBSX447=D452=161057=Y10=172]
+10-02-16 14:19:22.149	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=2349=QA_RTNS52=20160210-14:19:22.14956=AUTOMATION55=GBP/JPY571=FF64-0E70-0006-00-100000751=0939=0552=154=210=108]
+10-02-16 14:19:22.149	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0006-00-100000], SeqNo: [23]
+10-02-16 14:19:22.187	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0006-00-1BC000], SeqNo: [24]
+10-02-16 14:19:22.188	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=50035=AE34=2449=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=GBP31=180.12932=100000055=GBP/JPY60=20160210-14:19:18.80663=064=2016021065=SP75=20160210150=F167=FOR194=180.129195=0460=4571=FF64-0E70-0006-00-1BC0001003=FF64-0E70-0006-001056=180129000552=154=137=FF64-0E70-0006-00-1BC00011=LN2-1446723330227-2453=5448=RB01447=D452=1802=1523=RB01RB01803=4019448=1PSE447=D452=3802=1523=PDE1PDE1803=4019448=N/A447=D452=11448=LN2447=D452=12448=EBSX447=D452=161057=N10=042]
+10-02-16 14:19:22.189	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=2449=QA_RTNS52=20160210-14:19:22.18956=AUTOMATION55=GBP/JPY571=FF64-0E70-0006-00-1BC000751=0939=0552=154=110=149]
+10-02-16 14:19:22.189	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0006-00-1BC000], SeqNo: [24]
+10-02-16 14:19:22.222	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0006-00-1CA000], SeqNo: [25]
+10-02-16 14:19:22.222	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=47935=AE34=2549=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=GBP31=180.12932=100000055=GBP/JPY60=20160210-14:19:18.80663=064=2016021065=SP75=20160210150=F167=FOR194=180.129195=0460=4571=FF64-0E70-0006-00-1CA0001003=FF64-0E70-0006-001056=180129000552=154=237=FF64-0E70-0006-00-1CA00011=LN2-1446723330227-2453=4448=LPDE447=D452=1802=1523=LPDELPDE803=4019448=RB01447=D452=3802=1523=RB01RB01803=4019448=LN2447=D452=11448=EBSX447=D452=161057=Y10=140]
+10-02-16 14:19:22.223	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=2549=QA_RTNS52=20160210-14:19:22.22356=AUTOMATION55=GBP/JPY571=FF64-0E70-0006-00-1CA000751=0939=0552=154=210=139]
+10-02-16 14:19:22.223	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0006-00-1CA000], SeqNo: [25]
+10-02-16 14:19:22.263	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:28, srcSid:1, srcMid:9]
+10-02-16 14:19:22.263	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0003-00-100000], SeqNo: [26]
+10-02-16 14:19:22.264	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48135=AE34=2649=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=USD31=52.860432=100000055=USD/RUB60=20160210-14:19:18.81263=064=2016021065=SP75=20160210150=F167=FOR194=52.8604195=0460=4571=FF64-0E70-0003-00-1000001003=FF64-0E70-0003-001056=52860400.00552=154=137=FF64-0E70-0003-00-10000011=LN2-1446722296089-3453=4448=LPRC447=D452=1802=1523=LPRCLPRC803=4019448=3CRE447=D452=3802=1523=CRE3CRE3803=4019448=N/A447=D452=11448=EBSX447=D452=161057=Y10=038]
+10-02-16 14:19:22.265	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=2649=QA_RTNS52=20160210-14:19:22.26456=AUTOMATION55=USD/RUB571=FF64-0E70-0003-00-100000751=0939=0552=154=110=114]
+10-02-16 14:19:22.265	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0003-00-100000], SeqNo: [26]
+10-02-16 14:19:22.301	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0003-00-1BC000], SeqNo: [27]
+10-02-16 14:19:22.302	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=50235=AE34=2749=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=USD31=52.860432=100000055=USD/RUB60=20160210-14:19:18.81263=064=2016021065=SP75=20160210150=F167=FOR194=52.8604195=0460=4571=FF64-0E70-0003-00-1BC0001003=FF64-0E70-0003-001056=52860400.00552=154=237=FF64-0E70-0003-00-1BC00011=LN2-1446722296089-3453=5448=R3E1447=D452=1802=1523=R3E1R3E1803=4019448=3CRE447=D452=3802=1523=CRE3CRE3803=4019448=N/A447=D452=11448=LN5447=D452=12448=EBSX447=D452=161057=N10=202]
+10-02-16 14:19:22.303	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=2749=QA_RTNS52=20160210-14:19:22.30256=AUTOMATION55=USD/RUB571=FF64-0E70-0003-00-1BC000751=0939=0552=154=210=146]
+10-02-16 14:19:22.303	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0003-00-1BC000], SeqNo: [27]
+10-02-16 14:19:22.337	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0003-00-1CA000], SeqNo: [28]
+10-02-16 14:19:22.337	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48135=AE34=2849=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=USD31=52.860432=100000055=USD/RUB60=20160210-14:19:18.81263=064=2016021065=SP75=20160210150=F167=FOR194=52.8604195=0460=4571=FF64-0E70-0003-00-1CA0001003=FF64-0E70-0003-001056=52860400.00552=154=137=FF64-0E70-0003-00-1CA00011=LN2-1446722296089-3453=4448=LCRE447=D452=1802=1523=LCRELCRE803=4019448=R3E1447=D452=3802=1523=R3E1R3E1803=4019448=LN5447=D452=11448=EBSX447=D452=161057=Y10=042]
+10-02-16 14:19:22.338	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=2849=QA_RTNS52=20160210-14:19:22.33856=AUTOMATION55=USD/RUB571=FF64-0E70-0003-00-1CA000751=0939=0552=154=110=154]
+10-02-16 14:19:22.339	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0003-00-1CA000], SeqNo: [28]
+10-02-16 14:19:22.374	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:29, srcSid:1, srcMid:10]
+10-02-16 14:19:22.374	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0004-00-100000], SeqNo: [29]
+10-02-16 14:19:22.374	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48135=AE34=2949=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=USD31=52.750232=100000055=USD/RUB60=20160210-14:19:18.81963=064=2016021065=SP75=20160210150=F167=FOR194=52.7502195=0460=4571=FF64-0E70-0004-00-1000001003=FF64-0E70-0004-001056=52750200.00552=154=237=FF64-0E70-0004-00-10000011=LN2-1446722297770-4453=4448=LPRD447=D452=1802=1523=LPRDLPRD803=4019448=3CRE447=D452=3802=1523=CRE3CRE3803=4019448=N/A447=D452=11448=EBSX447=D452=161057=Y10=042]
+10-02-16 14:19:22.375	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=2949=QA_RTNS52=20160210-14:19:22.37556=AUTOMATION55=USD/RUB571=FF64-0E70-0004-00-100000751=0939=0552=154=210=122]
+10-02-16 14:19:22.376	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0004-00-100000], SeqNo: [29]
+10-02-16 14:19:22.411	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0004-00-1BC000], SeqNo: [30]
+10-02-16 14:19:22.411	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=50235=AE34=3049=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=USD31=52.750232=100000055=USD/RUB60=20160210-14:19:18.81963=064=2016021065=SP75=20160210150=F167=FOR194=52.7502195=0460=4571=FF64-0E70-0004-00-1BC0001003=FF64-0E70-0004-001056=52750200.00552=154=137=FF64-0E70-0004-00-1BC00011=LN2-1446722297770-4453=5448=R3E2447=D452=1802=1523=R3E2R3E2803=4019448=3CRE447=D452=3802=1523=CRE3CRE3803=4019448=N/A447=D452=11448=LN6447=D452=12448=EBSX447=D452=161057=N10=196]
+10-02-16 14:19:22.412	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=3049=QA_RTNS52=20160210-14:19:22.41256=AUTOMATION55=USD/RUB571=FF64-0E70-0004-00-1BC000751=0939=0552=154=110=142]
+10-02-16 14:19:22.412	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0004-00-1BC000], SeqNo: [30]
+10-02-16 14:19:22.448	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0004-00-1CA000], SeqNo: [31]
+10-02-16 14:19:22.449	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48135=AE34=3149=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=USD31=52.750232=100000055=USD/RUB60=20160210-14:19:18.81963=064=2016021065=SP75=20160210150=F167=FOR194=52.7502195=0460=4571=FF64-0E70-0004-00-1CA0001003=FF64-0E70-0004-001056=52750200.00552=154=237=FF64-0E70-0004-00-1CA00011=LN2-1446722297770-4453=4448=LCRE447=D452=1802=1523=LCRELCRE803=4019448=R3E2447=D452=3802=1523=R3E2R3E2803=4019448=LN6447=D452=11448=EBSX447=D452=161057=Y10=038]
+10-02-16 14:19:22.450	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=3149=QA_RTNS52=20160210-14:19:22.44956=AUTOMATION55=USD/RUB571=FF64-0E70-0004-00-1CA000751=0939=0552=154=210=153]
+10-02-16 14:19:22.450	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0004-00-1CA000], SeqNo: [31]
+10-02-16 14:19:22.487	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:30, srcSid:1, srcMid:14]
+10-02-16 14:19:22.488	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0012-0000-2D-100000], SeqNo: [32]
+10-02-16 14:19:22.488	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48835=AE34=3249=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=EUR31=1.3901132=155=EUR/AUD60=20160210-14:19:18.82563=064=2016021065=SP75=20160210150=F167=FOR194=1.39011195=0460=4571=FF0A-0012-0000-2D-1000001003=FF0A-0012-0000-2D1056=1.39552=154=137=FF0A-0012-0000-2D-10000011=NOSced69fd7-e7d1-4478-af06-e3fe79da7c50453=4448=LPRN447=D452=1802=1523=LPRNLPRN803=4019448=LCPJ447=D452=3802=1523=LCPJLCPJ803=4019448=MT7447=D452=11448=EBSX447=D452=161057=Y10=040]
+10-02-16 14:19:22.489	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=3249=QA_RTNS52=20160210-14:19:22.48956=AUTOMATION55=EUR/AUD571=FF0A-0012-0000-2D-100000751=0939=0552=154=110=106]
+10-02-16 14:19:22.490	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0012-0000-2D-100000], SeqNo: [32]
+10-02-16 14:19:22.524	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:31, srcSid:1, srcMid:15]
+10-02-16 14:19:22.525	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0001-00-100000], SeqNo: [33]
+10-02-16 14:19:22.525	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=47935=AE34=3349=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=USD31=0.9901032=100000055=USD/CHF60=20160210-14:19:18.83163=064=2016021065=SP75=20160210150=F167=FOR194=0.99010195=0460=4571=FF64-0E70-0001-00-1000001003=FF64-0E70-0001-001056=990100.00552=154=137=FF64-0E70-0001-00-10000011=LN2-1446721379487-1453=4448=LPRP447=D452=1802=1523=LPRPLPRP803=4019448=LCPN447=D452=3802=1523=LCPNLCPN803=4019448=LN1447=D452=11448=EBSX447=D452=161057=Y10=049]
+10-02-16 14:19:22.526	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=3349=QA_RTNS52=20160210-14:19:22.52656=AUTOMATION55=USD/CHF571=FF64-0E70-0001-00-100000751=0939=0552=154=110=087]
+10-02-16 14:19:22.527	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0001-00-100000], SeqNo: [33]
+10-02-16 14:19:22.562	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:32, srcSid:1, srcMid:16]
+10-02-16 14:19:22.789	PTS-C306	DEBUG	Received MSL message #14: RedurHdr{session=1, sequence=43}  SrcMessage{session=14, seq=14, namespace=4, type=1, time=10/02/2016 14:19:22}   VariMsgPrefix{blockType=3, len=852}
+10-02-16 14:19:22.789	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 43, srcSid: 1, srcMid: 17, execId: FF64-0E70-0002-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:22.790	PTS-C306	DEBUG	Received MSL message #15: RedurHdr{session=1, sequence=44}  SrcMessage{session=14, seq=15, namespace=4, type=1, time=10/02/2016 14:19:22}   VariMsgPrefix{blockType=3, len=850}
+10-02-16 14:19:22.790	PTS-C306	DEBUG	Received MSL message #16: RedurHdr{session=1, sequence=45}  SrcMessage{session=14, seq=16, namespace=4, type=1, time=10/02/2016 14:19:22}   VariMsgPrefix{blockType=3, len=874}
+10-02-16 14:19:22.790	PTS-C306	DEBUG	Received MSL message #17: RedurHdr{session=1, sequence=46}  SrcMessage{session=14, seq=17, namespace=4, type=1, time=10/02/2016 14:19:22}   VariMsgPrefix{blockType=3, len=901}
+10-02-16 14:19:22.790	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-0002-00-100000], SeqNo: [34]
+10-02-16 14:19:22.790	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=47935=AE34=3449=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=USD31=0.9900832=100000055=USD/CHF60=20160210-14:19:18.83763=064=2016021065=SP75=20160210150=F167=FOR194=0.99008195=0460=4571=FF64-0E70-0002-00-1000001003=FF64-0E70-0002-001056=990080.00552=154=237=FF64-0E70-0002-00-10000011=LN2-1446721464277-2453=4448=LPRP447=D452=1802=1523=LPRPLPRP803=4019448=LCPO447=D452=3802=1523=LCPOLCPO803=4019448=LN4447=D452=11448=EBSX447=D452=161057=Y10=080]
+10-02-16 14:19:22.790	PTS-C306	DEBUG	Received MSL message #18: RedurHdr{session=1, sequence=47}  SrcMessage{session=14, seq=18, namespace=4, type=1, time=10/02/2016 14:19:22}   VariMsgPrefix{blockType=3, len=865}
+10-02-16 14:19:22.791	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:43, srcSid:1, srcMid:17]
+10-02-16 14:19:22.791	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 44, srcSid: 1, srcMid: 18, execId: FF64-0E6D-000A-00, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:22.791	PTS-C306	DEBUG	Received MSL message #19: RedurHdr{session=1, sequence=48}  SrcMessage{session=14, seq=19, namespace=4, type=1, time=10/02/2016 14:19:22}   VariMsgPrefix{blockType=3, len=3586}
+10-02-16 14:19:22.792	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:44, srcSid:1, srcMid:18]
+10-02-16 14:19:22.792	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 45, srcSid: 1, srcMid: 19, execId: FF64-0E70-002E-04, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:22.792	PTS-C601	TRACE	Message [sid: 1, mid: 43, srcSid: 1, srcMid: 17, execId: FF64-0E70-0002-00, status: OK]: Ticket [LCPO/LCPO/FF64-0E70-0002-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.792	PTS-C306	DEBUG	Received MSL message #20: RedurHdr{session=1, sequence=49}  SrcMessage{session=14, seq=20, namespace=4, type=1, time=10/02/2016 14:19:22}   VariMsgPrefix{blockType=3, len=3575}
+10-02-16 14:19:22.792	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=3449=QA_RTNS52=20160210-14:19:22.79256=AUTOMATION55=USD/CHF571=FF64-0E70-0002-00-100000751=0939=0552=154=210=095]
+10-02-16 14:19:22.792	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-0002-00-100000], SeqNo: [34]
+10-02-16 14:19:22.792	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:45, srcSid:1, srcMid:19]
+10-02-16 14:19:22.793	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:LN4
+10-02-16 14:19:22.793	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:43, srcSid:1, srcMid:17]
+10-02-16 14:19:22.793	PTS-C601	TRACE	Message [sid: 1, mid: 43, srcSid: 1, srcMid: 17, execId: FF64-0E70-0002-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.793	PTS-C601	TRACE	Message [sid: 1, mid: 44, srcSid: 1, srcMid: 18, execId: FF64-0E6D-000A-00, status: OK]: Ticket [LCPL/LCPL/FF64-0E6D-000A-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.793	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:43, srcSid:1, srcMid:17]
+10-02-16 14:19:22.794	PTS-C306	DEBUG	Received MSL message #21: RedurHdr{session=1, sequence=50}  SrcMessage{session=14, seq=21, namespace=4, type=1, time=10/02/2016 14:19:22}   VariMsgPrefix{blockType=3, len=3575}
+10-02-16 14:19:22.794	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:44, srcSid:1, srcMid:18]
+10-02-16 14:19:22.794	PTS-C601	TRACE	Message [sid: 1, mid: 46, srcSid: 1, srcMid: 20, execId: FF0A-0012-0000-24, status: OK]: Ticket [LCPH/LCPH/FF0A-0012-0000-24-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+10-02-16 14:19:22.794	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:946:LN2
+10-02-16 14:19:22.794	PTS-C601	TRACE	Message [sid: 1, mid: 44, srcSid: 1, srcMid: 18, execId: FF64-0E6D-000A-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.795	PTS-C306	DEBUG	Received MSL message #22: RedurHdr{session=1, sequence=51}  SrcMessage{session=14, seq=22, namespace=4, type=1, time=10/02/2016 14:19:22}   VariMsgPrefix{blockType=3, len=1565}
+10-02-16 14:19:22.795	PTS-C601	TRACE	Message [sid: 1, mid: 45, srcSid: 1, srcMid: 19, execId: FF64-0E70-002E-04, status: OK]: Ticket [LCPM/LCPM/FF64-0E70-002E-04-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.795	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:44, srcSid:1, srcMid:18]
+10-02-16 14:19:22.795	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:45, srcSid:1, srcMid:19]
+10-02-16 14:19:22.795	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:46, srcSid:1, srcMid:20]
+10-02-16 14:19:22.795	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 46, srcSid: 1, srcMid: 20, execId: FF0A-0012-0000-24, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:22.795	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:947:L02
+10-02-16 14:19:22.795	PTS-C601	TRACE	Message [sid: 1, mid: 45, srcSid: 1, srcMid: 19, execId: FF64-0E70-002E-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.796	PTS-C601	TRACE	Message [sid: 1, mid: 47, srcSid: 1, srcMid: 21, execId: FF64-0E72-0003-00, status: OK]: Ticket [LCPI/LCPI/FF64-0E72-0003-00-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+10-02-16 14:19:22.796	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:46, srcSid:1, srcMid:20]
+10-02-16 14:19:22.796	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 47, srcSid: 1, srcMid: 21, execId: FF64-0E72-0003-00, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:22.796	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:45, srcSid:1, srcMid:19]
+10-02-16 14:19:22.797	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:47, srcSid:1, srcMid:21]
+10-02-16 14:19:22.797	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:47, srcSid:1, srcMid:21]
+10-02-16 14:19:22.797	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 48, srcSid: 1, srcMid: 22, execId: FF0A-0014-0000-1F, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:22.797	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT1
+10-02-16 14:19:22.797	PTS-C601	TRACE	Message [sid: 1, mid: 46, srcSid: 1, srcMid: 20, execId: FF0A-0012-0000-24, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.797	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 22, execId: FF0A-0014-0000-1F, status: OK]: Ticket [1PSE/1PDE/FF0A-0014-0000-1F-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.798	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:48, srcSid:1, srcMid:22]
+10-02-16 14:19:22.798	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 49, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:22.798	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 22, execId: FF0A-0014-0000-1F, status: OK]: Ticket [1PSE/1PDE/FF0A-0014-0000-1F-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.798	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:46, srcSid:1, srcMid:20]
+10-02-16 14:19:22.798	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 22, execId: FF0A-0014-0000-1F, status: OK]: Ticket [RA81/RA81/FF0A-0014-0000-1F-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.799	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:49, srcSid:1, srcMid:33]
+10-02-16 14:19:22.799	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 50, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:22.799	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT2
+10-02-16 14:19:22.799	PTS-C601	TRACE	Message [sid: 1, mid: 47, srcSid: 1, srcMid: 21, execId: FF64-0E72-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.799	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:50, srcSid:1, srcMid:34]
+10-02-16 14:19:22.800	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:47, srcSid:1, srcMid:21]
+10-02-16 14:19:22.800	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:48, srcSid:1, srcMid:22]
+10-02-16 14:19:22.800	PTS-C601	TRACE	Message [sid: 1, mid: 51, srcSid: 1, srcMid: 35, execId: 7E4B-D159-2E3F-51, status: OK]: Ticket [LCPK/LCPK/7E4B-D159-2E3F-51-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+10-02-16 14:19:22.800	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-08-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.801	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:22.801	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-08-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.801	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:51, srcSid:1, srcMid:35]
+10-02-16 14:19:22.801	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:22.801	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 22, execId: FF0A-0014-0000-1F, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.802	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [R4J1/R4J1/FF0A-0014-0000-08-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.802	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:22.803	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+10-02-16 14:19:22.803	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 22, execId: FF0A-0014-0000-1F, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.804	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1056:RA1
+10-02-16 14:19:22.804	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:49, srcSid:1, srcMid:33]
+10-02-16 14:19:22.805	PTS-C601	TRACE	Message [sid: 1, mid: 50, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-07-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.805	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1056:RA1
+10-02-16 14:19:22.805	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 22, execId: FF0A-0014-0000-1F, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.806	PTS-C601	TRACE	Message [sid: 1, mid: 50, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-07-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.806	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:48, srcSid:1, srcMid:22]
+10-02-16 14:19:22.806	PTS-C601	TRACE	Message [sid: 1, mid: 50, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [R4J2/R4J2/FF0A-0014-0000-07-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:22.807	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:22.807	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:22.807	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.807	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:50, srcSid:1, srcMid:34]
+10-02-16 14:19:22.807	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 51, srcSid: 1, srcMid: 35, execId: 7E4B-D159-2E3F-51, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:22.808	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:22.808	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:51, srcSid:1, srcMid:35]
+10-02-16 14:19:22.808	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:22.808	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.809	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:892:L12
+10-02-16 14:19:22.809	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:892:L12
+10-02-16 14:19:22.809	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 33, execId: FF0A-0014-0000-08, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.810	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:49, srcSid:1, srcMid:33]
+10-02-16 14:19:22.811	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:22.811	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:22.811	PTS-C601	TRACE	Message [sid: 1, mid: 50, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.812	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:22.813	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+10-02-16 14:19:22.813	PTS-C601	TRACE	Message [sid: 1, mid: 50, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.813	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:893:L14
+10-02-16 14:19:22.814	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:893:L14
+10-02-16 14:19:22.814	PTS-C601	TRACE	Message [sid: 1, mid: 50, srcSid: 1, srcMid: 34, execId: FF0A-0014-0000-07, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.815	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:50, srcSid:1, srcMid:34]
+10-02-16 14:19:22.815	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:945:M12
+10-02-16 14:19:22.816	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:945:M12
+10-02-16 14:19:22.816	PTS-C601	TRACE	Message [sid: 1, mid: 51, srcSid: 1, srcMid: 35, execId: 7E4B-D159-2E3F-51, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:22.816	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:51, srcSid:1, srcMid:35]
+10-02-16 14:19:22.846	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:43, srcSid:1, srcMid:17]
+10-02-16 14:19:22.847	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E6D-000A-00-100000], SeqNo: [35]
+10-02-16 14:19:22.847	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48035=AE34=3549=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=AUD31=1.0244032=100000055=AUD/CAD60=20160210-14:19:18.84463=064=2016021065=SP75=20160210150=F167=FOR194=1.02440195=0460=4571=FF64-0E6D-000A-00-1000001003=FF64-0E6D-000A-001056=1024400.00552=154=137=FF64-0E6D-000A-00-10000011=LN2-1446716515210-8453=4448=LPRA447=D452=1802=1523=LPRALPRA803=4019448=LCPL447=D452=3802=1523=LCPLLCPL803=4019448=LN2447=D452=11448=EBSX447=D452=161057=Y10=068]
+10-02-16 14:19:22.848	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=3549=QA_RTNS52=20160210-14:19:22.84856=AUTOMATION55=AUD/CAD571=FF64-0E6D-000A-00-100000751=0939=0552=154=110=104]
+10-02-16 14:19:22.848	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E6D-000A-00-100000], SeqNo: [35]
+10-02-16 14:19:22.883	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:44, srcSid:1, srcMid:18]
+10-02-16 14:19:22.884	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E70-002E-04-100000], SeqNo: [36]
+10-02-16 14:19:22.884	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48035=AE34=3649=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=AUD31=0.9645232=500000055=AUD/CAD60=20160210-14:19:18.86163=064=2016021065=SP75=20160210150=F167=FOR194=0.96452195=0460=4571=FF64-0E70-002E-04-1000001003=FF64-0E70-002E-041056=4822600.00552=154=237=FF64-0E70-002E-04-10000011=LN2-1446975088802-2453=4448=LPRB447=D452=1802=1523=LPRBLPRB803=4019448=LCPM447=D452=3802=1523=LCPMLCPM803=4019448=L02447=D452=11448=EBSX447=D452=161057=Y10=076]
+10-02-16 14:19:22.884	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=3649=QA_RTNS52=20160210-14:19:22.88456=AUTOMATION55=AUD/CAD571=FF64-0E70-002E-04-100000751=0939=0552=154=210=097]
+10-02-16 14:19:22.885	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E70-002E-04-100000], SeqNo: [36]
+10-02-16 14:19:22.926	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:45, srcSid:1, srcMid:19]
+10-02-16 14:19:22.927	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0012-0000-24-100000], SeqNo: [37]
+10-02-16 14:19:22.927	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=50235=AE34=3749=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=EUR31=1.0742032=1000000055=EUR/GBP60=20160210-14:19:18.86863=064=2016021065=SP75=20160210150=F167=FOR194=1.07420195=0460=4571=FF0A-0012-0000-24-1000001003=FF0A-0012-0000-241056=10742000.00552=154=137=FF0A-0012-0000-24-10000011=NOS88d9159c-2dac-4ddc-853d-3f1a6ba035de453=4448=LPRG447=D452=1802=1523=LPRGLPRG803=4019448=LCPH447=D452=3802=1523=LCPHLCPH803=4019448=MT1447=D452=11448=EBSX447=D452=161057=Y10=093]
+10-02-16 14:19:22.928	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=3749=QA_RTNS52=20160210-14:19:22.92756=AUTOMATION55=EUR/GBP571=FF0A-0012-0000-24-100000751=0939=0552=154=110=091]
+10-02-16 14:19:22.928	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF0A-0012-0000-24-100000], SeqNo: [37]
+10-02-16 14:19:22.975	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:46, srcSid:1, srcMid:20]
+10-02-16 14:19:22.976	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF64-0E72-0003-00-100000], SeqNo: [38]
+10-02-16 14:19:22.976	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=48035=AE34=3849=AUTOMATION52=20160210-14:19:2256=QA_RTNS15=EUR31=1.3597932=100000055=EUR/GBP60=20160210-14:19:18.87563=064=2016021065=SP75=20160210150=F167=FOR194=1.35979195=0460=4571=FF64-0E72-0003-00-1000001003=FF64-0E72-0003-001056=1359790.00552=154=237=FF64-0E72-0003-00-10000011=LN2-1447148910874-3453=4448=LPRH447=D452=1802=1523=LPRHLPRH803=4019448=LCPI447=D452=3802=1523=LCPILCPI803=4019448=MT2447=D452=11448=EBSX447=D452=161057=Y10=134]
+10-02-16 14:19:22.977	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12535=AR34=3849=QA_RTNS52=20160210-14:19:22.97656=AUTOMATION55=EUR/GBP571=FF64-0E72-0003-00-100000751=0939=0552=154=210=114]
+10-02-16 14:19:22.977	PTS-C7101	INFO	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: TCR approved [ticket id: FF64-0E72-0003-00-100000], SeqNo: [38]
+10-02-16 14:19:23.11	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:47, srcSid:1, srcMid:21]
+10-02-16 14:19:23.27	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-1F-100000], SeqNo: [39]
+10-02-16 14:19:23.27	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62035=AE34=3949=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=USD31=52.799032=100000055=USD/RUB60=20160210-14:19:18.88265=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-1F-1000001003=FF0A-0014-0000-1F552=154=137=FF0A-0014-0000-1F-10000011=IS1-1446734757962-8453=4448=LPRD447=D452=1802=1523=LPRDLPRD803=4019448=1PSE447=D452=3802=1523=PDE1PDE1803=4019448=N/A447=D452=11448=EBSX447=D452=161057=Y555=2624=2587=0588=20160210637=52.7990001073=0.001074=52799000.005190=52.7990685=1000000624=1587=B588=20160210637=52.7010001073=-980.001074=52701000.005190=52.7990685=100000010=053]
+10-02-16 14:19:23.28	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=3949=QA_RTNS52=20160210-14:19:23.02856=AUTOMATION45=3958=Out of order repeating group members371=624372=AE373=1510=059]
+10-02-16 14:19:23.29	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [39], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.66	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-1F-1BC000], SeqNo: [40]
+10-02-16 14:19:23.67	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=64135=AE34=4049=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=USD31=52.799032=100000055=USD/RUB60=20160210-14:19:18.88265=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-1F-1BC0001003=FF0A-0014-0000-1F552=154=237=FF0A-0014-0000-1F-1BC00011=IS1-1446734757962-8453=5448=RA81447=D452=1802=1523=RA81RA81803=4019448=1PSE447=D452=3802=1523=PDE1PDE1803=4019448=N/A447=D452=11448=RA1447=D452=12448=EBSX447=D452=161057=N555=2624=1587=0588=20160210637=52.7990001073=0.001074=52799000.005190=52.7990685=1000000624=2587=B588=20160210637=52.7010001073=-980.001074=52701000.005190=52.7990685=100000010=206]
+10-02-16 14:19:23.68	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=4049=QA_RTNS52=20160210-14:19:23.06856=AUTOMATION45=4058=Out of order repeating group members371=624372=AE373=1510=047]
+10-02-16 14:19:23.68	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [40], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.101	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-1F-1CA000], SeqNo: [41]
+10-02-16 14:19:23.101	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62035=AE34=4149=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=USD31=52.799032=100000055=USD/RUB60=20160210-14:19:18.88265=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-1F-1CA0001003=FF0A-0014-0000-1F552=154=137=FF0A-0014-0000-1F-1CA00011=IS1-1446734757962-8453=4448=LPDE447=D452=1802=1523=LPDELPDE803=4019448=RA81447=D452=3802=1523=RA81RA81803=4019448=RA1447=D452=11448=EBSX447=D452=161057=Y555=2624=2587=0588=20160210637=52.7990001073=0.001074=52799000.005190=52.7990685=1000000624=1587=B588=20160210637=52.7010001073=-980.001074=52701000.005190=52.7990685=100000010=028]
+10-02-16 14:19:23.102	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=4149=QA_RTNS52=20160210-14:19:23.10256=AUTOMATION45=4158=Out of order repeating group members371=624372=AE373=1510=038]
+10-02-16 14:19:23.102	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [41], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.139	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:48, srcSid:1, srcMid:22]
+10-02-16 14:19:23.140	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-08-100000], SeqNo: [42]
+10-02-16 14:19:23.140	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62735=AE34=4249=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=EUR31=129.39932=100000055=EUR/JPY60=20160210-14:19:18.88965=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-08-1000001003=FF0A-0014-0000-08552=154=237=FF0A-0014-0000-08-10000011=LN2-1446727843975-7453=4448=LPRC447=D452=1802=1523=LPRCLPRC803=4019448=4CRJ447=D452=3802=1523=CRJ4CRJ4803=4019448=N/A447=D452=11448=EBSX447=D452=161057=Y555=2624=1587=0588=20160210637=129.3990001073=0.00001074=129399000.005190=129.399685=1000000624=2587=W1588=20160210637=129.5490001073=15.00001074=129549000.005190=129.399685=100000010=165]
+10-02-16 14:19:23.141	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=4249=QA_RTNS52=20160210-14:19:23.14156=AUTOMATION45=4258=Out of order repeating group members371=624372=AE373=1510=043]
+10-02-16 14:19:23.141	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [42], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.174	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-08-1BC000], SeqNo: [43]
+10-02-16 14:19:23.174	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=64835=AE34=4349=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=EUR31=129.39932=100000055=EUR/JPY60=20160210-14:19:18.88965=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-08-1BC0001003=FF0A-0014-0000-08552=154=137=FF0A-0014-0000-08-1BC00011=LN2-1446727843975-7453=5448=R4J1447=D452=1802=1523=R4J1R4J1803=4019448=4CRJ447=D452=3802=1523=CRJ4CRJ4803=4019448=N/A447=D452=11448=L12447=D452=12448=EBSX447=D452=161057=N555=2624=2587=0588=20160210637=129.3990001073=0.00001074=129399000.005190=129.399685=1000000624=1587=W1588=20160210637=129.5490001073=15.00001074=129549000.005190=129.399685=100000010=066]
+10-02-16 14:19:23.175	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=4349=QA_RTNS52=20160210-14:19:23.17556=AUTOMATION45=4358=Out of order repeating group members371=624372=AE373=1510=052]
+10-02-16 14:19:23.175	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [43], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.214	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-08-1CA000], SeqNo: [44]
+10-02-16 14:19:23.214	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62735=AE34=4449=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=EUR31=129.39932=100000055=EUR/JPY60=20160210-14:19:18.88965=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-08-1CA0001003=FF0A-0014-0000-08552=154=237=FF0A-0014-0000-08-1CA00011=LN2-1446727843975-7453=4448=LCRJ447=D452=1802=1523=LCRJLCRJ803=4019448=R4J1447=D452=3802=1523=R4J1R4J1803=4019448=L12447=D452=11448=EBSX447=D452=161057=Y555=2624=1587=0588=20160210637=129.3990001073=0.00001074=129399000.005190=129.399685=1000000624=2587=W1588=20160210637=129.5490001073=15.00001074=129549000.005190=129.399685=100000010=152]
+10-02-16 14:19:23.215	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=4449=QA_RTNS52=20160210-14:19:23.21456=AUTOMATION45=4458=Out of order repeating group members371=624372=AE373=1510=048]
+10-02-16 14:19:23.215	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [44], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.252	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:49, srcSid:1, srcMid:33]
+10-02-16 14:19:23.253	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-07-100000], SeqNo: [45]
+10-02-16 14:19:23.253	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62735=AE34=4549=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=EUR31=129.21132=100000055=EUR/JPY60=20160210-14:19:18.89665=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-07-1000001003=FF0A-0014-0000-07552=154=137=FF0A-0014-0000-07-10000011=LN2-1446727831927-6453=4448=LPRD447=D452=1802=1523=LPRDLPRD803=4019448=4CRJ447=D452=3802=1523=CRJ4CRJ4803=4019448=N/A447=D452=11448=EBSX447=D452=161057=Y555=2624=2587=0588=20160210637=129.2110001073=0.00001074=129211000.005190=129.211685=1000000624=1587=W1588=20160210637=129.1610001073=-5.00001074=129161000.005190=129.211685=100000010=049]
+10-02-16 14:19:23.254	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=4549=QA_RTNS52=20160210-14:19:23.25456=AUTOMATION45=4558=Out of order repeating group members371=624372=AE373=1510=054]
+10-02-16 14:19:23.254	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [45], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.288	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-07-1BC000], SeqNo: [46]
+10-02-16 14:19:23.288	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=64835=AE34=4649=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=EUR31=129.21132=100000055=EUR/JPY60=20160210-14:19:18.89665=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-07-1BC0001003=FF0A-0014-0000-07552=154=237=FF0A-0014-0000-07-1BC00011=LN2-1446727831927-6453=5448=R4J2447=D452=1802=1523=R4J2R4J2803=4019448=4CRJ447=D452=3802=1523=CRJ4CRJ4803=4019448=N/A447=D452=11448=L14447=D452=12448=EBSX447=D452=161057=N555=2624=1587=0588=20160210637=129.2110001073=0.00001074=129211000.005190=129.211685=1000000624=2587=W1588=20160210637=129.1610001073=-5.00001074=129161000.005190=129.211685=100000010=210]
+10-02-16 14:19:23.289	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=4649=QA_RTNS52=20160210-14:19:23.28956=AUTOMATION45=4658=Out of order repeating group members371=624372=AE373=1510=064]
+10-02-16 14:19:23.289	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [46], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.333	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-07-1CA000], SeqNo: [47]
+10-02-16 14:19:23.333	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62735=AE34=4749=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=EUR31=129.21132=100000055=EUR/JPY60=20160210-14:19:18.89665=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-07-1CA0001003=FF0A-0014-0000-07552=154=137=FF0A-0014-0000-07-1CA00011=LN2-1446727831927-6453=4448=LCRJ447=D452=1802=1523=LCRJLCRJ803=4019448=R4J2447=D452=3802=1523=R4J2R4J2803=4019448=L14447=D452=11448=EBSX447=D452=161057=Y555=2624=2587=0588=20160210637=129.2110001073=0.00001074=129211000.005190=129.211685=1000000624=1587=W1588=20160210637=129.1610001073=-5.00001074=129161000.005190=129.211685=100000010=038]
+10-02-16 14:19:23.334	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=4749=QA_RTNS52=20160210-14:19:23.33456=AUTOMATION45=4758=Out of order repeating group members371=624372=AE373=1510=057]
+10-02-16 14:19:23.334	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [47], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.369	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:50, srcSid:1, srcMid:34]
+10-02-16 14:19:23.369	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: 7E4B-D159-2E3F-51-100000], SeqNo: [48]
+10-02-16 14:19:23.369	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=64035=AE34=4849=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=AUD31=1.075732=110000055=AUD/USD60=20160210-14:19:18.90365=SW75=20160210150=F167=FOR460=4571=7E4B-D159-2E3F-51-1000001003=7E4B-D159-2E3F-51552=154=137=7E4B-D159-2E3F-51-10000011=NOS-24b5b405-e3e0-4f80-8ff0-746c28ec7674453=4448=LPRN447=D452=1802=1523=LPRNLPRN803=4019448=LCPK447=D452=3802=1523=LCPKLCPK803=4019448=M12447=D452=11448=EBSX447=D452=161057=Y555=2624=2587=0588=20160210637=1.075700001073=0.00001074=1183270.005190=1.0757685=1100000624=1587=W1588=20160210637=1.076200001073=0.00501074=1183820.005190=1.0757685=110000010=224]
+10-02-16 14:19:23.370	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=4849=QA_RTNS52=20160210-14:19:23.37056=AUTOMATION45=4858=Out of order repeating group members371=624372=AE373=1510=059]
+10-02-16 14:19:23.370	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [48], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.405	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:51, srcSid:1, srcMid:35]
+10-02-16 14:19:23.794	PTS-C306	DEBUG	Received MSL message #23: RedurHdr{session=1, sequence=52}  SrcMessage{session=14, seq=23, namespace=4, type=1, time=10/02/2016 14:19:23}   VariMsgPrefix{blockType=3, len=1559}
+10-02-16 14:19:23.795	PTS-C306	DEBUG	Received MSL message #24: RedurHdr{session=1, sequence=53}  SrcMessage{session=14, seq=24, namespace=4, type=1, time=10/02/2016 14:19:23}   VariMsgPrefix{blockType=3, len=1559}
+10-02-16 14:19:23.795	PTS-C306	DEBUG	Received MSL message #25: RedurHdr{session=1, sequence=54}  SrcMessage{session=14, seq=25, namespace=4, type=1, time=10/02/2016 14:19:23}   VariMsgPrefix{blockType=3, len=1557}
+10-02-16 14:19:23.795	PTS-C601	TRACE	Message [sid: 1, mid: 52, srcSid: 1, srcMid: 36, execId: FF0A-0014-0000-0B, status: OK]: Ticket [LCPN/LCPN/FF0A-0014-0000-0B-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:23.795	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-0B-100000], SeqNo: [49]
+10-02-16 14:19:23.795	PTS-C306	DEBUG	Received MSL message #26: RedurHdr{session=1, sequence=55}  SrcMessage{session=14, seq=26, namespace=4, type=1, time=10/02/2016 14:19:23}   VariMsgPrefix{blockType=3, len=1544}
+10-02-16 14:19:23.795	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62435=AE34=4949=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=CNH31=6.1929432=100000055=USD/CNH60=20160210-14:19:18.91065=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-0B-1000001003=FF0A-0014-0000-0B552=154=237=FF0A-0014-0000-0B-10000011=LN2-1446728773277-10453=4448=LPRP447=D452=1802=1523=LPRPLPRP803=4019448=LCPN447=D452=3802=1523=LCPNLCPN803=4019448=LN9447=D452=11448=EBSX447=D452=161057=Y555=2624=1587=0588=20160210637=6.192940001073=0.00001074=161474.195190=6.19294685=1000000624=2587=M2588=20160210637=6.393940001073=2010.00001074=156398.095190=6.19294685=100000010=120]
+10-02-16 14:19:23.795	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN9
+10-02-16 14:19:23.796	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 52, srcSid: 1, srcMid: 36, execId: FF0A-0014-0000-0B, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:23.796	PTS-C306	DEBUG	Received MSL message #27: RedurHdr{session=1, sequence=56}  SrcMessage{session=14, seq=27, namespace=4, type=1, time=10/02/2016 14:19:23}   VariMsgPrefix{blockType=3, len=1551}
+10-02-16 14:19:23.796	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN9
+10-02-16 14:19:23.796	PTS-C601	TRACE	Message [sid: 1, mid: 52, srcSid: 1, srcMid: 36, execId: FF0A-0014-0000-0B, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:23.796	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:52, srcSid:1, srcMid:36]
+10-02-16 14:19:23.796	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:52, srcSid:1, srcMid:36]
+10-02-16 14:19:23.797	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 53, srcSid: 1, srcMid: 37, execId: FF0A-0014-0000-0C, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:23.797	PTS-C306	DEBUG	Received MSL message #28: RedurHdr{session=1, sequence=57}  SrcMessage{session=14, seq=28, namespace=4, type=1, time=10/02/2016 14:19:23}   VariMsgPrefix{blockType=3, len=1545}
+10-02-16 14:19:23.797	PTS-C601	TRACE	Message [sid: 1, mid: 53, srcSid: 1, srcMid: 37, execId: FF0A-0014-0000-0C, status: OK]: Ticket [LCPO/LCPO/FF0A-0014-0000-0C-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:23.797	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=4949=QA_RTNS52=20160210-14:19:23.79756=AUTOMATION45=4958=Out of order repeating group members371=624372=AE373=1510=074]
+10-02-16 14:19:23.797	PTS-C306	DEBUG	Received MSL message #29: RedurHdr{session=1, sequence=58}  SrcMessage{session=14, seq=29, namespace=4, type=1, time=10/02/2016 14:19:23}   VariMsgPrefix{blockType=3, len=1565}
+10-02-16 14:19:23.797	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [49], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.797	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:52, srcSid:1, srcMid:36]
+10-02-16 14:19:23.798	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:53, srcSid:1, srcMid:37]
+10-02-16 14:19:23.798	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 54, srcSid: 1, srcMid: 38, execId: FF0A-0014-0000-10, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:23.798	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:53, srcSid:1, srcMid:37]
+10-02-16 14:19:23.798	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:L10
+10-02-16 14:19:23.798	PTS-C601	TRACE	Message [sid: 1, mid: 54, srcSid: 1, srcMid: 38, execId: FF0A-0014-0000-10, status: OK]: Ticket [LCRI/LCRI/FF0A-0014-0000-10-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:23.798	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:L10
+10-02-16 14:19:23.798	PTS-C601	TRACE	Message [sid: 1, mid: 53, srcSid: 1, srcMid: 37, execId: FF0A-0014-0000-0C, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:23.799	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:54, srcSid:1, srcMid:38]
+10-02-16 14:19:23.799	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 55, srcSid: 1, srcMid: 39, execId: FF0A-0014-0000-0F, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:23.799	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:53, srcSid:1, srcMid:37]
+10-02-16 14:19:23.800	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:54, srcSid:1, srcMid:38]
+10-02-16 14:19:23.800	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:55, srcSid:1, srcMid:39]
+10-02-16 14:19:23.800	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:LN7
+10-02-16 14:19:23.800	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 56, srcSid: 1, srcMid: 40, execId: FF0A-0012-0000-61, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:23.800	PTS-C601	TRACE	Message [sid: 1, mid: 55, srcSid: 1, srcMid: 39, execId: FF0A-0014-0000-0F, status: OK]: Ticket [LCRJ/LCRJ/FF0A-0014-0000-0F-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:23.800	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:LN7
+10-02-16 14:19:23.800	PTS-C601	TRACE	Message [sid: 1, mid: 54, srcSid: 1, srcMid: 38, execId: FF0A-0014-0000-10, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:23.801	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:56, srcSid:1, srcMid:40]
+10-02-16 14:19:23.801	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 57, srcSid: 1, srcMid: 41, execId: FF0A-0012-0000-86, status: OK] filtered out by MyT deals only filter
+10-02-16 14:19:23.801	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:55, srcSid:1, srcMid:39]
+10-02-16 14:19:23.802	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:54, srcSid:1, srcMid:38]
+10-02-16 14:19:23.802	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:57, srcSid:1, srcMid:41]
+10-02-16 14:19:23.802	PTS-C601	TRACE	Message [sid: 1, mid: 56, srcSid: 1, srcMid: 40, execId: FF0A-0012-0000-61, status: OK]: Ticket [LCPH/LCPH/FF0A-0012-0000-61-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:23.802	PTS-C601	TRACE	Message [sid: 1, mid: 58, srcSid: 1, srcMid: 42, execId: E330-E7B0-C26B-52, status: OK]: Ticket [LCLA/LCLA/E330-E7B0-C26B-52-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+10-02-16 14:19:23.802	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:910:LN8
+10-02-16 14:19:23.803	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:56, srcSid:1, srcMid:40]
+10-02-16 14:19:23.803	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:910:LN8
+10-02-16 14:19:23.803	PTS-C601	TRACE	Message [sid: 1, mid: 55, srcSid: 1, srcMid: 39, execId: FF0A-0014-0000-0F, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:23.803	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:58, srcSid:1, srcMid:42]
+10-02-16 14:19:23.803	PTS-C601	TRACE	Message [sid: 1, mid: 57, srcSid: 1, srcMid: 41, execId: FF0A-0012-0000-86, status: OK]: Ticket [LCPI/LCPI/FF0A-0012-0000-86-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+10-02-16 14:19:23.804	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:55, srcSid:1, srcMid:39]
+10-02-16 14:19:23.804	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT6
+10-02-16 14:19:23.804	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:57, srcSid:1, srcMid:41]
+10-02-16 14:19:23.804	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 58, srcSid: 1, srcMid: 42, execId: E330-E7B0-C26B-52, status: OK] filtered out by Non-MyT deals filter
+10-02-16 14:19:23.805	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT6
+10-02-16 14:19:23.805	PTS-C601	TRACE	Message [sid: 1, mid: 56, srcSid: 1, srcMid: 40, execId: FF0A-0012-0000-61, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:23.805	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:58, srcSid:1, srcMid:42]
+10-02-16 14:19:23.805	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:56, srcSid:1, srcMid:40]
+10-02-16 14:19:23.806	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT7
+10-02-16 14:19:23.806	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT7
+10-02-16 14:19:23.806	PTS-C601	TRACE	Message [sid: 1, mid: 57, srcSid: 1, srcMid: 41, execId: FF0A-0012-0000-86, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:23.807	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:57, srcSid:1, srcMid:41]
+10-02-16 14:19:23.808	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:905:MYT
+10-02-16 14:19:23.808	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:905:MYT
+10-02-16 14:19:23.808	PTS-C601	TRACE	Message [sid: 1, mid: 58, srcSid: 1, srcMid: 42, execId: E330-E7B0-C26B-52, status: OK]: Ticket [json] routed by Persistent RedisSender
+10-02-16 14:19:23.809	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:58, srcSid:1, srcMid:42]
+10-02-16 14:19:23.837	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:52, srcSid:1, srcMid:36]
+10-02-16 14:19:23.838	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-0C-100000], SeqNo: [50]
+10-02-16 14:19:23.838	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62435=AE34=5049=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=CNH31=6.1929232=100000055=USD/CNH60=20160210-14:19:18.91765=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-0C-1000001003=FF0A-0014-0000-0C552=154=137=FF0A-0014-0000-0C-10000011=LN2-1446728783373-11453=4448=LPRP447=D452=1802=1523=LPRPLPRP803=4019448=LCPO447=D452=3802=1523=LCPOLCPO803=4019448=L10447=D452=11448=EBSX447=D452=161057=Y555=2624=2587=0588=20160210637=6.192920001073=0.00001074=161474.725190=6.19292685=1000000624=1587=M2588=20160210637=6.392420001073=1995.00001074=156435.285190=6.19292685=100000010=082]
+10-02-16 14:19:23.839	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=5049=QA_RTNS52=20160210-14:19:23.83856=AUTOMATION45=5058=Out of order repeating group members371=624372=AE373=1510=054]
+10-02-16 14:19:23.839	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [50], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.877	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:53, srcSid:1, srcMid:37]
+10-02-16 14:19:23.877	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-10-100000], SeqNo: [51]
+10-02-16 14:19:23.877	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=63135=AE34=5149=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=EUR31=1.0322932=2500000055=EUR/CHF60=20160210-14:19:18.92565=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-10-1000001003=FF0A-0014-0000-10552=154=237=FF0A-0014-0000-10-10000011=LN2-1446729754415-3453=4448=LPRG447=D452=1802=1523=LPRGLPRG803=4019448=LCRI447=D452=3802=1523=LCRILCRI803=4019448=LN7447=D452=11448=EBSX447=D452=161057=Y555=2624=1587=0588=20160210637=1.032290001073=0.00001074=25807250.005190=1.03229685=25000000624=2587=M12588=20160210637=1.232240001073=1999.50001074=30806000.005190=1.03229685=2500000010=060]
+10-02-16 14:19:23.879	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=5149=QA_RTNS52=20160210-14:19:23.87956=AUTOMATION45=5158=Out of order repeating group members371=624372=AE373=1510=061]
+10-02-16 14:19:23.879	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [51], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.912	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:54, srcSid:1, srcMid:38]
+10-02-16 14:19:23.912	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0014-0000-0F-100000], SeqNo: [52]
+10-02-16 14:19:23.912	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62235=AE34=5249=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=EUR31=1.0321732=100000055=EUR/CHF60=20160210-14:19:18.93165=SW75=20160210150=F167=FOR460=4571=FF0A-0014-0000-0F-1000001003=FF0A-0014-0000-0F552=154=137=FF0A-0014-0000-0F-10000011=LN2-1446729733199-2453=4448=LPRH447=D452=1802=1523=LPRHLPRH803=4019448=LCRJ447=D452=3802=1523=LCRJLCRJ803=4019448=LN8447=D452=11448=EBSX447=D452=161057=Y555=2624=2587=1588=20160210637=1.032170001073=0.00001074=1032170.005190=1.03217685=1000000624=1587=2588=20160210637=1.033220001073=10.50001074=1033220.005190=1.03217685=100000010=102]
+10-02-16 14:19:23.913	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=5249=QA_RTNS52=20160210-14:19:23.91356=AUTOMATION45=5258=Out of order repeating group members371=624372=AE373=1510=052]
+10-02-16 14:19:23.913	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [52], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.947	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:55, srcSid:1, srcMid:39]
+10-02-16 14:19:23.948	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0012-0000-61-100000], SeqNo: [53]
+10-02-16 14:19:23.948	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62935=AE34=5349=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=EUR31=129.39932=100000055=EUR/JPY60=20160210-14:19:18.93965=SW75=20160210150=F167=FOR460=4571=FF0A-0012-0000-61-1000001003=FF0A-0012-0000-61552=154=237=FF0A-0012-0000-61-10000011=AG1-1446537157344-15453=4448=LPRG447=D452=1802=1523=LPRGLPRG803=4019448=LCPH447=D452=3802=1523=LCPHLCPH803=4019448=MT6447=D452=11448=EBSX447=D452=161057=Y555=2624=1587=0588=20160210637=129.3990001073=0.00001074=129399000.005190=129.399685=1000000624=2587=M12588=20160210637=129.5490001073=15.00001074=129549000.005190=129.399685=100000010=052]
+10-02-16 14:19:23.948	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=5349=QA_RTNS52=20160210-14:19:23.94856=AUTOMATION45=5358=Out of order repeating group members371=624372=AE373=1510=062]
+10-02-16 14:19:23.948	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [53], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:23.982	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:56, srcSid:1, srcMid:40]
+10-02-16 14:19:23.982	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: FF0A-0012-0000-86-100000], SeqNo: [54]
+10-02-16 14:19:23.982	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=62735=AE34=5449=AUTOMATION52=20160210-14:19:2356=QA_RTNS15=EUR31=129.12132=100000055=EUR/JPY60=20160210-14:19:18.94665=SW75=20160210150=F167=FOR460=4571=FF0A-0012-0000-86-1000001003=FF0A-0012-0000-86552=154=137=FF0A-0012-0000-86-10000011=BE1-1446557363592-2453=4448=LPRH447=D452=1802=1523=LPRHLPRH803=4019448=LCPI447=D452=3802=1523=LCPILCPI803=4019448=MT7447=D452=11448=EBSX447=D452=161057=Y555=2624=2587=0588=20160210637=129.1210001073=0.00001074=129121000.005190=129.121685=1000000624=1587=W1588=20160210637=129.0710001073=-5.00001074=129071000.005190=129.121685=100000010=136]
+10-02-16 14:19:23.983	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=5449=QA_RTNS52=20160210-14:19:23.98356=AUTOMATION45=5458=Out of order repeating group members371=624372=AE373=1510=063]
+10-02-16 14:19:23.983	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [54], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:24.18	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:57, srcSid:1, srcMid:41]
+10-02-16 14:19:24.18	PTS-C7316	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: Sending TCR [ticket id: E330-E7B0-C26B-52-100000], SeqNo: [55]
+10-02-16 14:19:24.18	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=64035=AE34=5549=AUTOMATION52=20160210-14:19:2456=QA_RTNS15=USD31=1.075732=110000055=USD/CAD60=20160210-14:19:18.95265=SW75=20160210150=F167=FOR460=4571=E330-E7B0-C26B-52-1000001003=E330-E7B0-C26B-52552=154=137=E330-E7B0-C26B-52-10000011=NOS-24b5b405-e3e0-4f80-8ff0-746c28ec7674453=4448=LPRL447=D452=1802=1523=LPRLLPRL803=4019448=LCLA447=D452=3802=1523=LCLALCLA803=4019448=MYT447=D452=11448=EBSX447=D452=161057=Y555=2624=2587=0588=20160210637=1.075700001073=0.00001074=1183270.005190=1.0757685=1100000624=1587=W1588=20160210637=1.076200001073=0.00501074=1183820.005190=1.0757685=110000010=211]
+10-02-16 14:19:24.19	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=12935=334=5549=QA_RTNS52=20160210-14:19:24.01956=AUTOMATION45=5558=Out of order repeating group members371=624372=AE373=1510=056]
+10-02-16 14:19:24.19	PTS-C7006	ERROR	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: admin reject received. RefSeqNum(45): [55], RefTagID: [624], Text: [Out of order repeating group members]
+10-02-16 14:19:24.54	PTS-C606	DEBUG	Adapter[600] last processed message update: submitted [sid:1, mid:58, srcSid:1, srcMid:42]
+10-02-16 14:19:54.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6135=034=5649=QA_RTNS52=20160210-14:19:54.53756=AUTOMATION10=151]
+10-02-16 14:19:54.559	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5735=034=5649=AUTOMATION52=20160210-14:19:5456=QA_RTNS10=207]
+10-02-16 14:20:24.538	PTS-C7305	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: incoming: [8=FIXT.1.19=6135=034=5749=QA_RTNS52=20160210-14:20:24.53756=AUTOMATION10=141]
+10-02-16 14:20:24.558	PTS-C7306	TRACE	FIX session [FIXT.1.1:AUTOMATION->QA_RTNS:RTNS]: outgoing: [8=FIXT.1.19=5735=034=5749=AUTOMATION52=20160210-14:20:2456=QA_RTNS10=197]

@@ -1,0 +1,24 @@
+Tue Jan 26 07:14:53 GMT 2016 PTS service :  Attempting to perform stop on service pts_tidy
+Tue Jan 26 07:14:53 GMT 2016 PTS tidy :  stopping PTS (module: tidy) ...
+Tue Jan 26 07:14:53 GMT 2016 PTS tidy :  The PTS (module: tidy) is not running.
+Tue Jan 26 07:14:53 GMT 2016 PTS service :  pts_tidy stopped successfully
+Tue Jan 26 07:14:53 GMT 2016 PTS service :  Attempting to perform stop on service pts_core
+Tue Jan 26 07:14:53 GMT 2016 PTS core :  stopping PTS (module: core) ...
+Tue Jan 26 07:14:53 GMT 2016 PTS core :  The PTS (module: core) is not running.
+Tue Jan 26 07:14:53 GMT 2016 PTS service :  pts_core stopped successfully
+Tue Jan 26 07:14:53 GMT 2016 PTS service :  Attempting to perform stop on service pts_http
+Tue Jan 26 07:14:53 GMT 2016 PTS http :  stopping PTS (module: http) ...
+Tue Jan 26 07:14:53 GMT 2016 PTS http :  The PTS (module: http) is not running.
+Tue Jan 26 07:14:53 GMT 2016 PTS service :  pts_http stopped successfully
+Tue Jan 26 07:14:56 GMT 2016 PTS service :  Attempting to perform Start on service pts_tidy
+Tue Jan 26 07:14:56 GMT 2016 PTS tidy :  starting PTS (module: tidy) ...
+Tue Jan 26 07:15:01 GMT 2016 PTS service :  Service status: The PTS (module: tidy) is alive.
+Tue Jan 26 07:15:06 GMT 2016 PTS service :  Service status: The PTS (module: tidy) is alive.
+Tue Jan 26 07:15:06 GMT 2016 PTS service :  Attempting to perform Start on service pts_core
+Tue Jan 26 07:15:06 GMT 2016 PTS core :  starting PTS (module: core) ...
+Tue Jan 26 07:15:11 GMT 2016 PTS service :  Service status: The PTS (module: core) is alive.
+Tue Jan 26 07:15:16 GMT 2016 PTS service :  Service status: The PTS (module: core) is alive.
+Tue Jan 26 07:15:16 GMT 2016 PTS service :  Attempting to perform Start on service pts_http
+Tue Jan 26 07:15:16 GMT 2016 PTS http :  starting PTS (module: http) ...
+Tue Jan 26 07:15:21 GMT 2016 PTS service :  Service status: The PTS (module: http) is alive.
+Tue Jan 26 07:15:26 GMT 2016 PTS service :  Service status: The PTS (module: http) is alive.

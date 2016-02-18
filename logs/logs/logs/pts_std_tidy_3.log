@@ -1,0 +1,398 @@
+started at 2016-01-26_07-14-56
+----------------------------------
+Logger debug: main appenders: [com.ebs.jrt.logging.appenders.AsyncConsoleAppender@737996a0, com.ebs.jrt.logging.appenders.AsyncFileAppender@61dc03ce] monitor appenders: []
+26-01-16 07:14:57.005	PTS-C10	INFO	JVM arguments:
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/export/home/ptrade/Automation/PTS/logs/
+-Xms1024m
+-Xmx8g
+-Dconfig.file=/export/home/ptrade/Automation/PTS/config/prod.conf
+-DconfigPath=/export/home/ptrade/Automation/PTS/config
+-Dpts.module.name=tidy
+26-01-16 07:14:57.009	PTS-C10	INFO	Starting PTS Tidy Service  [Version: 1.4.2.0  build: 488 build time: 2016-01-11 12:32]
+26-01-16 07:14:57.250	PTS-C103	INFO	Component OracleConnectionFactory [JDBC version: JDBC 4.1; Oracle Driver version: 12.1.0.1.0; DB version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production] initialized & started. Effective configuration:
+{
+    "connectTimeout" : 3000,
+    "primary" : {
+        "host" : "10.20.42.50",
+        "port" : 1521
+    },
+    "readTimeout" : 15000,
+    "schema" : "ptrade",
+    "service" : "PTDB_NYCAPDB01M_TLVP.am.icap.com"
+}
+
+26-01-16 07:14:57.415	PTS-C105	INFO	Static Data - 799 floors successfully loaded
+26-01-16 07:14:57.506	PTS-C5100	INFO	Binding port: 5559	-> client configuration: c1 was allowed
+26-01-16 07:14:57.506	PTS-C5100	INFO	Binding port: 5560	-> client configuration: c2 was allowed
+26-01-16 07:14:57.728	PTS-C10	INFO	Processor capacity: 1024
+26-01-16 07:14:57.729	PTS-C103	INFO	Component MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] initialized & started. Effective configuration:
+{
+    "allowSubdirs" : "yes",
+    "id" : 100,
+    "retryInterval" : 3000,
+    "target" : "/export/home/ptrade/Automation/data/tickets/myt"
+}
+
+26-01-16 07:14:57.729	PTS-C103	INFO	Component COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] initialized & started. Effective configuration:
+{
+    "allowSubdirs" : "yes",
+    "id" : 101,
+    "retryInterval" : 3000,
+    "target" : "/export/home/ptrade/Automation/data/tickets/common"
+}
+
+26-01-16 07:14:57.734	PTS-C103	INFO	Component Sapphire Adapter [Persistent RedisSender] initialized & started. Effective configuration:
+{
+    "host" : "10.20.42.86",
+    "id" : 300,
+    "port" : 6399,
+    "retryInterval" : 3000,
+    "topic" : "ebs:gc:tickets:{fp.institutionKey}:{to_upper(fp.trader)}"
+}
+
+26-01-16 07:14:57.734	PTS-C103	INFO	Component DisruptorBasedProcessor initialized & started. Effective configuration:
+{
+    "capacity" : 1024
+}
+
+26-01-16 07:14:57.843	PTS-C210	INFO	Feeder #787 [TidyMSLFeeder] recovery start point: message 1/58 (sent on: 01-01-70 00:00:00.000)
+26-01-16 07:14:57.849	PTS-C103	INFO	Component TidyMSLFeeder Feeder initialized & started. Effective configuration:
+{
+    "acceptTypes" : [
+        {
+            "ns" : 4,
+            "type" : 1
+        }
+    ],
+    "client" : "CPTT",
+    "host" : "10.20.32.63",
+    "id" : 787,
+    "moniker" : "CPT-TIDY-3-10.20.42.86",
+    "port" : 6379,
+    "queue" : "destQ"
+}
+
+26-01-16 07:14:57.850	PTS-C101	INFO	Post-Trade Service PTS_Tidy [instance: 3] started
+26-01-16 07:14:57.858	PTS-C309	DEBUG	Received MSL notification: Disconnected
+26-01-16 07:15:00.854	PTS-C309	DEBUG	Received MSL notification: ReplayTransition
+26-01-16 07:15:00.873	PTS-C308	DEBUG	Received MSL control message: ReplayResponse [requestId: -9033343294242443619]
+Growing InputStream cache
+Growing InputStream cache
+Growing InputStream cache
+Growing InputStream cache
+Growing InputStream cache
+Growing InputStream cache
+Growing InputStream cache
+Growing InputStream cache
+Growing InputStream cache
+Growing InputStream cache
+26-01-16 07:17:38.709	PTS-C306	DEBUG	Received MSL message #1: RedurHdr{session=1, sequence=88}  SrcMessage{session=26, seq=1, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=936}
+26-01-16 07:17:38.717	PTS-C306	DEBUG	Received MSL message #2: RedurHdr{session=1, sequence=89}  SrcMessage{session=26, seq=2, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1916}
+26-01-16 07:17:38.718	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 88, srcSid: 1, srcMid: 59, execId: A7E8-2770-E32E-3B, status: OK] filtered out by Non-MyT deals filter
+26-01-16 07:17:38.718	PTS-C306	DEBUG	Received MSL message #3: RedurHdr{session=1, sequence=90}  SrcMessage{session=26, seq=3, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1904}
+26-01-16 07:17:38.719	PTS-C306	DEBUG	Received MSL message #4: RedurHdr{session=1, sequence=91}  SrcMessage{session=26, seq=4, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=917}
+26-01-16 07:17:38.719	PTS-C306	DEBUG	Received MSL message #5: RedurHdr{session=1, sequence=92}  SrcMessage{session=26, seq=5, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1904}
+26-01-16 07:17:38.720	PTS-C306	DEBUG	Received MSL message #6: RedurHdr{session=1, sequence=93}  SrcMessage{session=26, seq=6, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=916}
+26-01-16 07:17:38.720	PTS-C306	DEBUG	Received MSL message #7: RedurHdr{session=1, sequence=94}  SrcMessage{session=26, seq=7, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=916}
+26-01-16 07:17:38.721	PTS-C306	DEBUG	Received MSL message #8: RedurHdr{session=1, sequence=95}  SrcMessage{session=26, seq=8, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1788}
+26-01-16 07:17:38.722	PTS-C306	DEBUG	Received MSL message #9: RedurHdr{session=1, sequence=96}  SrcMessage{session=26, seq=9, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1788}
+26-01-16 07:17:38.722	PTS-C601	TRACE	Message [sid: 1, mid: 88, srcSid: 1, srcMid: 59, execId: A7E8-2770-E32E-3B, status: OK]: Ticket [LCRI/LCRI/A7E8-2770-E32E-3B-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+26-01-16 07:17:38.723	PTS-C306	DEBUG	Received MSL message #10: RedurHdr{session=1, sequence=97}  SrcMessage{session=26, seq=10, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1792}
+26-01-16 07:17:38.723	PTS-C306	DEBUG	Received MSL message #11: RedurHdr{session=1, sequence=98}  SrcMessage{session=26, seq=11, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1792}
+26-01-16 07:17:38.724	PTS-C306	DEBUG	Received MSL message #12: RedurHdr{session=1, sequence=99}  SrcMessage{session=26, seq=12, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=896}
+26-01-16 07:17:38.725	PTS-C306	DEBUG	Received MSL message #13: RedurHdr{session=1, sequence=100}  SrcMessage{session=26, seq=13, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=853}
+26-01-16 07:17:38.726	PTS-C306	DEBUG	Received MSL message #14: RedurHdr{session=1, sequence=101}  SrcMessage{session=26, seq=14, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=853}
+26-01-16 07:17:38.726	PTS-C306	DEBUG	Received MSL message #15: RedurHdr{session=1, sequence=102}  SrcMessage{session=26, seq=15, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=851}
+26-01-16 07:17:38.731	PTS-C306	DEBUG	Received MSL message #16: RedurHdr{session=1, sequence=103}  SrcMessage{session=26, seq=16, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=875}
+26-01-16 07:17:38.732	PTS-C306	DEBUG	Received MSL message #17: RedurHdr{session=1, sequence=104}  SrcMessage{session=26, seq=17, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=902}
+26-01-16 07:17:38.736	PTS-C306	DEBUG	Received MSL message #18: RedurHdr{session=1, sequence=105}  SrcMessage{session=26, seq=18, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=866}
+26-01-16 07:17:38.737	PTS-C306	DEBUG	Received MSL message #19: RedurHdr{session=1, sequence=106}  SrcMessage{session=26, seq=19, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=3569}
+26-01-16 07:17:38.738	PTS-C306	DEBUG	Received MSL message #20: RedurHdr{session=1, sequence=107}  SrcMessage{session=26, seq=20, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=3558}
+26-01-16 07:17:38.739	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:MYT
+26-01-16 07:17:38.739	PTS-C601	TRACE	Message [sid: 1, mid: 88, srcSid: 1, srcMid: 59, execId: A7E8-2770-E32E-3B, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.739	PTS-C306	DEBUG	Received MSL message #21: RedurHdr{session=1, sequence=108}  SrcMessage{session=26, seq=21, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=3558}
+26-01-16 07:17:38.739	PTS-C306	DEBUG	Received MSL message #22: RedurHdr{session=1, sequence=109}  SrcMessage{session=26, seq=22, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1560}
+26-01-16 07:17:38.740	PTS-C306	DEBUG	Received MSL message #23: RedurHdr{session=1, sequence=110}  SrcMessage{session=26, seq=23, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1554}
+26-01-16 07:17:38.740	PTS-C306	DEBUG	Received MSL message #24: RedurHdr{session=1, sequence=111}  SrcMessage{session=26, seq=24, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1554}
+26-01-16 07:17:38.741	PTS-C306	DEBUG	Received MSL message #25: RedurHdr{session=1, sequence=112}  SrcMessage{session=26, seq=25, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1552}
+26-01-16 07:17:38.742	PTS-C306	DEBUG	Received MSL message #26: RedurHdr{session=1, sequence=113}  SrcMessage{session=26, seq=26, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1539}
+26-01-16 07:17:38.742	PTS-C306	DEBUG	Received MSL message #27: RedurHdr{session=1, sequence=114}  SrcMessage{session=26, seq=27, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1546}
+26-01-16 07:17:38.743	PTS-C306	DEBUG	Received MSL message #28: RedurHdr{session=1, sequence=115}  SrcMessage{session=26, seq=28, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1540}
+26-01-16 07:17:38.743	PTS-C306	DEBUG	Received MSL message #29: RedurHdr{session=1, sequence=116}  SrcMessage{session=26, seq=29, namespace=4, type=1, time=26/01/2016 07:17:38}   VariMsgPrefix{blockType=3, len=1560}
+26-01-16 07:17:38.746	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:88, srcSid:1, srcMid:59]
+26-01-16 07:17:38.746	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:88, srcSid:1, srcMid:59]
+26-01-16 07:17:38.746	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 89, srcSid: 1, srcMid: 60, execId: FF0A-0014-0000-05, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.747	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:89, srcSid:1, srcMid:60]
+26-01-16 07:17:38.747	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 90, srcSid: 1, srcMid: 61, execId: FF0A-0014-0000-14, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.747	PTS-C601	TRACE	Message [sid: 1, mid: 89, srcSid: 1, srcMid: 60, execId: FF0A-0014-0000-05, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-05-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.748	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:90, srcSid:1, srcMid:61]
+26-01-16 07:17:38.748	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 91, srcSid: 1, srcMid: 62, execId: FF0A-0014-0000-1C, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.748	PTS-C601	TRACE	Message [sid: 1, mid: 89, srcSid: 1, srcMid: 60, execId: FF0A-0014-0000-05, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-05-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.749	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:91, srcSid:1, srcMid:62]
+26-01-16 07:17:38.749	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 92, srcSid: 1, srcMid: 63, execId: FF0A-0014-0000-0B, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.749	PTS-C601	TRACE	Message [sid: 1, mid: 89, srcSid: 1, srcMid: 60, execId: FF0A-0014-0000-05, status: OK]: Ticket [RA78/RA78/FF0A-0014-0000-05-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.750	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:92, srcSid:1, srcMid:63]
+26-01-16 07:17:38.750	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 93, srcSid: 1, srcMid: 64, execId: FF0A-0014-0000-1B, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.750	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:89, srcSid:1, srcMid:60]
+26-01-16 07:17:38.750	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:93, srcSid:1, srcMid:64]
+26-01-16 07:17:38.751	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 94, srcSid: 1, srcMid: 65, execId: FF0A-0014-0000-17, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.751	PTS-C601	TRACE	Message [sid: 1, mid: 90, srcSid: 1, srcMid: 61, execId: FF0A-0014-0000-14, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-14-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.751	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:94, srcSid:1, srcMid:65]
+26-01-16 07:17:38.751	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 95, srcSid: 1, srcMid: 66, execId: FF64-0E70-0005-01, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.751	PTS-C601	TRACE	Message [sid: 1, mid: 90, srcSid: 1, srcMid: 61, execId: FF0A-0014-0000-14, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-14-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.752	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:95, srcSid:1, srcMid:66]
+26-01-16 07:17:38.752	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 96, srcSid: 1, srcMid: 67, execId: FF64-0E70-0006-01, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.752	PTS-C601	TRACE	Message [sid: 1, mid: 90, srcSid: 1, srcMid: 61, execId: FF0A-0014-0000-14, status: OK]: Ticket [RA77/RA77/FF0A-0014-0000-14-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.752	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:96, srcSid:1, srcMid:67]
+26-01-16 07:17:38.752	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 97, srcSid: 1, srcMid: 68, execId: FF64-0E70-0003-01, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.753	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:90, srcSid:1, srcMid:61]
+26-01-16 07:17:38.753	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:97, srcSid:1, srcMid:68]
+26-01-16 07:17:38.753	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 98, srcSid: 1, srcMid: 69, execId: FF64-0E70-0004-01, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.753	PTS-C601	TRACE	Message [sid: 1, mid: 91, srcSid: 1, srcMid: 62, execId: FF0A-0014-0000-1C, status: OK]: Ticket [LCPN/LCPN/FF0A-0014-0000-1C-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.754	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:98, srcSid:1, srcMid:69]
+26-01-16 07:17:38.754	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:91, srcSid:1, srcMid:62]
+26-01-16 07:17:38.754	PTS-C601	TRACE	Message [sid: 1, mid: 99, srcSid: 1, srcMid: 70, execId: FF0A-0012-0000-2E, status: OK]: Ticket [LCPJ/LCPJ/FF0A-0012-0000-2E-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+26-01-16 07:17:38.755	PTS-C601	TRACE	Message [sid: 1, mid: 92, srcSid: 1, srcMid: 63, execId: FF0A-0014-0000-0B, status: OK]: Ticket [LPRP/1PRP/FF0A-0014-0000-0B-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.755	PTS-C601	TRACE	Message [sid: 1, mid: 92, srcSid: 1, srcMid: 63, execId: FF0A-0014-0000-0B, status: OK]: Ticket [LPRP/1PRP/FF0A-0014-0000-0B-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.755	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:99, srcSid:1, srcMid:70]
+26-01-16 07:17:38.755	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 100, srcSid: 1, srcMid: 71, execId: FF64-0E70-0001-01, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.756	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:100, srcSid:1, srcMid:71]
+26-01-16 07:17:38.756	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 101, srcSid: 1, srcMid: 72, execId: FF64-0E70-0002-01, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.756	PTS-C601	TRACE	Message [sid: 1, mid: 92, srcSid: 1, srcMid: 63, execId: FF0A-0014-0000-0B, status: OK]: Ticket [PL22/PL22/FF0A-0014-0000-0B-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.757	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:101, srcSid:1, srcMid:72]
+26-01-16 07:17:38.757	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 102, srcSid: 1, srcMid: 73, execId: FF64-0E6D-000A-01, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.757	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:92, srcSid:1, srcMid:63]
+26-01-16 07:17:38.757	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:88, srcSid:1, srcMid:59]
+26-01-16 07:17:38.758	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:102, srcSid:1, srcMid:73]
+26-01-16 07:17:38.758	PTS-C601	TRACE	Message [sid: 1, mid: 93, srcSid: 1, srcMid: 64, execId: FF0A-0014-0000-1B, status: OK]: Ticket [LCLH/LCLH/FF0A-0014-0000-1B-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.758	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 103, srcSid: 1, srcMid: 74, execId: FF64-0E70-002E-05, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.758	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:103, srcSid:1, srcMid:74]
+26-01-16 07:17:38.759	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:93, srcSid:1, srcMid:64]
+26-01-16 07:17:38.759	PTS-C601	TRACE	Message [sid: 1, mid: 104, srcSid: 1, srcMid: 75, execId: FF0A-0012-0000-25, status: OK]: Ticket [LCPH/LCPH/FF0A-0012-0000-25-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+26-01-16 07:17:38.759	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+26-01-16 07:17:38.759	PTS-C601	TRACE	Message [sid: 1, mid: 89, srcSid: 1, srcMid: 60, execId: FF0A-0014-0000-05, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.759	PTS-C601	TRACE	Message [sid: 1, mid: 94, srcSid: 1, srcMid: 65, execId: FF0A-0014-0000-17, status: OK]: Ticket [LCLI/LCLI/FF0A-0014-0000-17-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.760	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:104, srcSid:1, srcMid:75]
+26-01-16 07:17:38.760	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:94, srcSid:1, srcMid:65]
+26-01-16 07:17:38.760	PTS-C601	TRACE	Message [sid: 1, mid: 105, srcSid: 1, srcMid: 76, execId: FF64-0E72-0003-01, status: OK]: Ticket [LCPI/LCPI/FF64-0E72-0003-01-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+26-01-16 07:17:38.760	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+26-01-16 07:17:38.761	PTS-C601	TRACE	Message [sid: 1, mid: 89, srcSid: 1, srcMid: 60, execId: FF0A-0014-0000-05, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.761	PTS-C601	TRACE	Message [sid: 1, mid: 95, srcSid: 1, srcMid: 66, execId: FF64-0E70-0005-01, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0005-01-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.761	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:105, srcSid:1, srcMid:76]
+26-01-16 07:17:38.761	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 106, srcSid: 1, srcMid: 77, execId: FF0A-0014-0000-1G, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.761	PTS-C601	TRACE	Message [sid: 1, mid: 95, srcSid: 1, srcMid: 66, execId: FF64-0E70-0005-01, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0005-01-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.761	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:106, srcSid:1, srcMid:77]
+26-01-16 07:17:38.761	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 107, srcSid: 1, srcMid: 78, execId: FF0A-0014-9999-99, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.762	PTS-C601	TRACE	Message [sid: 1, mid: 95, srcSid: 1, srcMid: 66, execId: FF64-0E70-0005-01, status: OK]: Ticket [RA99/RA99/FF64-0E70-0005-01-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.762	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:107, srcSid:1, srcMid:78]
+26-01-16 07:17:38.762	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 108, srcSid: 1, srcMid: 79, execId: FF0A-0014-0000-98, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.762	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:95, srcSid:1, srcMid:66]
+26-01-16 07:17:38.763	PTS-C601	TRACE	Message [sid: 1, mid: 96, srcSid: 1, srcMid: 67, execId: FF64-0E70-0006-01, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0006-01-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.763	PTS-C601	TRACE	Message [sid: 1, mid: 96, srcSid: 1, srcMid: 67, execId: FF64-0E70-0006-01, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0006-01-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.764	PTS-C601	TRACE	Message [sid: 1, mid: 96, srcSid: 1, srcMid: 67, execId: FF64-0E70-0006-01, status: OK]: Ticket [RB01/RB01/FF64-0E70-0006-01-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.766	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1053:IS1
+26-01-16 07:17:38.766	PTS-C601	TRACE	Message [sid: 1, mid: 89, srcSid: 1, srcMid: 60, execId: FF0A-0014-0000-05, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.769	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:108, srcSid:1, srcMid:79]
+26-01-16 07:17:38.769	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:96, srcSid:1, srcMid:67]
+26-01-16 07:17:38.769	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:89, srcSid:1, srcMid:60]
+26-01-16 07:17:38.770	PTS-C601	TRACE	Message [sid: 1, mid: 109, srcSid: 1, srcMid: 80, execId: 7E4B-D159-2E3F-52, status: OK]: Ticket [LCPK/LCPK/7E4B-D159-2E3F-52-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+26-01-16 07:17:38.770	PTS-C601	TRACE	Message [sid: 1, mid: 97, srcSid: 1, srcMid: 68, execId: FF64-0E70-0003-01, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0003-01-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.770	PTS-C601	TRACE	Message [sid: 1, mid: 97, srcSid: 1, srcMid: 68, execId: FF64-0E70-0003-01, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0003-01-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.770	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+26-01-16 07:17:38.770	PTS-C601	TRACE	Message [sid: 1, mid: 90, srcSid: 1, srcMid: 61, execId: FF0A-0014-0000-14, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.770	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:109, srcSid:1, srcMid:80]
+26-01-16 07:17:38.771	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 110, srcSid: 1, srcMid: 81, execId: FF0A-0014-0000-0C, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.771	PTS-C601	TRACE	Message [sid: 1, mid: 97, srcSid: 1, srcMid: 68, execId: FF64-0E70-0003-01, status: OK]: Ticket [R3E1/R3E1/FF64-0E70-0003-01-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.771	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:110, srcSid:1, srcMid:81]
+26-01-16 07:17:38.771	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 111, srcSid: 1, srcMid: 82, execId: FF0A-0014-0000-0D, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.772	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:97, srcSid:1, srcMid:68]
+26-01-16 07:17:38.772	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:111, srcSid:1, srcMid:82]
+26-01-16 07:17:38.772	PTS-C601	TRACE	Message [sid: 1, mid: 98, srcSid: 1, srcMid: 69, execId: FF64-0E70-0004-01, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0004-01-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.772	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 112, srcSid: 1, srcMid: 83, execId: FF0A-0014-0000-11, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.772	PTS-C601	TRACE	Message [sid: 1, mid: 98, srcSid: 1, srcMid: 69, execId: FF64-0E70-0004-01, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0004-01-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.773	PTS-C601	TRACE	Message [sid: 1, mid: 98, srcSid: 1, srcMid: 69, execId: FF64-0E70-0004-01, status: OK]: Ticket [R3E2/R3E2/FF64-0E70-0004-01-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.774	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:112, srcSid:1, srcMid:83]
+26-01-16 07:17:38.774	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 113, srcSid: 1, srcMid: 84, execId: FF0A-0014-0000-0G, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.774	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+26-01-16 07:17:38.774	PTS-C601	TRACE	Message [sid: 1, mid: 90, srcSid: 1, srcMid: 61, execId: FF0A-0014-0000-14, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.774	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:98, srcSid:1, srcMid:69]
+26-01-16 07:17:38.774	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 99, srcSid: 1, srcMid: 70, execId: FF0A-0012-0000-2E, status: OK] filtered out by Non-MyT deals filter
+26-01-16 07:17:38.775	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1052:LN2
+26-01-16 07:17:38.775	PTS-C601	TRACE	Message [sid: 1, mid: 90, srcSid: 1, srcMid: 61, execId: FF0A-0014-0000-14, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.775	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:99, srcSid:1, srcMid:70]
+26-01-16 07:17:38.775	PTS-C601	TRACE	Message [sid: 1, mid: 100, srcSid: 1, srcMid: 71, execId: FF64-0E70-0001-01, status: OK]: Ticket [LCPN/LCPN/FF64-0E70-0001-01-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.776	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:90, srcSid:1, srcMid:61]
+26-01-16 07:17:38.776	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:100, srcSid:1, srcMid:71]
+26-01-16 07:17:38.776	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:113, srcSid:1, srcMid:84]
+26-01-16 07:17:38.776	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 114, srcSid: 1, srcMid: 85, execId: FF0A-0012-0000-62, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.776	PTS-C601	TRACE	Message [sid: 1, mid: 101, srcSid: 1, srcMid: 72, execId: FF64-0E70-0002-01, status: OK]: Ticket [LCPO/LCPO/FF64-0E70-0002-01-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.777	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:114, srcSid:1, srcMid:85]
+26-01-16 07:17:38.777	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]] deal [sid: 1, mid: 115, srcSid: 1, srcMid: 86, execId: FF0A-0012-0000-87, status: OK] filtered out by MyT deals only filter
+26-01-16 07:17:38.777	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:101, srcSid:1, srcMid:72]
+26-01-16 07:17:38.778	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:115, srcSid:1, srcMid:86]
+26-01-16 07:17:38.778	PTS-C601	TRACE	Message [sid: 1, mid: 102, srcSid: 1, srcMid: 73, execId: FF64-0E6D-000A-01, status: OK]: Ticket [LCPL/LCPL/FF64-0E6D-000A-01-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.778	PTS-C601	TRACE	Message [sid: 1, mid: 116, srcSid: 1, srcMid: 87, execId: E330-E7B0-C26B-53, status: OK]: Ticket [LCLA/LCLA/E330-E7B0-C26B-53-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/myt]
+26-01-16 07:17:38.779	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN2
+26-01-16 07:17:38.779	PTS-C601	TRACE	Message [sid: 1, mid: 91, srcSid: 1, srcMid: 62, execId: FF0A-0014-0000-1C, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.779	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:102, srcSid:1, srcMid:73]
+26-01-16 07:17:38.779	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:116, srcSid:1, srcMid:87]
+26-01-16 07:17:38.779	PTS-C601	TRACE	Message [sid: 1, mid: 103, srcSid: 1, srcMid: 74, execId: FF64-0E70-002E-05, status: OK]: Ticket [LCPM/LCPM/FF64-0E70-002E-05-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.779	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:91, srcSid:1, srcMid:62]
+26-01-16 07:17:38.780	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:973:
+26-01-16 07:17:38.780	PTS-C601	TRACE	Message [sid: 1, mid: 92, srcSid: 1, srcMid: 63, execId: FF0A-0014-0000-0B, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.781	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:973:
+26-01-16 07:17:38.781	PTS-C601	TRACE	Message [sid: 1, mid: 92, srcSid: 1, srcMid: 63, execId: FF0A-0014-0000-0B, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.782	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1133:LN2
+26-01-16 07:17:38.782	PTS-C601	TRACE	Message [sid: 1, mid: 92, srcSid: 1, srcMid: 63, execId: FF0A-0014-0000-0B, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.796	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:103, srcSid:1, srcMid:74]
+26-01-16 07:17:38.796	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:92, srcSid:1, srcMid:63]
+26-01-16 07:17:38.796	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 104, srcSid: 1, srcMid: 75, execId: FF0A-0012-0000-25, status: OK] filtered out by Non-MyT deals filter
+26-01-16 07:17:38.797	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1166:LN2
+26-01-16 07:17:38.797	PTS-C601	TRACE	Message [sid: 1, mid: 93, srcSid: 1, srcMid: 64, execId: FF0A-0014-0000-1B, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.797	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:104, srcSid:1, srcMid:75]
+26-01-16 07:17:38.797	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 105, srcSid: 1, srcMid: 76, execId: FF64-0E72-0003-01, status: OK] filtered out by Non-MyT deals filter
+26-01-16 07:17:38.798	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:93, srcSid:1, srcMid:64]
+26-01-16 07:17:38.798	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:105, srcSid:1, srcMid:76]
+26-01-16 07:17:38.798	PTS-C601	TRACE	Message [sid: 1, mid: 106, srcSid: 1, srcMid: 77, execId: FF0A-0014-0000-1G, status: OK]: Ticket [1PSE/1PDE/FF0A-0014-0000-1G-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.799	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1167:LN0
+26-01-16 07:17:38.799	PTS-C601	TRACE	Message [sid: 1, mid: 94, srcSid: 1, srcMid: 65, execId: FF0A-0014-0000-17, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.799	PTS-C601	TRACE	Message [sid: 1, mid: 106, srcSid: 1, srcMid: 77, execId: FF0A-0014-0000-1G, status: OK]: Ticket [1PSE/1PDE/FF0A-0014-0000-1G-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.799	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:94, srcSid:1, srcMid:65]
+26-01-16 07:17:38.800	PTS-C601	TRACE	Message [sid: 1, mid: 106, srcSid: 1, srcMid: 77, execId: FF0A-0014-0000-1G, status: OK]: Ticket [RA81/RA81/FF0A-0014-0000-1G-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.800	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+26-01-16 07:17:38.800	PTS-C601	TRACE	Message [sid: 1, mid: 95, srcSid: 1, srcMid: 66, execId: FF64-0E70-0005-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.801	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+26-01-16 07:17:38.801	PTS-C601	TRACE	Message [sid: 1, mid: 95, srcSid: 1, srcMid: 66, execId: FF64-0E70-0005-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.801	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:106, srcSid:1, srcMid:77]
+26-01-16 07:17:38.801	PTS-C601	TRACE	Message [sid: 1, mid: 107, srcSid: 1, srcMid: 78, execId: FF0A-0014-9999-99, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-9999-99-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.802	PTS-C601	TRACE	Message [sid: 1, mid: 107, srcSid: 1, srcMid: 78, execId: FF0A-0014-9999-99, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-9999-99-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.802	PTS-C601	TRACE	Message [sid: 1, mid: 107, srcSid: 1, srcMid: 78, execId: FF0A-0014-9999-99, status: OK]: Ticket [R4J1/R4J1/FF0A-0014-9999-99-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.803	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:107, srcSid:1, srcMid:78]
+26-01-16 07:17:38.804	PTS-C601	TRACE	Message [sid: 1, mid: 108, srcSid: 1, srcMid: 79, execId: FF0A-0014-0000-98, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-98-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.804	PTS-C601	TRACE	Message [sid: 1, mid: 108, srcSid: 1, srcMid: 79, execId: FF0A-0014-0000-98, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-98-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.805	PTS-C601	TRACE	Message [sid: 1, mid: 108, srcSid: 1, srcMid: 79, execId: FF0A-0014-0000-98, status: OK]: Ticket [R4J2/R4J2/FF0A-0014-0000-98-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.806	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:108, srcSid:1, srcMid:79]
+26-01-16 07:17:38.806	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 109, srcSid: 1, srcMid: 80, execId: 7E4B-D159-2E3F-52, status: OK] filtered out by Non-MyT deals filter
+26-01-16 07:17:38.807	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:109, srcSid:1, srcMid:80]
+26-01-16 07:17:38.807	PTS-C601	TRACE	Message [sid: 1, mid: 110, srcSid: 1, srcMid: 81, execId: FF0A-0014-0000-0C, status: OK]: Ticket [LCPN/LCPN/FF0A-0014-0000-0C-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.808	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:110, srcSid:1, srcMid:81]
+26-01-16 07:17:38.809	PTS-C601	TRACE	Message [sid: 1, mid: 111, srcSid: 1, srcMid: 82, execId: FF0A-0014-0000-0D, status: OK]: Ticket [LCPO/LCPO/FF0A-0014-0000-0D-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.810	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:111, srcSid:1, srcMid:82]
+26-01-16 07:17:38.811	PTS-C601	TRACE	Message [sid: 1, mid: 112, srcSid: 1, srcMid: 83, execId: FF0A-0014-0000-11, status: OK]: Ticket [LCRI/LCRI/FF0A-0014-0000-11-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.812	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:112, srcSid:1, srcMid:83]
+26-01-16 07:17:38.812	PTS-C601	TRACE	Message [sid: 1, mid: 113, srcSid: 1, srcMid: 84, execId: FF0A-0014-0000-0G, status: OK]: Ticket [LCRJ/LCRJ/FF0A-0014-0000-0G-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.813	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:113, srcSid:1, srcMid:84]
+26-01-16 07:17:38.814	PTS-C601	TRACE	Message [sid: 1, mid: 114, srcSid: 1, srcMid: 85, execId: FF0A-0012-0000-62, status: OK]: Ticket [LCPH/LCPH/FF0A-0012-0000-62-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.814	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:114, srcSid:1, srcMid:85]
+26-01-16 07:17:38.815	PTS-C601	TRACE	Message [sid: 1, mid: 115, srcSid: 1, srcMid: 86, execId: FF0A-0012-0000-87, status: OK]: Ticket [LCPI/LCPI/FF0A-0012-0000-87-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]
+26-01-16 07:17:38.816	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:115, srcSid:1, srcMid:86]
+26-01-16 07:17:38.816	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade/Automation/data/tickets/common]] deal [sid: 1, mid: 116, srcSid: 1, srcMid: 87, execId: E330-E7B0-C26B-53, status: OK] filtered out by Non-MyT deals filter
+26-01-16 07:17:38.816	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:116, srcSid:1, srcMid:87]
+26-01-16 07:17:38.968	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1074:LN2
+26-01-16 07:17:38.968	PTS-C601	TRACE	Message [sid: 1, mid: 95, srcSid: 1, srcMid: 66, execId: FF64-0E70-0005-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.969	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:95, srcSid:1, srcMid:66]
+26-01-16 07:17:38.971	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+26-01-16 07:17:38.971	PTS-C601	TRACE	Message [sid: 1, mid: 96, srcSid: 1, srcMid: 67, execId: FF64-0E70-0006-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.971	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+26-01-16 07:17:38.971	PTS-C601	TRACE	Message [sid: 1, mid: 96, srcSid: 1, srcMid: 67, execId: FF64-0E70-0006-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.972	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1075:LN2
+26-01-16 07:17:38.972	PTS-C601	TRACE	Message [sid: 1, mid: 96, srcSid: 1, srcMid: 67, execId: FF64-0E70-0006-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.972	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:96, srcSid:1, srcMid:67]
+26-01-16 07:17:38.973	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+26-01-16 07:17:38.973	PTS-C601	TRACE	Message [sid: 1, mid: 97, srcSid: 1, srcMid: 68, execId: FF64-0E70-0003-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.974	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+26-01-16 07:17:38.974	PTS-C601	TRACE	Message [sid: 1, mid: 97, srcSid: 1, srcMid: 68, execId: FF64-0E70-0003-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.974	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1097:LN5
+26-01-16 07:17:38.974	PTS-C601	TRACE	Message [sid: 1, mid: 97, srcSid: 1, srcMid: 68, execId: FF64-0E70-0003-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.975	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:97, srcSid:1, srcMid:68]
+26-01-16 07:17:38.976	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+26-01-16 07:17:38.976	PTS-C601	TRACE	Message [sid: 1, mid: 98, srcSid: 1, srcMid: 69, execId: FF64-0E70-0004-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.976	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+26-01-16 07:17:38.976	PTS-C601	TRACE	Message [sid: 1, mid: 98, srcSid: 1, srcMid: 69, execId: FF64-0E70-0004-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.977	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1098:LN6
+26-01-16 07:17:38.977	PTS-C601	TRACE	Message [sid: 1, mid: 98, srcSid: 1, srcMid: 69, execId: FF64-0E70-0004-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.978	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:98, srcSid:1, srcMid:69]
+26-01-16 07:17:38.979	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:944:MT7
+26-01-16 07:17:38.979	PTS-C601	TRACE	Message [sid: 1, mid: 99, srcSid: 1, srcMid: 70, execId: FF0A-0012-0000-2E, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.979	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:99, srcSid:1, srcMid:70]
+26-01-16 07:17:38.980	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN1
+26-01-16 07:17:38.980	PTS-C601	TRACE	Message [sid: 1, mid: 100, srcSid: 1, srcMid: 71, execId: FF64-0E70-0001-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.981	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:100, srcSid:1, srcMid:71]
+26-01-16 07:17:38.981	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:LN4
+26-01-16 07:17:38.981	PTS-C601	TRACE	Message [sid: 1, mid: 101, srcSid: 1, srcMid: 72, execId: FF64-0E70-0002-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.982	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:101, srcSid:1, srcMid:72]
+26-01-16 07:17:38.982	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:946:LN2
+26-01-16 07:17:38.982	PTS-C601	TRACE	Message [sid: 1, mid: 102, srcSid: 1, srcMid: 73, execId: FF64-0E6D-000A-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.983	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:102, srcSid:1, srcMid:73]
+26-01-16 07:17:38.984	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:947:L02
+26-01-16 07:17:38.984	PTS-C601	TRACE	Message [sid: 1, mid: 103, srcSid: 1, srcMid: 74, execId: FF64-0E70-002E-05, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.985	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:103, srcSid:1, srcMid:74]
+26-01-16 07:17:38.985	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT1
+26-01-16 07:17:38.985	PTS-C601	TRACE	Message [sid: 1, mid: 104, srcSid: 1, srcMid: 75, execId: FF0A-0012-0000-25, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.986	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:104, srcSid:1, srcMid:75]
+26-01-16 07:17:38.986	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT2
+26-01-16 07:17:38.986	PTS-C601	TRACE	Message [sid: 1, mid: 105, srcSid: 1, srcMid: 76, execId: FF64-0E72-0003-01, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.987	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:105, srcSid:1, srcMid:76]
+26-01-16 07:17:38.988	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+26-01-16 07:17:38.988	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+26-01-16 07:17:38.988	PTS-C601	TRACE	Message [sid: 1, mid: 106, srcSid: 1, srcMid: 77, execId: FF0A-0014-0000-1G, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.989	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+26-01-16 07:17:38.990	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+26-01-16 07:17:38.990	PTS-C601	TRACE	Message [sid: 1, mid: 106, srcSid: 1, srcMid: 77, execId: FF0A-0014-0000-1G, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.991	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1056:RA1
+26-01-16 07:17:38.991	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1056:RA1
+26-01-16 07:17:38.991	PTS-C601	TRACE	Message [sid: 1, mid: 106, srcSid: 1, srcMid: 77, execId: FF0A-0014-0000-1G, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.992	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:106, srcSid:1, srcMid:77]
+26-01-16 07:17:38.993	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+26-01-16 07:17:38.993	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+26-01-16 07:17:38.993	PTS-C601	TRACE	Message [sid: 1, mid: 107, srcSid: 1, srcMid: 78, execId: FF0A-0014-9999-99, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.994	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+26-01-16 07:17:38.994	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+26-01-16 07:17:38.995	PTS-C601	TRACE	Message [sid: 1, mid: 107, srcSid: 1, srcMid: 78, execId: FF0A-0014-9999-99, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.995	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:892:L12
+26-01-16 07:17:38.996	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:892:L12
+26-01-16 07:17:38.996	PTS-C601	TRACE	Message [sid: 1, mid: 107, srcSid: 1, srcMid: 78, execId: FF0A-0014-9999-99, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.996	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:107, srcSid:1, srcMid:78]
+26-01-16 07:17:38.997	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+26-01-16 07:17:38.997	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+26-01-16 07:17:38.997	PTS-C601	TRACE	Message [sid: 1, mid: 108, srcSid: 1, srcMid: 79, execId: FF0A-0014-0000-98, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:38.998	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+26-01-16 07:17:38.999	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+26-01-16 07:17:38.999	PTS-C601	TRACE	Message [sid: 1, mid: 108, srcSid: 1, srcMid: 79, execId: FF0A-0014-0000-98, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:39.000	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:893:L14
+26-01-16 07:17:39.000	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:893:L14
+26-01-16 07:17:39.000	PTS-C601	TRACE	Message [sid: 1, mid: 108, srcSid: 1, srcMid: 79, execId: FF0A-0014-0000-98, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:39.001	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:108, srcSid:1, srcMid:79]
+26-01-16 07:17:39.002	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:945:M12
+26-01-16 07:17:39.002	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:945:M12
+26-01-16 07:17:39.002	PTS-C601	TRACE	Message [sid: 1, mid: 109, srcSid: 1, srcMid: 80, execId: 7E4B-D159-2E3F-52, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:39.003	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:109, srcSid:1, srcMid:80]
+26-01-16 07:17:39.004	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN9
+26-01-16 07:17:39.004	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN9
+26-01-16 07:17:39.004	PTS-C601	TRACE	Message [sid: 1, mid: 110, srcSid: 1, srcMid: 81, execId: FF0A-0014-0000-0C, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:39.005	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:110, srcSid:1, srcMid:81]
+26-01-16 07:17:39.006	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:L10
+26-01-16 07:17:39.006	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:L10
+26-01-16 07:17:39.006	PTS-C601	TRACE	Message [sid: 1, mid: 111, srcSid: 1, srcMid: 82, execId: FF0A-0014-0000-0D, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:39.007	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:111, srcSid:1, srcMid:82]
+26-01-16 07:17:39.008	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:LN7
+26-01-16 07:17:39.008	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:LN7
+26-01-16 07:17:39.008	PTS-C601	TRACE	Message [sid: 1, mid: 112, srcSid: 1, srcMid: 83, execId: FF0A-0014-0000-11, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:39.009	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:112, srcSid:1, srcMid:83]
+26-01-16 07:17:39.10	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:910:LN8
+26-01-16 07:17:39.10	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:910:LN8
+26-01-16 07:17:39.10	PTS-C601	TRACE	Message [sid: 1, mid: 113, srcSid: 1, srcMid: 84, execId: FF0A-0014-0000-0G, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:39.11	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:113, srcSid:1, srcMid:84]
+26-01-16 07:17:39.11	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT6
+26-01-16 07:17:39.12	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT6
+26-01-16 07:17:39.12	PTS-C601	TRACE	Message [sid: 1, mid: 114, srcSid: 1, srcMid: 85, execId: FF0A-0012-0000-62, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:39.13	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:114, srcSid:1, srcMid:85]
+26-01-16 07:17:39.13	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT7
+26-01-16 07:17:39.14	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT7
+26-01-16 07:17:39.14	PTS-C601	TRACE	Message [sid: 1, mid: 115, srcSid: 1, srcMid: 86, execId: FF0A-0012-0000-87, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:39.15	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:115, srcSid:1, srcMid:86]
+26-01-16 07:17:39.15	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:905:MYT
+26-01-16 07:17:39.16	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:905:MYT
+26-01-16 07:17:39.16	PTS-C601	TRACE	Message [sid: 1, mid: 116, srcSid: 1, srcMid: 87, execId: E330-E7B0-C26B-53, status: OK]: Ticket [json] routed by Persistent RedisSender
+26-01-16 07:17:39.16	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:116, srcSid:1, srcMid:87]

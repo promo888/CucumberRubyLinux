@@ -1,0 +1,479 @@
+94: set -o errexit
+95: set -o pipefail
+96: set -o nounset
+99: userPermitted=oracle
+100: argFirst=-n
+101: argSecond=PTS_MAIN_1.3.13.0.407.tar.gz
+102: argsQty=2
+103: untarWhereTo=/export/home/oracle/Automation/packages
+104: archiveName=
+105: tarFilter=DB
+106: installPtradeMode=qa
+107: verboseMode=
+108: pathGiven=
+109: errorMsg=
+110: COLOR=
+111: getLastPackageName=
+112: getPackageName=
+113: ipRemote=
+114: pathRemote=
+115: userRemote=
+116: installationPath=
+118: storagePath=/export/home/oracle/build_server/Releases/PTS
+119: storageLocalPath=/export/home/oracle/tmp_storage_ptrade
+814: readParam
+169: '[' 2 -lt 3 ']'
+170: '[' 2 -eq 2 ']'
+171: [[ -n == \-\v ]]
+171: [[ -n == \-\v\e\r\b\o\s\e ]]
+177: [[ -n == \-\p ]]
+177: [[ -n == \-\p\v ]]
+192: [[ -n == \-\f ]]
+192: [[ -n == \-\f\v ]]
+231: [[ -n == \-\n ]]
+2233: cd /export/home/oracle/build_server/Releases/PTS
+2233: egrep PTS_MAIN_1.3.13.0.407.tar.gz
+2233: find 0.0.0.0 0.1.0.0 1.2.0.0 1.2.1.0 1.2.2.0 1.2.3.0 1.2.4.0 1.2.5.0 1.2.6.0 1.2.7.0 1.3.0.0 1.3.1.0 1.3.10.0 1.3.11.0 1.3.12.0 1.3.13.0 1.3.13.1 1.3.2.0 1.3.3.0 1.3.4.0 1.3.5.0 1.3.6.0 1.3.7.0 1.3.8.0 1.3.9.0 1.4.0.0 1.4.1.0 1.4.2.0 -type f -printf '%p\n'
+233: '[' 1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz ']'
+234: '[' -n == -nv ']'
+237: verboseMode=
+2239: cd /export/home/oracle/build_server/Releases/PTS
+2239: egrep PTS_MAIN_1.3.13.0.407.tar.gz
+2239: find 0.0.0.0 0.1.0.0 1.2.0.0 1.2.1.0 1.2.2.0 1.2.3.0 1.2.4.0 1.2.5.0 1.2.6.0 1.2.7.0 1.3.0.0 1.3.1.0 1.3.10.0 1.3.11.0 1.3.12.0 1.3.13.0 1.3.13.1 1.3.2.0 1.3.3.0 1.3.4.0 1.3.5.0 1.3.6.0 1.3.7.0 1.3.8.0 1.3.9.0 1.4.0.0 1.4.1.0 1.4.2.0 -type f -printf '%p\n'
+239: getPackageName=1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz
+247: [[ -f /export/home/oracle/build_server/Releases/PTS/1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz ]]
+247: [[ /export/home/oracle/build_server/Releases/PTS/1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz =~ \.t?gz$ ]]
+248: archiveName=PTS_MAIN_1.3.13.0.407.tar.gz
+249: pathGiven=/export/home/oracle/build_server/Releases/PTS/1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz
+817: '[' '' = v ']'
+820: exec
+8823: date +%Y-%m-%d_%H:%M:%S,%3N
+823: echo '2016-01-04_07:37:10,079 -- Started'
+824: echo -e '\n---Writing regular output to log /export/home/oracle/Automation/logs_PT_DB/ptradeDB_schema_install_automatic.log---'
+825: echo -e '***Writing debug output to log /export/home/oracle/Automation/logs_PT_DB/ptradeDB_schema_install_automatic.log***\n'
+828: checkCurrentUser
+159: local userId
+1160: id -u oracle
+160: userId=100
+1161: id -u
+161: '[' 100 '!=' 100 ']'
+831: getPackage
+5563: date +%Y-%m-%d_%H:%M:%S,%3N
+563: echoColoured '2016-01-04_07:37:10,083 -- Getting package...' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33m2016-01-04_07:37:10,083 -- Getting package...\e[0m'
+566: errorMsg='Error while getting package, installation not finished'
+568: mkdir -p /export/home/oracle/Automation/packages
+571: '[' /export/home/oracle/build_server/Releases/PTS/1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz '!=' '' ']'
+572: echoColoured 'Path to package was given explicitly, getting /export/home/oracle/build_server/Releases/PTS/1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33mPath to package was given explicitly, getting /export/home/oracle/build_server/Releases/PTS/1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz\e[0m'
+575: cmp -s /export/home/oracle/build_server/Releases/PTS/1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz /export/home/oracle/Automation/packages/PTS_MAIN_1.3.13.0.407.tar.gz
+578: cp -fv /export/home/oracle/build_server/Releases/PTS/1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz /export/home/oracle/Automation/packages
+579: echo 'Copying finished'
+607: echo 'setting env variable AUTOMATION_PACKAGE_NAME_ptrade in .bashrc'
+608: set_replace_env_global AUTOMATION_PACKAGE_NAME_ptrade PTS_MAIN_1.3.13.0.407.tar.gz
+547: '[' 2 -eq 2 ']'
+548: grep -q 'export AUTOMATION_PACKAGE_NAME_ptrade=' /export/home/oracle/.bashrc
+549: sed -i -e 's/export AUTOMATION_PACKAGE_NAME_ptrade=.*/export AUTOMATION_PACKAGE_NAME_ptrade=PTS_MAIN_1.3.13.0.407.tar.gz/g' /export/home/oracle/.bashrc
+553: return 0
+611: errorMsg=
+834: extractPackage
+616: local tarPath=
+617: local installationFolderNameSlash=
+618: local installationFolderName1=
+619: local installationFolderName=
+620: local db_config_qa_ptrade_Path=
+6623: date +%Y-%m-%d_%H:%M:%S,%3N
+623: echoColoured '\n2016-01-04_07:37:10,846 -- Extracting PTS_MAIN_1.3.13.0.407.tar.gz to /export/home/oracle/Automation/packages...\n' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33m\n2016-01-04_07:37:10,846 -- Extracting PTS_MAIN_1.3.13.0.407.tar.gz to /export/home/oracle/Automation/packages...\n\e[0m'
+626: errorMsg='Error while extracting package, installation not finished'
+628: '[' /export/home/oracle/build_server/Releases/PTS/1.3.13.0/PTS_MAIN_1.3.13.0.407.tar.gz '!=' '' ']'
+629: tarPath=/export/home/oracle/Automation/packages/PTS_MAIN_1.3.13.0.407.tar.gz
+632: '[' -s /export/home/oracle/Automation/packages/PTS_MAIN_1.3.13.0.407.tar.gz ']'
+6642: tar '--exclude=*/*' -tf /export/home/oracle/Automation/packages/PTS_MAIN_1.3.13.0.407.tar.gz
+6642: egrep -c DB
+642: countResult=1
+644: '[' 1 '!=' 1 ']'
+6648: tar '--exclude=*/*' -tf /export/home/oracle/Automation/packages/PTS_MAIN_1.3.13.0.407.tar.gz
+6648: egrep DB
+648: installationFolderNameSlash=PT_DB_1.3.13.0/
+651: installationFolderName1=PT_DB_1.3.13.0
+652: installationFolderName=PT_DB_1.3.13.0_ptrade
+653: installationPath=/export/home/oracle/Automation/packages/PT_DB_1.3.13.0_ptrade
+683: errorMsg='Error while removing directory with the same version, installation not finished'
+686: '[' -d /export/home/oracle/Automation/packages/PT_DB_1.3.13.0_ptrade ']'
+693: errorMsg='Error while extracting package, installation not finished'
+696: mkdir /export/home/oracle/Automation/packages/PT_DB_1.3.13.0_ptrade
+696: tar xzvf /export/home/oracle/Automation/packages/PTS_MAIN_1.3.13.0.407.tar.gz -C /export/home/oracle/Automation/packages/PT_DB_1.3.13.0_ptrade --strip-components 1
+698: echoColoured '"PT_DB_1.3.13.0" from the package "PTS_MAIN_1.3.13.0.407.tar.gz" was extracted in /export/home/oracle/Automation/packages as "PT_DB_1.3.13.0_ptrade"' green
+325: '[' 2 = 2 ']'
+326: '[' green = yellow ']'
+328: '[' green = red ']'
+330: '[' green = green ']'
+331: COLOR=32
+337: '[' -z 32 ']'
+340: echo -e '\e[32m"PT_DB_1.3.13.0" from the package "PTS_MAIN_1.3.13.0.407.tar.gz" was extracted in /export/home/oracle/Automation/packages as "PT_DB_1.3.13.0_ptrade"\e[0m'
+701: errorMsg=
+8837: date +%Y-%m-%d_%H:%M:%S,%3N
+837: echoColoured '\n2016-01-04_07:37:11,617 -- Starting installation...' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33m\n2016-01-04_07:37:11,617 -- Starting installation...\e[0m'
+840: provideRmanAnswers
+7707: date +%Y-%m-%d_%H:%M:%S,%3N
+707: echoColoured '\n2016-01-04_07:37:11,619 -- Removing oracle archive logs with RMAN...\n' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33m\n2016-01-04_07:37:11,619 -- Removing oracle archive logs with RMAN...\n\e[0m'
+710: echoColoured '\nsetting PTS_AUTOMATION_LOGS_HOME' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33m\nsetting PTS_AUTOMATION_LOGS_HOME\e[0m'
+711: export PTS_AUTOMATION_LOGS_HOME=/export/home/oracle/Automation/logs_PT_DB
+711: PTS_AUTOMATION_LOGS_HOME=/export/home/oracle/Automation/logs_PT_DB
+712: echo 'set PTS_AUTOMATION_LOGS_HOME: /export/home/oracle/Automation/logs_PT_DB'
+714: echoColoured '\nsetting PTS_AUTOMATION_USERNAME' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33m\nsetting PTS_AUTOMATION_USERNAME\e[0m'
+715: export PTS_AUTOMATION_USERNAME=ptrade
+715: PTS_AUTOMATION_USERNAME=ptrade
+716: echo -e 'set PTS_AUTOMATION_USERNAME: ptrade\n'
+719: errorMsg='Timeout or inner expect error while executing rman, installation not finished'
+721: msg=
+722: automation_logs_home=
+723: automation_script_username=
+724: expect -c '
+log_user 1
+set timeout 5
+
+proc err_exit {msg} {
+	puts ---
+    puts stderr "$msg"
+	send "exit status: $?\r"
+    exit 1
+}
+
+puts "Reading PTS_AUTOMATION_LOGS_HOME"
+
+if {[info exists env(PTS_AUTOMATION_LOGS_HOME)]} {
+    set automation_logs_home $::env(PTS_AUTOMATION_LOGS_HOME)
+	puts "Found PTS_AUTOMATION_LOGS_HOME"
+} else {
+	err_exit "Error while reading env variable PTS_AUTOMATION_LOGS_HOME"
+}
+
+puts "Reading PTS_AUTOMATION_USERNAME"
+
+if {[info exists env(PTS_AUTOMATION_USERNAME)]} {
+    set automation_script_username $::env(PTS_AUTOMATION_USERNAME)
+	puts "Found PTS_AUTOMATION_USERNAME"
+} else {
+	err_exit "Error while reading env variable PTS_AUTOMATION_USERNAME"
+}
+
+exp_internal -f $automation_logs_home/expect_rman_debug_$automation_script_username.log 0
+
+spawn bash
+
+send "rman\r"
+sleep 2
+expect {
+    "*Recovery Manager: Release*" {
+        send "connect target\r"
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+sleep 2
+expect {
+    "*connected to target database:*" {
+        send "delete force archivelog all completed before '\''sysdate -2/24'\'';\r"
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+sleep 2
+
+expect {
+    "*Do you really want to delete the above objects (enter YES or NO)*" {
+        send "YES\r"
+    }
+	"*specification does not match any archived log in the repo*" {
+        send "exit\r"
+		exit 0
+    }
+	"*using target database control file instead of recovery catalog*" {
+        send "exit\r"
+		exit 0
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+sleep 3
+expect {
+    "*Deleted*objects" {
+        send "exit\r"
+    }
+    timeout {
+        err_exit "\nError: timeout\n"
+    }
+}
+
+expect eof
+'
+808: errorMsg=
+8810: date +%Y-%m-%d_%H:%M:%S,%3N
+810: echoColoured '\n2016-01-04_07:37:26,286 -- Finished RMAN\n' green
+325: '[' 2 = 2 ']'
+326: '[' green = yellow ']'
+328: '[' green = red ']'
+330: '[' green = green ']'
+331: COLOR=32
+337: '[' -z 32 ']'
+340: echo -e '\e[32m\n2016-01-04_07:37:26,286 -- Finished RMAN\n\e[0m'
+843: drop_user
+3346: date +%Y-%m-%d_%H:%M:%S,%3N
+346: echoColoured '\n2016-01-04_07:37:26,288 -- Dropping user ptrade' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33m\n2016-01-04_07:37:26,288 -- Dropping user ptrade\e[0m'
+349: errorMsg='Error while dropping user, installation not finished'
+352: sqlplus / as sysdba
+400: errorMsg=
+4402: date +%Y-%m-%d_%H:%M:%S,%3N
+402: echoColoured '2016-01-04_07:38:24,176 -- Dropping user "ptrade" finished' green
+325: '[' 2 = 2 ']'
+326: '[' green = yellow ']'
+328: '[' green = red ']'
+330: '[' green = green ']'
+331: COLOR=32
+337: '[' -z 32 ']'
+340: echo -e '\e[32m2016-01-04_07:38:24,176 -- Dropping user "ptrade" finished\e[0m'
+403: echoColoured ''
+325: '[' 1 = 2 ']'
+337: '[' -z 32 ']'
+340: echo -e '\e[32m\e[0m'
+846: create_app_users
+409: errorMsg='Error while creating user, installation not finished'
+4411: date +%Y-%m-%d_%H:%M:%S,%3N
+411: echoColoured '2016-01-04_07:38:24,178 -- Creating user ptrade...' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33m2016-01-04_07:38:24,178 -- Creating user ptrade...\e[0m'
+5528: date +%C%y%m%d-%H:%M:%S
+528: START_TIME=20160104-07:38:24
+529: echo 'START_TIME is 20160104-07:38:24'
+530: set_env
+421: DIR=/export/home/oracle
+422: TMPDIR=/etc/ebs
+4423: date +%C%y%m%d-%H:%M:%S
+423: DT=20160104-07:38:24
+427: echo 'set_env is complete'
+533: create_schema
+5517: sqlplus / as sysdba
+517: create_user='
+SQL*Plus: Release 12.1.0.2.0 Production on Mon Jan 4 07:38:24 2016
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning and Automatic Storage Management options
+
+SQL> SQL> SQL> SQL> SQL> SQL> SQL> SQL>   2    3    4    5    6  
+PL/SQL procedure successfully completed.
+
+SQL> SQL>   2    3    4    5    6  
+PL/SQL procedure successfully completed.
+
+SQL>   2    3    4    5  
+User created.
+
+SQL> SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning and Automatic Storage Management options'
+519: echo Done
+520: echo 'SQLPLUS RESULT create_user is:'
+521: echo '
+SQL*Plus: Release 12.1.0.2.0 Production on Mon Jan 4 07:38:24 2016
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning and Automatic Storage Management options
+
+SQL> SQL> SQL> SQL> SQL> SQL> SQL> SQL>   2    3    4    5    6  
+PL/SQL procedure successfully completed.
+
+SQL> SQL>   2    3    4    5    6  
+PL/SQL procedure successfully completed.
+
+SQL>   2    3    4    5  
+User created.
+
+SQL> SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> 
+Grant succeeded.
+
+SQL> SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning and Automatic Storage Management options'
+523: echo 'create_schema is done'
+5535: date +%C%y%m%d-%H:%M:%S
+535: echo 'Finished create_app_users at 20160104-07:38:24 '
+538: errorMsg=
+5540: date +%Y-%m-%d_%H:%M:%S,%3N
+540: echoColoured '2016-01-04_07:38:24,930 -- Creating ptrade user completed' green
+325: '[' 2 = 2 ']'
+326: '[' green = yellow ']'
+328: '[' green = red ']'
+330: '[' green = green ']'
+331: COLOR=32
+337: '[' -z 32 ']'
+340: echo -e '\e[32m2016-01-04_07:38:24,930 -- Creating ptrade user completed\e[0m'
+541: echoColoured ''
+325: '[' 1 = 2 ']'
+337: '[' -z 32 ']'
+340: echo -e '\e[32m\e[0m'
+849: echoColoured 'Start installing ptrade...' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33mStart installing ptrade...\e[0m'
+852: errorMsg='Error while installing schema, installation not finished'
+854: cd /export/home/oracle/Automation/packages/PT_DB_1.3.13.0_ptrade
+855: chmod 755 db_bkp_rlbk.sh install_ptrade_db.sh pts_installer.sh update_ptrade_db.sh
+856: ./install_ptrade_db.sh qa
+859: errorMsg=
+862: echoColoured 'Creating link PT_DB...' yellow
+325: '[' 2 = 2 ']'
+326: '[' yellow = yellow ']'
+327: COLOR=33
+337: '[' -z 33 ']'
+340: echo -e '\e[33mCreating link PT_DB...\e[0m'
+865: errorMsg='Error while creating link, installation not finished'
+868: ln -nsfv /export/home/oracle/Automation/packages/PT_DB_1.3.13.0_ptrade /export/home/oracle/Automation/PT_DB
+871: errorMsg='Error while removing PID file /export/home/oracle/Automation/pid_ptrade, installation not finished'
+874: rm -f /export/home/oracle/Automation/pid_ptrade.log
+877: errorMsg=
+8879: date +%Y-%m-%d_%H:%M:%S,%3N
+879: echoColoured '\n2016-01-04_07:39:04,301 -- Installation finished' green
+325: '[' 2 = 2 ']'
+326: '[' green = yellow ']'
+328: '[' green = red ']'
+330: '[' green = green ']'
+331: COLOR=32
+337: '[' -z 32 ']'
+340: echo -e '\e[32m\n2016-01-04_07:39:04,301 -- Installation finished\e[0m'
+1: giveErrorMsg
+20: exit_status=0
+21: '[' 0 -ne 0 ']'

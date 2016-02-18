@@ -1,0 +1,1055 @@
+08-02-16 16:46:40.353	PTS-C10	INFO	JVM arguments:
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/export/home/ptrade1/Automation/PTS/logs/
+-Xms1024m
+-Xmx8g
+-Dconfig.file=/export/home/ptrade1/Automation/PTS/config/prod.conf
+-DconfigPath=/export/home/ptrade1/Automation/PTS/config
+-Dpts.module.name=tidy
+08-02-16 16:46:40.357	PTS-C10	INFO	Starting PTS Tidy Service  [Version: 1.4.4.0  build: 510 build time: 2016-02-04 12:37]
+08-02-16 16:46:40.597	PTS-C103	INFO	Component OracleConnectionFactory [JDBC version: JDBC 4.1; Oracle Driver version: 12.1.0.1.0; DB version: Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production] initialized & started. Effective configuration:
+{
+    "connectTimeout" : 3000,
+    "primary" : {
+        "host" : "10.20.42.50",
+        "port" : 1521
+    },
+    "readTimeout" : 15000,
+    "schema" : "ptrade1",
+    "service" : "PTDB.am.icap.com"
+}
+
+08-02-16 16:46:40.758	PTS-C105	INFO	Static Data - 799 floors successfully loaded
+08-02-16 16:46:40.767	PTS-C107	INFO	Static Data - 46 CCY pairs successfully loaded
+08-02-16 16:46:40.855	PTS-C5100	INFO	Binding port: 5559	-> client configuration: c1 was allowed
+08-02-16 16:46:40.855	PTS-C5100	INFO	Binding port: 5560	-> client configuration: c2 was allowed
+08-02-16 16:46:41.159	PTS-C10	INFO	Processor capacity: 1024
+08-02-16 16:46:41.160	PTS-C213	WARNING	No messages for feeder #787 found in the DB
+08-02-16 16:46:41.160	PTS-C103	INFO	Component MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] initialized & started. Effective configuration:
+{
+    "allowSubdirs" : "yes",
+    "id" : 100,
+    "retryInterval" : 3000,
+    "target" : "/export/home/ptrade1/Automation/data/tickets/myt"
+}
+
+08-02-16 16:46:41.161	PTS-C103	INFO	Component COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] initialized & started. Effective configuration:
+{
+    "allowSubdirs" : "yes",
+    "id" : 101,
+    "retryInterval" : 3000,
+    "target" : "/export/home/ptrade1/Automation/data/tickets/common"
+}
+
+08-02-16 16:46:41.210	PTS-C103	INFO	Component Sapphire Adapter [Persistent RedisSender] initialized & started. Effective configuration:
+{
+    "host" : "10.20.42.86",
+    "id" : 300,
+    "port" : 6389,
+    "retryInterval" : 3000,
+    "topic" : "ebs:gc:tickets:{fp.institutionKey}:{to_upper(fp.trader)}"
+}
+
+08-02-16 16:46:41.210	PTS-C7100	INFO	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: FIX initiator starting
+08-02-16 16:46:41.349	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Session FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS schedule is daily, 16:00:00-UTC - 23:00:00-UTC (daily, 16:00:00-GMT - 23:00:00-GMT)]
+08-02-16 16:46:41.350	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Created session: FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]
+08-02-16 16:46:41.350	PTS-C7300	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: onCreate invoked
+08-02-16 16:46:41.390	PTS-C103	INFO	Component RTNS FIX Adapter initialized & started. Effective configuration:
+{
+    "beginString" : "FIXT.1.1",
+    "cnfgDir" : "/export/home/ptrade1/Automation/PTS/config/fix/rtns",
+    "cnfgFile" : "qfj.cfg",
+    "debug" : {
+        "enabled" : "no",
+        "spotDict" : "rtns/FIX50SP1-TCR-Spot.xml",
+        "swapDict" : "rtns/FIX50SP1-TCR-Swap.xml"
+    },
+    "host" : "10.20.42.86",
+    "id" : 600,
+    "port" : 16005,
+    "retryInterval" : 3000,
+    "senderCompId" : "QA_RTNS",
+    "targetCompId" : "AUTOMATION1"
+}
+
+08-02-16 16:46:41.391	PTS-C103	INFO	Component DisruptorBasedProcessor initialized & started. Effective configuration:
+{
+    "capacity" : 1024
+}
+
+08-02-16 16:46:41.499	PTS-C211	INFO	Feeder #787 [TidyMSLFeeder] recovery start point: time 08-02-16 16:46:41.499
+08-02-16 16:46:41.506	PTS-C103	INFO	Component TidyMSLFeeder Feeder initialized & started. Effective configuration:
+{
+    "acceptTypes" : [
+        {
+            "ns" : 4,
+            "type" : 1
+        }
+    ],
+    "client" : "CPTT",
+    "host" : "10.20.32.60",
+    "id" : 787,
+    "moniker" : "CPT-TIDY-3-10.20.42.86",
+    "port" : 6379,
+    "queue" : "destQ"
+}
+
+08-02-16 16:46:41.507	PTS-C101	INFO	Post-Trade Service PTS_Tidy [instance: 3] started
+08-02-16 16:46:41.512	PTS-C309	DEBUG	Received MSL notification: Disconnected
+08-02-16 16:46:42.420	PTS-C7310	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: admin message going to be sent, message type: [Logon(A)]
+08-02-16 16:46:42.440	PTS-C7306	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: outgoing: [8=FIXT.1.19=8235=A34=149=QA_RTNS52=20160208-16:46:4256=AUTOMATION198=0108=30141=Y1137=810=099]
+08-02-16 16:46:42.446	PTS-C7302	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Logout performed or forced termination or a loss of network connection occured.
+08-02-16 16:46:42.502	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Initiated logon request]
+08-02-16 16:46:44.510	PTS-C309	DEBUG	Received MSL notification: ReplayTransition
+08-02-16 16:46:46.567	PTS-C308	DEBUG	Received MSL control message: ReplayResponse [requestId: -7819916263845966965]
+08-02-16 16:47:12.414	PTS-C7310	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: admin message going to be sent, message type: [Logon(A)]
+08-02-16 16:47:12.434	PTS-C7306	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: outgoing: [8=FIXT.1.19=8235=A34=149=QA_RTNS52=20160208-16:47:1256=AUTOMATION198=0108=30141=Y1137=810=097]
+08-02-16 16:47:12.436	PTS-C7302	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Logout performed or forced termination or a loss of network connection occured.
+08-02-16 16:47:12.473	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Initiated logon request]
+08-02-16 16:47:42.411	PTS-C7310	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: admin message going to be sent, message type: [Logon(A)]
+08-02-16 16:47:42.429	PTS-C7306	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: outgoing: [8=FIXT.1.19=8235=A34=149=QA_RTNS52=20160208-16:47:4256=AUTOMATION198=0108=30141=Y1137=810=100]
+08-02-16 16:47:42.431	PTS-C7302	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Logout performed or forced termination or a loss of network connection occured.
+08-02-16 16:47:42.469	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Initiated logon request]
+08-02-16 16:48:12.412	PTS-C7310	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: admin message going to be sent, message type: [Logon(A)]
+08-02-16 16:48:12.433	PTS-C7306	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: outgoing: [8=FIXT.1.19=8235=A34=149=QA_RTNS52=20160208-16:48:1256=AUTOMATION198=0108=30141=Y1137=810=098]
+08-02-16 16:48:12.435	PTS-C7302	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Logout performed or forced termination or a loss of network connection occured.
+08-02-16 16:48:12.468	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Initiated logon request]
+08-02-16 16:48:42.410	PTS-C7310	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: admin message going to be sent, message type: [Logon(A)]
+08-02-16 16:48:42.427	PTS-C7306	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: outgoing: [8=FIXT.1.19=8235=A34=149=QA_RTNS52=20160208-16:48:4256=AUTOMATION198=0108=30141=Y1137=810=101]
+08-02-16 16:48:42.429	PTS-C7302	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Logout performed or forced termination or a loss of network connection occured.
+08-02-16 16:48:42.465	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Initiated logon request]
+08-02-16 16:49:12.410	PTS-C7310	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: admin message going to be sent, message type: [Logon(A)]
+08-02-16 16:49:12.428	PTS-C7306	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: outgoing: [8=FIXT.1.19=8235=A34=149=QA_RTNS52=20160208-16:49:1256=AUTOMATION198=0108=30141=Y1137=810=099]
+08-02-16 16:49:12.430	PTS-C7302	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Logout performed or forced termination or a loss of network connection occured.
+08-02-16 16:49:12.464	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Initiated logon request]
+08-02-16 16:49:15.405	PTS-C306	DEBUG	Received MSL message #1: RedurHdr{session=1, sequence=29}  SrcMessage{session=2, seq=1, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=939}
+08-02-16 16:49:15.412	PTS-C306	DEBUG	Received MSL message #2: RedurHdr{session=1, sequence=30}  SrcMessage{session=2, seq=2, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1925}
+08-02-16 16:49:15.413	PTS-C306	DEBUG	Received MSL message #3: RedurHdr{session=1, sequence=31}  SrcMessage{session=2, seq=3, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1913}
+08-02-16 16:49:15.413	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 29, srcSid: 1, srcMid: 1, execId: A7E8-2770-E32E-3A, status: OK] filtered out by Non-MyT deals filter
+08-02-16 16:49:15.414	PTS-C306	DEBUG	Received MSL message #4: RedurHdr{session=1, sequence=32}  SrcMessage{session=2, seq=4, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=920}
+08-02-16 16:49:15.414	PTS-C306	DEBUG	Received MSL message #5: RedurHdr{session=1, sequence=33}  SrcMessage{session=2, seq=5, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1913}
+08-02-16 16:49:15.415	PTS-C306	DEBUG	Received MSL message #6: RedurHdr{session=1, sequence=34}  SrcMessage{session=2, seq=6, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=918}
+08-02-16 16:49:15.415	PTS-C306	DEBUG	Received MSL message #7: RedurHdr{session=1, sequence=35}  SrcMessage{session=2, seq=7, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=918}
+08-02-16 16:49:15.416	PTS-C306	DEBUG	Received MSL message #8: RedurHdr{session=1, sequence=36}  SrcMessage{session=2, seq=8, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1787}
+08-02-16 16:49:15.416	PTS-C306	DEBUG	Received MSL message #9: RedurHdr{session=1, sequence=37}  SrcMessage{session=2, seq=9, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1787}
+08-02-16 16:49:15.417	PTS-C306	DEBUG	Received MSL message #10: RedurHdr{session=1, sequence=38}  SrcMessage{session=2, seq=10, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1791}
+08-02-16 16:49:15.417	PTS-C306	DEBUG	Received MSL message #11: RedurHdr{session=1, sequence=39}  SrcMessage{session=2, seq=11, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1791}
+08-02-16 16:49:15.418	PTS-C601	TRACE	Message [sid: 1, mid: 29, srcSid: 1, srcMid: 1, execId: A7E8-2770-E32E-3A, status: OK]: Ticket [LCRI/LCRI/A7E8-2770-E32E-3A-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+08-02-16 16:49:15.418	PTS-C306	DEBUG	Received MSL message #12: RedurHdr{session=1, sequence=40}  SrcMessage{session=2, seq=12, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=895}
+08-02-16 16:49:15.418	PTS-C306	DEBUG	Received MSL message #13: RedurHdr{session=1, sequence=41}  SrcMessage{session=2, seq=13, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=852}
+08-02-16 16:49:15.419	PTS-C306	DEBUG	Received MSL message #14: RedurHdr{session=1, sequence=42}  SrcMessage{session=2, seq=14, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=852}
+08-02-16 16:49:15.419	PTS-C306	DEBUG	Received MSL message #15: RedurHdr{session=1, sequence=43}  SrcMessage{session=2, seq=15, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=850}
+08-02-16 16:49:15.419	PTS-C306	DEBUG	Received MSL message #16: RedurHdr{session=1, sequence=44}  SrcMessage{session=2, seq=16, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=874}
+08-02-16 16:49:15.420	PTS-C306	DEBUG	Received MSL message #17: RedurHdr{session=1, sequence=45}  SrcMessage{session=2, seq=17, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=901}
+08-02-16 16:49:15.420	PTS-C306	DEBUG	Received MSL message #18: RedurHdr{session=1, sequence=46}  SrcMessage{session=2, seq=18, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=865}
+08-02-16 16:49:15.420	PTS-C306	DEBUG	Received MSL message #19: RedurHdr{session=1, sequence=47}  SrcMessage{session=2, seq=19, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=3586}
+08-02-16 16:49:15.421	PTS-C306	DEBUG	Received MSL message #20: RedurHdr{session=1, sequence=48}  SrcMessage{session=2, seq=20, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=3575}
+08-02-16 16:49:15.422	PTS-C306	DEBUG	Received MSL message #21: RedurHdr{session=1, sequence=49}  SrcMessage{session=2, seq=21, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=3575}
+08-02-16 16:49:15.423	PTS-C306	DEBUG	Received MSL message #22: RedurHdr{session=1, sequence=50}  SrcMessage{session=2, seq=22, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1565}
+08-02-16 16:49:15.423	PTS-C306	DEBUG	Received MSL message #23: RedurHdr{session=1, sequence=51}  SrcMessage{session=2, seq=23, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1559}
+08-02-16 16:49:15.424	PTS-C306	DEBUG	Received MSL message #24: RedurHdr{session=1, sequence=52}  SrcMessage{session=2, seq=24, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1559}
+08-02-16 16:49:15.425	PTS-C306	DEBUG	Received MSL message #25: RedurHdr{session=1, sequence=53}  SrcMessage{session=2, seq=25, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1557}
+08-02-16 16:49:15.425	PTS-C306	DEBUG	Received MSL message #26: RedurHdr{session=1, sequence=54}  SrcMessage{session=2, seq=26, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1544}
+08-02-16 16:49:15.426	PTS-C306	DEBUG	Received MSL message #27: RedurHdr{session=1, sequence=55}  SrcMessage{session=2, seq=27, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1551}
+08-02-16 16:49:15.426	PTS-C306	DEBUG	Received MSL message #28: RedurHdr{session=1, sequence=56}  SrcMessage{session=2, seq=28, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1545}
+08-02-16 16:49:15.426	PTS-C306	DEBUG	Received MSL message #29: RedurHdr{session=1, sequence=58}  SrcMessage{session=2, seq=29, namespace=4, type=1, time=08/02/2016 16:49:14}   VariMsgPrefix{blockType=3, len=1565}
+08-02-16 16:49:15.430	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [2]
+08-02-16 16:49:15.431	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:MYT
+08-02-16 16:49:15.431	PTS-C601	TRACE	Message [sid: 1, mid: 29, srcSid: 1, srcMid: 1, execId: A7E8-2770-E32E-3A, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.436	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:29, srcSid:1, srcMid:1]
+08-02-16 16:49:15.436	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:29, srcSid:1, srcMid:1]
+08-02-16 16:49:15.436	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 30, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.437	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:30, srcSid:1, srcMid:2]
+08-02-16 16:49:15.437	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-04-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.437	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 31, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.438	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-04-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.438	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:31, srcSid:1, srcMid:3]
+08-02-16 16:49:15.438	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 32, srcSid: 1, srcMid: 4, execId: FF0A-0014-0000-1B, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.439	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [RA78/RA78/FF0A-0014-0000-04-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.439	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:32, srcSid:1, srcMid:4]
+08-02-16 16:49:15.439	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 33, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.440	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:30, srcSid:1, srcMid:2]
+08-02-16 16:49:15.440	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:33, srcSid:1, srcMid:5]
+08-02-16 16:49:15.440	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 34, srcSid: 1, srcMid: 6, execId: FF0A-0014-0000-1A, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.440	PTS-C601	TRACE	Message [sid: 1, mid: 31, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-13-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.441	PTS-C601	TRACE	Message [sid: 1, mid: 31, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [1PSD/1PDD/FF0A-0014-0000-13-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.441	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:34, srcSid:1, srcMid:6]
+08-02-16 16:49:15.441	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 35, srcSid: 1, srcMid: 7, execId: FF0A-0014-0000-16, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.442	PTS-C601	TRACE	Message [sid: 1, mid: 31, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [RA77/RA77/FF0A-0014-0000-13-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.442	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:35, srcSid:1, srcMid:7]
+08-02-16 16:49:15.442	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 36, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.443	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:31, srcSid:1, srcMid:3]
+08-02-16 16:49:15.443	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:36, srcSid:1, srcMid:8]
+08-02-16 16:49:15.443	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 37, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.443	PTS-C601	TRACE	Message [sid: 1, mid: 32, srcSid: 1, srcMid: 4, execId: FF0A-0014-0000-1B, status: OK]: Ticket [LCPN/LCPN/FF0A-0014-0000-1B-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.444	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:37, srcSid:1, srcMid:9]
+08-02-16 16:49:15.444	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 38, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.444	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:32, srcSid:1, srcMid:4]
+08-02-16 16:49:15.445	PTS-C601	TRACE	Message [sid: 1, mid: 33, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [LPRP/1PRP/FF0A-0014-0000-0A-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.445	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:38, srcSid:1, srcMid:10]
+08-02-16 16:49:15.445	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 39, srcSid: 1, srcMid: 11, execId: FF64-0E70-0004-00, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.445	PTS-C601	TRACE	Message [sid: 1, mid: 33, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [LPRP/1PRP/FF0A-0014-0000-0A-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.446	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:39, srcSid:1, srcMid:11]
+08-02-16 16:49:15.446	PTS-C601	TRACE	Message [sid: 1, mid: 33, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [PL22/PL22/FF0A-0014-0000-0A-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.446	PTS-C601	TRACE	Message [sid: 1, mid: 40, srcSid: 1, srcMid: 12, execId: FF0A-0012-0000-2D, status: OK]: Ticket [LCPJ/LCPJ/FF0A-0012-0000-2D-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+08-02-16 16:49:15.447	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:33, srcSid:1, srcMid:5]
+08-02-16 16:49:15.447	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:40, srcSid:1, srcMid:12]
+08-02-16 16:49:15.447	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 41, srcSid: 1, srcMid: 13, execId: FF64-0E70-0001-00, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.447	PTS-C601	TRACE	Message [sid: 1, mid: 34, srcSid: 1, srcMid: 6, execId: FF0A-0014-0000-1A, status: OK]: Ticket [LCLH/LCLH/FF0A-0014-0000-1A-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.448	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:41, srcSid:1, srcMid:13]
+08-02-16 16:49:15.448	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 42, srcSid: 1, srcMid: 14, execId: FF64-0E70-0002-00, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.448	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:34, srcSid:1, srcMid:6]
+08-02-16 16:49:15.449	PTS-C601	TRACE	Message [sid: 1, mid: 35, srcSid: 1, srcMid: 7, execId: FF0A-0014-0000-16, status: OK]: Ticket [LCLI/LCLI/FF0A-0014-0000-16-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.449	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:42, srcSid:1, srcMid:14]
+08-02-16 16:49:15.449	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 43, srcSid: 1, srcMid: 15, execId: FF64-0E6D-000A-00, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.450	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:43, srcSid:1, srcMid:15]
+08-02-16 16:49:15.450	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:35, srcSid:1, srcMid:7]
+08-02-16 16:49:15.450	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 44, srcSid: 1, srcMid: 16, execId: FF64-0E70-002E-04, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.450	PTS-C601	TRACE	Message [sid: 1, mid: 36, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0005-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.450	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:44, srcSid:1, srcMid:16]
+08-02-16 16:49:15.451	PTS-C601	TRACE	Message [sid: 1, mid: 36, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0005-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.451	PTS-C601	TRACE	Message [sid: 1, mid: 45, srcSid: 1, srcMid: 17, execId: FF0A-0012-0000-24, status: OK]: Ticket [LCPH/LCPH/FF0A-0012-0000-24-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+08-02-16 16:49:15.451	PTS-C601	TRACE	Message [sid: 1, mid: 36, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [RA99/RA99/FF64-0E70-0005-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.452	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:45, srcSid:1, srcMid:17]
+08-02-16 16:49:15.452	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:36, srcSid:1, srcMid:8]
+08-02-16 16:49:15.452	PTS-C601	TRACE	Message [sid: 1, mid: 46, srcSid: 1, srcMid: 18, execId: FF64-0E72-0003-00, status: OK]: Ticket [LCPI/LCPI/FF64-0E72-0003-00-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+08-02-16 16:49:15.452	PTS-C601	TRACE	Message [sid: 1, mid: 37, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0006-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.453	PTS-C601	TRACE	Message [sid: 1, mid: 37, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [1PSE/1PDE/FF64-0E70-0006-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.453	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:46, srcSid:1, srcMid:18]
+08-02-16 16:49:15.453	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 47, srcSid: 1, srcMid: 19, execId: FF0A-0014-0000-1F, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.453	PTS-C601	TRACE	Message [sid: 1, mid: 37, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [RB01/RB01/FF64-0E70-0006-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.454	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:47, srcSid:1, srcMid:19]
+08-02-16 16:49:15.454	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 48, srcSid: 1, srcMid: 20, execId: FF0A-0014-0000-08, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.454	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:37, srcSid:1, srcMid:9]
+08-02-16 16:49:15.455	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:48, srcSid:1, srcMid:20]
+08-02-16 16:49:15.455	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 49, srcSid: 1, srcMid: 21, execId: FF0A-0014-0000-07, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.455	PTS-C601	TRACE	Message [sid: 1, mid: 38, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0003-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.455	PTS-C601	TRACE	Message [sid: 1, mid: 38, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0003-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.455	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:49, srcSid:1, srcMid:21]
+08-02-16 16:49:15.456	PTS-C601	TRACE	Message [sid: 1, mid: 38, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [R3E1/R3E1/FF64-0E70-0003-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.456	PTS-C601	TRACE	Message [sid: 1, mid: 50, srcSid: 1, srcMid: 22, execId: 7E4B-D159-2E3F-51, status: OK]: Ticket [LCPK/LCPK/7E4B-D159-2E3F-51-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+08-02-16 16:49:15.457	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:38, srcSid:1, srcMid:10]
+08-02-16 16:49:15.457	PTS-C601	TRACE	Message [sid: 1, mid: 39, srcSid: 1, srcMid: 11, execId: FF64-0E70-0004-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0004-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.457	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:50, srcSid:1, srcMid:22]
+08-02-16 16:49:15.457	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 51, srcSid: 1, srcMid: 23, execId: FF0A-0014-0000-0B, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.457	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:29, srcSid:1, srcMid:1]
+08-02-16 16:49:15.457	PTS-C601	TRACE	Message [sid: 1, mid: 39, srcSid: 1, srcMid: 11, execId: FF64-0E70-0004-00, status: OK]: Ticket [3CRE/3CRE/FF64-0E70-0004-00-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.458	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:51, srcSid:1, srcMid:23]
+08-02-16 16:49:15.458	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 52, srcSid: 1, srcMid: 24, execId: FF0A-0014-0000-0C, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.458	PTS-C601	TRACE	Message [sid: 1, mid: 39, srcSid: 1, srcMid: 11, execId: FF64-0E70-0004-00, status: OK]: Ticket [R3E2/R3E2/FF64-0E70-0004-00-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.459	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:52, srcSid:1, srcMid:24]
+08-02-16 16:49:15.459	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 53, srcSid: 1, srcMid: 25, execId: FF0A-0014-0000-10, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.459	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:39, srcSid:1, srcMid:11]
+08-02-16 16:49:15.459	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 40, srcSid: 1, srcMid: 12, execId: FF0A-0012-0000-2D, status: OK] filtered out by Non-MyT deals filter
+08-02-16 16:49:15.459	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+08-02-16 16:49:15.459	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.459	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:53, srcSid:1, srcMid:25]
+08-02-16 16:49:15.459	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 54, srcSid: 1, srcMid: 26, execId: FF0A-0014-0000-0F, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.460	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:40, srcSid:1, srcMid:12]
+08-02-16 16:49:15.460	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:54, srcSid:1, srcMid:26]
+08-02-16 16:49:15.460	PTS-C601	TRACE	Message [sid: 1, mid: 41, srcSid: 1, srcMid: 13, execId: FF64-0E70-0001-00, status: OK]: Ticket [LCPN/LCPN/FF64-0E70-0001-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.460	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 55, srcSid: 1, srcMid: 27, execId: FF0A-0012-0000-61, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.461	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+08-02-16 16:49:15.461	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.461	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:55, srcSid:1, srcMid:27]
+08-02-16 16:49:15.461	PTS-C607	DEBUG	Adapter [100] MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] deal [sid: 1, mid: 56, srcSid: 1, srcMid: 28, execId: FF0A-0012-0000-86, status: OK] filtered out by MyT deals only filter
+08-02-16 16:49:15.461	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:41, srcSid:1, srcMid:13]
+08-02-16 16:49:15.462	PTS-C601	TRACE	Message [sid: 1, mid: 42, srcSid: 1, srcMid: 14, execId: FF64-0E70-0002-00, status: OK]: Ticket [LCPO/LCPO/FF64-0E70-0002-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.462	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:56, srcSid:1, srcMid:28]
+08-02-16 16:49:15.463	PTS-C601	TRACE	Message [sid: 1, mid: 58, srcSid: 1, srcMid: 57, execId: E330-E7B0-C26B-52, status: OK]: Ticket [LCLA/LCLA/E330-E7B0-C26B-52-100000.m3.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]
+08-02-16 16:49:15.463	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:42, srcSid:1, srcMid:14]
+08-02-16 16:49:15.463	PTS-C601	TRACE	Message [sid: 1, mid: 43, srcSid: 1, srcMid: 15, execId: FF64-0E6D-000A-00, status: OK]: Ticket [LCPL/LCPL/FF64-0E6D-000A-00-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.463	PTS-C606	DEBUG	Adapter[100] last processed message update: submitted [sid:1, mid:58, srcSid:1, srcMid:57]
+08-02-16 16:49:15.464	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:43, srcSid:1, srcMid:15]
+08-02-16 16:49:15.464	PTS-C601	TRACE	Message [sid: 1, mid: 44, srcSid: 1, srcMid: 16, execId: FF64-0E70-002E-04, status: OK]: Ticket [LCPM/LCPM/FF64-0E70-002E-04-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.465	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:44, srcSid:1, srcMid:16]
+08-02-16 16:49:15.465	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 45, srcSid: 1, srcMid: 17, execId: FF0A-0012-0000-24, status: OK] filtered out by Non-MyT deals filter
+08-02-16 16:49:15.466	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:45, srcSid:1, srcMid:17]
+08-02-16 16:49:15.466	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 46, srcSid: 1, srcMid: 18, execId: FF64-0E72-0003-00, status: OK] filtered out by Non-MyT deals filter
+08-02-16 16:49:15.466	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1053:IS1
+08-02-16 16:49:15.466	PTS-C601	TRACE	Message [sid: 1, mid: 30, srcSid: 1, srcMid: 2, execId: FF0A-0014-0000-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.467	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:46, srcSid:1, srcMid:18]
+08-02-16 16:49:15.467	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:30, srcSid:1, srcMid:2]
+08-02-16 16:49:15.467	PTS-C601	TRACE	Message [sid: 1, mid: 47, srcSid: 1, srcMid: 19, execId: FF0A-0014-0000-1F, status: OK]: Ticket [1PSE/1PDE/FF0A-0014-0000-1F-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.468	PTS-C601	TRACE	Message [sid: 1, mid: 47, srcSid: 1, srcMid: 19, execId: FF0A-0014-0000-1F, status: OK]: Ticket [1PSE/1PDE/FF0A-0014-0000-1F-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.468	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+08-02-16 16:49:15.468	PTS-C601	TRACE	Message [sid: 1, mid: 31, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.468	PTS-C601	TRACE	Message [sid: 1, mid: 47, srcSid: 1, srcMid: 19, execId: FF0A-0014-0000-1F, status: OK]: Ticket [RA81/RA81/FF0A-0014-0000-1F-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.469	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:15.469	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:47, srcSid:1, srcMid:19]
+08-02-16 16:49:15.470	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:15.470	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 20, execId: FF0A-0014-0000-08, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-08-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.470	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:15.470	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 20, execId: FF0A-0014-0000-08, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-08-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.471	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 20, execId: FF0A-0014-0000-08, status: OK]: Ticket [R4J1/R4J1/FF0A-0014-0000-08-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.472	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:967:
+08-02-16 16:49:15.472	PTS-C601	TRACE	Message [sid: 1, mid: 31, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.472	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:48, srcSid:1, srcMid:20]
+08-02-16 16:49:15.472	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 21, execId: FF0A-0014-0000-07, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-07-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.473	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1052:LN2
+08-02-16 16:49:15.473	PTS-C601	TRACE	Message [sid: 1, mid: 31, srcSid: 1, srcMid: 3, execId: FF0A-0014-0000-13, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.473	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 21, execId: FF0A-0014-0000-07, status: OK]: Ticket [4CRJ/4CRJ/FF0A-0014-0000-07-1BC000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.474	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:31, srcSid:1, srcMid:3]
+08-02-16 16:49:15.474	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 21, execId: FF0A-0014-0000-07, status: OK]: Ticket [R4J2/R4J2/FF0A-0014-0000-07-1CA000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.474	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:49, srcSid:1, srcMid:21]
+08-02-16 16:49:15.474	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 50, srcSid: 1, srcMid: 22, execId: 7E4B-D159-2E3F-51, status: OK] filtered out by Non-MyT deals filter
+08-02-16 16:49:15.475	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:50, srcSid:1, srcMid:22]
+08-02-16 16:49:15.476	PTS-C601	TRACE	Message [sid: 1, mid: 51, srcSid: 1, srcMid: 23, execId: FF0A-0014-0000-0B, status: OK]: Ticket [LCPN/LCPN/FF0A-0014-0000-0B-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.476	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:51, srcSid:1, srcMid:23]
+08-02-16 16:49:15.477	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN2
+08-02-16 16:49:15.477	PTS-C601	TRACE	Message [sid: 1, mid: 32, srcSid: 1, srcMid: 4, execId: FF0A-0014-0000-1B, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.477	PTS-C601	TRACE	Message [sid: 1, mid: 52, srcSid: 1, srcMid: 24, execId: FF0A-0014-0000-0C, status: OK]: Ticket [LCPO/LCPO/FF0A-0014-0000-0C-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.477	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:32, srcSid:1, srcMid:4]
+08-02-16 16:49:15.478	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:52, srcSid:1, srcMid:24]
+08-02-16 16:49:15.478	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:973:
+08-02-16 16:49:15.478	PTS-C601	TRACE	Message [sid: 1, mid: 33, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.478	PTS-C601	TRACE	Message [sid: 1, mid: 53, srcSid: 1, srcMid: 25, execId: FF0A-0014-0000-10, status: OK]: Ticket [LCRI/LCRI/FF0A-0014-0000-10-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.479	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:973:
+08-02-16 16:49:15.479	PTS-C601	TRACE	Message [sid: 1, mid: 33, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.479	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:53, srcSid:1, srcMid:25]
+08-02-16 16:49:15.480	PTS-C601	TRACE	Message [sid: 1, mid: 54, srcSid: 1, srcMid: 26, execId: FF0A-0014-0000-0F, status: OK]: Ticket [LCRJ/LCRJ/FF0A-0014-0000-0F-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.480	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1133:LN2
+08-02-16 16:49:15.480	PTS-C601	TRACE	Message [sid: 1, mid: 33, srcSid: 1, srcMid: 5, execId: FF0A-0014-0000-0A, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.482	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:54, srcSid:1, srcMid:26]
+08-02-16 16:49:15.483	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:33, srcSid:1, srcMid:5]
+08-02-16 16:49:15.483	PTS-C601	TRACE	Message [sid: 1, mid: 55, srcSid: 1, srcMid: 27, execId: FF0A-0012-0000-61, status: OK]: Ticket [LCPH/LCPH/FF0A-0012-0000-61-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.484	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1166:LN2
+08-02-16 16:49:15.484	PTS-C601	TRACE	Message [sid: 1, mid: 34, srcSid: 1, srcMid: 6, execId: FF0A-0014-0000-1A, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.484	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:55, srcSid:1, srcMid:27]
+08-02-16 16:49:15.485	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:34, srcSid:1, srcMid:6]
+08-02-16 16:49:15.485	PTS-C601	TRACE	Message [sid: 1, mid: 56, srcSid: 1, srcMid: 28, execId: FF0A-0012-0000-86, status: OK]: Ticket [LCPI/LCPI/FF0A-0012-0000-86-100000.c2.csv] routed by Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]
+08-02-16 16:49:15.486	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1167:LN0
+08-02-16 16:49:15.486	PTS-C601	TRACE	Message [sid: 1, mid: 35, srcSid: 1, srcMid: 7, execId: FF0A-0014-0000-16, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.486	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:56, srcSid:1, srcMid:28]
+08-02-16 16:49:15.486	PTS-C607	DEBUG	Adapter [101] COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] deal [sid: 1, mid: 58, srcSid: 1, srcMid: 57, execId: E330-E7B0-C26B-52, status: OK] filtered out by Non-MyT deals filter
+08-02-16 16:49:15.486	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:35, srcSid:1, srcMid:7]
+08-02-16 16:49:15.487	PTS-C606	DEBUG	Adapter[101] last processed message update: submitted [sid:1, mid:58, srcSid:1, srcMid:57]
+08-02-16 16:49:15.487	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+08-02-16 16:49:15.487	PTS-C601	TRACE	Message [sid: 1, mid: 36, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.488	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+08-02-16 16:49:15.488	PTS-C601	TRACE	Message [sid: 1, mid: 36, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.506	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1074:LN2
+08-02-16 16:49:15.506	PTS-C601	TRACE	Message [sid: 1, mid: 36, srcSid: 1, srcMid: 8, execId: FF64-0E70-0005-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.507	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:36, srcSid:1, srcMid:8]
+08-02-16 16:49:15.508	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+08-02-16 16:49:15.508	PTS-C601	TRACE	Message [sid: 1, mid: 37, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.508	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+08-02-16 16:49:15.508	PTS-C601	TRACE	Message [sid: 1, mid: 37, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.509	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1075:LN2
+08-02-16 16:49:15.509	PTS-C601	TRACE	Message [sid: 1, mid: 37, srcSid: 1, srcMid: 9, execId: FF64-0E70-0006-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.510	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:37, srcSid:1, srcMid:9]
+08-02-16 16:49:15.511	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+08-02-16 16:49:15.511	PTS-C601	TRACE	Message [sid: 1, mid: 38, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.512	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+08-02-16 16:49:15.512	PTS-C601	TRACE	Message [sid: 1, mid: 38, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.512	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1097:LN5
+08-02-16 16:49:15.512	PTS-C601	TRACE	Message [sid: 1, mid: 38, srcSid: 1, srcMid: 10, execId: FF64-0E70-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.513	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:38, srcSid:1, srcMid:10]
+08-02-16 16:49:15.514	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+08-02-16 16:49:15.514	PTS-C601	TRACE	Message [sid: 1, mid: 39, srcSid: 1, srcMid: 11, execId: FF64-0E70-0004-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.514	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1083:
+08-02-16 16:49:15.515	PTS-C601	TRACE	Message [sid: 1, mid: 39, srcSid: 1, srcMid: 11, execId: FF64-0E70-0004-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.515	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1098:LN6
+08-02-16 16:49:15.515	PTS-C601	TRACE	Message [sid: 1, mid: 39, srcSid: 1, srcMid: 11, execId: FF64-0E70-0004-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.516	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:39, srcSid:1, srcMid:11]
+08-02-16 16:49:15.517	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:944:MT7
+08-02-16 16:49:15.517	PTS-C601	TRACE	Message [sid: 1, mid: 40, srcSid: 1, srcMid: 12, execId: FF0A-0012-0000-2D, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.517	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:40, srcSid:1, srcMid:12]
+08-02-16 16:49:15.518	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN1
+08-02-16 16:49:15.518	PTS-C601	TRACE	Message [sid: 1, mid: 41, srcSid: 1, srcMid: 13, execId: FF64-0E70-0001-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.519	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:41, srcSid:1, srcMid:13]
+08-02-16 16:49:15.519	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:LN4
+08-02-16 16:49:15.519	PTS-C601	TRACE	Message [sid: 1, mid: 42, srcSid: 1, srcMid: 14, execId: FF64-0E70-0002-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.520	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:42, srcSid:1, srcMid:14]
+08-02-16 16:49:15.520	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:946:LN2
+08-02-16 16:49:15.520	PTS-C601	TRACE	Message [sid: 1, mid: 43, srcSid: 1, srcMid: 15, execId: FF64-0E6D-000A-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.521	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:43, srcSid:1, srcMid:15]
+08-02-16 16:49:15.522	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:947:L02
+08-02-16 16:49:15.522	PTS-C601	TRACE	Message [sid: 1, mid: 44, srcSid: 1, srcMid: 16, execId: FF64-0E70-002E-04, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.522	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:44, srcSid:1, srcMid:16]
+08-02-16 16:49:15.523	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT1
+08-02-16 16:49:15.523	PTS-C601	TRACE	Message [sid: 1, mid: 45, srcSid: 1, srcMid: 17, execId: FF0A-0012-0000-24, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.524	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:45, srcSid:1, srcMid:17]
+08-02-16 16:49:15.524	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT2
+08-02-16 16:49:15.524	PTS-C601	TRACE	Message [sid: 1, mid: 46, srcSid: 1, srcMid: 18, execId: FF64-0E72-0003-00, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.525	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:46, srcSid:1, srcMid:18]
+08-02-16 16:49:15.526	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+08-02-16 16:49:15.526	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+08-02-16 16:49:15.526	PTS-C601	TRACE	Message [sid: 1, mid: 47, srcSid: 1, srcMid: 19, execId: FF0A-0014-0000-1F, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.527	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+08-02-16 16:49:15.528	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:968:
+08-02-16 16:49:15.528	PTS-C601	TRACE	Message [sid: 1, mid: 47, srcSid: 1, srcMid: 19, execId: FF0A-0014-0000-1F, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.529	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1056:RA1
+08-02-16 16:49:15.530	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:1056:RA1
+08-02-16 16:49:15.530	PTS-C601	TRACE	Message [sid: 1, mid: 47, srcSid: 1, srcMid: 19, execId: FF0A-0014-0000-1F, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.530	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:47, srcSid:1, srcMid:19]
+08-02-16 16:49:15.531	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+08-02-16 16:49:15.532	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+08-02-16 16:49:15.532	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 20, execId: FF0A-0014-0000-08, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.532	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+08-02-16 16:49:15.533	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+08-02-16 16:49:15.533	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 20, execId: FF0A-0014-0000-08, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.533	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:892:L12
+08-02-16 16:49:15.534	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:892:L12
+08-02-16 16:49:15.534	PTS-C601	TRACE	Message [sid: 1, mid: 48, srcSid: 1, srcMid: 20, execId: FF0A-0014-0000-08, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.535	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:48, srcSid:1, srcMid:20]
+08-02-16 16:49:15.535	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+08-02-16 16:49:15.536	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+08-02-16 16:49:15.536	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 21, execId: FF0A-0014-0000-07, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.536	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+08-02-16 16:49:15.537	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:875:
+08-02-16 16:49:15.537	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 21, execId: FF0A-0014-0000-07, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.538	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:893:L14
+08-02-16 16:49:15.538	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:893:L14
+08-02-16 16:49:15.538	PTS-C601	TRACE	Message [sid: 1, mid: 49, srcSid: 1, srcMid: 21, execId: FF0A-0014-0000-07, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.539	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:49, srcSid:1, srcMid:21]
+08-02-16 16:49:15.540	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:945:M12
+08-02-16 16:49:15.540	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:945:M12
+08-02-16 16:49:15.540	PTS-C601	TRACE	Message [sid: 1, mid: 50, srcSid: 1, srcMid: 22, execId: 7E4B-D159-2E3F-51, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.541	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:50, srcSid:1, srcMid:22]
+08-02-16 16:49:15.542	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN9
+08-02-16 16:49:15.542	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:948:LN9
+08-02-16 16:49:15.542	PTS-C601	TRACE	Message [sid: 1, mid: 51, srcSid: 1, srcMid: 23, execId: FF0A-0014-0000-0B, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.543	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:51, srcSid:1, srcMid:23]
+08-02-16 16:49:15.544	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:L10
+08-02-16 16:49:15.544	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:949:L10
+08-02-16 16:49:15.544	PTS-C601	TRACE	Message [sid: 1, mid: 52, srcSid: 1, srcMid: 24, execId: FF0A-0014-0000-0C, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.545	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:52, srcSid:1, srcMid:24]
+08-02-16 16:49:15.546	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:LN7
+08-02-16 16:49:15.546	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:909:LN7
+08-02-16 16:49:15.546	PTS-C601	TRACE	Message [sid: 1, mid: 53, srcSid: 1, srcMid: 25, execId: FF0A-0014-0000-10, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.547	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:53, srcSid:1, srcMid:25]
+08-02-16 16:49:15.547	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:910:LN8
+08-02-16 16:49:15.548	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:910:LN8
+08-02-16 16:49:15.548	PTS-C601	TRACE	Message [sid: 1, mid: 54, srcSid: 1, srcMid: 26, execId: FF0A-0014-0000-0F, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.549	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:54, srcSid:1, srcMid:26]
+08-02-16 16:49:15.550	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT6
+08-02-16 16:49:15.550	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:942:MT6
+08-02-16 16:49:15.550	PTS-C601	TRACE	Message [sid: 1, mid: 55, srcSid: 1, srcMid: 27, execId: FF0A-0012-0000-61, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.551	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:55, srcSid:1, srcMid:27]
+08-02-16 16:49:15.552	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT7
+08-02-16 16:49:15.552	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:943:MT7
+08-02-16 16:49:15.552	PTS-C601	TRACE	Message [sid: 1, mid: 56, srcSid: 1, srcMid: 28, execId: FF0A-0012-0000-86, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.553	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:56, srcSid:1, srcMid:28]
+08-02-16 16:49:15.554	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:905:MYT
+08-02-16 16:49:15.554	PTS-C650	DEBUG	Message was successfully sent to redis 10.20.42.86@ebs:gc:tickets:905:MYT
+08-02-16 16:49:15.554	PTS-C601	TRACE	Message [sid: 1, mid: 58, srcSid: 1, srcMid: 57, execId: E330-E7B0-C26B-52, status: OK]: Ticket [json] routed by Persistent RedisSender
+08-02-16 16:49:15.555	PTS-C606	DEBUG	Adapter[300] last processed message update: submitted [sid:1, mid:58, srcSid:1, srcMid:57]
+08-02-16 16:49:18.470	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [3]
+08-02-16 16:49:18.509	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:18.510	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:18.510	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:21.510	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [4]
+08-02-16 16:49:21.543	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:21.544	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:21.544	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:24.544	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [5]
+08-02-16 16:49:24.577	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:24.577	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:24.577	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:27.578	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [6]
+08-02-16 16:49:27.612	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:27.612	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:27.612	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:30.612	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [7]
+08-02-16 16:49:30.656	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:30.656	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:30.656	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:33.656	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [8]
+08-02-16 16:49:33.693	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:33.693	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:33.693	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:36.693	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [9]
+08-02-16 16:49:36.730	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:36.731	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:36.731	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:39.731	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [10]
+08-02-16 16:49:39.765	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:39.765	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:39.765	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:42.411	PTS-C7310	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: admin message going to be sent, message type: [Logon(A)]
+08-02-16 16:49:42.431	PTS-C7306	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: outgoing: [8=FIXT.1.19=8235=A34=149=QA_RTNS52=20160208-16:49:4256=AUTOMATION198=0108=30141=Y1137=810=102]
+08-02-16 16:49:42.433	PTS-C7302	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Logout performed or forced termination or a loss of network connection occured.
+08-02-16 16:49:42.465	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Initiated logon request]
+08-02-16 16:49:42.765	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [2]
+08-02-16 16:49:42.797	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:42.797	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:42.797	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:45.797	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [3]
+08-02-16 16:49:45.833	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:45.833	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:45.833	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:48.833	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [4]
+08-02-16 16:49:48.874	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:48.874	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:48.874	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:51.874	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [5]
+08-02-16 16:49:51.910	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:51.910	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:51.910	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:54.910	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [6]
+08-02-16 16:49:54.948	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:54.948	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:54.948	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:49:57.948	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [7]
+08-02-16 16:49:57.987	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:49:57.987	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:49:57.987	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:00.987	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [8]
+08-02-16 16:50:01.26	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:01.26	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:01.26	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:04.26	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [9]
+08-02-16 16:50:04.61	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:04.61	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:04.61	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:07.61	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [10]
+08-02-16 16:50:07.95	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:07.95	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:07.95	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:10.95	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [11]
+08-02-16 16:50:10.131	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:10.131	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:10.131	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:12.415	PTS-C7310	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: admin message going to be sent, message type: [Logon(A)]
+08-02-16 16:50:12.434	PTS-C7306	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: outgoing: [8=FIXT.1.19=8235=A34=149=QA_RTNS52=20160208-16:50:1256=AUTOMATION198=0108=30141=Y1137=810=091]
+08-02-16 16:50:12.437	PTS-C7302	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Logout performed or forced termination or a loss of network connection occured.
+08-02-16 16:50:12.468	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Initiated logon request]
+08-02-16 16:50:13.131	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [2]
+08-02-16 16:50:13.164	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:13.164	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:13.164	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:16.165	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [3]
+08-02-16 16:50:16.201	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:16.201	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:16.201	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:19.201	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [4]
+08-02-16 16:50:19.239	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:19.239	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:19.239	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:22.239	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [5]
+08-02-16 16:50:22.274	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:22.274	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:22.274	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:25.274	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [6]
+08-02-16 16:50:25.314	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:25.314	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:25.314	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:28.315	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [7]
+08-02-16 16:50:28.354	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:28.354	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:28.354	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:31.354	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [8]
+08-02-16 16:50:31.393	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:31.393	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:31.393	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:34.393	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [9]
+08-02-16 16:50:34.429	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:34.429	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:34.429	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:37.430	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [10]
+08-02-16 16:50:37.466	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:37.466	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:37.466	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:40.466	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [11]
+08-02-16 16:50:40.500	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:40.500	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:40.500	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:42.408	PTS-C7310	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: admin message going to be sent, message type: [Logon(A)]
+08-02-16 16:50:42.426	PTS-C7306	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: outgoing: [8=FIXT.1.19=8235=A34=149=QA_RTNS52=20160208-16:50:4256=AUTOMATION198=0108=30141=Y1137=810=094]
+08-02-16 16:50:42.427	PTS-C7302	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Logout performed or forced termination or a loss of network connection occured.
+08-02-16 16:50:42.462	PTS-C7307	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: event: [Initiated logon request]
+08-02-16 16:50:43.500	PTS-C7316	TRACE	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Sending TCR [ticket id: A7E8-2770-E32E-3A-100000], SeqNo: [2]
+08-02-16 16:50:43.536	PTS-C7001	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Message not accepted by session [ticket id: A7E8-2770-E32E-3A-100000]
+08-02-16 16:50:43.536	PTS-C7007	ERROR	FIX session [FIXT.1.1:QA_RTNS->AUTOMATION1:RTNS]: Failed to send TCR [ticket id: A7E8-2770-E32E-3A-100000]. Exception: com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+08-02-16 16:50:43.536	PTS-C810	WARNING	RTNSFixSender failed to send message [targetId: N/A] (will retry in 3000 millis) : com.ebs.fix.engine.exception.RejectedBySessionException: <empty string>
+com.ebs.fix.adapter.RTNSFixSender.sendToTarget(RTNSFixSender.java:159)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:148)
+com.ebs.fix.adapter.RTNSFixSender.send(RTNSFixSender.java:40)
+com.ebs.pts.adapter.transport.PersistentMessageSender.send(PersistentMessageSender.java:36)
+com.ebs.pts.adapter.RTNSAdapter.doPush(RTNSAdapter.java:47)
+com.ebs.pts.adapter.AbstractAdapter.pushDealTickets(AbstractAdapter.java:70)
+com.ebs.pts.adapter.AbstractAdapter.push(AbstractAdapter.java:58)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:154)
+com.ebs.pts.PTS_Tidy$AdapterHandler.handleMessage(PTS_Tidy.java:130)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:105)
+com.ebs.pts.core.engine.disruptor.DisruptorBasedProcessor$4.onEvent(DisruptorBasedProcessor.java:102)
+com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:128)
+java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+java.lang.Thread.run(Unknown Source)
+
+08-02-16 16:50:44.480	PTS-C191	INFO	Component MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] shutdown started
+08-02-16 16:50:44.480	PTS-C192	INFO	Component MYT CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/myt]] shutdown completed
+08-02-16 16:50:44.480	PTS-C191	INFO	Component COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] shutdown started
+08-02-16 16:50:44.480	PTS-C192	INFO	Component COMMON CSV Adapter [Persistent File Sender [/export/home/ptrade1/Automation/data/tickets/common]] shutdown completed
+08-02-16 16:50:44.480	PTS-C191	INFO	Component Sapphire Adapter [Persistent RedisSender] shutdown started
+08-02-16 16:50:44.480	PTS-C192	INFO	Component Sapphire Adapter [Persistent RedisSender] shutdown completed
+08-02-16 16:50:44.480	PTS-C191	INFO	Component RTNS FIX Adapter shutdown started
+08-02-16 16:50:44.480	PTS-C192	INFO	Component RTNS FIX Adapter shutdown completed
+08-02-16 16:50:44.480	PTS-C191	INFO	Component TidyMSLFeeder Feeder shutdown started
+08-02-16 16:50:45.354	PTS-C192	INFO	Component TidyMSLFeeder Feeder shutdown completed

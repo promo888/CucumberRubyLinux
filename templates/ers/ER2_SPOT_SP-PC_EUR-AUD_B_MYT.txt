@@ -1,0 +1,79 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-1F00-002C"
+clOrdId: "NOSced69fd7-e7d1-4478-af06-e3fe79da7c50"
+securityId: 2228354
+securityType: FX_SPOT
+symbol: "EUR/AUD"
+marketSegmentId: EBSD_RFQ
+instrumentLeg {
+  tenorType: SP
+  tenorValue: 1
+  settlDate: 16743
+}
+isTermCcy: false
+orderLeg {
+  legSide: BUY
+  orderQty {
+    mantissa: 10
+    exponent: -1
+  }
+  orderPx {
+    mantissa: 139011
+    exponent: -5
+  }
+}
+ordType: LIMIT
+accessMethod: MY_TREASURIES
+clQuoteReqId: 1
+quoteReqId: 72057594558021672
+execId: "FF0A-0012-0000-2D"
+secondaryExecId: "54319368_3"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 1
+    exponent: 0
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 139011000
+    exponent: -8
+  }
+}
+transactTime: 1446390319364
+tradeDate: 16741
+tradeLeg {
+  tradePx {
+    mantissa: 139011
+    exponent: -5
+  }
+  tradeQty {
+    mantissa: 1
+    exponent: 0
+  }
+  tradeContraQty {
+    mantissa: 139
+    exponent: -2
+  }
+  legSide: BUY
+}
+executingParty {
+  floorKey: 3877
+  floorCode: "LCPJ"
+  traderId: "MT7"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4243
+  floorCode: "PL01"
+  partyType: FLOOR
+}
+clientOrderSubmitTime: 1446390319364
+lpOrderSubmitTime: 1446390319368
+lpOrderResponseTime: 1446390319372
+aggressorIndicator: true

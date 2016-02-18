@@ -1,0 +1,74 @@
+posDup: false
+unsolicitedIndicator: true
+orderId: "0100-2400-0017"
+clOrdId: "LN2-1446723245475-2"
+securityId: 852105
+securityType: FX_SPOT
+symbol: "GBP/JPY"
+marketSegmentId: EBSD
+instrumentLeg {
+  tenorType: SP
+  tenorValue: 1
+  settlDate: 16748
+}
+isTermCcy: false
+orderLeg {
+  legSide: BUY
+  orderQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  orderPx {
+    mantissa: 180177
+    exponent: -3
+  }
+}
+ordType: LIMIT
+accessMethod: SAPPHIRE
+execId: "FF64-0E70-0005-01"
+secondaryExecId: "2"
+execType: TRADE
+ordStatus: FILLED
+orderStatusLeg {
+  cumQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  leavesQty {
+    mantissa: 0
+    exponent: 0
+  }
+  avgPx {
+    mantissa: 180177000
+    exponent: -6
+  }
+}
+transactTime: 1446723245519
+tradeDate: 16744
+tradeLeg {
+  tradePx {
+    mantissa: 180177
+    exponent: -3
+  }
+  tradeQty {
+    mantissa: 1000000
+    exponent: 0
+  }
+  tradeContraQty {
+    mantissa: 180177000
+    exponent: 0
+  }
+  legSide: BUY
+}
+executingParty {
+  floorKey: 4391
+  floorCode: "RA99"
+  traderId: "LN2"
+  partyType: TRADER
+}
+counterParty {
+  floorKey: 4507
+  floorCode: "Z4AL"
+  partyType: FLOOR
+}
+aggressorIndicator: true
