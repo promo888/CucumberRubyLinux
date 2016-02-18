@@ -15,7 +15,7 @@ When /^User is running LOCAL ER Simulator (.*) (.*)$/  do |er_file_path,scenario
   $cmd_res=nil
   $exec_id=nil
   $er=nil
-
+#dummy
 
   $cmd_res = Actions::WINCMD('cd ' +Dir.getwd+'/libs/MSLErSender/bin & mslErSender.bat ' + scenario_folder, 60, 'txt with execId') #Run ER Simulator
   $exec_ids = $cmd_res.to_s.scan(/txt with execId(.*?)\[(.*?)\]/i)
