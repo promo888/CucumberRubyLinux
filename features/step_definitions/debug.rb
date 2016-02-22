@@ -25,83 +25,85 @@ SELL_ENTRY =3
 SELL_EXIT = 4
 
 
+$avg_period = 20
 Given /^Code Tested$/  do
 
-  #Actions.checkRtnsDelievery(Dir.getwd + '/templates/old_app_rtns/pts_tidy_3.log', CONFIG.get['CORE_HOST_USER1'])
-  #Actions.checkRtnsDelievery(Dir.getwd + '/templates/new_app_rtns/pts_tidy_3.log', CONFIG.get['CORE_HOST_USER'])
+  readCsvFile(Dir.getwd+"/logs/USD000UTSTOM_160101_160214.txt")
+  calculateBarsSpread($avg_period,0)
+  getAvgChannelBreakoutProfitLoss
 
-  #log_file_path1=Dir.getwd + '/templates/old_app_rtns/pts_tidy_3.log'
-  #log_file_path2=Dir.getwd + '/templates/new_app_rtns/pts_tidy_3.log'
-  #Actions.compareOutgoingRtns(log_file_path1,log_file_path2)
-
-=begin
-  steps %Q{
-    Then Old and New versions Traiana outgoing data compared as CSV
-  }
-=end
-
-  file_path=Dir.getwd+"/logs/USD000UTSTOM_160101_160214.txt"
-  source_hash = Actions.getHashMapFromCsvFile(file_path)
-
-  single_avg_signals={'bar_index'=>0,'above_avg'=>false,'below_avg'=>false,'open'=>0,'high'=>0,'low'=>0,'close'=>0}
-  trade_indicator={'bar_index_entry'=>0,'entry_type'=>0,'entry_price'=>0,'exit_type'=>0,'exit_price'=>0,'bar_index_entry'=>0,'entry_max_profit'=>0,'entry_max_loss'=>0}
+end
 
 
-  avg_bars_period = 3 #ToDo ts for MinMax avg bar
-  i=0 #starting bar
-  avg_indicators=[]
+
+$source_hash=nil
+def readCsvFile(file_path)
+  $source_hash = Actions.getHashMapFromCsvFile(file_path)
+end
+
+#single_avg_signals={'bar_index'=>0,'above_avg'=>false,'below_avg'=>false,'open'=>0,'high'=>0,'low'=>0,'close'=>0}
+trade_indicator={'bar_index_entry' => 0, 'entry_type' => 0, 'entry_price' => 0, 'exit_type' => 0, 'exit_price' => 0, 'bar_index_entry' => 0, 'entry_max_profit' => 0, 'entry_max_loss' => 0}
+
+def calculateBarsSpread(avg_bars_period,start_bar) #ToDo ts for MinMax avg bar
+  $avg_indicators=[]
   #ToDo add MinMaxFromOpen
-   bar_indicator={'bar_index'=>0,'avg_close_price'=>0,'avg_high_price'=>0,'avg_low_price'=>0,'highlow_percent_from_close'=>0,'nextbar_percent_from_low'=>0,'nextbar_percent_from_low'=>0,'open'=>0,'high'=>0,'low'=>0,'close'=>0}
-   source_hash.each_with_index { |bar,index|
-   i=index+avg_bars_period # -1 for starting from 0 , to count deals next period =+1 onRule?
-   break if(i>source_hash.length)
+  bar_indicator={'bar_index' => 0, 'avg_close_price' => 0, 'avg_high_price' => 0, 'avg_low_price' => 0, 'highlow_percent_from_close' => 0, 'nextbar_percent_from_high' => 0, 'nextbar_percent_from_low' => 0, 'open' => 0, 'high' => 0, 'low' => 0, 'close' => 0}
+  $source_hash.each_with_index { |bar, index|
+    start_bar=index+avg_bars_period # -1 for starting from 0 , to count deals next period =+1 onRule?
+    break if (start_bar>$source_hash.length)
 
-   highlow_percent_from_close_arr=0 #[] #ToDo to continue with next indicator + ToDo trades with nextDay
-   avg_close_price=0
-   avg_high_price=0 #from close-1
-   avg_low_price=0 #from close-1
-   for j in index..i #b/c starting from 0 for OPEN,Starting from 1 when CLOSE
-     #next if j==0 #To calculate previous close
-     break if index+avg_bars_period+3>source_hash.length #for entry on 2 second positive close after signal
-     if j==0  # to calculate previous Avg
-       j=1
-       next
-     end
-     #current_bar_indicator = bar_indicator #ToDo change open with close
-     highlow_percent_from_close = (source_hash[j][HIGH_FIELD].to_f-source_hash[j][LOW_FIELD].to_f)/source_hash[j-1][CLOSE_FIELD].to_f*100
-     highlow_percent_from_close_arr=highlow_percent_from_close_arr+highlow_percent_from_close
-     avg_close_price = avg_close_price+source_hash[j][CLOSE_FIELD].to_f
-     avg_high_price = avg_high_price+source_hash[j][HIGH_FIELD].to_f
-     avg_low_price = avg_low_price+source_hash[j][LOW_FIELD].to_f
-     if j==i
-      current_bar_avg=nil
-      avg_period_indicator={'period_last_bar_index'=>0,'period_avg_highlow_percent_from_close'=>0,'period_avg_decline_percent'=>0, 'period_avg_advance_percent'=>0}
-      current_bar_avg = avg_period_indicator
-      current_bar_avg['period_last_bar_index'] = j
-      current_bar_avg['period_avg_highlow_percent_from_close'] = (highlow_percent_from_close_arr/avg_bars_period).to_f.round(2)
-      current_bar_avg['avg_close_price'] = (avg_close_price/avg_bars_period).to_f.round(2)
-      current_bar_avg['avg_high_price'] = (avg_high_price/avg_bars_period).to_f.round(2)
-      current_bar_avg['avg_low_price'] = (avg_low_price/avg_bars_period).to_f.round(2)
-      current_bar_avg['open'] = source_hash[j][OPEN_FIELD].to_f
-      current_bar_avg['high'] = source_hash[j][HIGH_FIELD].to_f
-      current_bar_avg['low'] = source_hash[j][LOW_FIELD].to_f
-      current_bar_avg['close'] = source_hash[j][CLOSE_FIELD].to_f
+    highlow_percent_from_close_arr=0 #[] #ToDo to continue with next indicator + ToDo trades with nextDay
+    avg_close_price=0
+    avg_high_price=0 #from close-1
+    avg_low_price=0 #from close-1
+    period_high_percent_from_close = 0
+    period_low_percent_from_close = 10000000
+    for j in index..start_bar #b/c starting from 0 for OPEN,Starting from 1 when CLOSE
+      #next if j==0 #To calculate previous close
+      break if index+avg_bars_period+3>$source_hash.length #for entry on 2 second positive close after signal
+      if j==0 # to calculate previous Avg
+        j=1
+        next
+      end
+      #current_bar_indicator = bar_indicator #ToDo change open with close
+      highlow_percent_from_close = ($source_hash[j][HIGH_FIELD].to_f-$source_hash[j][LOW_FIELD].to_f)/$source_hash[j-1][CLOSE_FIELD].to_f*100
+      highlow_percent_from_close_arr=highlow_percent_from_close_arr+highlow_percent_from_close
+      avg_close_price = avg_close_price+$source_hash[j][CLOSE_FIELD].to_f
+      avg_high_price = avg_high_price+$source_hash[j][HIGH_FIELD].to_f
+      avg_low_price = avg_low_price+$source_hash[j][LOW_FIELD].to_f
+
+      period_high_percent_from_close = 0
+      highlow_percent_from_close > period_high_percent_from_close ? period_high_percent_from_close = highlow_percent_from_close  : period_high_percent_from_close
+      if j==start_bar
+        current_bar_avg=nil
+        avg_period_indicator={'period_last_bar_index' => 'NA', 'period_avg_highlow_percent_from_close' => 'NA', 'period_high_percent_from_close' => 'NA', 'period_low_percent_from_close' => 'NA'}
+        current_bar_avg = avg_period_indicator
+        current_bar_avg['period_last_bar_index'] = j
+        current_bar_avg['period_avg_highlow_percent_from_close'] = (highlow_percent_from_close_arr/avg_bars_period).to_f.round(2)
+        current_bar_avg['avg_close_price'] = (avg_close_price/avg_bars_period).to_f.round(2)
+        current_bar_avg['avg_high_price'] = (avg_high_price/avg_bars_period).to_f.round(2)
+        current_bar_avg['avg_low_price'] = (avg_low_price/avg_bars_period).to_f.round(2)
+        current_bar_avg['open'] = $source_hash[j][OPEN_FIELD].to_f
+        current_bar_avg['high'] = $source_hash[j][HIGH_FIELD].to_f
+        current_bar_avg['low'] = $source_hash[j][LOW_FIELD].to_f
+        current_bar_avg['close'] = $source_hash[j][CLOSE_FIELD].to_f
+        current_bar_avg['max_period_volatile_percent_from_close'] = period_high_percent_from_close
 
 
+        $avg_indicators.push current_bar_avg
+        #addSignalForCrossMa1(index, $source_hash, avg_bars_period)
+      end
 
-      avg_indicators.push current_bar_avg
-     end
 
-
-
-   end
+    end
   }
 
   avg_high_low_max=0
   avg_high_low_min=0
   avg_of_high_low_avg=0
+  maxNextBarVolatilityFromClose = 0
   avg_median=0
-  avg_indicators.each{|avg|
+  $avg_indicators.each { |avg|
     avg_high_low_max=avg['period_avg_highlow_percent_from_close'] if avg_high_low_max==0
     avg_high_low_min=avg['period_avg_highlow_percent_from_close'] if avg_high_low_min==0
 
@@ -110,22 +112,135 @@ Given /^Code Tested$/  do
     avg_high_low_min=avg['period_avg_highlow_percent_from_close'] if avg['period_avg_highlow_percent_from_close']<avg_high_low_min
 
     avg_of_high_low_avg=avg_of_high_low_avg+avg_high_low_min=avg['period_avg_highlow_percent_from_close']
+    #maxNextBarVolatilityFromClose = avg['max_period_volatile_percent_from_close'] if avg['max_period_volatile_percent_from_close']>0
   }
-  avg_of_high_low_avg=(avg_of_high_low_avg/avg_indicators.length).to_f.round(2)
+  avg_of_high_low_avg=(avg_of_high_low_avg/$avg_indicators.length).to_f.round(2)
   avg_high_low_max=avg_high_low_max.to_f.round(2)
   avg_high_low_min=avg_high_low_min.to_f.round(2)
 
-  puts 'AvgPeriod - '+avg_bars_period.to_s+ ', MinHighLowAvg - '+avg_high_low_min.to_s+'%, MaxHighLowAvg - '+avg_high_low_max.to_s+'%, AvgOfHighLowAvg - ' + avg_of_high_low_avg.to_s+'% '
+  puts 'AvgPeriod - '+avg_bars_period.to_s+ ', Total MinHighLowAvg - '+avg_high_low_min.to_s+'%, MaxHighLowAvg - '+avg_high_low_max.to_s+'%, AvgOfHighLowAvg - ' + avg_of_high_low_avg.to_s+'% '#', MaxNextBarVolatilityFromClose - ' + maxNextBarVolatilityFromClose.to_f.round(2).to_s + '%'
+end
+
+#ToDo - till EoD,EoW,EoM for IntraWeekMonthDay trading
+#will enter trade intraday on 2 DOUBLE channel breakout of Avg HighLow Spread
+$channel_breakout_indicator={'bar_index'=>'NA','Direction'=>'NA','PriceEntry'=>'NA','PL_next_N_bars'=>1,'up_to_next_N_bars_max_profit_percent'=>'NA','up_to_next_N_bars_max_loss_percent'=>'NA','up_to_next_N_bars_min_profit_percent'=>'NA','up_to_next_N_bars_min_loss_percent'=>'NA','maxHighLowAvgPercent'=>'NA'}
+$channel_breakout_indicators_arr=[]
+def getAvgChannelBreakoutProfitLoss
+
+
+  $avg_indicators.each_with_index { |bar,index|
+    next if index==0
+    current_bar = bar
+    #period_avg_highlow_percent_from_close ? toImplement ?
+    breakout_percent_multiplier = current_bar['max_period_volatile_percent_from_close'].to_f*2 #< 1 ? current_bar['avg_high_price']*2+1 : current_bar['avg_high_price']*2
+    breakout_long_price = $avg_indicators[index-1]['close'] + $avg_indicators[index-1]['close'].to_f * breakout_percent_multiplier/100
+    breakout_short_price = $avg_indicators[index-1]['close'] - $avg_indicators[index-1]['close'].to_f * breakout_percent_multiplier/100
+    entry_price = nil
+    entry_direction = nil
+
+    current_signal = {} #$channel_breakout_indicator
+    if (bar['high'] > breakout_long_price && bar['low'] < breakout_short_price)
+      current_signal['Direction'] = 'BI_DIRECTIONAL_BREAKOUT'
+      current_signal['maxHighLowAvgPercent'] = current_bar['avg_high_price']
+      $channel_breakout_indicators_arr.push current_signal
+      puts 'Bi-Directional Breakout for bar_index - ' + current_signal['bar_index']
+    next
+    end
+
+    if(bar['high'] > breakout_long_price)
+      entry_direction = 'Long'
+      current_signal['bar_index'] = index
+      current_signal['Direction'] = entry_direction
+      current_signal['PriceEntry'] = breakout_long_price
+      next_bars_to_check = 1
+      index+$avg_period <= $avg_indicators.length ? next_bars_to_check = $avg_period : next_bars_to_check = $avg_indicators.length-index
+      current_signal['PL_next_N_bars'] = next_bars_to_check
+      min = getMinMaxPrice($avg_indicators.slice(index,next_bars_to_check))['min'] #.to_f.round(2)
+      max = getMinMaxPrice($avg_indicators.slice(index,next_bars_to_check))['max'] #.to_f.round(2)
+
+      #if current_signal['Direction'].to_s.downcase='long'
+        profit = ((max/current_signal['PriceEntry'].to_f)-1)*100
+        loss = ((min/current_signal['PriceEntry'].to_f)-1)*100
+        current_signal['up_to_next_N_bars_max_profit_percent'] = profit
+        current_signal['up_to_next_N_bars_max_loss_percent'] = loss
+      #end
+
+      $channel_breakout_indicators_arr.push current_signal
+      #next
 
 
 
+    end
 
 
+    if(bar['low'] < breakout_short_price)
+      entry_direction = 'Short'
+      current_signal['bar_index'] = index
+      current_signal['Direction'] = entry_direction
+      current_signal['PriceEntry'] = breakout_short_price
+      next_bars_to_check = 1
+      index+$avg_period <= $avg_indicators.length ? next_bars_to_check = $avg_period : next_bars_to_check = $avg_indicators.length-index
+      current_signal['PL_next_N_bars'] = next_bars_to_check
+      min = getMinMaxPrice($avg_indicators.slice(index,next_bars_to_check))['min']#.to_f.round(2)
+      max = getMinMaxPrice($avg_indicators.slice(index,next_bars_to_check))['max']#.to_f.round(2)
+
+
+      #if current_signal['Direction'].to_s.downcase='short'
+      profit = ((current_signal['PriceEntry'].to_f/min)-1)*100
+      loss = ((current_signal['PriceEntry'].to_f/max)-1)*100
+      current_signal['up_to_next_N_bars_max_profit_percent'] = profit
+      current_signal['up_to_next_N_bars_max_loss_percent'] = loss
+      #end
+
+      $channel_breakout_indicators_arr.push current_signal
+      #next
+
+    end
+
+
+  }
+
+  total_breakout_profit_percent = 0
+  total_breakout_loss_percent = 0
+  max_breakout_profit_percent = 0
+  max_breakout_loss_percent  =  100000000 #ToDo
+  avg_breakout_profit_percent = 0
+  avg_breakout_loss_percent = 0 #ToDo
+  $channel_breakout_indicators_arr.each { |signal|
+    total_breakout_profit_percent = total_breakout_profit_percent+signal['up_to_next_N_bars_max_profit_percent']
+    total_breakout_loss_percent = total_breakout_loss_percent+signal['up_to_next_N_bars_max_loss_percent']
+    signal['up_to_next_N_bars_max_profit_percent'].to_f > max_breakout_profit_percent  ? max_breakout_profit_percent=signal['up_to_next_N_bars_max_profit_percent'].to_f : max_breakout_profit_percent
+    signal['up_to_next_N_bars_max_loss_percent'].to_f < max_breakout_loss_percent  ? max_breakout_loss_percent=signal['up_to_next_N_bars_max_loss_percent'].to_f : max_breakout_loss_percent
+  }
+
+ if ($channel_breakout_indicators_arr.length > 0 )
+  avg_breakout_profit_percent = (total_breakout_profit_percent/$channel_breakout_indicators_arr.length).to_f.round(2)
+  avg_breakout_loss_percent = (total_breakout_loss_percent/$channel_breakout_indicators_arr.length).to_f.round(2)
+  puts ' total_profit_percent - ' + total_breakout_profit_percent.round(2).to_s + '% , total_loss_percent - ' + total_breakout_loss_percent.round(2).to_s+'%'
+  puts ' avg_breakout_profit_percent - ' + avg_breakout_profit_percent.round(2).to_s + '% , max_breakout_profit_percent - ' + max_breakout_profit_percent.round(2).to_s+'%'
+  puts ' avg_breakout_loss_percent - ' + avg_breakout_loss_percent.round(2).to_s + '% , max_breakout_loss_percent - ' + max_breakout_loss_percent.round(2).to_s+'%'
+
+ else
+   puts 'NO BREAKOUT Signals found'
+ end
 end
 
 
+def getMinMaxPrice(bars_array)
+  min = 1000000000
+  max = 0
+  bars_array.each { |bar|
+    max=bar['high'] if bar['high'] > max
+    min=bar['low'] if bar['low'] < min
+  }
 
-signals_ma1_arr=[]
+  max = nil if max==0
+  min = nil if min==1000000000
+  return {'min'=> min, 'max'=> max}
+end
+
+
+$signals_ma1_arr=[]
 def addSignalForCrossMa1(current_bar_index,bars_array,avg_period)
   #signal entry above/below avg after 1and2nd bar close in signal direction - entry on close
   if(current_bar_index+1+1<=bars_array.length && current_bar_index>1+1+avg_period) #additional +1 - at least 1/next day exist in order to test profit/loss
@@ -136,28 +251,68 @@ def addSignalForCrossMa1(current_bar_index,bars_array,avg_period)
     #single_avg_signals={'bar_index'=>0,'percent_above_avg'=>false,'_percent_below_avg'=>false,'open'=>0,'high'=>0,'low'=>0,'close'=>0}
     current_signal={}
     #LongEntry
-    if current_close['close']>before_bar_close['avg_close_price'] && next_bar_close['close']>current_close['close']
-      current_signal['bar_index'] = next_bar_close['bar_index']
-      current_signal['open'] = next_bar_close['open']
-      current_signal['high'] = next_bar_close['high']
-      current_signal['low'] = next_bar_close['low']
+    if  current_close['close'].to_f>before_bar_close['avg_close_price'].to_f && next_bar_close['close'].to_f>current_close['close'].to_f
+      current_signal['bar_index'].to_f = next_bar_close['bar_index'].to_f
+      current_signal['open'].to_f = next_bar_close['open'].to_f
+      current_signal['high'].to_f = next_bar_close['high'].to_f
+      current_signal['low'].to_f = next_bar_close['low'].to_f
 
       # current close/above previous day close avg
-      current_signal['percent_above_avg'] = (next_bar_close['close']-before_bar_close['avg_close_price']/before_bar_close['avg_close_price']*100).to_f.round(2)
-      #current_signal['points_above_avg'] = (next_bar_close['close']-before_bar_close['avg_close_price']).to_f.round(2) #will fill between trades
-      #current_signal['percent_below_avg'] = source_hash[j]['bar_index']
-      #current_signal['points_below_avg'] = source_hash[j]['bar_index']
+      current_signal['signal_percent_above_avg'].to_f = (next_bar_close['close'].to_f-before_bar_close['avg_close_price'].to_f/before_bar_close['avg_close_price'].to_f*100).to_f.round(2)
+      #ToDo Max ProfitLoss between signal and entry+between entry and exit
+      maxProfitPercentTillEntry = 0
+      if current_close['high'].to_f>=next_bar_close['high'].to_f
+        maxProfitPercentTillEntry=((current_close['high'].to_f-before_bar_close['avg_close_price'].to_f)/before_bar_close['avg_close_price'].to_f*100).to_f.round(2)
+      else
+        maxProfitPercentTillEntry=((next_bar_close['high'].to_f-before_bar_close['avg_close_price'].to_f)/before_bar_close['avg_close_price'].to_f*100).to_f.round(2)
+      end
+      current_signal['maxProfitPercentTillEntry'] = maxProfitPercentTillEntry
+
+      maxLossPercentTillEntry = 0
+      if current_close['low'].to_f<=next_bar_close['low'].to_f
+        maxLossPercentTillEntry=((before_bar_close['avg_close_price'].to_f-current_close['low'].to_f)/before_bar_close['avg_close_price'].to_f*100).to_f.round(2)
+      else
+        maxLossPercentTillEntry=((before_bar_close['avg_close_price'].to_f-current_close['low'].to_f)/before_bar_close['avg_close_price'].to_f*100).to_f.round(2)
+      end
+      current_signal['maxLossPercentTillEntry'] = maxLossPercentTillEntry
+
+
       current_signal['avg_period'] = avg_period
-      current_signal['avg_value'] = source_hash[j]['bar_index']
+      current_signal['avg_value'] = before_bar_close['avg_close_price']
       #
     end
 
     #ShortEntry
-    if current_close['close']<current_close['avg_close_price'] && next_bar_close['close']<current_close['close'] && next_next_bar_close['close']<next_bar_close['close']
+    if current_close['close'].to_f<before_bar_close['avg_close_price'].to_f && next_bar_close['close'].to_f<current_close['close'].to_f
+      current_signal['bar_index'].to_f = next_bar_close['bar_index'].to_f
+      current_signal['open'].to_f = next_bar_close['open'].to_f
+      current_signal['high'].to_f = next_bar_close['high'].to_f
+      current_signal['low'].to_f = next_bar_close['low'].to_f
 
+      # current close/below previous day close avg
+      current_signal['signal_percent_below_avg'] = (before_bar_close['avg_close_price']-next_bar_close['close']/before_bar_close['avg_close_price']*100).to_f.round(2)
+      maxProfitPercentTillEntry = 0
+      if current_close['low'].to_f<=next_bar_close['low'].to_f
+        maxProfitPercentTillEntry=((before_bar_close['avg_close_price'].to_f-current_close['low'].to_f)/before_bar_close['avg_close_price'].to_f*100).to_f.round(2)
+      else
+        maxProfitPercentTillEntry=((before_bar_close['avg_close_price'].to_f-next_bar_close['low'].to_f)/before_bar_close['avg_close_price'].to_f*100).to_f.round(2)
+      end
+      current_signal['maxProfitPercentTillEntry'] = maxProfitPercentTillEntry
+
+      maxLossPercentTillEntry = 0 #todo to check if high>avg +above P/L too
+      if current_close['high'].to_f>=next_bar_close['high'].to_f
+        maxLossPercentTillEntry=((current_close['high'].to_f-before_bar_close['avg_close_price'].to_f)/before_bar_close['avg_close_price'].to_f*100).to_f.round(2)
+      else
+        maxLossPercentTillEntry=(current_close['high'].to_f-(before_bar_close['avg_close_price'].to_f)/before_bar_close['avg_close_price'].to_f*100).to_f.round(2)
+      end
+      current_signal['maxLossPercentTillEntry'] = maxLossPercentTillEntry
+      current_signal['avg_period'] = avg_period
+      current_signal['avg_value'] = before_bar_close['avg_close_price']
+      #
     end
 
 
+    $signals_ma1_arr.push(current_signal)
   end
 end
 
