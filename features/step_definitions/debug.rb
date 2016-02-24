@@ -24,8 +24,11 @@ BUY_EXIT = 2
 SELL_ENTRY =3
 SELL_EXIT = 4
 
+#Strat Params
+BREAKOUT_MULTIPLIER = 2
+$avg_period = 3
 
-$avg_period = 20
+
 Given /^Code Tested$/  do
 
   readCsvFile(Dir.getwd+"/logs/USD000UTSTOM_160101_160214.txt")
@@ -125,6 +128,8 @@ end
 #will enter trade intraday on 2 DOUBLE channel breakout of Avg HighLow Spread
 $channel_breakout_indicator={'bar_index'=>'NA','Direction'=>'NA','PriceEntry'=>'NA','PL_next_N_bars'=>1,'up_to_next_N_bars_max_profit_percent'=>'NA','up_to_next_N_bars_max_loss_percent'=>'NA','up_to_next_N_bars_min_profit_percent'=>'NA','up_to_next_N_bars_min_loss_percent'=>'NA','maxHighLowAvgPercent'=>'NA'}
 $channel_breakout_indicators_arr=[]
+$long_trades_count=0
+$short_trades_count=0
 def getAvgChannelBreakoutProfitLoss
 
 
@@ -132,7 +137,7 @@ def getAvgChannelBreakoutProfitLoss
     next if index==0
     current_bar = bar
     #period_avg_highlow_percent_from_close ? toImplement ?
-    breakout_percent_multiplier = current_bar['max_period_volatile_percent_from_close'].to_f*2 #< 1 ? current_bar['avg_high_price']*2+1 : current_bar['avg_high_price']*2
+    breakout_percent_multiplier = current_bar['max_period_volatile_percent_from_close'].to_f*BREAKOUT_MULTIPLIER #< 1 ? current_bar['avg_high_price']*2+1 : current_bar['avg_high_price']*2
     breakout_long_price = $avg_indicators[index-1]['close'] + $avg_indicators[index-1]['close'].to_f * breakout_percent_multiplier/100
     breakout_short_price = $avg_indicators[index-1]['close'] - $avg_indicators[index-1]['close'].to_f * breakout_percent_multiplier/100
     entry_price = nil
@@ -147,7 +152,12 @@ def getAvgChannelBreakoutProfitLoss
     next
     end
 
-    if(bar['high'] > breakout_long_price)
+
+    long_signal_exist=true
+    !$channel_breakout_indicators_arr.to_a.empty? && $channel_breakout_indicators_arr.last['bar_index'].to_i+$avg_period<index ? long_signal_exist=false : long_signal_exist=true
+    long_signal_exist = false if $channel_breakout_indicators_arr.to_a.empty?
+    if(bar['high'] > breakout_long_price && !long_signal_exist)
+      $long_trades_count+=1
       entry_direction = 'Long'
       current_signal['bar_index'] = index
       current_signal['Direction'] = entry_direction
@@ -173,7 +183,11 @@ def getAvgChannelBreakoutProfitLoss
     end
 
 
-    if(bar['low'] < breakout_short_price)
+    short_signal_exist=true
+    !$channel_breakout_indicators_arr.to_a.empty? && $channel_breakout_indicators_arr.last['bar_index'].to_i+$avg_period<index ? short_signal_exist=false : short_signal_exist=true
+    short_signal_exist = false if $channel_breakout_indicators_arr.to_a.empty?
+    if(bar['low'] < breakout_short_price && !short_signal_exist)
+      $short_trades_count+=1
       entry_direction = 'Short'
       current_signal['bar_index'] = index
       current_signal['Direction'] = entry_direction
@@ -219,6 +233,7 @@ def getAvgChannelBreakoutProfitLoss
   puts ' total_profit_percent - ' + total_breakout_profit_percent.round(2).to_s + '% , total_loss_percent - ' + total_breakout_loss_percent.round(2).to_s+'%'
   puts ' avg_breakout_profit_percent - ' + avg_breakout_profit_percent.round(2).to_s + '% , max_breakout_profit_percent - ' + max_breakout_profit_percent.round(2).to_s+'%'
   puts ' avg_breakout_loss_percent - ' + avg_breakout_loss_percent.round(2).to_s + '% , max_breakout_loss_percent - ' + max_breakout_loss_percent.round(2).to_s+'%'
+  puts ' long_trades_count: ' + $long_trades_count.to_s + ', short_trades_count: ' + $short_trades_count.to_s
 
  else
    puts 'NO BREAKOUT Signals found'
