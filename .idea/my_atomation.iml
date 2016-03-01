@@ -42,7 +42,6 @@
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.2, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="csv-diff (v0.3.0, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="csv-mapper (v0.5.1, ruby-2.1.7-p400) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="csv2json (v0.3.0, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cucumber (v2.1.0, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cucumber-core (v1.3.0, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dbi (v0.4.5, ruby-2.1.7-p400) [gem]" level="application" />
@@ -52,7 +51,6 @@
     <orderEntry type="library" scope="PROVIDED" name="diffy (v3.0.7, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="fastercsv (v1.5.5, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="gherkin3 (v3.1.2, ruby-2.1.7-p400) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="json (v1.8.1, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json-compare (v0.1.8, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.11.2, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_test (v0.1.2, ruby-2.1.7-p400) [gem]" level="application" />
@@ -60,6 +58,5 @@
     <orderEntry type="library" scope="PROVIDED" name="net-sftp (v2.1.2, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-ssh (v3.0.1, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="psych (v2.0.5, ruby-2.1.7-p400) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="ruby-oci8 (v2.2.0.2, ruby-2.1.7-p400) [gem]" level="application" />
   </component>
 </module>

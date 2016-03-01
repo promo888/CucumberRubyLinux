@@ -17,6 +17,7 @@ HIGH_FIELD = "<HIGH>" #2
 LOW_FIELD = "<LOW>" #3
 CLOSE_FIELD = "<CLOSE>" #4
 VOLUME_FIELD = "<VOLUME>" #5
+DATE_FIELD = "<DATE>" #5
 
 #user in entry_type and exit_type
 BUY_ENTRY = 1
@@ -28,14 +29,22 @@ SELL_EXIT = 4
 BREAKOUT_MULTIPLIER = 2
 $avg_period = 10
 
+#ToDo maxLoss,AvgLoss MaxConsecutive PL,display date + test bars + param start stats
+#fx from finam not to revert - dja from wsj should be reverted
 
 Given /^Code Tested$/  do
-
-  readCsvFile(Dir.getwd+"/logs/USD000UTSTOM_160101_160214.txt")
+  #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
+  readCsvFile(Dir.getwd+"/logs/DjaHistoricalPrices2000-2016.csv")#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
   #getAvgChannelBreakoutProfitLoss
-  getPercentChannelBreakoutProfitLoss(0.55,0,0.5) #TODO for now islimited till 1% #0.8,1,0.5 8/2  8/3 7/3 7/2
 
+  $source_hash.reverse! #TEMP for DJIA
+  begin
+    getPercentChannelBreakoutProfitLoss(0.555,0,0.55) #TODO for now islimited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
+  rescue Exception=>e
+    puts 'Exception: ' +  e.message if !e.nil? && !e.message.to_s.empty?
+    puts 'Backtrace: ' +  e.backtrace if !e.nil?
+  end
 end
 
 
