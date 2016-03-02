@@ -40,10 +40,10 @@ Given /^Code Tested$/  do
 
   $source_hash.reverse! #TEMP for DJIA
   begin
-    getPercentChannelBreakoutProfitLoss(0.555,0,0.55) #TODO for now islimited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
+    getPercentChannelBreakoutProfitLoss(0.5,0,0.5) #TODO for now islimited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
   rescue Exception=>e
     puts 'Exception: ' +  e.message if !e.nil? && !e.message.to_s.empty?
-    puts 'Backtrace: ' +  e.backtrace if !e.nil?
+    puts 'Backtrace: ' +  e.backtrace.to_s if !e.nil?
   end
 end
 
@@ -306,9 +306,46 @@ end
 
 
 def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
+
+###new query code
+=begin
+  #select bi-breakout signals
+  #$source_hash.each_with_index.select {|bar,index| bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose && $source_hash[0]['<DATE>'] && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose )}
+
+  #select bi-profit trades
+  $source_hash.each_with_index.select {|bar,index| bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && $source_hash[0]['<DATE>'] && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
+
+  #select 1direction-profit trades
+  $source_hash.each_with_index.select {|bar,index| bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && $source_hash[0]['<DATE>'] || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
+
+  #select 1direction-breakout trades with drawdownPL from entry where drawdown=percentPL
+  #$source_hash.each_with_index.select {|bar,index| bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && ($source_hash[index-1]['<CLOSE>'].to_f*(1+percentFromClose)/bar['<LOW>'].to_f - 1)*100 >= percentPL) && $source_hash[0]['<DATE>'] || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentPL  && (bar['<LOW>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose) - 1  )*100 >= percentPL )}
+  $source_hash.each_with_index.select {|bar,index|
+    bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL &&
+    ($source_hash[index-1]['<CLOSE>'].to_f*(1+percentFromClose/100)/bar['<LOW>'].to_f - 1)*100 >= percentPL)  ||
+    (($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentPL  &&
+    (bar['<LOW>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose/100) - 1  )*100 >= percentPL) )}
+
+
+
+  #select 1direction-breakout trades with drawdownPL from CLOSE where drawdown=percentPL
+  $source_hash.each_with_index.select {|bar,index|
+    bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL &&
+        ($source_hash[index-1]['<CLOSE>'].to_f/100)/bar['<LOW>'].to_f - 1)*100 >= percentPL)  ||
+        (($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentPL  &&
+            (bar['<LOW>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f/100 - 1  )*100 >= percentPL )}
+=end
+
+
+
+  #ToDo Month/Day/Hour/Min profit/loss/volatile distibution
+  ###end of new query code
+
   $same_bar_bi_directional_breakout_count = 0
+  $period_bi_directional_ProfitLoss_count = 0
   $same_bar_breakout_profit_count= 0
   $same_bar_total_profit = 0
+  $same_bar_total_drawdown = 0
 
   $source_hash.each_with_index { |bar,index|
     next if index==0
@@ -327,6 +364,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
       current_signal['maxHighLowAvgPercent'] = current_bar['avg_high_price']
       $channel_breakout_indicators_arr.push current_signal
       puts '===================Bi-Directional Breakout for bar_index - ' + current_signal['bar_index'].to_s
+      $same_bar_bi_directional_breakout_count+=1
       next
     end
 
@@ -353,28 +391,34 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
       current_signal['up_to_next_N_bars_max_profit_percent'] = profit
       current_signal['up_to_next_N_bars_max_loss_percent'] = loss
       #end
-       if (profit>=percentPL && loss>=percentPL)
-         $same_bar_bi_directional_breakout_count+=1
-         puts 'same_bar_bi_directional_breakout_count for bar: '+current_signal['bar_index'].to_s
+       if (profit>=percentPL && loss<=-percentPL)
+         $period_bi_directional_ProfitLoss_count+=1
+         puts 'period_bi_directional_ProfitLoss_count for bar: '+current_signal['bar_index'].to_s
        end
 
       str_per_profit = ' Profit % for bar: ' + current_signal['bar_index'].to_s + ' is: '
+      str_per_drawdown = ', Drawdown % is: '
       if percentPL <= profit
         $same_bar_breakout_profit_count+=1
         $same_bar_total_profit+=percentPL
         str_per_profit<<percentPL.to_s
-      else
+        str_per_profit<<str_per_drawdown<<loss.round(2).to_s
+      else #loss
          if $source_hash[current_signal['bar_index']][LOW_FIELD].to_f <= breakout_short_price # if profit unmet exit on opposite breakout
            $same_bar_total_profit-=percentPL
            str_per_profit<<-percentPL.to_s
+           str_per_profit<<str_per_drawdown<<loss.round(2).to_s
            #TODO Double entry
          else
            res = (current_signal['PriceEntry'].to_f/$source_hash[current_signal['bar_index']][CLOSE_FIELD].to_f-1)*100
            $same_bar_total_profit+=res
            str_per_profit<<res.to_s
+           str_per_profit<<str_per_drawdown<<loss.round(2).to_s
          end
       end
+      $same_bar_total_drawdown+=loss
       puts str_per_profit
+
 
       $channel_breakout_indicators_arr.push current_signal
       #next
@@ -408,29 +452,33 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
       #end
 
 
-      if (profit>=percentPL && loss>=percentPL)
-        $same_bar_bi_directional_breakout_count+=1
-        puts 'same_bar_bi_directional_breakout_count for bar: '+current_signal['bar_index'].to_s
+      if (profit>=percentPL && loss<=-percentPL)
+        $period_bi_directional_ProfitLoss_count+=1
+        puts 'period_bi_directional_ProfitLoss_count for bar: '+current_signal['bar_index'].to_s
       end
 
       str_per_profit = ' Profit % for bar: ' + current_signal['bar_index'].to_s + ' is: '
+      str_per_drawdown = ', Drawdown % is: '
       if percentPL <= profit
         $same_bar_breakout_profit_count+=1
         $same_bar_total_profit+=percentPL
         str_per_profit<<percentPL.to_s
+        str_per_profit<<str_per_drawdown<<loss.round(2).to_s
       else #exit on bar close if Profit unmet
         if $source_hash[current_signal['bar_index']][HIGH_FIELD].to_f >= breakout_long_price # if profit unmet exit on opposite breakout
           $same_bar_total_profit-=percentPL
           str_per_profit<<-percentPL.to_s
+          str_per_profit<<str_per_drawdown<<loss.round(2).to_s
           #TODO Double entry
         else
           res = ($source_hash[current_signal['bar_index']][CLOSE_FIELD].to_f/current_signal['PriceEntry'].to_f-1)*100
           $same_bar_total_profit+=res
           str_per_profit<<res.to_s
+          str_per_profit<<str_per_drawdown<<loss.round(2).to_s
         end
       end
       puts str_per_profit
-
+      $same_bar_total_drawdown+=loss
 
       $channel_breakout_indicators_arr.push current_signal
       #next
@@ -457,12 +505,13 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   if ($channel_breakout_indicators_arr.length > 0 )
     avg_breakout_profit_percent = (total_breakout_profit_percent/$channel_breakout_indicators_arr.length).to_f.round(2)
     avg_breakout_loss_percent = (total_breakout_loss_percent/$channel_breakout_indicators_arr.length).to_f.round(2)
-    puts ' SameBarTotalProfit: '+$same_bar_total_profit.round(2).to_s+'% ,Max_total_profit_percent: ' + total_breakout_profit_percent.round(2).to_s + '% , Max_total_loss_percent: ' + total_breakout_loss_percent.round(2).to_s+'%'
+    puts ' SameBarTotalProfit: '+$same_bar_total_profit.round(2).to_s+'% SameBarTotalDrawDown: '+total_breakout_profit_percent.round(2).to_s + \
+         '%,Max_total_profit_percent: ' + total_breakout_profit_percent.round(2).to_s + '% , Max_total_loss_percent: ' + total_breakout_loss_percent.round(2).to_s+'%'
     puts ' Avg_breakout_profit_percent: ' + avg_breakout_profit_percent.round(2).to_s + '% , Max_breakout_profit_percent: ' + max_breakout_profit_percent.round(2).to_s+'%'
     puts ' Avg_breakout_loss_percent: ' + avg_breakout_loss_percent.round(2).to_s + '% , Max_breakout_loss_percent: ' + max_breakout_loss_percent.round(2).to_s+'%'
     puts ' Total trades count: '+($long_trades_count+$short_trades_count).to_s+' long_trades_count: ' + $long_trades_count.to_s + ', short_trades_count: ' + $short_trades_count.to_s
-    puts ' IN period_bi_directional_breakout_count - ' + $same_bar_bi_directional_breakout_count.to_s
-    puts ' '+percentPL.to_s + '% profit IN bar trades count ' + $same_bar_breakout_profit_count.to_s
+    puts ' BiSignal Breakout Amount: ' + $same_bar_bi_directional_breakout_count.to_s + ', in PERIOD_bi_directional_ProfitLoss_count: ' + $period_bi_directional_ProfitLoss_count.to_s
+    puts ' '+percentPL.to_s + '% profit in SameBar trades count: ' + $same_bar_breakout_profit_count.to_s
   end
 =begin
     puts "Profit/Loss Between Breakout signals"
