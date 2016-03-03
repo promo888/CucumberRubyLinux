@@ -528,11 +528,11 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
     avg_breakout_loss_percent = (total_breakout_loss_percent/$channel_breakout_indicators_arr.length).to_f.round(2)
     puts ' SameBarTotalProfit: '+$same_bar_total_profit.round(2).to_s+'% SameBarTotalDrawDown: '+$same_bar_total_drawdown.round(2).to_s + \
          ' SameBarTotalLoss: '+$same_bar_total_loss.round(2).to_s + \
-         '%,Max_total_profit_percent: ' + total_breakout_profit_percent.round(2).to_s + '% , Max_total_loss_percent: ' + total_breakout_loss_percent.round(2).to_s+'%'
+         '%,Max_total_profit_percent: ' + total_breakout_profit_percent.round(2).to_s + '% , Max_total_loss_percent: ' + total_breakout_loss_percent.round(2).to_s+'% [? precedence HL,hence maybe no loss sometimes]'
     puts ' Avg_breakout_profit_percent: ' + avg_breakout_profit_percent.round(2).to_s + '% , Max_breakout_profit_percent: ' + max_breakout_profit_percent.round(2).to_s+'%'
     puts ' Avg_breakout_loss_percent: ' + avg_breakout_loss_percent.round(2).to_s + '% , Max_breakout_loss_percent: ' + max_breakout_loss_percent.round(2).to_s+'%'
     puts ' Total trades count: '+($long_trades_count+$short_trades_count).to_s+' long_trades_count: ' + $long_trades_count.to_s + ', short_trades_count: ' + $short_trades_count.to_s
-    puts ' BiSignal Breakout Amount: ' + $same_bar_bi_directional_breakout_count.to_s + ', in PERIOD_bi_directional_ProfitLoss_count: ' + $period_bi_directional_ProfitLoss_count.to_s
+    puts ' BiSignal Breakout Amount: ' + $same_bar_bi_directional_breakout_count.to_s + ', in PERIOD_bi_directional_ProfitLoss_count: ' + $period_bi_directional_ProfitLoss_count.to_s + ' [? precedence HL] '
     puts ' '+percentPL.to_s + '% profit in SameBar trades count: ' + $same_bar_breakout_profit_count.to_s
   end
 =begin
