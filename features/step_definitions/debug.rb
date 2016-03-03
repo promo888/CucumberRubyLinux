@@ -52,11 +52,11 @@ Given /^Code Tested$/  do
 =end
 
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
-  readCsvFile(Dir.getwd+"/logs/DjaHistoricalPrices2000-2016.csv")#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
+  readCsvFile(Dir.getwd+"/logs/USD000000TOD_160101_160214.txt")#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
   #getAvgChannelBreakoutProfitLoss
 
-  $source_hash.reverse! #TEMP for DJIA
+  #$source_hash.reverse! #TEMP for DJIA
   begin
     getPercentChannelBreakoutProfitLoss(0.5,0,0.5) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
   rescue Exception=>e
@@ -526,7 +526,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   if ($channel_breakout_indicators_arr.length > 0 )
     avg_breakout_profit_percent = (total_breakout_profit_percent/$channel_breakout_indicators_arr.length).to_f.round(2)
     avg_breakout_loss_percent = (total_breakout_loss_percent/$channel_breakout_indicators_arr.length).to_f.round(2)
-    puts ' SameBarTotalProfit: '+$same_bar_total_profit.round(2).to_s+'% SameBarTotalDrawDown: '+total_breakout_profit_percent.round(2).to_s + \
+    puts ' SameBarTotalProfit: '+$same_bar_total_profit.round(2).to_s+'% SameBarTotalDrawDown: '+$same_bar_total_drawdown.round(2).to_s + \
          ' SameBarTotalLoss: '+$same_bar_total_loss.round(2).to_s + \
          '%,Max_total_profit_percent: ' + total_breakout_profit_percent.round(2).to_s + '% , Max_total_loss_percent: ' + total_breakout_loss_percent.round(2).to_s+'%'
     puts ' Avg_breakout_profit_percent: ' + avg_breakout_profit_percent.round(2).to_s + '% , Max_breakout_profit_percent: ' + max_breakout_profit_percent.round(2).to_s+'%'
