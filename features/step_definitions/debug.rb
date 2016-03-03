@@ -33,6 +33,24 @@ $avg_period = 10
 #fx from finam not to revert - dja from wsj should be reverted
 
 Given /^Code Tested$/  do
+
+=begin
+  a = [12,3,4,5,123,4,5,6,7,7,7,7,8,8,8,5,66]
+  a.sort!
+  elements = a.count
+  center =  elements/2
+  median = elements.even? ? (a[center] + a[center+1])/2 : a[center]
+=end
+
+=begin
+  array = [
+      {:price => 1, :count => 3},
+      {:price => 2, :count => 3},
+      {:price => 3, :count => 3},
+  ]
+  array.map{|x| x[:price]}
+=end
+
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
   readCsvFile(Dir.getwd+"/logs/DjaHistoricalPrices2000-2016.csv")#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
@@ -40,7 +58,7 @@ Given /^Code Tested$/  do
 
   $source_hash.reverse! #TEMP for DJIA
   begin
-    getPercentChannelBreakoutProfitLoss(0.5,0,0.5) #TODO for now islimited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
+    getPercentChannelBreakoutProfitLoss(0.5,0,0.5) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
   rescue Exception=>e
     puts 'Exception: ' +  e.message if !e.nil? && !e.message.to_s.empty?
     puts 'Backtrace: ' +  e.backtrace.to_s if !e.nil?
@@ -359,7 +377,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
     current_signal = {} #$channel_breakout_indicator
     if (bar[HIGH_FIELD].to_f > breakout_long_price && bar[LOW_FIELD].to_f < breakout_short_price)
       current_signal['bar_index'] = index
-      current_signal['Direction'] = 'BI_DIRECTIONAL_BREAKOUT'
+      current_signal['Direction'] = 'BI_DIRECTIONAL_BREAKOUT - LongEntryFirst' #Since long deals are more frequent we'll execute Long first
       current_signal['maxHighLowAvgPercent'] = current_bar['avg_high_price']
       $channel_breakout_indicators_arr.push current_signal
       puts '===================Bi-Directional Breakout for bar_index - ' + current_signal['bar_index'].to_s
