@@ -52,11 +52,11 @@ Given /^Code Tested$/  do
 =end
 
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
-  readCsvFile(Dir.getwd+"/logs/USD000000TOD_160101_160214.txt")#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
+  readCsvFile(Dir.getwd+"/logs/DjaHistoricalPrices2000-2016.csv")#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
   #getAvgChannelBreakoutProfitLoss
 
-  #$source_hash.reverse! #TEMP for DJIA
+  $source_hash.reverse! #TEMP for DJIA
   begin
     getPercentChannelBreakoutProfitLoss(0.5,0,0.5) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
   rescue Exception=>e
@@ -326,28 +326,202 @@ end
 def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
 
 ###new query code
+  #populate % bar changes <TIME> sometimes exist in Daity for Daily data + exist separate in Intraday data
+  $source_hash.each_with_index.select {|bar,index|
+    next if index == 0
+    $source_hash[index]['<CHANGE_PERCENT>'] = (bar['<CLOSE>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f - 1)*100
+  }
+
+  #populate change AD distribution #TODO positive_negative profit_loss drawdown distibutions + max consecutive losses
+  # 0-9 = 0.1-0.9% #ToDo later 11>1% 322>2% 33>3% 55>5%
+  $change_distribution = {'total'=>0,'1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0,'8'=>0,'9'=>0,'10'=>0,'11'=>0,'22'=>0,'33'=>0,'55'=>0}
+  $change_positive_distribution = {'total'=>0,'1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0,'8'=>0,'9'=>0,'10'=>0,'11'=>0,'22'=>0,'33'=>0,'55'=>0}
+  $change_negative_distribution = {'total'=>0,'1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0,'8'=>0,'9'=>0,'10'=>0,'11'=>0,'22'=>0,'33'=>0,'55'=>0}
+  $source_hash.each_with_index.select {|bar,index|
+    next if index == 0
+    change = $source_hash[index]['<CHANGE_PERCENT>'].to_f > 0 ? $source_hash[index]['<CHANGE_PERCENT>'].to_f : $source_hash[index]['<CHANGE_PERCENT>'].to_f * -1
+    case
+      when change <= 0.1 && change > 0
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['1'] = $change_distribution['1'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['1'] = $change_positive_distribution['1'].to_i+1
+
+      when change >= -0.1 && change <= 0
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['1'] = $change_distribution['1'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['1'] = $change_negative_distribution['1'].to_i+1
+
+      when change <= 0.2 && change > 0.1
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['2'] = $change_distribution['2'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['2'] = $change_positive_distribution['2'].to_i+1
+
+      when change >= -0.2 && change <= -0.1
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['2'] = $change_distribution['2'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['2'] = $change_negative_distribution['2'].to_i+1
+
+      when change <= 0.3 && change > 0.2
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['3'] = $change_distribution['3'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['3'] = $change_positive_distribution['3'].to_i+1
+
+      when change >= -0.3 && change <= -0.2
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['3'] = $change_distribution['3'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['3'] = $change_negative_distribution['3'].to_i+1
+
+      when change <= 0.4 && change > 0.3
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['4'] = $change_distribution['4'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['4'] = $change_positive_distribution['4'].to_i+1
+
+      when change >= -0.4 && change <= -0.3
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['4'] = $change_distribution['4'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['4'] = $change_negative_distribution['4'].to_i+1
+
+      when change <= 0.5 && change > 0.4
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['5'] = $change_distribution['5'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['5'] = $change_positive_distribution['5'].to_i+1
+
+      when change >= -0.5 && change <= -0.4
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['5'] = $change_distribution['5'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['5'] = $change_negative_distribution['5'].to_i+1
+
+      when change <= 0.6 && change > 0.5
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['6'] = $change_distribution['6'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['6'] = $change_positive_distribution['6'].to_i+1
+
+      when change >= -0.6 && change <= -0.5
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['6'] = $change_distribution['6'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['6'] = $change_negative_distribution['6'].to_i+1
+
+
+      when change <= 0.7 && change > 0.6
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['7'] = $change_distribution['7'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['7'] = $change_positive_distribution['7'].to_i+1
+
+      when change >= -0.7 && change <= -0.6
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['7'] = $change_distribution['7'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['7'] = $change_negative_distribution['7'].to_i+1
+
+      when change <= 0.8 && change > 0.7
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['8'] = $change_distribution['8'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['8'] = $change_positive_distribution['8'].to_i+1
+
+      when change >= -0.8 && change <= -0.7
+        $change_distribution['total'] = $change_distribution['total'].to_i+=1
+        $change_distribution['8'] = $change_distribution['7'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['8'] = $change_negative_distribution['8'].to_i+1
+
+      when change <= 0.9 && change > 0.8
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['9'] = $change_distribution['9'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['9'] = $change_positive_distribution['9'].to_i+1
+
+      when change >= -0.9 && change <= -0.8
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['9'] = $change_distribution['9'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['9'] = $change_negative_distribution['9'].to_i+1
+
+      when change <= 1 && change > 0.9
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['10'] = $change_distribution['10'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['10'] = $change_positive_distribution['10'].to_i+1
+
+      when change >= -1 && change <= -0.9
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['10'] = $change_distribution['10'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['10'] = $change_negative_distribution['10'].to_i+1
+
+      when change <= 2 && change > 1
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['11'] = $change_distribution['11'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['11'] = $change_positive_distribution['11'].to_i+1
+
+      when change >= -2 && change <= -1
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['11'] = $change_distribution['11'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['11'] = $change_negative_distribution['11'].to_i+1
+
+      when change <= 3 && change > 2
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['22'] = $change_distribution['22'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['22'] = $change_positive_distribution['22'].to_i+1
+
+      when change >= -3 && change <= -2
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['22'] = $change_distribution['22'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['22'] = $change_negative_distribution['22'].to_i+1
+
+      when change <= 5 && change > 3
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['33'] = $change_distribution['33'].to_i+1
+        $change_positive_distribution['total'] = $change_positive_distribution['total'].to_i+1
+        $change_positive_distribution['33'] = $change_positive_distribution['33'].to_i+1
+
+      when change >= -5 && change <= -3
+        $change_distribution['total'] = $change_distribution['total'].to_i+1
+        $change_distribution['33'] = $change_distribution['33'].to_i+1
+        $change_negative_distribution['total'] = $change_negative_distribution['total'].to_i+1
+        $change_negative_distribution['33'] = $change_negative_distribution['33'].to_i+1
+
+    end
+
+
+
+  }
+
+
   #select bi-breakout signals
-  #$source_hash.each_with_index.select {|bar,index| bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose && $source_hash[0]['<DATE>'] && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose )}
+  #$source_hash.each_with_index.select {|bar,index| index != 0 && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose && $source_hash[0]['<DATE>'] && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose )}
 
   #select bi-profit trades
-  $source_hash.each_with_index.select {|bar,index| bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && $source_hash[0]['<DATE>'] && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
+  $source_hash.each_with_index.select {|bar,index| index != 0 && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && $source_hash[0]['<DATE>'] && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
 
   #select 1direction-profit trades
-  $source_hash.each_with_index.select {|bar,index| bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && $source_hash[0]['<DATE>'] || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
+  $source_hash.each_with_index.select {|bar,index| index != 0 && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && $source_hash[0]['<DATE>'] || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
 
   #select 1direction-breakout trades with drawdownPL from entry where drawdown=percentPL
-  #$source_hash.each_with_index.select {|bar,index| bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && ($source_hash[index-1]['<CLOSE>'].to_f*(1+percentFromClose)/bar['<LOW>'].to_f - 1)*100 >= percentPL) && $source_hash[0]['<DATE>'] || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentPL  && (bar['<LOW>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose) - 1  )*100 >= percentPL )}
-  $source_hash.each_with_index.select {|bar,index|
-    bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL &&
-    ($source_hash[index-1]['<CLOSE>'].to_f*(1+percentFromClose/100)/bar['<LOW>'].to_f - 1)*100 >= percentPL)  ||
-    (($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentPL  &&
-    (bar['<LOW>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose/100) - 1  )*100 >= percentPL) )}
+  #$source_hash.each_with_index.select {|bar,index| index != 0 && ( ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && ($source_hash[index-1]['<CLOSE>'].to_f*(1+percentFromClose)/bar['<LOW>'].to_f - 1)*100 >= percentPL) && $source_hash[0]['<DATE>'] || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentPL  && (bar['<LOW>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose) - 1  )*100 >= percentPL )}
 
 
 
   #select 1direction-breakout trades with drawdownPL from CLOSE where drawdown=percentPL
   $source_hash.each_with_index.select {|bar,index|
-    bar['<DATE>'] != $source_hash[0]['<DATE>'] && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL &&
+   index != 0 && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL &&
         (($source_hash[index-1]['<CLOSE>'].to_f/100)/bar['<LOW>'].to_f - 1)*100 >= percentPL )  ||
         (($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentPL  &&
             (bar['<LOW>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f/100 - 1)*100 >= percentPL )}
@@ -417,15 +591,17 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
       str_per_drawdown = ', Drawdown % is: '
       if percentPL <= profit
         $same_bar_breakout_profit_count+=1
-        $same_bar_total_profit+=percentPL
+        $same_bar_total_profit+=percentPL #TakeProfit
         str_per_profit<<percentPL.to_s
         str_per_profit<<str_per_drawdown<<loss.round(2).to_s
+        current_signal['Profit'] = percentPL
       else #loss
          if $source_hash[current_signal['bar_index']][LOW_FIELD].to_f <= breakout_short_price # if profit unmet exit on opposite breakout
            $same_bar_total_profit-=percentPL # loss on stop  - same as profit
            str_per_profit<<-percentPL.to_s
            str_per_profit<<str_per_drawdown<<loss.round(2).to_s
-           $same_bar_total_loss+=-percentPL
+           $same_bar_total_loss+=-percentPL #StopLoss
+           current_signal['Profit'] = -percentPL
            #TODO Double entry
          else
            res = (current_signal['PriceEntry'].to_f/$source_hash[current_signal['bar_index']][CLOSE_FIELD].to_f-1)*100 #if no stop exit on same close
@@ -433,6 +609,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
            str_per_profit<<res.to_s
            str_per_profit<<str_per_drawdown<<loss.round(2).to_s
            $same_bar_total_loss+=res if res < 0
+           current_signal['Profit'] = res
          end
       end
       $same_bar_total_drawdown+=loss
@@ -480,15 +657,17 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
       str_per_drawdown = ', Drawdown % is: '
       if percentPL <= profit
         $same_bar_breakout_profit_count+=1
-        $same_bar_total_profit+=percentPL
+        $same_bar_total_profit+=percentPL #TakeProfit
         str_per_profit<<percentPL.to_s
         str_per_profit<<str_per_drawdown<<loss.round(2).to_s
+        current_signal['Profit'] = percentPL
       else #exit on bar close if Profit unmet
         if $source_hash[current_signal['bar_index']][HIGH_FIELD].to_f >= breakout_long_price # if profit unmet exit on opposite breakout
           $same_bar_total_profit-=percentPL
           str_per_profit<<-percentPL.to_s
           str_per_profit<<str_per_drawdown<<loss.round(2).to_s
-          $same_bar_total_loss+=-percentPL
+          $same_bar_total_loss+=-percentPL #StopLoss
+          current_signal['Profit'] = -percentPL
           #TODO Double entry
         else
           res = ($source_hash[current_signal['bar_index']][CLOSE_FIELD].to_f/current_signal['PriceEntry'].to_f-1)*100
@@ -496,6 +675,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
           str_per_profit<<res.to_s
           str_per_profit<<str_per_drawdown<<loss.round(2).to_s
           $same_bar_total_loss+=res if res < 0
+          current_signal['Profit'] = res
         end
       end
       puts str_per_profit
@@ -532,65 +712,30 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
     puts ' Avg_breakout_profit_percent: ' + avg_breakout_profit_percent.round(2).to_s + '% , Max_breakout_profit_percent: ' + max_breakout_profit_percent.round(2).to_s+'%'
     puts ' Avg_breakout_loss_percent: ' + avg_breakout_loss_percent.round(2).to_s + '% , Max_breakout_loss_percent: ' + max_breakout_loss_percent.round(2).to_s+'%'
     puts ' Total trades count: '+($long_trades_count+$short_trades_count).to_s+' long_trades_count: ' + $long_trades_count.to_s + ', short_trades_count: ' + $short_trades_count.to_s
-    puts ' BiSignal Breakout Amount: ' + $same_bar_bi_directional_breakout_count.to_s + ', in PERIOD_bi_directional_ProfitLoss_count: ' + $period_bi_directional_ProfitLoss_count.to_s + ' [? precedence HL] '
+    puts ' BiSignal Breakout Amount: ' + $same_bar_bi_directional_breakout_count.to_s + ', in PERIOD_bi_directional_BREAKOUT_count: ' + $period_bi_directional_ProfitLoss_count.to_s + ' [? precedence HL] '
     puts ' '+percentPL.to_s + '% profit in SameBar trades count: ' + $same_bar_breakout_profit_count.to_s
   end
-=begin
-    puts "Profit/Loss Between Breakout signals"
-    swing_profit=0 #%
-    swing_loss=0 #%
-    period_total_profit = 0 #%
-    period_total_loss = 0 #%
-    $channel_breakout_indicators_arr.each_with_index{ |entry,index|
-      next if $channel_breakout_indicators_arr[index+1].nil?
-      entry_price = entry['PriceEntry']
-      entry_index = entry['bar_index']
-      entry_direction = entry['Direction']
-      exit_price = $channel_breakout_indicators_arr[index+1]['PriceEntry']
-      exit_index = $channel_breakout_indicators_arr[index+1]['bar_index']
-
-      period_min = getMinMaxPrice2($source_hash.slice(entry_index,exit_index))['min']
-      period_max = getMinMaxPrice2($source_hash.slice(entry_index,entry_index))['max']
-      period_max_profit_percent = 0
-      period_max_loss_percent = 0
 
 
-      entry_profit = 0
-      entry_loss = 0
-      if entry_direction.to_s.downcase == 'long'
-        period_max_profit_percent=(period_max-entry_price)/entry_price*100 if period_max > entry_price
-        period_max_loss_percent=(entry_price-period_min)/entry_price*100 if period_min < entry_price
-        period_total_profit+=period_max_profit_percent
-        period_total_loss+=period_max_loss_percent
+  #select loss trades amount
+  $loss_trades_count = 0
+  $consecutive_loss_trades_amount = 0
+  $max_consecutive_loss_trades_amount = 0
+  $channel_breakout_indicators_arr.each_with_index.select {|bar,index|
+     if bar['Profit'].to_f <= 0
+       $loss_trades_count+=1
+       if(index>1 && $channel_breakout_indicators_arr[index-1]['bar_index'].to_i+1 == $channel_breakout_indicators_arr[index]['bar_index'].to_i && $channel_breakout_indicators_arr[index-1]['Profit'].to_f < 0)
+         $consecutive_loss_trades_amount+=1
+         $max_consecutive_loss_trades_amount=$consecutive_loss_trades_amount if $consecutive_loss_trades_amount > $max_consecutive_loss_trades_amount
+       else
+         $consecutive_loss_trades_amount = 0
+       end
+     end
+  }
+  puts ' Loss Trades Count: ' + $loss_trades_count.to_s
+  puts ' Max Loss Consecutive Amount: ' + $max_consecutive_loss_trades_amount.to_s
 
-        if exit_price.to_f > entry_price.to_f #profit
-          entry_profit = (exit_price.to_f - entry_price.to_f) / entry_price.to_f * 100
-        else #loss
-          entry_loss = (entry_price.to_f-exit_price.to_f) / entry_price.to_f * 100
-        end
-      else #short
-        period_max_profit_percent=(entry_price-period_min)/entry_price*100 if period_min < entry_price
-        period_max_loss_percent=(period_max-entry_price)/entry_price*100 if period_max > entry_price
-        period_total_profit+=period_max_profit_percent
-        period_total_loss+=period_max_loss_percent
 
-        if exit_price.to_f < entry_price.to_f #profit
-          entry_profit = (entry_price.to_f-exit_price.to_f) / entry_price.to_f * 100
-        else #loss
-          entry_loss = (exit_price.to_f-entry_price.to_f) / entry_price.to_f * 100
-        end
-      end
-      swing_profit+=entry_profit
-      swing_loss+=entry_loss # negative minus sign  - excluded for loss,hence loss % is positive
-      puts 'EntryDirection: '+entry_direction+' EntryIndex: ' + entry_index.to_s  + ' EntryPrice: '+entry_price.round(2).to_s + ' ExitIndex: ' + exit_index.to_s + ' ExitPrice: ' + exit_price.round(2).to_s + ' EntryProfit: ' + entry_profit.round(2).to_s  + '% EntryLoss: ' + entry_loss.round(2).to_s + '%'+ ' PeriodMaxProfit: ' + period_max_profit_percent.round(2).to_s + '% PeriodMaxLoss: '+period_max_profit_percent.round(2).to_s+'%'
-    }
-    puts 'TotalTrades: ' + $channel_breakout_indicators_arr.length.to_s + ' TotalProfit: ' +swing_profit.round(2).to_s + '% TotalLoss: ' +swing_loss.round(2).to_s+'% '
-    puts 'TotalMaxPeriodProfit: ' + period_total_profit.round(2).to_s + '%' + ' TotalMaxPeriodLoss: ' + period_total_loss.round(2).to_s + '%'
-
-  else
-    puts 'NO BREAKOUT Signals found'
-  end
-=end
 end
 
 
