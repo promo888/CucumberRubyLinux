@@ -52,7 +52,7 @@ Given /^Code Tested$/  do
 =end
 
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
-  readCsvFile(Dir.getwd+"/logs/DjaHistoricalPrices2000-2016.csv")#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
+  readCsvFile(Dir.getwd+"/logs/USD000000TOD_160101_160214.txt")#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
   #getAvgChannelBreakoutProfitLoss
 
@@ -325,6 +325,7 @@ end
 
 def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
 
+
 ###new query code
   #populate % bar changes <TIME> sometimes exist in Daity for Daily data + exist separate in Intraday data
   $source_hash.each_with_index.select {|bar,index|
@@ -585,6 +586,11 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
        if (profit>=percentPL && loss<=-percentPL)
          $period_bi_directional_ProfitLoss_count+=1
          puts '===Period_bi_directional_ProfitLoss_count for bar: '+current_signal['bar_index'].to_s
+         $same_bar_breakout_profit_count+=1
+         $same_bar_total_profit-=percentPL
+         current_signal['Profit'] = -percentPL
+         $same_bar_total_loss+=-percentPL
+         next
        end
 
       str_per_profit = ' Profit % for bar: ' + current_signal['bar_index'].to_s + ' is: '
@@ -608,8 +614,11 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
            $same_bar_total_profit+=res
            str_per_profit<<res.to_s
            str_per_profit<<str_per_drawdown<<loss.round(2).to_s
-           $same_bar_total_loss+=res if res < 0
-           current_signal['Profit'] = res
+            if res < 0
+              $same_bar_total_loss+=res
+              current_signal['Profit'] = res
+            end
+
          end
       end
       $same_bar_total_drawdown+=loss
@@ -639,6 +648,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
       min = getMinMaxPrice2($source_hash.slice(index,next_bars_to_check))['min'].to_f #.to_f.round(2)
       max = getMinMaxPrice2($source_hash.slice(index,next_bars_to_check))['max'].to_f #.to_f.round(2)
 
+      #Todo refactor from 652 for LongShort
 
       #if current_signal['Direction'].to_s.downcase='short'
       profit = ((current_signal['PriceEntry'].to_f/min)-1)*100
@@ -651,6 +661,11 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
       if (profit>=percentPL && loss<=-percentPL)
         $period_bi_directional_ProfitLoss_count+=1
         puts '===Period_bi_directional_ProfitLoss_count for bar: '+current_signal['bar_index'].to_s
+        $same_bar_breakout_profit_count+=1 #ToDo refactor+remove duplicate
+        $same_bar_total_profit-=percentPL
+        current_signal['Profit'] = -percentPL
+        $same_bar_total_loss+=-percentPL
+        next
       end
 
       str_per_profit = ' Profit % for bar: ' + current_signal['bar_index'].to_s + ' is: '
@@ -706,13 +721,13 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   if ($channel_breakout_indicators_arr.length > 0 )
     avg_breakout_profit_percent = (total_breakout_profit_percent/$channel_breakout_indicators_arr.length).to_f.round(2)
     avg_breakout_loss_percent = (total_breakout_loss_percent/$channel_breakout_indicators_arr.length).to_f.round(2)
-    puts ' SameBarTotalProfit: '+$same_bar_total_profit.round(2).to_s+'% SameBarTotalDrawDown: '+$same_bar_total_drawdown.round(2).to_s + \
+    puts ' SameBarTotalProfit excl. Loss: '+$same_bar_total_profit.round(2).to_s+'% SameBarTotalDrawDown: '+$same_bar_total_drawdown.round(2).to_s + \
          ' SameBarTotalLoss: '+$same_bar_total_loss.round(2).to_s + \
          '%,Max_total_profit_percent: ' + total_breakout_profit_percent.round(2).to_s + '% , Max_total_loss_percent: ' + total_breakout_loss_percent.round(2).to_s+'% [? precedence HL,hence maybe no loss sometimes]'
     puts ' Avg_breakout_profit_percent: ' + avg_breakout_profit_percent.round(2).to_s + '% , Max_breakout_profit_percent: ' + max_breakout_profit_percent.round(2).to_s+'%'
     puts ' Avg_breakout_loss_percent: ' + avg_breakout_loss_percent.round(2).to_s + '% , Max_breakout_loss_percent: ' + max_breakout_loss_percent.round(2).to_s+'%'
     puts ' Total trades count: '+($long_trades_count+$short_trades_count).to_s+' long_trades_count: ' + $long_trades_count.to_s + ', short_trades_count: ' + $short_trades_count.to_s
-    puts ' BiSignal Breakout Amount: ' + $same_bar_bi_directional_breakout_count.to_s + ', in PERIOD_bi_directional_BREAKOUT_count: ' + $period_bi_directional_ProfitLoss_count.to_s + ' [? precedence HL] '
+    puts ' BiSignal Breakout Amount: ' + $same_bar_bi_directional_breakout_count.to_s + ', in PERIOD_bi_directional_ProfitLoss_count: ' + $period_bi_directional_ProfitLoss_count.to_s + ' [? precedence HL] '
     puts ' '+percentPL.to_s + '% profit in SameBar trades count: ' + $same_bar_breakout_profit_count.to_s
   end
 
@@ -721,9 +736,11 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   $loss_trades_count = 0
   $consecutive_loss_trades_amount = 0
   $max_consecutive_loss_trades_amount = 0
-  $channel_breakout_indicators_arr.each_with_index.select {|bar,index|
-     if bar['Profit'].to_f <= 0
+  $total_loss_percent = 0
+  loss_trades = $channel_breakout_indicators_arr.each_with_index.select {|bar,index|
+     if bar['Profit'].to_f < 0
        $loss_trades_count+=1
+       $total_loss_percent+=bar['Profit'].to_f
        if(index>1 && $channel_breakout_indicators_arr[index-1]['bar_index'].to_i+1 == $channel_breakout_indicators_arr[index]['bar_index'].to_i && $channel_breakout_indicators_arr[index-1]['Profit'].to_f < 0)
          $consecutive_loss_trades_amount+=1
          $max_consecutive_loss_trades_amount=$consecutive_loss_trades_amount if $consecutive_loss_trades_amount > $max_consecutive_loss_trades_amount
@@ -732,9 +749,9 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
        end
      end
   }
-  puts ' Loss Trades Count: ' + $loss_trades_count.to_s
+  puts ' Loss Trades Count: ' + $loss_trades_count.to_s + ' Loss Trade Avg: ' + ($total_loss_percent/loss_trades.length).to_s
   puts ' Max Loss Consecutive Amount: ' + $max_consecutive_loss_trades_amount.to_s
-
+#loss_trades.select{|bar,index| bar['Profit'].to_f < -0.4 }
 
 end
 
