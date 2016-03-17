@@ -505,20 +505,62 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
 
   }
 
+  $select=[]
+
+  #select breakout signals
+  breakout_signals = $source_hash.each_with_index.select {|bar,index| index != 0 && \
+                    ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose  \
+                    || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose )}
+  $select.push '=====breakout_signals: ' + breakout_signals.length.to_s
+
+  #select profit trades #TODO to think about sequence HL and StopLoss B/C volatility
+  profit_trades = $source_hash.each_with_index.select {|bar,index| index != 0 && \
+                        ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL \
+                     || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
+  $select.push '=====profit_trades: ' + profit_trades.length.to_s
+
+
+  #select profit trades on bar close - exit on close if TP percent PL unmet
+  profit_trades_with_close = $source_hash.each_with_index.select {|bar,index| index != 0 && \
+                      ( (bar['<CLOSE>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose \
+                     && ( (bar['<CLOSE>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 < percentFromClose+percentPL \
+                     || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<CLOSE>'].to_f-1)*100 >= percentFromClose ) \
+                     && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<CLOSE>'].to_f-1)*100 < percentFromClose+percentPL)  }
+  $select.push '=====profit_trades_with_close when TP unmet: ' + profit_trades_with_close.length.to_s
+
+
+
 
   #select bi-breakout signals
-  #$source_hash.each_with_index.select {|bar,index| index != 0 && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose && $source_hash[0]['<DATE>'] && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose )}
+  bi_breakout_signals = $source_hash.each_with_index.select {|bar,index| index != 0 && \
+                         ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose  \
+                        && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose )}
+  $select.push '=====bi_breakout_signals: ' + bi_breakout_signals.length.to_s
+
 
   #select bi-profit trades
-  $source_hash.each_with_index.select {|bar,index| index != 0 && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && $source_hash[0]['<DATE>'] && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
-
-  #select 1direction-profit trades
-  $source_hash.each_with_index.select {|bar,index| index != 0 && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && $source_hash[0]['<DATE>'] || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
-
-  #select 1direction-breakout trades with drawdownPL from entry where drawdown=percentPL
-  #$source_hash.each_with_index.select {|bar,index| index != 0 && ( ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL && ($source_hash[index-1]['<CLOSE>'].to_f*(1+percentFromClose)/bar['<LOW>'].to_f - 1)*100 >= percentPL) && $source_hash[0]['<DATE>'] || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentPL  && (bar['<LOW>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose) - 1  )*100 >= percentPL )}
+  bi_profit_trades = $source_hash.each_with_index.select {|bar,index| index != 0 && \
+                    ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL \
+                    &&  ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
+  $select.push '=====bi_profit_trades: ' + bi_profit_trades.length.to_s
 
 
+  #select bi-profit trades with drawdownPL from entry where drawdown=percentPL*2 ?
+  bi_profit_drawdown_pl_trades = $source_hash.each_with_index.select {|bar,index| index != 0 && \
+                                ( ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose \
+                                && ($source_hash[index-1]['<CLOSE>'].to_f*(1+percentFromClose)/bar['<LOW>'].to_f - 1)*100 >= percentPL*2)) \
+                                || (($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose  \
+                                && (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose) - 1)*100 >= percentPL*2)}
+  $select.push '=====bi_profit_drawdown_pl*2_trades: ' + bi_profit_drawdown_pl_trades.length.to_s
+
+
+  #select profit trades excluding Bi-Breakout
+  breakout_indexes = bi_breakout_signals.collect{|bar| bar[1]}
+  profit_trades_excluded_bi_breakouts = []
+  profit_trades.each { |bar|
+    profit_trades_excluded_bi_breakouts.push bar if !breakout_indexes.include?(bar[1])
+  }
+  $select.push '=====profit_trades_excluded_bi_breakouts: ' + profit_trades_excluded_bi_breakouts.length.to_s
 
   #select 1direction-breakout trades with drawdownPL from CLOSE where drawdown=percentPL
   $source_hash.each_with_index.select {|bar,index|
@@ -729,6 +771,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
     puts ' Total trades count: '+($long_trades_count+$short_trades_count).to_s+' long_trades_count: ' + $long_trades_count.to_s + ', short_trades_count: ' + $short_trades_count.to_s
     puts ' BiSignal Breakout Amount: ' + $same_bar_bi_directional_breakout_count.to_s + ', in PERIOD_bi_directional_ProfitLoss_count: ' + $period_bi_directional_ProfitLoss_count.to_s + ' [? precedence HL] '
     puts ' '+percentPL.to_s + '% profit in SameBar trades count: ' + $same_bar_breakout_profit_count.to_s
+
   end
 
 
@@ -753,11 +796,14 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   puts ' Max Loss Consecutive Amount: ' + $max_consecutive_loss_trades_amount.to_s
 #loss_trades.select{|bar,index| bar['Profit'].to_f < -0.4 }
 
+  $select.each{|row| puts row}
+
+
 end
 
 
 
-
+#TODO 80#20 25#75 30#70 35#65
 
 
 
