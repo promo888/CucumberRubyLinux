@@ -452,7 +452,7 @@ end
 
 
 
-def compareCsvFolders2(source_dir,target_dir,excluded_fields_arr)
+def Actions.compareCsvFolders2(source_dir,target_dir,excluded_fields_arr)
   Actions.v 'Comparing CSV folders source: ' + source_dir + ' and ' + target_dir
   dir_count=Actions.compareCsvDirs2(source_dir,target_dir,excluded_fields_arr)
   Actions.c (dir_count-2).to_s+' folders have been tested in '+source_dir if(!$csv_folders_count.nil? && !dir_count.nil? && !dir_count[0].to_s.downcase.include?('error'))

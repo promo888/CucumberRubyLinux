@@ -58,7 +58,7 @@ Given /^Code Tested$/  do
 
   $source_hash.reverse! #TEMP for DJIA
   begin
-    getPercentChannelBreakoutProfitLoss(0.5,0,0.5) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
+    getPercentChannelBreakoutProfitLoss(0.5,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
   rescue Exception=>e
     puts 'Exception: ' +  e.message if !e.nil? && !e.message.to_s.empty?
     puts 'Backtrace: ' +  e.backtrace.to_s if !e.nil?
@@ -562,6 +562,36 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   }
   $select.push '=====profit_trades_excluded_bi_breakouts: ' + profit_trades_excluded_bi_breakouts.length.to_s
 
+
+  #select bi_signals_with_ma_cross when MaCross in Direction of Signal
+  crossMa1 = 3
+  crossMa2 = 9
+  bi_signals_with_ma_cross = $source_hash.each_with_index.select {|bar,index| index != 0 && index>crossMa2 &&
+                                ( ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose &&
+                                    #getAvgValue(crossMa1,index-1,$source_hash,'CLOSE').to_f > getAvgValue(crossMa2,index-1,$source_hash,'CLOSE').to_f) \
+                                    $source_hash[index-1]['<CLOSE>'].to_f*(1+percentFromClose) > getAvgValue(crossMa1,index-1,$source_hash,'CLOSE').to_f) \
+                                || (($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose &&
+                                    # getAvgValue(crossMa1,index-1,$source_hash,'CLOSE').to_f < getAvgValue(crossMa2,index-1,$source_hash,'CLOSE').to_f) )}
+                                    $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose) < getAvgValue(crossMa2,index-1,$source_hash,'CLOSE').to_f) )}
+  $select.push '=====bi_signals_with_ma_cross: ' + bi_signals_with_ma_cross.length.to_s
+
+
+  #select bi_profit_trades_with_ma_cross when MaCross in Direction of Signal
+  crossMa1 = 3
+  crossMa2 = 9
+  bi_profit_trades_with_ma_cross = $source_hash.each_with_index.select {|bar,index| index != 0 && index>crossMa2 &&
+      ( ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose &&
+          #getAvgValue(crossMa1,index-1,$source_hash,'CLOSE').to_f >  getAvgValue(crossMa2,index-1,$source_hash,'CLOSE').to_f && \
+          $source_hash[index-1]['<CLOSE>'].to_f*(1+percentFromClose) > getAvgValue(crossMa1,index-1,$source_hash,'CLOSE').to_f && \
+          (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL) \
+      || (($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose && \
+          #getAvgValue(crossMa1,index-1,$source_hash,'CLOSE').to_f <  getAvgValue(crossMa2,index-1,$source_hash,'CLOSE').to_f && \
+          $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose) < getAvgValue(crossMa2,index-1,$source_hash,'CLOSE').to_f && \
+          ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL  ))}
+  $select.push '=====bi_profit_trades_with_ma_cross: ' + bi_profit_trades_with_ma_cross.length.to_s
+
+
+
   #select 1direction-breakout trades with drawdownPL from CLOSE where drawdown=percentPL
   $source_hash.each_with_index.select {|bar,index|
    index != 0 && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL &&
@@ -721,7 +751,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
       else #exit on bar close if Profit unmet
         if $source_hash[current_signal['bar_index']][HIGH_FIELD].to_f >= breakout_long_price # if profit unmet exit on opposite breakout
           $same_bar_total_profit-=percentPL
-          str_per_profit<<-percentPL.to_s
+          str_per_profit<<'-'+percentPL.to_s
           str_per_profit<<str_per_drawdown<<loss.round(2).to_s
           $same_bar_total_loss+=-percentPL #StopLoss
           current_signal['Profit'] = -percentPL
@@ -834,6 +864,9 @@ def getMinMaxPrice2(bars_array)
   min = nil if min==1000000000
   return {'min'=> min, 'max'=> max}
 end
+
+
+
 
 
 $signals_ma1_arr=[]
@@ -952,7 +985,16 @@ def getAvgValue(bars_period,before_bar_index,bars_array,ohlc_type)
       puts "You must setup PRICE FIELD by <OPEN><HIGH><LOW><CLOSE>"
   end
 
-  #bars_array
+  total = 0
+  avg = 0
+  avg_arr =  bars_array.each_with_index.select {|bar,index| !bars_array.nil? && before_bar_index < bars_array.length  &&  before_bar_index-bars_period > 0 \
+             && index > before_bar_index-bars_period && index <= before_bar_index
+  }
+
+  avg_arr.each{|bar|
+    total+=bar[0][ohlc_type_field].to_f}
+  avg = (total/bars_period).to_f.round(4) if total!=0
+  return avg #> 0 ? avg : nil
 
 end
 

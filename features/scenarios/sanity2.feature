@@ -15,7 +15,7 @@ Feature: Build old and new versions with schemas from scratch or upgrade, submit
     Then DB tables DEAL TICKETS LEGS compared for both versions
     Then Old and New versions csv Folders are Matched excluding timestamps
     Then Old and New Saphire Jsons are Matched excluding sequence
-    #Then Old and New versions Traiana outgoing data compared as CSV
+   #Then Old and New versions Traiana outgoing data compared as CSV
     #Then Old and New versions RTNS outgoing data compared
     Then Jenkins will email PassedOrFailed
 
