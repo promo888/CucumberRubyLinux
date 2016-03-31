@@ -31,9 +31,28 @@ $avg_period = 10
 
 #ToDo maxLoss,AvgLoss MaxConsecutive PL,display date + test bars + param start stats
 #fx from finam not to revert - dja from wsj should be reverted
+###############Test Scenarios
+=begin
+
+1.Even if 70/30 of Profit trades in order to benefit from Martinale 80/20 drawdowns should be no more than (Drawdown = Profit * 2)
+  Following from Distribution that 6-70% of price distributions are in range +- 0.3% ...
+  Given Entry on +-0.3% gives 0.2-0.3% profit - Drawdown should be no less then Entry(price-+percent_indicator_entry) Drawdown = Entry - percent_indicator_entry * 2
+  In such way each loss will be covered by Martingale next deal
+
+  if we have 3 fail sequnces with 3 trades each where loss = profit * 3 then in order to cover the loss we should reinvest as follows :
+  Lets assume that 1% max loss (10 percent with leverage = 100% - 300% loss = 3*3*3 = 27)
+  27-35 times Multiplier on Worst Case Sequence i.e. = in order to cover losses from 1000$ trades we should invest 30000$
+
+
+
+
+
+
+=end
+
 
 Given /^Code Tested$/  do
-
+#TODO merge Profits  & Losses + display Entries/Exits on the Graph
 =begin
   a = [12,3,4,5,123,4,5,6,7,7,7,7,8,8,8,5,66]
   a.sort!
@@ -52,17 +71,20 @@ Given /^Code Tested$/  do
 =end
 
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
-  readCsvFile(Dir.getwd+"/logs/USD000000TOD_160101_160214.txt")#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
+  file_name = 'DjaHistoricalPrices2000-2016.csv'
+  readCsvFile(Dir.getwd+"/logs/"+file_name)#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
   #getAvgChannelBreakoutProfitLoss
 
-  $source_hash.reverse! #TEMP for DJIA
+  $source_hash.reverse! if file_name.include?('Dj') #TEMP for DJIA#################################################
   begin
-    getPercentChannelBreakoutProfitLoss(0.5,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
+    getPercentChannelBreakoutProfitLoss(0.7,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
   rescue Exception=>e
     puts 'Exception: ' +  e.message if !e.nil? && !e.message.to_s.empty?
     puts 'Backtrace: ' +  e.backtrace.to_s if !e.nil?
   end
+
+
 end
 
 
@@ -518,6 +540,19 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
                         ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL \
                      || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
   $select.push '=====profit_trades: ' + profit_trades.length.to_s
+  profit_trades.each{|bar|  $select.push('[' + bar[0][DATE_FIELD].to_s + ']') }
+
+  #select loss trades
+  loss_trades = $source_hash.each_with_index.select {|bar,index| index != 0 && \
+                         ((bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose && \
+                          (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 <= percentFromClose+percentPL && \
+                          $source_hash[index]['<CLOSE>'].to_f < $source_hash[index]['<CLOSE>'].to_f*(1+percentFromClose)) \
+  || (($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose && \
+      ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 <= percentFromClose+percentPL && \
+       $source_hash[index]['<CLOSE>'].to_f > $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose))
+  }
+  $select.push '=====loss_trades: ' + loss_trades.length.to_s
+  loss_trades.each{|bar| $select.push('[' + bar[0][DATE_FIELD].to_s + ']')}
 
 
   #select profit trades on bar close - exit on close if TP percent PL unmet
@@ -864,6 +899,12 @@ def getMinMaxPrice2(bars_array)
   min = nil if min==1000000000
   return {'min'=> min, 'max'=> max}
 end
+
+
+#back testing
+# Scenario1: run by [num=3] periods back minStep=[20d] and find Max/Min-1=percent_range[6%]
+# IF Found assign to arr
+# if NOT FOUND percent_range step back next 20d if currentStepMax > previousStepMax -> max = currentStepMax
 
 
 
