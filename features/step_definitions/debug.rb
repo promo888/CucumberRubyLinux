@@ -76,6 +76,7 @@ Given /^Code Tested$/  do
   #calculateBarsSpread($avg_period,0)
   #getAvgChannelBreakoutProfitLoss
 
+  #TODO reverse if lastDate > firstDate
   $source_hash.reverse! if file_name.include?('Dj') #TEMP for DJIA#################################################
   begin
     getPercentChannelBreakoutProfitLoss(0.7,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
@@ -626,6 +627,36 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   $select.push '=====bi_profit_trades_with_ma_cross: ' + bi_profit_trades_with_ma_cross.length.to_s
 
 
+  #TODO - to continue STEP next days
+  #select Count of MaSingle cross profits # todo losses (HighLows) from crosses
+
+ #d = getMinMaxHighLowPrice2(($source_hash[21,10])['high'].to_f/$source_hash[20]['<CLOSE>'].to_f-1)*100  #>=percentPL
+  singleMa = 200
+  percentPL = 0.1
+  periodPL = 1
+  periodPlStep = 2
+  bi_profit_signals_with_ma_single = $source_hash.each_with_index.select {|bar,index| index>periodPL  && index+1+periodPL<$source_hash.length-1 &&
+      ( ($source_hash[index]['<CLOSE>'].to_f > getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f && getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f>0 \
+        #  && (getMinMaxHighLowPrice2($source_hash[index+1,periodPL])['max'].to_f/ $source_hash[index]['<CLOSE>'].to_f-1)*100 >=percentPL \
+       )  || ($source_hash[index]['<CLOSE>'].to_f < getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f  && getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f>0 \
+        #  && (getMinMaxHighLowPrice2($source_hash[index+1,periodPL])['min'].to_f/ $source_hash[index]['<CLOSE>'].to_f-1)*100 >=percentPL \
+       )   )}
+
+  $select.push '=====bi_profit_signals_with_ma_single count: ' + bi_profit_signals_with_ma_single.length.to_s + ' ma='+singleMa.to_s #+' with profit ' + percentPL.to_s + '% + LOSS NOT COUNTED'
+
+
+  bi_profit_trades_with_ma_single = $source_hash.each_with_index.select {|bar,index| index>periodPL  && index+1+periodPL<$source_hash.length-1 &&
+       ( ($source_hash[index]['<CLOSE>'].to_f > getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f && getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f>0 \
+          && (getMinMaxHighLowPrice2($source_hash[index+periodPlStep,periodPL])['max'].to_f/ $source_hash[index]['<CLOSE>'].to_f-1)*100 >=percentPL \
+       )  || ($source_hash[index]['<CLOSE>'].to_f < getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f  && getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f>0 \
+          && (getMinMaxHighLowPrice2($source_hash[index+periodPlStep,periodPL])['min'].to_f/ $source_hash[index]['<CLOSE>'].to_f-1)*100 >=percentPL \
+       )   )}
+
+  $select.push '=====bi_profit_trades_with_ma_single: ' + bi_profit_trades_with_ma_single.length.to_s + ' ma='+singleMa.to_s+' with profit ' + percentPL.to_s + '% + LOSS NOT COUNTED'
+
+
+
+
 
   #select 1direction-breakout trades with drawdownPL from CLOSE where drawdown=percentPL
   $source_hash.each_with_index.select {|bar,index|
@@ -681,8 +712,8 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
       next_bars_to_check = nextBarsPL+1
       #index+next_bars_to_check <= $avg_indicators.length ? next_bars_to_check = $avg_period : next_bars_to_check = $avg_indicators.length-index
       current_signal['PL_next_N_bars'] = next_bars_to_check
-      min = getMinMaxPrice2($source_hash.slice(index,next_bars_to_check))['min'].to_f #.to_f.round(2)
-      max = getMinMaxPrice2($source_hash.slice(index,next_bars_to_check))['max'].to_f #.to_f.round(2)
+      min = getMinMaxHighLowPrice2($source_hash.slice(index,next_bars_to_check))['min'].to_f #.to_f.round(2)
+      max = getMinMaxHighLowPrice2($source_hash.slice(index,next_bars_to_check))['max'].to_f #.to_f.round(2)
 
       #if current_signal['Direction'].to_s.downcase='long'
       profit = ((max/current_signal['PriceEntry'])-1)*100 #maxProfit  i.e. same bar high
@@ -752,8 +783,8 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
       next_bars_to_check = nextBarsPL+1
       #index+next_bars_to_check <= $avg_indicators.length ? next_bars_to_check = next_bars_to_check : next_bars_to_check = $avg_indicators.length-index
       current_signal['PL_next_N_bars'] = next_bars_to_check
-      min = getMinMaxPrice2($source_hash.slice(index,next_bars_to_check))['min'].to_f #.to_f.round(2)
-      max = getMinMaxPrice2($source_hash.slice(index,next_bars_to_check))['max'].to_f #.to_f.round(2)
+      min = getMinMaxHighLowPrice2($source_hash.slice(index,next_bars_to_check))['min'].to_f #.to_f.round(2)
+      max = getMinMaxHighLowPrice2($source_hash.slice(index,next_bars_to_check))['max'].to_f #.to_f.round(2)
 
       #Todo refactor from 652 for LongShort
 
@@ -887,7 +918,7 @@ end
 
 
 
-def getMinMaxPrice2(bars_array)
+def getMinMaxHighLowPrice2(bars_array)
   min = 1000000000
   max = 0
   bars_array.each { |bar|
