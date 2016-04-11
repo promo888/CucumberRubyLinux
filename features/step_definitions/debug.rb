@@ -627,7 +627,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   $select.push '=====bi_profit_trades_with_ma_cross: ' + bi_profit_trades_with_ma_cross.length.to_s
 
 
-  #TODO - to continue STEP next days
+  #TODO - to continue STEP next days + drawdowns + investigate opposit with - loss
   #select Count of MaSingle cross profits # todo losses (HighLows) from crosses
 
  #d = getMinMaxHighLowPrice2(($source_hash[21,10])['high'].to_f/$source_hash[20]['<CLOSE>'].to_f-1)*100  #>=percentPL
