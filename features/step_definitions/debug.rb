@@ -2,6 +2,9 @@ require 'cucumber'
 require 'net/ssh'
 require 'net/scp'
 require 'time'
+require 'gchart'
+require 'google_chart'
+require 'graph'
 
 begin
   require '../../features/helpers/Actions'
@@ -71,7 +74,7 @@ Given /^Code Tested$/  do
 =end
 
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
-  file_name = 'DjaHistoricalPrices2000-2016.csv'
+  file_name = 'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
   readCsvFile(Dir.getwd+"/logs/"+file_name)#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
   #getAvgChannelBreakoutProfitLoss
@@ -627,24 +630,27 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   $select.push '=====bi_profit_trades_with_ma_cross: ' + bi_profit_trades_with_ma_cross.length.to_s
 
 
-  #TODO - to continue STEP next days + drawdowns + investigate opposit with - loss
+  #TODO - to continue STEP next days + drawdowns + investigate opposite with - loss
   #select Count of MaSingle cross profits # todo losses (HighLows) from crosses
 
  #d = getMinMaxHighLowPrice2(($source_hash[21,10])['high'].to_f/$source_hash[20]['<CLOSE>'].to_f-1)*100  #>=percentPL
   singleMa = 200
   percentPL = 0.1
-  periodPL = 1
-  periodPlStep = 2
+  periodPL = 3
+  periodPlStep = 1
+  correctionPercent = 3
+
+
   bi_profit_signals_with_ma_single = $source_hash.each_with_index.select {|bar,index| index>periodPL  && index+1+periodPL<$source_hash.length-1 &&
       ( ($source_hash[index]['<CLOSE>'].to_f > getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f && getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f>0 \
-        #  && (getMinMaxHighLowPrice2($source_hash[index+1,periodPL])['max'].to_f/ $source_hash[index]['<CLOSE>'].to_f-1)*100 >=percentPL \
+          && $source_hash[index]['HiAvg'] = getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f \
        )  || ($source_hash[index]['<CLOSE>'].to_f < getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f  && getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f>0 \
-        #  && (getMinMaxHighLowPrice2($source_hash[index+1,periodPL])['min'].to_f/ $source_hash[index]['<CLOSE>'].to_f-1)*100 >=percentPL \
+          && $source_hash[index]['LowAvg'] = getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f \
        )   )}
 
-  $select.push '=====bi_profit_signals_with_ma_single count: ' + bi_profit_signals_with_ma_single.length.to_s + ' ma='+singleMa.to_s #+' with profit ' + percentPL.to_s + '% + LOSS NOT COUNTED'
+  $select.push '=====bi_profit_signals_with_ma_single count: ' + bi_profit_signals_with_ma_single.length.to_s + ' ma='+singleMa.to_s + ' periodPL: '+periodPL.to_s+' periodStepPL: ' + periodPlStep.to_s
 
-
+#TODO temp disabled
   bi_profit_trades_with_ma_single = $source_hash.each_with_index.select {|bar,index| index>periodPL  && index+1+periodPL<$source_hash.length-1 &&
        ( ($source_hash[index]['<CLOSE>'].to_f > getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f && getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f>0 \
           && (getMinMaxHighLowPrice2($source_hash[index+periodPlStep,periodPL])['max'].to_f/ $source_hash[index]['<CLOSE>'].to_f-1)*100 >=percentPL \
@@ -652,12 +658,56 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
           && (getMinMaxHighLowPrice2($source_hash[index+periodPlStep,periodPL])['min'].to_f/ $source_hash[index]['<CLOSE>'].to_f-1)*100 >=percentPL \
        )   )}
 
-  $select.push '=====bi_profit_trades_with_ma_single: ' + bi_profit_trades_with_ma_single.length.to_s + ' ma='+singleMa.to_s+' with profit ' + percentPL.to_s + '% + LOSS NOT COUNTED'
+  $select.push '=====bi_profit_trades_with_ma_single: ' + bi_profit_trades_with_ma_single.length.to_s + ' ma='+singleMa.to_s+' with profit ' + percentPL.to_s + '%  periodPL: '+periodPL.to_s+' periodStepPL: ' + periodPlStep.to_s + ' + LOSS NOT COUNTED'
 
 
 
+  #gem install googlecharts
+  #require 'gchart'
+
+=begin
+  hi_array = [1, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9]
+  low_array = [4, 2, 10, 4, 7, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9]
+  hi_avg_array = [-4, -2, -10, 4, 7, 4, 3, 5, -39, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9]
+  low_avg_array = [-4, -2, -10, 4, 7, 4, 3, 5, -39, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9, 4, 3, 5, 9]
+=end
 
 
+  hi_array=[]
+  low_array=[]
+  hi_avg_array=[]
+  low_avg_array=[]
+
+  $source_hash.each.select{|bar|
+    hi_array.push(bar['<HIGH>'].to_f)
+    hi_array.push(bar['<LOW>'].to_f)
+
+    !bar['HiAvg'].nil? ? hi_avg_array.push(bar['HiAvg'].to_f) : true #hi_avg_array.push(6000) #TODO missed bars by avg
+    !bar['LowAvg'].nil? ? low_avg_array.push(bar['LowAvg'].to_f) : true #low_avg_array.push(6000) #TODO missed bars by avg
+
+  }
+
+
+  bar_chart = Gchart.new(
+      :type => 'line',
+      :size => '600x400',
+      :bar_colors => ['0000FF', '0088FF','00FF00','FF0000'],
+      :title => "My Title",
+      :bg => 'EFEFEF',
+      :legend => ['High', 'Low', 'HiAvg','LowAvg'],
+      :data => [hi_array, low_array,hi_avg_array,low_avg_array],
+      :filename => 'bar_chart.png',
+      :stacked => false,
+      :legend_position => 'bottom',
+      :axis_with_labels => [['x'], ['y']],
+      :max_value => 20000, # 5,
+      :min_value => 6000, #0,
+      #:axis_labels => [["A|B|C|D|E"]], #TODO dates
+  )
+
+  bar_chart.file
+  Actions.c '<img src="bar_chart.png"/>'
+######################
   #select 1direction-breakout trades with drawdownPL from CLOSE where drawdown=percentPL
   $source_hash.each_with_index.select {|bar,index|
    index != 0 && ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL &&

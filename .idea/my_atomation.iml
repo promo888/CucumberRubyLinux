@@ -50,7 +50,10 @@
     <orderEntry type="library" scope="PROVIDED" name="diff_dirs (v0.1.2, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diffy (v3.0.7, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="fastercsv (v1.5.5, ruby-2.1.7-p400) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="gchartrb (v0.8, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="gherkin3 (v3.1.2, ruby-2.1.7-p400) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="googlecharts (v1.6.12, ruby-2.1.7-p400) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="graph (v2.8.1, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json-compare (v0.1.8, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.11.2, ruby-2.1.7-p400) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_test (v0.1.2, ruby-2.1.7-p400) [gem]" level="application" />
