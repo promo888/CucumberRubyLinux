@@ -644,10 +644,10 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   bi_profit_signals_with_ma_single = $source_hash.each_with_index.select {|bar,index| index>periodPL  && index+1+periodPL<$source_hash.length-1 &&
       ( ($source_hash[index]['<CLOSE>'].to_f > getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f && getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f>0 \
           && $source_hash[index]['HiAvg'] = getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f \
-          && $source_hash[index]['HiAvg'] = getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f \
+        #  && $source_hash[index]['LowAvg'] = getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f \
        )  || ($source_hash[index]['<CLOSE>'].to_f < getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f  && getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f>0 \
           && $source_hash[index]['LowAvg'] = getAvgValue(singleMa,index-1,$source_hash,'LOW').to_f \
-          && $source_hash[index]['HiAvg'] = getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f \
+        #  && $source_hash[index]['HiAvg'] = getAvgValue(singleMa,index-1,$source_hash,'HIGH').to_f \
        )   )}
 
   $select.push '=====bi_profit_signals_with_ma_single count: ' + bi_profit_signals_with_ma_single.length.to_s + ' ma='+singleMa.to_s + ' periodPL: '+periodPL.to_s+' periodStepPL: ' + periodPlStep.to_s
