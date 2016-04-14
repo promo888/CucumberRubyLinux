@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="//cdn.anychart.com/js/7.9.1/anychart-bundle.min.js"></script>
+    <script src="//cdn.anychart.com/csv-data/csco-daily.js"></script>
+    <style>
+      html, body, #container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+anychart.onDocumentReady(function() {
+// The data used in this sample can be obtained from the CDN
+// http://cdn.anychart.com/csv-data/csco-daily.js
+
+// create data table on loaded data
+var dataTable = anychart.data.table();
+dataTable.addData(get_csco_daily_data());
+
+// map loaded data for the ohlc series
+var mapping = dataTable.mapAs();
+mapping.addField('value', 4, 'close');
+
+// create stock chart
+chart = anychart.stock();
+
+// create first plot on the chart
+var plot = chart.plot(0);
+
+// create line series
+var ohlcSeries = plot.line(mapping);
+ohlcSeries.name('CSCO');
+ohlcSeries.stroke('2px #64b5f6');
+
+// create first plot on the chart
+var secondPlot = chart.plot(1);
+secondPlot.height('30%');
+
+// create MACD indicator with fast period 12, slow period 26 and signal period 9
+var macd = secondPlot.macd(mapping, 12, 26, 9);
+macd.macdSeries().stroke('#bf360c');
+macd.signalSeries().stroke('#ff6d00');
+macd.histogramSeries().fill('#ffe082');
+
+// adding extra Y axis to the right side
+plot.yAxis(1).orientation('right');
+secondPlot.yAxis(1).orientation('right');
+// setting chart padding to fit both Y axes
+chart.padding(10, 50, 10, 50);
+
+// create scroller series with mapped data
+chart.scroller().line(mapping);
+
+// set container id for the chart
+chart.container('container');
+
+// initiate chart drawing
+chart.draw();
+    });
+    
+    </script>
+  </body>
+</html>

@@ -689,7 +689,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
 
   }
 
-
+#png
   bar_chart = Gchart.new(
       :type => 'line',
       :size => '600x400',
@@ -709,6 +709,11 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
 
   bar_chart.file
   Actions.c '<img src="bar_chart.png"/>'
+
+
+  #html charts
+  #http://playground.anychart.com/gallery/7.9.1/Stock_Technical_Indicators/Simple_Moving_Average_(SMA)
+
 ######################
   #select 1direction-breakout trades with drawdownPL from CLOSE where drawdown=percentPL
   $source_hash.each_with_index.select {|bar,index|

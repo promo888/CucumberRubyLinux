@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="anychart-bundle.min.js"></script>
+    <script src="ixic-daily-short.js"></script>
+    <style>
+      html, body, #container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+anychart.onDocumentReady(function() {
+// The data used in this sample can be obtained from the CDN
+// http://cdn.anychart.com/csv-data/csco-daily.js
+
+// create data table on loaded data
+var dataTable = anychart.data.table();
+dataTable.addData(get_ixic_daily_short_data());
+
+// map loaded data for the ohlc series
+var mapping = dataTable.mapAs();
+mapping.addField('open', 1, 'first');
+mapping.addField('high', 2, 'max');
+mapping.addField('low', 3, 'min');
+mapping.addField('close', 4, 'last');
+mapping.addField('value', 4, 'close');
+
+// create stock chart
+chart = anychart.stock();
+
+// create first plot on the chart
+var plot = chart.plot(0);
+
+// create line series
+var ohlcSeries = plot.ohlc(mapping);
+ohlcSeries.name('IXIC');
+
+// create first plot on the chart
+var secondPlot = chart.plot(1);
+secondPlot.height('30%');
+
+// create RSI indicator with period 14
+var roc = secondPlot.rsi(mapping, 14).series();
+roc.stroke('#64b5f6');
+
+// create SMA indicators with period 20
+var sma20 = plot.sma(mapping, 20).series();
+sma20.name('SMA(20)');
+sma20.stroke('#00FF00');
+
+var sma100 = plot.sma(mapping, 100).series();
+sma100.name('SMA(100)');
+sma100.stroke('#0000FF');
+
+var sma200 = plot.sma(mapping, 200).series();
+sma200.name('SMA(200)');
+sma200.stroke('#bf260c');
+
+
+// adding extra Y axis to the right side
+plot.yAxis(1).orientation('right');
+secondPlot.yAxis(1).orientation('right');
+// setting chart padding to fit both Y axes
+chart.padding(10, 50, 10, 50);
+
+// create scroller series with mapped data
+chart.scroller().line(mapping);
+
+// set container id for the chart
+chart.container('container');
+
+// initiate chart drawing
+chart.draw();
+    });
+    
+    </script>
+  </body>
+</html>
