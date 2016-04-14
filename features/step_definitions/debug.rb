@@ -713,7 +713,12 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
 
   #html charts
   #http://playground.anychart.com/gallery/7.9.1/Stock_Technical_Indicators/Simple_Moving_Average_(SMA)
-
+#####
+  #Ma strats
+  #1 % from close,high,low - observed ma20*2,3  = weekly/monthly trend reversal
+  #2 MA cross when ma20>ma50>ma200 *2-2.5 Monthly/Weekly reversals
+  #3 Cross 20 ma stop loss n-1,2 on low entry bar
+  #4
 ######################
   #select 1direction-breakout trades with drawdownPL from CLOSE where drawdown=percentPL
   $source_hash.each_with_index.select {|bar,index|
