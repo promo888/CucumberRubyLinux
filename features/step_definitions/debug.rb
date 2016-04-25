@@ -693,7 +693,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   bar_chart = Gchart.new(
       :type => 'line',
       :size => '600x400',
-      :bar_colors => ['0000FF', '0088FF','00FF00','FF0000'],
+      :bar_colors => ['0000FF', '000000','00FF00','FF0000'],
       :title => "My Title",
       :bg => 'EFEFEF',
       :legend => ['High', 'Low', 'HiAvg','LowAvg'],
