@@ -4,8 +4,14 @@ require 'net/scp'
 require 'time'
 require 'thread'
 require 'thwait'
+
 require 'ruby-fann'
 
+require "rubygems"
+require "graphviz"
+#require 'ruby-graphviz'
+#require 'ruby_fann/neural_network'
+require 'ruby_fann/neurotica'
 
 begin
   require '../../features/helpers/Actions'
@@ -2566,4 +2572,63 @@ Epochs            2. Current error: 0.0028754869. Bit fail 0.
 
 =end
 
+#http://www.graphviz.org/Download_windows.php
+
+
+
+
+
+
+
+
+
+
+  # Create a new graph
+=begin
+  g = GraphViz.new( :G, :type => :digraph )
+  # Create two nodes
+  hello = g.add_nodes( "Hello" )
+  world = g.add_nodes( "World" )
+
+  # Create an edge between the two nodes
+  g.add_edges( hello, world )
+
+  # Generate output image
+  g.output( :png => "hello_world.png" )
+=end
+
+
+  ##########neurotica = RubyFann::Neurotica.new
+
+
+=begin
+  train = RubyFann::TrainData.new(
+      :inputs=>[[0.3, 0.4, 0.5, 1.0, -1.0], [0.1, 0.2, 0.3, 1.0, 1.0], [0.6, 0.74, 0.58, -1.0, -1.0], [0.109, 0.677, 0.21, -1.0, 1.0]],
+      :desired_outputs=>[[0.7, 0.4, 0.9], [0.8, -0.2, -0.5], [-0.33, 0.34, -0.22], [0.129, -0.87, 0.25]])
+  neural_net = RubyFann::Standard.new(:num_inputs=>3, :hidden_neurons=>[4, 2, 1], :num_outputs=>3)
+  neural_net.train_on_data(train, 100, 20, 0.01)
+  neurotica.graph(neural_net, "neurotica1.png")
+=end
+
+=begin
+  train = RubyFann::TrainData.new(:inputs=>[[0.3, 0.4, 0.5], [0.1, 0.2, 0.3]], :desired_outputs=>[[0.7], [0.8]])
+  neural_net = RubyFann::Shortcut.new(:num_inputs=>3, :num_outputs=>3)
+  neural_net.cascadetrain_on_data(train, 5, 10, 0.1)
+  neural_net.train_on_data(train, 5, 10, 0.1)
+  neurotica.graph(neural_net, "neurotica2.png")
+
+  test_3d_output
+=end
+
+end
+
+
+def test_3d_output
+  train = RubyFann::TrainData.new(:inputs=>[[0.3, 0.4, 0.5], [0.1, 0.2, 0.3]], :desired_outputs=>[[0.7], [0.8]])
+  #neural_net = RubyFann::Shortcut.new(9, 5, [2, 4, 12, 8, 4, 3, 4], 1)
+  neural_net = RubyFann::Shortcut.new(:num_inputs=>4, :num_outputs=>1)
+  neural_net.cascadetrain_on_data(train, 1000, 100, 0.1)
+  neurotica = RubyFann::Neurotica.new
+  neurotica.graph(neural_net, "neurotica2.vrml", :three_dimensional=>true)
+  assert(File.exist?('neurotica2.vrml'))
 end
