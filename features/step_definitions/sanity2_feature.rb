@@ -4,6 +4,8 @@ require 'net/scp'
 require 'time'
 require 'thread'
 require 'thwait'
+require 'ruby-fann'
+
 
 begin
   require '../../features/helpers/Actions'
@@ -2507,7 +2509,8 @@ end
 Given /^Code Tested2$/  do
 
   #Example training & subsequent execution
-  require 'ruby-fann'
+  #require 'ruby-fann'
+=begin
   train = RubyFann::TrainData.new(:inputs=>[[0.3, 0.4, 0.5], [0.1, 0.2, 0.3]], :desired_outputs=>[[0.7], [0.8]])
   fann = RubyFann::Standard.new(:num_inputs=>3, :hidden_neurons=>[2, 8, 4, 3, 4], :num_outputs=>1)
   fann.train_on_data(train, 1000, 10, 0.002) # 1000 max_epochs, 10 errors between reports and 0.1 desired MSE (mean-squared-error)
@@ -2523,8 +2526,15 @@ Given /^Code Tested2$/  do
 
   #Save trained network to file and use it later (continued from above)
   fann.save('foo.net')
+=end
+
+
+
+  #Run With Saved NN
   saved_nn = RubyFann::Standard.new(:filename=>"foo.net")
-  saved_nn.run([0.3, 0.2, 0.4])
+  #predicted_results = saved_nn.run([0.3, 0.2, 0.4])
+  predicted_results = saved_nn.run([0.3, 0.4, 0.5])
+  predicted_results.each_with_index { |v,i | puts 'Predicted #'+(i+1).to_s+'='+v.to_s+ ' but Real=0.7' }
 
 =begin
 Max epochs     1000. Desired error: 0.0020000001.
