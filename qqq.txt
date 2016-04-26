@@ -1,0 +1,139 @@
+
+
+Math
+http://eqworld.ipmnet.ru/ru/solutions/npde.htm
+http://www.statsoft.ru/home/textbook/glossary/gloss_m.html#Maximum Likelihood Method
+http://www.statsoft.ru/home/textbook/modules/stmulreg.html
+http://www.statsoft.ru/home/textbook/default.htm
+http://www.statsoft.ru/home/textbook/modules/stfacan.html
+
+https://ru.wikipedia.org/wiki/%D0%A0%D1%8F%D0%B4_%D0%A4%D1%83%D1%80%D1%8C%D0%B5
+https://ru.wikipedia.org/wiki/%D0%A1%D0%B0%D0%BC%D0%BE%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D1%83%D1%8E%D1%89%D0%B0%D1%8F%D1%81%D1%8F_%D0%BA%D0%B0%D1%80%D1%82%D0%B0_%D0%9A%D0%BE%D1%85%D0%BE%D0%BD%D0%B5%D0%BD%D0%B0
+https://www.mql5.com/ru/articles/163
+https://ru.wikipedia.org/wiki/%D0%90%D0%BF%D0%BF%D1%80%D0%BE%D0%BA%D1%81%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D1%8F
+https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D1%8B%D1%85_%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82
+https://ru.wikipedia.org/wiki/%D0%98%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B9
+https://ru.wikipedia.org/wiki/%D0%93%D0%B5%D0%BD%D0%BE%D0%BC_%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA%D0%B0
+https://ru.wikipedia.org/wiki/%D0%93%D0%B8%D0%B4%D1%80%D0%BE%D0%BA%D1%81%D0%B8%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D0%B0
+https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%A1%D1%8D%D0%BD%D0%B3%D0%B5%D1%80%D0%B0
+
+
+
+
+
+
+
+
+
+Ruby
+https://www.google.co.il/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=ruby%20neural%20network
+http://www.rubylab.io/2015/03/18/simple-neural-network-implenentation-in-ruby/
+https://github.com/gbuesing/neural-net-ruby/blob/master/examples/mnist.rb
+https://github.com/tangledpath/ruby-fann
+https://github.com/gbuesing/neural-net-ruby
+
+
+
+###
+http://ruby-fann.rubyforge.org/RubyFann/Standard.html
+
+https://github.com/tangledpath/ruby-fann
+
+$ gem install ruby-fann
+Usage
+
+First, Go here & read about FANN. You don't need to install it before using the gem, but understanding FANN will help you understand what you can do with the ruby-fann gem: http://leenissen.dk/fann/
+
+ruby-fann RDocs: http://ruby-fann.rubyforge.org/
+
+Example training & subsequent execution:
+
+  require 'ruby-fann'
+  train = RubyFann::TrainData.new(:inputs=>[[0.3, 0.4, 0.5], [0.1, 0.2, 0.3]], :desired_outputs=>[[0.7], [0.8]])
+  fann = RubyFann::Standard.new(:num_inputs=>3, :hidden_neurons=>[2, 8, 4, 3, 4], :num_outputs=>1)
+  fann.train_on_data(train, 1000, 10, 0.1) # 1000 max_epochs, 10 errors between reports and 0.1 desired MSE (mean-squared-error)
+  outputs = fann.run([0.3, 0.2, 0.4])    
+Save training data to file and use it later (continued from above)
+
+  train.save('verify.train')
+  train = RubyFann::TrainData.new(:filename=>'verify.train')
+  # Train again with 10000 max_epochs, 20 errors between reports and 0.01 desired MSE (mean-squared-error)
+  # This will take longer:
+  fann.train_on_data(train, 10000, 20, 0.01) 
+Save trained network to file and use it later (continued from above)
+
+  fann.save('foo.net')
+  saved_nn = RubyFann::Standard.new(:filename=>"foo.net")
+  saved_nn.run([0.3, 0.2, 0.4])  
+Custom training using a callback method
+
+This callback function can be called during training when using train_on_data, train_on_file or cascadetrain_on_data.
+
+It is very useful for doing custom things during training. It is recommended to use this function when implementing custom training procedures, or when visualizing the training in a GUI etc. The args which the callback function takes is the parameters given to the train_on_data, plus an epochs parameter which tells how many epochs the training have taken so far.
+
+The callback method should return an integer, if the callback function returns -1, the training will terminate.
+
+The callback (training_callback) will be automatically called if it is implemented on your subclass as follows:
+
+class MyFann < RubyFann::Standard
+  def training_callback(args)
+    puts "ARGS: #{args.inspect}"
+    0  
+  end
+end
+A sample project using RubyFann to play tic-tac-toe
+
+https://github.com/bigohstudios/tictactoe
+
+###
+
+
+Genome
+http://molbiol.ru/protocol/13_03.html
+https://ru.wikipedia.org/wiki/%D0%A1%D0%B5%D0%BA%D0%B2%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5
+https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D0%BA%D1%80%D1%8B%D1%82%D0%B0%D1%8F_%D1%80%D0%B0%D0%BC%D0%BA%D0%B0_%D1%81%D1%87%D0%B8%D1%82%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F
+http://www.chem.msu.su/rus/teaching/kolman/256.htm
+https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82_%C2%AB%D0%93%D0%B5%D0%BD%D0%BE%D0%BC_%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA%D0%B0%C2%BB
+
+
+
+JS
+http://jsfiddle.net/amcharts/6ZJ2y/?utm_source=website&utm_medium=embed&utm_campaign=6ZJ2y
+https://www.amcharts.com/demos/line-with-custom-bullets/
+http://jsfiddle.net/amcharts/n84Bh/
+https://www.amcharts.com/tutorials/moving-average-indicators-for-stock-chart/
+http://jsfiddle.net/amcharts/9589aaoh/?utm_source=website&utm_medium=embed&utm_campaign=9589aaoh
+
+https://github.com/harthur/brain
+http://harthur.github.io/brain/
+
+
+NN
+http://leenissen.dk/fann/forum/viewforum.php?f=15&sid=67e6584ccda7c6cf161703f8b13d0b42
+https://en.wikipedia.org/wiki/Mean_squared_error
+http://leenissen.dk/fann/wp/help/advanced-usage/
+http://leenissen.dk/fann/wp/help/neural-network-theory/
+http://leenissen.dk/rl/Steffen_Nissen_Thesis2007_Hyper.pdf 
+
+Training an ANN
+When training an ANN with a set of input and output data, we wish to adjust the weights in the ANN, to make the ANN give the same outputs as seen in the training data.  On the other hand, we do not want to make the ANN too specific, making it give precise results for the training data, but incorrect results for all other data.  When this happens, we say that the ANN has been over-fitted.
+The training process can be seen as an optimization problem, where we wish to minimize the mean square error of the entire set of training data.  This problem can be solved in many different ways, ranging from standard optimization heuristics like simulated annealing, through more special optimization techniques like genetic algorithms to specialized gradient descent algorithms like backpropagation.
+The most used algorithm is the backpropagation algorithm, but this algorithm has some limitations concerning, the extent of adjustment to the weights in each iteration.  This problem has been solved in more advanced algorithms like RPROP [Riedmiller and Braun, 1993] and quickprop [Fahlman, 1988].
+
+
+
+A good idea is to filter out all price noise bo using Kalman filter (as somebody suggested), but also it will filter all typical price patterns, which could be used for scalping and short deals. 
+My ideas of further development: 
+1. Using convolution ANN, which may give some improvement on noisy patterns. 
+2. Kohonen SOM as a filter to split all the input values to clusters and later feed the MLP network with unique patterns, representing each cluster in SOM. 
+
+What was done: 
+1. A tool, which is able of importing historic data from TradeStation 
+2. Predictions based on volatility and trade volumes 
+3. Filtering input data (global/local input pattern linear normalization), price offset prediction (instead of price value as it is) 
+4. Genetic-based network structure optimizer. 
+
+http://www.obitko.com/tutorials/neural-network-prediction/nasdaq-prediction.html
+
+###
+
