@@ -39,6 +39,10 @@ http://ruby-fann.rubyforge.org/RubyFann/Standard.html
 
 https://github.com/tangledpath/ruby-fann
 
+
+https://github.com/glejeune/Ruby-Graphviz
+
+
 $ gem install ruby-fann
 Usage
 
