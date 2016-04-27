@@ -8,3 +8,8 @@ Feature: Test Code
   @test2
   Scenario: Test Separate Function2
     Given Code Tested2
+
+
+  @test3
+  Scenario: Test Separate Function3
+    Given Code Tested3
