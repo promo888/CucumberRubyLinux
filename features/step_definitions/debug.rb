@@ -21,6 +21,8 @@ LOW_FIELD = "<LOW>" #3
 CLOSE_FIELD = "<CLOSE>" #4
 VOLUME_FIELD = "<VOLUME>" #5
 DATE_FIELD = "<DATE>" #5
+BUY_FIELD="buy"
+SELL_FIELD="sell"
 
 #user in entry_type and exit_type
 BUY_ENTRY = 1
@@ -84,7 +86,7 @@ Given /^Code Tested$/  do
   #if file_name.include?('Dj')
   #  logToJsFile($source_hash.reverse!)
   #else
-    logToJsFile($source_hash)
+    ###logToJsFile($source_hash)
   #end
   begin
     getPercentChannelBreakoutProfitLoss(0.7,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
@@ -543,13 +545,20 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
                     ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose  \
                     || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose )}
   $select.push '=====breakout_signals: ' + breakout_signals.length.to_s
+  breakout_signals.each{|bar|
+    $source_hash[bar[1]][BUY_FIELD] = bar[0][CLOSE_FIELD].to_f if((bar[0][HIGH_FIELD].to_f / $source_hash[bar[1]-1][CLOSE_FIELD].to_f-1)*100 >= percentFromClose)
+    $source_hash[bar[1]][SELL_FIELD] = bar[0][CLOSE_FIELD].to_f if(($source_hash[bar[1]-1][CLOSE_FIELD].to_f / bar[0][LOW_FIELD].to_f - 1)*100 >= percentFromClose)
+  }
+  logToJsFile($source_hash)
+
 
   #select profit trades #TODO to think about sequence HL and StopLoss B/C volatility
   profit_trades = $source_hash.each_with_index.select {|bar,index| index != 0 && \
                         ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose+percentPL \
                      || ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose+percentPL )}
   $select.push '=====profit_trades: ' + profit_trades.length.to_s
-  profit_trades.each{|bar|  $select.push('[' + bar[0][DATE_FIELD].to_s + ']') }
+  #profit_trades.each{|bar| $select.push('[' + bar[0][DATE_FIELD].to_s + ']') }
+
 
   #select loss trades
   loss_trades = $source_hash.each_with_index.select {|bar,index| index != 0 && \
@@ -561,7 +570,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
        $source_hash[index]['<CLOSE>'].to_f > $source_hash[index-1]['<CLOSE>'].to_f*(1-percentFromClose))
   }
   $select.push '=====loss_trades: ' + loss_trades.length.to_s
-  loss_trades.each{|bar| $select.push('[' + bar[0][DATE_FIELD].to_s + ']')}
+  #loss_trades.each{|bar| $select.push('[' + bar[0][DATE_FIELD].to_s + ']')}
 
 
   #select profit trades on bar close - exit on close if TP percent PL unmet
@@ -1140,6 +1149,8 @@ end
 #TODO map fields & reverse
 #Html Reports
 def logToJsFile(bars_array,file_name='getBarData') #DOHLCBS:  Date-Open-High-Low-Close-BuyPrice-SellPrice
+=begin
+
   jsFile=[]
   #header
   jsFile.push "function get_bar_data() {"
@@ -1159,13 +1170,14 @@ def logToJsFile(bars_array,file_name='getBarData') #DOHLCBS:  Date-Open-High-Low
   jsFile.push "}"
 
   #File.write(Dir.getwd+'/'+file_name+'.js', jsFile.to_s)
+=end
 
 
   open(Dir.getwd+'/'+file_name+'.js', 'w') { |row|
     row.puts "function get_bar_data() {"
     row.puts "  return ["
     bars_array.each{|bar|
-      jsBar =  "    ['"+bar['<DATE>'].to_s+"', " +bar['<OPEN>'].to_s+', '+bar['<HIGH>'].to_s+', '+bar['<LOW>'].to_s+', '+bar['<CLOSE>'].to_s+', '+bar['<VOLUME>'].to_s+', '+bar['<OPEN>'].to_s+', '+bar['<CLOSE>'].to_s+"],"  #+bar['buy'].to_s+', '+bar['sell'].to_s+"],"
+      jsBar =  "    ['"+bar[DATE_FIELD].to_s+"', " +bar[OPEN_FIELD].to_s+', '+bar[HIGH_FIELD].to_s+', '+bar[LOW_FIELD].to_s+', '+bar[CLOSE_FIELD].to_s+', '+bar[VOLUME_FIELD].to_s+', '+bar[BUY_FIELD].to_s+', '+bar[SELL_FIELD].to_s+"],"  #+bar['buy'].to_s+', '+bar['sell'].to_s+"],"
       row.puts jsBar
     }
     row.puts "  ];"
