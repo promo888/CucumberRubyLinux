@@ -81,6 +81,11 @@ Given /^Code Tested$/  do
 
   #TODO reverse if lastDate > firstDate
   $source_hash.reverse! if file_name.include?('Dj') #TEMP for DJIA#################################################
+  #if file_name.include?('Dj')
+  #  logToJsFile($source_hash.reverse!)
+  #else
+    logToJsFile($source_hash)
+  #end
   begin
     getPercentChannelBreakoutProfitLoss(0.7,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
   rescue Exception=>e
@@ -1132,7 +1137,47 @@ def getAvgValue(bars_period,before_bar_index,bars_array,ohlc_type)
 
 end
 
+#TODO map fields & reverse
+#Html Reports
+def logToJsFile(bars_array,file_name='getBarData') #DOHLCBS:  Date-Open-High-Low-Close-BuyPrice-SellPrice
+  jsFile=[]
+  #header
+  jsFile.push "function get_bar_data() {"
+  jsFile.push "  return ["
 
+  #body
+  #jsFile.push  [DateTime, Open, High, Low, Close, Volume, BuyPrice, SellPrice],
+  # jsFile.push "    ['2009-07-02', 1823.6899, 1823.91, 1795.95, 1796.52, 1923069952, ,1796.52],
+  bars_array.each{|bar|
+      jsBar =  "    ['"+bar['<DATE>'].to_s+"', " +bar['<OPEN>'].to_s+', '+bar['<HIGH>'].to_s+', '+bar['<LOW>'].to_s+', '+bar['<CLOSE>'].to_s+', '+bar['<VOLUME>'].to_s+', '+bar['<OPEN>'].to_s+', '+bar['<CLOSE>'].to_s+"],"
+      #+      #bar['buy'].to_s+', ' #+bar['sell'].to_s+"],"
+      jsFile.push jsBar
+  }
+
+  #footer
+  jsFile.push "  ];"
+  jsFile.push "}"
+
+  #File.write(Dir.getwd+'/'+file_name+'.js', jsFile.to_s)
+
+
+  open(Dir.getwd+'/'+file_name+'.js', 'w') { |row|
+    row.puts "function get_bar_data() {"
+    row.puts "  return ["
+    bars_array.each{|bar|
+      jsBar =  "    ['"+bar['<DATE>'].to_s+"', " +bar['<OPEN>'].to_s+', '+bar['<HIGH>'].to_s+', '+bar['<LOW>'].to_s+', '+bar['<CLOSE>'].to_s+', '+bar['<VOLUME>'].to_s+', '+bar['<OPEN>'].to_s+', '+bar['<CLOSE>'].to_s+"],"  #+bar['buy'].to_s+', '+bar['sell'].to_s+"],"
+      row.puts jsBar
+    }
+    row.puts "  ];"
+    row.puts "}"
+
+  }
+
+
+
+
+
+end
 
 
 #Trades
@@ -1153,4 +1198,3 @@ end
 def executeTrade(amount,longOrShort,openOrClose)
 
 end
-

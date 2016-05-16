@@ -1,7 +1,7 @@
 @debug
 Feature: Test Code
 
-  @test
+  @test1
   Scenario: Test Separate Function
     Given Code Tested
 

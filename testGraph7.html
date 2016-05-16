@@ -1,0 +1,321 @@
+<head>
+   
+    <script src="ixic-daily-short.js"></script>
+    <script src="getBarData.js"></script>
+	<script src="amcharts.js"></script>
+	<script src="serial.js"></script>
+	<!--script src="light.js"></script-->
+	<script src="amstock.js"></script>
+	<script src="anychart-bundle.min.js"></script>
+	<script src="none.js"></script>
+
+	<style>
+    html, body, #container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+	  
+	body {
+		font-family: Verdana;
+		font-size: 12px;
+		padding: 10px;
+	}
+	  
+	#chartdiv {
+		  width: 99%;
+		  height: 500px;
+    }																	
+    </style>
+  </head>
+  <body>
+    <div id="chartdiv"></div>	
+	<div id="container"></div>	
+ <script>
+ <!--"type": "candlestick" or "ohlc" or "line"-->
+AmCharts.ready(function () {
+    generateChartData();
+    createStockChart();
+
+//document.getElementById("addPanelButton").onclick = function(){
+//	addPanel();
+//}
+//document.getElementById("removePanelButton").onclick = function(){
+//	removePanel();
+//}
+});
+
+var chart;
+var chartData = [];
+var newPanel;
+var stockPanel;
+
+function generateChartData() {
+
+    ///////////////temp TODO reverse+field mapping
+    var arrBarData = get_bar_data(); //get_ixic_daily_short_data();
+    for(var i = 0; i < arrBarData.length; i++) {
+        chartData[i] = ({
+            date: arrBarData[i][0],
+            open: arrBarData[i][1],
+            high: arrBarData[i][2],
+            low: arrBarData[i][3],
+            close: arrBarData[i][4],
+            volume: arrBarData[i][5],
+            buy: arrBarData[i][6],
+            sell: arrBarData[i][7]
+        });
+    }
+
+//////////////temp
+
+/*
+    var firstDate = new Date();
+    firstDate.setHours(0, 0, 0, 0);
+    firstDate.setDate(firstDate.getDate() - 2000);
+    
+    for (var i = 0; i < 2000; i++) {
+        var newDate = new Date(firstDate);
+        
+        newDate.setDate(newDate.getDate() + i);
+        
+        var open = Math.round(Math.random() * (30) + 100);
+        var close = open + Math.round(Math.random() * (15) - Math.random() * 10);
+        
+        var low;
+        if (open < close) {
+            low = open - Math.round(Math.random() * 5);
+        } else {
+            low = close - Math.round(Math.random() * 5);
+        }
+        
+        var high;
+        if (open < close) {
+            high = close + Math.round(Math.random() * 5);
+        } else {
+            high = open + Math.round(Math.random() * 5);
+        }
+        
+        var volume = Math.round(Math.random() * (1000 + i)) + 100 + i;
+
+
+        chartData[i] = ({
+            date: newDate,
+            open: open,
+            close: close,
+            high: high,
+            low: low,
+            volume: volume
+        });
+        
+        // add sell value on those data points that we want sell bullet to appear
+        if ( (i & 5) == 5 )
+            chartData[i].sell = close;
+        
+        // add buy value on those data points that we want buy bullet to appear
+        if ( (i & 6) == 6 )
+            chartData[i].buy = open ;
+
+        /*
+        if ( (i & 7) == 7 )
+            chartData[i].buy = null ;
+            chartData[i].sell = null ;
+        */
+  // }
+
+
+
+    ///////////////// Reading from file
+    /*
+    var dataTable = anychart.data.table();
+    dataTable.addData(get_ixic_daily_short_data());
+
+// map loaded data for the ohlc series
+    var mapping = dataTable.mapAs();
+    mapping.addField('open', 1, 'first');
+    mapping.addField('high', 2, 'max');
+    mapping.addField('low', 3, 'min');
+    mapping.addField('close', 4, 'last');
+    mapping.addField('value', 4, 'close');
+// create stock chart
+    chart2 = anychart.stock();
+
+
+// create first plot on the chart
+    var plot = chart2.plot(0);
+
+// create line series
+    var ohlcSeries = plot.ohlc(mapping);
+    ohlcSeries.name('IXIC');
+//AmCharts.makeChart( "container", chart2);
+// create scroller series with mapped data
+    chart2.scroller().line(mapping);
+
+// set container id for the chart
+    chart2.container('container');
+
+// initiate chart drawing
+    chart2.draw();
+
+
+*/
+
+    ////////////////////
+}
+
+function createStockChart() {
+    
+	chart = new AmCharts.AmStockChart();
+    chart.pathToImages = "images/" //http://www.amcharts.com/lib/3/images/";
+    
+    //var chartScrollbar = new AmCharts.ChartScrollbar();
+	//chartScrollbar.dragIconHeight = 10;
+	//chartScrollbar.dragIconWidth = 10;
+	//chartScrollbar.enabled = false;
+	//chart.addChartScrollbar(chartScrollbar);
+	
+	/*
+	var chart = new AmCharts.AmStockChart("chartdiv",{
+    "pathToImages":  "images/", // required for grips
+	"chartScrollbar": {
+       "dragIconHeight": 10,
+	   "dragIconWidth": 10,
+	   "enabled": false
+  }
+});
+	*/
+	
+	chart.balloon.horizontalPadding = 10;
+    
+    // DATASET //////////////////////////////////////////
+    var dataSet = new AmCharts.DataSet();
+    dataSet.fieldMappings = [{
+        fromField: "open",
+        toField: "open"
+    }, {
+        fromField: "close",
+        toField: "close"
+    }, {
+        fromField: "high",
+        toField: "high"
+    }, {
+        fromField: "low",
+        toField: "low"
+    }, {
+        fromField: "volume",
+        toField: "volume"
+    }, {
+        fromField: "value",
+        toField: "value"
+    }, {
+        fromField: "buy",
+        toField: "buy"
+    }, {
+        fromField: "sell",
+        toField: "sell"
+    }];
+    dataSet.color = "#7f8da9";
+    dataSet.dataProvider = chartData;
+    dataSet.categoryField = "date";
+    
+    chart.dataSets = [dataSet];
+    
+    // PANELS ///////////////////////////////////////////                                                  
+    stockPanel = new AmCharts.StockPanel();
+    stockPanel.title = "Value";
+    
+    // graph of first stock panel
+    var graph = new AmCharts.StockGraph();
+    graph.type = "candlestick"; //candlestick ohlc
+    graph.openField = "open";
+    graph.closeField = "close";
+    graph.highField = "high";
+    graph.lowField = "low";
+    graph.valueField = "high";
+    graph.lineColor = "#7f8da9";
+    graph.fillColors = "#7f8da9";
+    graph.negativeLineColor = "#db4c3c";
+    graph.negativeFillColors = "#db4c3c";
+    graph.fillAlphas = 1;
+    graph.balloonText = "open:<b>[[open]]</b><br>close:<b>[[close]]</b><br>low:<b>[[low]]</b><br>high:<b>[[high]]</b>";
+    graph.useDataSetColors = false;
+    stockPanel.addStockGraph(graph); 
+    chart.panels = [stockPanel];
+    
+    // add buy graph
+    var graph = new AmCharts.StockGraph();
+    graph.type = "line";
+    graph.valueField = "buy";
+    graph.lineColor = "green";
+    graph.lineAlpha = 0;
+    graph.bullet = "circle";
+    graph.text = "circle";
+    graph.useDataSetColors = false;
+    stockPanel.addStockGraph(graph); 
+    
+    // add sell graph
+    var graph = new AmCharts.StockGraph();
+    graph.type = "line";
+    graph.valueField = "sell";
+    graph.lineColor = "red";
+    graph.lineAlpha = 0;
+    graph.bullet = "square";
+    graph.useDataSetColors = false;
+    stockPanel.addStockGraph(graph); 
+
+    // OTHER SETTINGS ////////////////////////////////////
+    var sbsettings = new AmCharts.ChartScrollbarSettings();
+    sbsettings.graph = graph;
+    sbsettings.graphType = "line";
+    sbsettings.usePeriod = "MM";
+	sbsettings.dragIconHeight = 10;
+	sbsettings.dragIconWidth = 10;
+    chart.chartScrollbarSettings = sbsettings;
+    
+    // Enable pan events
+    var panelsSettings = new AmCharts.PanelsSettings();
+    panelsSettings.panEventsEnabled = true;
+    chart.panelsSettings = panelsSettings;
+    
+    // CURSOR
+    var cursorSettings = new AmCharts.ChartCursorSettings();
+    cursorSettings.valueBalloonsEnabled = true;
+    chart.chartCursorSettings = cursorSettings;
+    
+    // PERIOD SELECTOR ///////////////////////////////////
+    var periodSelector = new AmCharts.PeriodSelector();
+    periodSelector.position = "bottom";
+    periodSelector.periods = [{
+        period: "DD",
+        count: 10,
+        label: "10 days"
+    }, {
+        period: "MM",
+        selected: true,
+        count: 1,
+        label: "1 month"
+    },{
+        period: "MM",
+        selected: true,
+        count: 3,
+        label: "3 month"
+    },{
+        period: "YYYY",
+        count: 1,
+        label: "1 year"
+    }, {
+        period: "YTD",
+        label: "YTD"
+    }, {
+        period: "MAX",
+        label: "MAX"
+    }];
+    chart.periodSelector = periodSelector;
+    
+    
+    chart.write('chartdiv');
+};
+    </script>
+  </body>
+</html>
