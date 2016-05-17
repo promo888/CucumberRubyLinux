@@ -89,8 +89,8 @@ Given /^Code Tested$/  do
     ###logToJsFile($source_hash)
   #end
   begin
-   #getPercentChannelBreakoutProfitLoss(0.7,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
-   getPercentChannelBreakoutProfitLoss(0.1,0,0.1)
+   getPercentChannelBreakoutProfitLoss(0.7,1,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
+   #getPercentChannelBreakoutProfitLoss(0.1,0,0.1)
   rescue Exception=>e
     puts 'Exception: ' +  e.message if !e.nil? && !e.message.to_s.empty?
     puts 'Backtrace: ' +  e.backtrace.to_s if !e.nil?
@@ -562,7 +562,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   $select.push '=====profit_trades: ' + profit_trades.length.to_s
   #profit_trades.each{|bar| $select.push('[' + bar[0][DATE_FIELD].to_s + ']') }
   #TODO Different color for PL trades
-  profit_trades.each{|bar|  $source_hash[bar[1]-1][BUY_FIELD] = bar[0][CLOSE_FIELD].to_f   } #Profit trades in Green
+  profit_trades.each{|bar|  $source_hash[bar[1]-1][BUY_FIELD] = $source_hash[bar[1]-1][CLOSE_FIELD].to_f   } #Profit trades in Green
 
 
   #select loss trades
@@ -576,7 +576,16 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   }
   $select.push '=====loss_trades: ' + loss_trades.length.to_s
   #loss_trades.each{|bar| $select.push('[' + bar[0][DATE_FIELD].to_s + ']')}
-  loss_trades.each{|bar|  $source_hash[bar[1]-1][SELL_FIELD] = bar[0][CLOSE_FIELD].to_f   } #Loss trades in Red
+  loss_trades.each{|bar|  $source_hash[bar[1]-1][SELL_FIELD] = $source_hash[bar[1]-1][CLOSE_FIELD].to_f   } #Loss trades in Red
+
+
+
+
+
+  logToJsFile($source_hash)
+
+
+
 
   #select profit trades on bar close - exit on close if TP percent PL unmet
   profit_trades_with_close = $source_hash.each_with_index.select {|bar,index| index != 0 && \
