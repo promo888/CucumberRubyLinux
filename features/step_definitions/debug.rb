@@ -76,20 +76,29 @@ Given /^Code Tested$/  do
 =end
 
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
-  file_name = 'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
+  ###file_name = 'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
+  file_name = 'EURUSD000TOM_050101_160214_1.txt'
   readCsvFile(Dir.getwd+"/logs/"+file_name)#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
   #getAvgChannelBreakoutProfitLoss
 
   #TODO reverse if lastDate > firstDate
   $source_hash.reverse! if file_name.include?('Dj') #TEMP for DJIA#################################################
+  if file_name.include?('USD')
+    $source_hash.each{|bar|
+     bardate = Date.strptime(bar['<DATE>'],"%Y%m%d")
+     str_date = bardate.month.to_s+'/'+bardate.day.to_s+'/'+bardate.year.to_s
+     bar['<DATE>'] = str_date
+    }
+  end
   #if file_name.include?('Dj')
   #  logToJsFile($source_hash.reverse!)
   #else
     ###logToJsFile($source_hash)
   #end
   begin
-   getPercentChannelBreakoutProfitLoss(0.7,1,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
+   #getPercentChannelBreakoutProfitLoss(0.7,1,0.2)
+   getPercentChannelBreakoutProfitLoss(0.72,0,0.28) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.1)
   rescue Exception=>e
     puts 'Exception: ' +  e.message if !e.nil? && !e.message.to_s.empty?
@@ -356,24 +365,11 @@ def getAvgChannelBreakoutProfitLoss
 end
 
 
-
-
-def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
-
-
-###new query code
-  #populate % bar changes <TIME> sometimes exist in Daity for Daily data + exist separate in Intraday data
-  $source_hash.each_with_index.select {|bar,index|
-    next if index == 0
-    $source_hash[index]['<CHANGE_PERCENT>'] = (bar['<CLOSE>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f - 1)*100
-  }
-
-  #populate change AD distribution #TODO positive_negative profit_loss drawdown distibutions + max consecutive losses
-  # 0-9 = 0.1-0.9% #ToDo later 11>1% 322>2% 33>3% 55>5%
-  $change_distribution = {'total'=>0,'1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0,'8'=>0,'9'=>0,'10'=>0,'11'=>0,'22'=>0,'33'=>0,'55'=>0}
-  $change_positive_distribution = {'total'=>0,'1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0,'8'=>0,'9'=>0,'10'=>0,'11'=>0,'22'=>0,'33'=>0,'55'=>0}
-  $change_negative_distribution = {'total'=>0,'1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0,'8'=>0,'9'=>0,'10'=>0,'11'=>0,'22'=>0,'33'=>0,'55'=>0}
-  $source_hash.each_with_index.select {|bar,index|
+def getPercentChangeDistribution
+  $change_distribution = {'total' => 0, '1' => 0, '2' => 0, '3' => 0, '4' => 0, '5' => 0, '6' => 0, '7' => 0, '8' => 0, '9' => 0, '10' => 0, '11' => 0, '22' => 0, '33' => 0, '55' => 0}
+  $change_positive_distribution = {'total' => 0, '1' => 0, '2' => 0, '3' => 0, '4' => 0, '5' => 0, '6' => 0, '7' => 0, '8' => 0, '9' => 0, '10' => 0, '11' => 0, '22' => 0, '33' => 0, '55' => 0}
+  $change_negative_distribution = {'total' => 0, '1' => 0, '2' => 0, '3' => 0, '4' => 0, '5' => 0, '6' => 0, '7' => 0, '8' => 0, '9' => 0, '10' => 0, '11' => 0, '22' => 0, '33' => 0, '55' => 0}
+  $source_hash.each_with_index.select { |bar, index|
     next if index == 0
     change = $source_hash[index]['<CHANGE_PERCENT>'].to_f > 0 ? $source_hash[index]['<CHANGE_PERCENT>'].to_f : $source_hash[index]['<CHANGE_PERCENT>'].to_f * -1
     case
@@ -537,8 +533,22 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
     end
 
 
-
   }
+end
+
+def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
+
+
+###new query code
+  #populate % bar changes <TIME> sometimes exist in Date for Daily data + exist separate in Intraday data
+  $source_hash.each_with_index.select {|bar,index|
+    next if index == 0
+    $source_hash[index]['<CHANGE_PERCENT>'] = (bar['<CLOSE>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f - 1)*100
+  }
+
+  #populate change AD distribution #TODO positive_negative profit_loss drawdown distibutions + max consecutive losses
+  # 0-9 = 0.1-0.9% #ToDo later 11>1% 322>2% 33>3% 55>5%
+  getPercentChangeDistribution
 
   $select=[]
 
@@ -630,8 +640,9 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   }
   $select.push '=====profit_trades_excluded_bi_breakouts: ' + profit_trades_excluded_bi_breakouts.length.to_s
 
-
+#TODO Refactor ignore loop
   #select bi_signals_with_ma_cross when MaCross in Direction of Signal
+=begin
   crossMa1 = 3
   crossMa2 = 9
   bi_signals_with_ma_cross = $source_hash.each_with_index.select {|bar,index| index != 0 && index>crossMa2 &&
@@ -690,6 +701,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
        )   )}
 
   $select.push '=====bi_profit_trades_with_ma_single: ' + bi_profit_trades_with_ma_single.length.to_s + ' ma='+singleMa.to_s+' with profit ' + percentPL.to_s + '%  periodPL: '+periodPL.to_s+' periodStepPL: ' + periodPlStep.to_s + ' + LOSS NOT COUNTED'
+=end
 
 
 
@@ -979,7 +991,7 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
        end
      end
   }
-  puts ' Loss Trades Count: ' + $loss_trades_count.to_s + ' Loss Trade Avg: ' + ($total_loss_percent/loss_trades.length).to_s
+  puts ' Loss Trades Count: ' + $loss_trades_count.to_s + ' Loss Trade Avg: ' + ($total_loss_percent == 0 ? '0' :($total_loss_percent/loss_trades.length).to_s)
   puts ' Max Loss Consecutive Amount: ' + $max_consecutive_loss_trades_amount.to_s
 #loss_trades.select{|bar,index| bar['Profit'].to_f < -0.4 }
 
