@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://www.amcharts.com/demos/ohlc-chart/ -->
+<html id="__html" class="" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.amcharts.com/favicon.ico">
+<link rel="image_src" href="https://www.amcharts.com/wp-content/themes/amcharts/static/img/share_google.png">
+<style>@import url(//fonts.googleapis.com/css?family=Lato:300,400,700);</style>
+ 
+<script src="./OHLC chart demo _ amCharts_files/cb=gapi.loaded_1" async=""></script><script src="./OHLC chart demo _ amCharts_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./OHLC chart demo _ amCharts_files/dc.js"></script><script id="twitter-wjs" src="https://platform.twitter.com/widgets.js"></script><script id="facebook-jssdk" src="https://connect.facebook.net/en_US/all.js#xfbml=1"></script><script type="text/javascript" async="" src="./OHLC chart demo _ amCharts_files/plusone.js" gapi_processed="true"></script><script type="text/javascript" async="" src="./OHLC chart demo _ amCharts_files/platform.js" gapi_processed="true"></script><script>
+		(function() {
+			var dMode		= document.documentMode;
+			var className	= "";
+			if ( dMode ) {
+				if ( dMode < 9 ) {
+					className += ' ieLT9 ';
+				}
+				className += 'ie' + dMode;
+				document.getElementById('__html').setAttribute('class',className);
+			}
+		})();
+	</script>
+ 
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.amcharts.com/xmlrpc.php">
+<script>
+		var ajaxurl = 'https://www.amcharts.com/wp-admin/admin-ajax.php';
+		var homeurl = 'https://www.amcharts.com';
+		var themeurl = 'https://www.amcharts.com/wp-content/themes/amcharts';
+	</script>
+ 
+<title>OHLC chart demo | amCharts</title>
+<meta name="description" content="OHLC or open-high-low-close chart is a type of chart used to illustrate how the price of a stock or bond changed over time. Vertical line on the chart show">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://www.amcharts.com/demos/ohlc-chart/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OHLC chart demo | amCharts">
+<meta property="og:description" content="OHLC or open-high-low-close chart is a type of chart used to illustrate how the price of a stock or bond changed over time. Vertical line on the chart show">
+<meta property="og:url" content="https://www.amcharts.com/demos/ohlc-chart/">
+<meta property="og:site_name" content="amCharts">
+<meta property="article:publisher" content="https://www.facebook.com/amcharts">
+<meta property="fb:admins" content="1358808116">
+ 
+<link rel="alternate" type="application/rss+xml" title="amCharts » Feed" href="https://feeds.feedburner.com/amcharts/">
+<link rel="alternate" type="application/rss+xml" title="amCharts » Comments Feed" href="https://www.amcharts.com/comments/feed/">
+<link rel="stylesheet" id="amcharts-style-bootstrap-css" href="./OHLC chart demo _ amCharts_files/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-fontawesome-css" href="./OHLC chart demo _ amCharts_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-core-css" href="./OHLC chart demo _ amCharts_files/core.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-mobile-css" href="./OHLC chart demo _ amCharts_files/mobile.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-codemirror-css" href="./OHLC chart demo _ amCharts_files/codemirror.css" type="text/css" media="all">
+<link rel="stylesheet" id="amexport-css" href="./OHLC chart demo _ amCharts_files/export.css" type="text/css" media="all">
+<link rel="stylesheet" id="fancybox-css" href="./OHLC chart demo _ amCharts_files/jquery.fancybox-1.3.7.min.css" type="text/css" media="screen">
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/jquery.min.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/core.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/amcharts.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/pie.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/serial.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/amstock.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/funnel.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/gauge.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/radar.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/xy.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/gantt.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/ammap_amcharts_extension.js"></script>
+<link rel="https://api.w.org/" href="https://www.amcharts.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.amcharts.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.amcharts.com/wp-includes/wlwmanifest.xml">
+<link rel="shortlink" href="https://www.amcharts.com/?p=846">
+<link rel="alternate" type="application/json+oembed" href="https://www.amcharts.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.amcharts.com%2Fdemos%2Fohlc-chart%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.amcharts.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.amcharts.com%2Fdemos%2Fohlc-chart%2F&amp;format=xml">
+ 
+<style type="text/css">div.simplesocialbuttons{height:20px;margin:10px auto 10px 0;text-align:left;clear:left;}div.simplesocialbutton{float:left;}div.ssb-button-googleplus{width:100px;}div.ssb-button-fblike{width:140px;line-height:1;}div.ssb-button-twitter{width:130px;}div.ssb-button-pinterest{width:100px;}.fb-like iframe{max-width:none!important;}</style>
+ 
+<meta property="og:image" content="http://www.amcharts.com/wp-content/uploads/2014/04/static_demo_846.jpg">
+ 
+<script type="text/javascript">
+/* <![CDATA[ */
+var fb_timeout = null;
+var fb_opts = { 'overlayShow' : true, 'hideOnOverlayClick' : true, 'showCloseButton' : true, 'centerOnScroll' : true, 'enableEscapeButton' : true, 'autoScale' : true };
+var easy_fancybox_handler = function(){
+	/* IMG */
+	var fb_IMG_select = 'a[href*=".jpg"]:not(.nofancybox,.pin-it-button), area[href*=".jpg"]:not(.nofancybox), a[href*=".jpeg"]:not(.nofancybox,.pin-it-button), area[href*=".jpeg"]:not(.nofancybox), a[href*=".png"]:not(.nofancybox,.pin-it-button), area[href*=".png"]:not(.nofancybox)';
+	jQuery(fb_IMG_select).addClass('fancybox image');
+	var fb_IMG_sections = jQuery('div.gallery ');
+	fb_IMG_sections.each(function() { jQuery(this).find(fb_IMG_select).attr('rel', 'gallery-' + fb_IMG_sections.index(this)); });
+	jQuery('a.fancybox, area.fancybox, li.fancybox a:not(li.nofancybox a)').fancybox( jQuery.extend({}, fb_opts, { 'transitionIn' : 'elastic', 'easingIn' : 'easeOutBack', 'transitionOut' : 'elastic', 'easingOut' : 'easeInBack', 'opacity' : false, 'hideOnContentClick' : false, 'titleShow' : true, 'titlePosition' : 'over', 'titleFromAlt' : true, 'showNavArrows' : true, 'enableKeyboardNav' : true, 'cyclic' : false }) );
+	/* Auto-click */ 
+	jQuery('#fancybox-auto').trigger('click');
+}
+/* ]]> */
+</script>
+<script src="./OHLC chart demo _ amCharts_files/detect.js"></script><script type="text/javascript" src="./OHLC chart demo _ amCharts_files/pdfmake.js" async=""></script><script type="text/javascript" src="./OHLC chart demo _ amCharts_files/jszip.js" async=""></script><script type="text/javascript" src="./OHLC chart demo _ amCharts_files/fabric.js" async=""></script><script type="text/javascript" src="./OHLC chart demo _ amCharts_files/FileSaver.js" async=""></script><script type="text/javascript" src="./OHLC chart demo _ amCharts_files/xlsx.js" async=""></script><script type="text/javascript" src="./OHLC chart demo _ amCharts_files/vfs_fonts.js" async=""></script></head>
+<body class="single single-demos postid-846">
+<div class="app">
+<div class="app-header">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="navbar navbar-default" role="navigation">
+<a class="m-nav-opener m-only">MENU</a>
+<div class="app-nav-brand">
+<div class="app-nav-brand-inner">
+<a href="https://www.amcharts.com/"><img src="./OHLC chart demo _ amCharts_files/logo.png" alt="amCharts: JavaScript Charts and Maps"></a>
+</div>
+</div>
+<ul id="menu-main-menu" class="nav navbar-nav navbar-main"><li id="nav-menu-item-151" class=" dropdown"><a href="https://www.amcharts.com/javascript-charts/"><span>Products</span></a>
+<ul class="dropdown-menu">
+<li id="nav-menu-item-104" class=""><a title="JavaScript Charts" href="https://www.amcharts.com/javascript-charts/"><i class="product-icon javascript-charts"></i><span>JavaScript</span><strong class="app-font transform-uppercase">Charts</strong></a></li>
+<li id="nav-menu-item-103" class=""><a title="JavaScript Stock Chart" href="https://www.amcharts.com/stock-chart/"><i class="product-icon stock-chart"></i><span>JavaScript</span><strong class="app-font transform-uppercase">Stock Chart</strong></a></li>
+<li id="nav-menu-item-102" class=""><a title="Interactive JavaScript Maps" href="https://www.amcharts.com/javascript-maps/"><i class="product-icon javascript-maps"></i><span>Interactive JavaScript</span><strong class="app-font transform-uppercase">Maps</strong></a></li>
+</ul>
+</li>
+<li id="nav-menu-item-112" class=" dropdown active"><a href="https://www.amcharts.com/demos/"><span>Demos</span></a>
+<ul class="dropdown-menu">
+<li id="nav-menu-item-113" class=" active"><a href="https://www.amcharts.com/demos/"><span>Charts and Maps</span></a></li>
+<li id="nav-menu-item-114" class=""><a href="https://www.amcharts.com/inspiration/"><span>Inspiration Gallery</span></a></li>
+</ul>
+</li>
+<li id="nav-menu-item-138" class=""><a href="https://www.amcharts.com/download/"><span>Download</span></a></li>
+<li id="nav-menu-item-96" class=""><a href="https://www.amcharts.com/online-store/"><span>Buy</span></a></li>
+<li id="nav-menu-item-100" class=""><a href="https://www.amcharts.com/support/"><span>Support</span></a></li>
+<li id="nav-menu-item-208" class=" dropdown"><a href="https://docs.amcharts.com/3/"><span>Docs</span></a>
+<ul class="dropdown-menu">
+<li id="nav-menu-item-210" class=""><a href="https://docs.amcharts.com/3/"><span>API Reference</span></a></li>
+<li id="nav-menu-item-972" class=""><a href="https://www.amcharts.com/tutorials/"><span>Tutorials</span></a></li>
+<li id="nav-menu-item-4331" class=""><a href="https://www.amcharts.com/tips/"><span>Quick Tips</span></a></li>
+</ul>
+</li>
+</ul> <ul class="nav navbar-nav navbar-social">
+<li>
+<a class="pull-left" href="https://www.facebook.com/amcharts" target="_blank"><i class="fa fa-facebook-square"></i></a>
+</li>
+<li>
+<a class="pull-left" href="https://www.twitter.com/amcharts" target="_blank"><i class="fa fa-twitter"></i></a>
+</li>
+<li>
+<a class="pull-left" href="https://feeds.feedburner.com/amcharts" target="_blank"><i class="fa fa-rss"></i></a>
+</li>
+<li>
+<div style="padding-top:12px; padding-left:15px;"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 24px; height: 15px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 24px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 15px;" tabindex="0" vspace="0" width="100%" id="I2_1460869533688" name="I2_1460869533688" src="./OHLC chart demo _ amCharts_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div></div>
+<script type="text/javascript">
+									  (function() {
+									    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+									    po.src = 'https://apis.google.com/js/platform.js';
+									    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+									  })();
+									</script>
+</li>
+<li>
+<a class="btn btn-flat btn-liveeditor transform-uppercase" href="https://live.amcharts.com/">
+<span class="title">Live Editor</span>
+<span class="subtitle">Create charts online</span>
+</a>
+ 
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="app-body">
+<div class="demo-body">
+<div id="style_css"><style type="text/css">#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}						</style></div>
+<div class="app-section background-gray">
+<div class="container">
+<div class="row demo-headline">
+<div class="col-sm-12">
+<a class="demo-flipper-toggler btn btn-flat btn-blue less-margin pull-right transform-uppercase">
+<span>Edit</span>
+</a>
+<div class="demo-nav-top demo-themes pull-right ">
+<ul>
+<li>
+<span class="size-small family-light color-lightgray m-hide">Click to change theme:&nbsp;&nbsp;</span>
+<span class="size-small family-light color-lightgray m-only">Theme:&nbsp;&nbsp;</span>
+</li>
+<li class="demo-themes-item amcharts-tooltip active" data-theme="light" data-css="#chartdiv {
+	width		: 100%;
+	height		: 500px;
+	font-size	: 11px;
+}	" data-title="Light" data-original-title="" title="">
+<a class="fx-all-250" href="https://www.amcharts.com/demos/ohlc-chart/#theme-light">
+<img width="36" height="35" src="./OHLC chart demo _ amCharts_files/theme_light2.png" class="attachment-full size-full wp-post-image" alt="theme_light"> </a>
+</li>
+<li class="demo-themes-item amcharts-tooltip" data-theme="dark" data-css="background: #3f3f4f;color:#ffffff;						" data-title="Dark" data-original-title="" title="">
+<a class="fx-all-250" href="https://www.amcharts.com/demos/ohlc-chart/#theme-dark">
+<img width="36" height="35" src="./OHLC chart demo _ amCharts_files/theme_dark2.png" class="attachment-full size-full wp-post-image" alt="theme_dark"> </a>
+</li>
+<li class="demo-themes-item amcharts-tooltip" data-theme="chalk" data-css="background: #282828 url(&#39;http://www.amcharts.com/lib/3/patterns/chalk/bg.jpg&#39;);color: #fff;		" data-title="Chalk" data-original-title="" title="">
+<a class="fx-all-250" href="https://www.amcharts.com/demos/ohlc-chart/#theme-chalk">
+<img width="36" height="35" src="./OHLC chart demo _ amCharts_files/theme_chalk.png" class="attachment-full size-full wp-post-image" alt="theme_chalk"> </a>
+</li>
+<li class="demo-themes-item amcharts-tooltip" data-theme="none" data-css="" data-title="Default" data-original-title="" title="">
+<a class="fx-all-250" href="https://www.amcharts.com/demos/ohlc-chart/#theme-none">
+<img width="36" height="35" src="./OHLC chart demo _ amCharts_files/theme_none.png" class="attachment-full size-full wp-post-image" alt="theme_none"> </a>
+</li>
+</ul>
+</div>
+<h2 class="app-font family-light size-biggerer" style="padding: 0 0 0 20px;">
+<i class="product-icon javascript-charts position-relative"></i>Javascript Charts </h2>
+</div>
+</div>
+<div class="row demo-example">
+<div class="col-sm-12">
+<div class="demo-flipper">
+<div class="demo-flipper-container">
+<div class="demo-flipper-front demo-panel-white fx-all-250" style="#chartdiv {
+	width		: 100%;
+	height		: 500px;
+	font-size	: 11px;
+}	">
+<div id="container_html" class="chart-reset overflow-hidden" style="height: 100%;"><div id="chartdiv" style="overflow: visible; text-align: left;"><div class="amcharts-main-div" style="position: relative;"><div class="amcharts-chart-div" style="overflow: hidden; position: relative; text-align: left; width: 1120px; height: 500px; padding: 0px; cursor: default; touch-action: auto;"><svg version="1.1" style="position: absolute; width: 1120px; height: 500px; top: 0px; left: -0.5px;"><desc>JavaScript chart by amCharts 3.20.3</desc><g><path cs="100,100" d="M0.5,0.5 L1119.5,0.5 L1119.5,499.5 L0.5,499.5 Z" fill="#FFFFFF" stroke="#000000" fill-opacity="0" stroke-width="1" stroke-opacity="0" class="amcharts-bg"></path><path cs="100,100" d="M0.5,0.5 L1048.5,0.5 L1048.5,416.5 L0.5,416.5 L0.5,0.5 Z" fill="#FFFFFF" stroke="#000000" fill-opacity="0" stroke-width="1" stroke-opacity="0" class="amcharts-plot-area" transform="translate(51,50)"></path></g><g><g class="amcharts-value-axis value-axis-valueAxisAuto0_1460869534366" transform="translate(51,0)" visibility="hidden"></g><g class="amcharts-category-axis" transform="translate(51,50)"><g><path cs="100,100" d="M0.5,0.5 L0.5,5.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(0,416)" class="amcharts-axis-tick"></path><path cs="100,100" d="M0.5,416.5 L0.5,416.5 L0.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M140.5,0.5 L140.5,5.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(0,416)" class="amcharts-axis-tick"></path><path cs="100,100" d="M140.5,416.5 L140.5,416.5 L140.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M279.5,0.5 L279.5,5.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(0,416)" class="amcharts-axis-tick"></path><path cs="100,100" d="M279.5,416.5 L279.5,416.5 L279.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M419.5,0.5 L419.5,5.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(0,416)" class="amcharts-axis-tick"></path><path cs="100,100" d="M419.5,416.5 L419.5,416.5 L419.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M559.5,0.5 L559.5,5.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(0,416)" class="amcharts-axis-tick"></path><path cs="100,100" d="M559.5,416.5 L559.5,416.5 L559.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M699.5,0.5 L699.5,5.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(0,416)" class="amcharts-axis-tick"></path><path cs="100,100" d="M699.5,416.5 L699.5,416.5 L699.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M838.5,0.5 L838.5,5.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(0,416)" class="amcharts-axis-tick"></path><path cs="100,100" d="M838.5,416.5 L838.5,416.5 L838.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M978.5,0.5 L978.5,5.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(0,416)" class="amcharts-axis-tick"></path><path cs="100,100" d="M978.5,416.5 L978.5,416.5 L978.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g></g><g class="amcharts-value-axis value-axis-valueAxisAuto0_1460869534366" transform="translate(51,50)" visibility="visible"><g><path cs="100,100" d="M0.5,416.5 L6.5,416.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(-6,0)" class="amcharts-axis-tick"></path><path cs="100,100" d="M0.5,416.5 L0.5,416.5 L1048.5,416.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,364.5 L6.5,364.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(-6,0)" class="amcharts-axis-tick"></path><path cs="100,100" d="M0.5,364.5 L0.5,364.5 L1048.5,364.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,312.5 L6.5,312.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(-6,0)" class="amcharts-axis-tick"></path><path cs="100,100" d="M0.5,312.5 L0.5,312.5 L1048.5,312.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,260.5 L6.5,260.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(-6,0)" class="amcharts-axis-tick"></path><path cs="100,100" d="M0.5,260.5 L0.5,260.5 L1048.5,260.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,208.5 L6.5,208.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(-6,0)" class="amcharts-axis-tick"></path><path cs="100,100" d="M0.5,208.5 L0.5,208.5 L1048.5,208.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,156.5 L6.5,156.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(-6,0)" class="amcharts-axis-tick"></path><path cs="100,100" d="M0.5,156.5 L0.5,156.5 L1048.5,156.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,104.5 L6.5,104.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(-6,0)" class="amcharts-axis-tick"></path><path cs="100,100" d="M0.5,104.5 L0.5,104.5 L1048.5,104.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,52.5 L6.5,52.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(-6,0)" class="amcharts-axis-tick"></path><path cs="100,100" d="M0.5,52.5 L0.5,52.5 L1048.5,52.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,0.5 L6.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(-6,0)" class="amcharts-axis-tick"></path><path cs="100,100" d="M0.5,0.5 L0.5,0.5 L1048.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g></g></g><g transform="translate(51,50)" clip-path="url(#AmChartsEl-3)"><g visibility="hidden"></g></g><g></g><g></g><g></g><g><g transform="translate(51,50)" class="amcharts-graph-ohlc amcharts-graph-g1"><g></g><path cs="100,100" d="M7.5,343.5 L35.5,343.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M35.5,399.5 L35.5,328.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke"></path><path cs="100,100" d="M35.5,343.5 L63.5,343.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M77.5,291.5 L105.5,291.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M105.5,314.5 L105.5,276.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke"></path><path cs="100,100" d="M105.5,291.5 L133.5,291.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M286.5,271.5 L314.5,271.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M314.5,307.5 L314.5,265.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke"></path><path cs="100,100" d="M314.5,289.5 L342.5,289.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M356.5,289.5 L384.5,289.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M384.5,302.5 L384.5,219.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke"></path><path cs="100,100" d="M384.5,233.5 L412.5,233.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M426.5,195.5 L454.5,195.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M454.5,205.5 L454.5,179.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke"></path><path cs="100,100" d="M454.5,182.5 L482.5,182.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M496.5,176.5 L524.5,176.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M524.5,210.5 L524.5,173.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke"></path><path cs="100,100" d="M524.5,197.5 L552.5,197.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M566.5,202.5 L594.5,202.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M594.5,210.5 L594.5,152.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke"></path><path cs="100,100" d="M594.5,153.5 L622.5,153.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M775.5,173.5 L803.5,173.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M803.5,186.5 L803.5,160.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke"></path><path cs="100,100" d="M803.5,185.5 L831.5,185.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M845.5,198.5 L873.5,198.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M873.5,243.5 L873.5,183.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke"></path><path cs="100,100" d="M873.5,241.5 L901.5,241.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M915.5,209.5 L943.5,209.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M943.5,213.5 L943.5,165.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke"></path><path cs="100,100" d="M943.5,166.5 L971.5,166.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M985.5,180.5 L1013.5,180.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M1013.5,143.5 L1041.5,143.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M1048.5,109.5 L1048.5,109.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M1048.5,120.5 L1048.5,120.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#db4c3c" class="amcharts-graph-stroke-close"></path><g></g><path cs="100,100" d="M1048.5,105.5 L1048.5,105.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-open"></path><path cs="100,100" d="M1013.5,184.5 L1013.5,122.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke amcharts-graph-stroke amcharts-graph-stroke"></path><path cs="100,100" d="M1048.5,61.5 L1048.5,61.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#7f8da9" class="amcharts-graph-stroke-close"></path><g></g></g></g><g></g><g><g><path cs="100,100" d="M0.5,0.5 L1048.5,0.5" fill="none" stroke-width="1" stroke-opacity="0" stroke="#000000" transform="translate(0,30)" class="amcharts-axis-line"></path></g><g class="amcharts-value-axis value-axis-valueAxisAuto0_1460869534366"><path cs="100,100" d="M0.5,0.5 L0.5,30.5" fill="none" stroke-width="1" stroke-opacity="0" stroke="#000000" transform="translate(51,0)" class="amcharts-axis-line" visibility="hidden"></path></g><g class="amcharts-category-axis"><path cs="100,100" d="M0.5,0.5 L1048.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(51,466)" class="amcharts-axis-line"></path></g><g class="amcharts-value-axis value-axis-valueAxisAuto0_1460869534366"><path cs="100,100" d="M0.5,0.5 L0.5,416.5" fill="none" stroke-width="1" stroke-opacity="0.3" stroke="#000000" transform="translate(51,50)" class="amcharts-axis-line" visibility="visible"></path></g></g><g><g transform="translate(51,50)" clip-path="url(#AmChartsEl-4)" style="pointer-events: none;"><path cs="100,100" d="M0.5,0.5 L0.5,0.5 L0.5,416.5" fill="none" stroke-width="1" stroke-opacity="0.5" stroke="#000000" class="amcharts-cursor-line amcharts-cursor-line-vertical" visibility="hidden" transform="translate(454,0)"></path><path cs="100,100" d="M0.5,0.5 L1048.5,0.5 L1048.5,0.5" fill="none" stroke-width="1" stroke="#000000" class="amcharts-cursor-line amcharts-cursor-line-horizontal" visibility="hidden" transform="translate(0,409)"></path></g><clippath id="AmChartsEl-4"><rect x="0" y="0" width="1048" height="416" rx="0" ry="0" stroke-width="0"></rect></clippath></g><g><g visibility="visible" transform="translate(51,20)" style="touch-action: none;"><rect x="0.5" y="0.5" width="1049" height="30" rx="0" ry="0" stroke-width="1" fill="#000000" stroke="#000000" fill-opacity="0.12" stroke-opacity="0.12" class="amcharts-scrollbar-bg"></rect><rect x="0.5" y="0.5" width="80" height="31" rx="0" ry="0" stroke-width="0" fill="#FFFFFF" stroke="#FFFFFF" fill-opacity="0.4" stroke-opacity="0.4" class="amcharts-scrollbar-bg-selected" transform="translate(75,0)"></rect><g transform="translate(0,0)" class="amcharts-graph-line amcharts-graph-g1"><g></g><g><path cs="100,100" d="M3.5,23.202 L8.5,24.13 L24.5,23.45 L29.5,23.494 L35.5,23.698 L40.5,25.222 L45.5,25.5 L61.5,24.942 L67.5,25.694 L72.5,26.52 L78.5,27.09 L83.5,26.088 L99.5,26.056 L104.5,24.986 L110.5,23.998 L115.5,24.286 L120.5,23.44 L136.5,24.05 L142.5,25.136 L147.5,23.684 L152.5,23.25 L158.5,22.804 L179.5,21.668 L184.5,23.148 L190.5,23.498 L195.5,24.146 L211.5,23.158 L217.5,23.402 L222.5,23.13 L227.5,23.06 L233.5,22.738 L249.5,22.818 L254.5,22.316 L259.5,22.346 L265.5,22.438 L270.5,21.67 L286.5,20.844 L291.5,19.864 L297.5,19.946 L302.5,19.6 L307.5,19.806 L323.5,19.232 L329.5,18.81 L334.5,18.916 L339.5,19.252 L345.5,18.21 L361.5,16.918 L366.5,16.928 L372.5,17.142 L377.5,18.054 L382.5,17.05 L398.5,17.104 L404.5,16.584 L409.5,15.95 L414.5,15.8 L420.5,16.416 L436.5,15.628 L441.5,13.268 L446.5,13.314 L452.5,13.944 L457.5,13.56 L473.5,13.482 L478.5,13.1 L484.5,12.51 L489.5,13.012 L495.5,12.926 L511.5,13.264 L516.5,12.142 L521.5,13.24 L527.5,15.406 L532.5,17.426 L548.5,19.748 L554.5,16.508 L559.5,17.278 L564.5,17.64 L570.5,17.222 L586.5,17.71 L591.5,16.73 L596.5,16.808 L607.5,16.192 L623.5,15.992 L628.5,15.538 L634.5,14.456 L639.5,13.642 L644.5,14.056 L660.5,14.728 L666.5,14.538 L671.5,13.4 L676.5,12.51 L682.5,11.64 L698.5,11.658 L703.5,12.792 L709.5,12.328 L714.5,12.134 L719.5,12.422 L735.5,13.62 L741.5,13.904 L746.5,13.876 L751.5,13.058 L757.5,11.718 L773.5,10.74 L783.5,10.71 L789.5,10.786 L794.5,10.534 L810.5,10.884 L821.5,11.532 L826.5,11.514 L831.5,14.49 L848.5,14.972 L853.5,16.25 L858.5,14.62 L864.5,14.896 L869.5,15.962 L885.5,14.744 L890.5,16.692 L896.5,18.572 L901.5,18.322 L906.5,18.228 L928.5,19.372 L933.5,22.686 L938.5,23.38 L944.5,24.498 L960.5,24.498 L965.5,24.192 L970.5,24.064 L976.5,23.428 L981.5,23.75 L997.5,24.17 L1003.5,24.628 L1008.5,26.1 L1013.5,26.252 L1019.5,25.404 L1035.5,24.61 L1040.5,25.528 L1045.5,24.62 M0,0 L0,0" fill="none" stroke-width="1" stroke-opacity="0" stroke="#BBBBBB" class="amcharts-scrollbar-graph-stroke"></path><path cs="100,100" d="M3.5,23.202 L8.5,24.13 L24.5,23.45 L29.5,23.494 L35.5,23.698 L40.5,25.222 L45.5,25.5 L61.5,24.942 L67.5,25.694 L72.5,26.52 L78.5,27.09 L83.5,26.088 L99.5,26.056 L104.5,24.986 L110.5,23.998 L115.5,24.286 L120.5,23.44 L136.5,24.05 L142.5,25.136 L147.5,23.684 L152.5,23.25 L158.5,22.804 L179.5,21.668 L184.5,23.148 L190.5,23.498 L195.5,24.146 L211.5,23.158 L217.5,23.402 L222.5,23.13 L227.5,23.06 L233.5,22.738 L249.5,22.818 L254.5,22.316 L259.5,22.346 L265.5,22.438 L270.5,21.67 L286.5,20.844 L291.5,19.864 L297.5,19.946 L302.5,19.6 L307.5,19.806 L323.5,19.232 L329.5,18.81 L334.5,18.916 L339.5,19.252 L345.5,18.21 L361.5,16.918 L366.5,16.928 L372.5,17.142 L377.5,18.054 L382.5,17.05 L398.5,17.104 L404.5,16.584 L409.5,15.95 L414.5,15.8 L420.5,16.416 L436.5,15.628 L441.5,13.268 L446.5,13.314 L452.5,13.944 L457.5,13.56 L473.5,13.482 L478.5,13.1 L484.5,12.51 L489.5,13.012 L495.5,12.926 L511.5,13.264 L516.5,12.142 L521.5,13.24 L527.5,15.406 L532.5,17.426 L548.5,19.748 L554.5,16.508 L559.5,17.278 L564.5,17.64 L570.5,17.222 L586.5,17.71 L591.5,16.73 L596.5,16.808 L607.5,16.192 L623.5,15.992 L628.5,15.538 L634.5,14.456 L639.5,13.642 L644.5,14.056 L660.5,14.728 L666.5,14.538 L671.5,13.4 L676.5,12.51 L682.5,11.64 L698.5,11.658 L703.5,12.792 L709.5,12.328 L714.5,12.134 L719.5,12.422 L735.5,13.62 L741.5,13.904 L746.5,13.876 L751.5,13.058 L757.5,11.718 L773.5,10.74 L783.5,10.71 L789.5,10.786 L794.5,10.534 L810.5,10.884 L821.5,11.532 L826.5,11.514 L831.5,14.49 L848.5,14.972 L853.5,16.25 L858.5,14.62 L864.5,14.896 L869.5,15.962 L885.5,14.744 L890.5,16.692 L896.5,18.572 L901.5,18.322 L906.5,18.228 L928.5,19.372 L933.5,22.686 L938.5,23.38 L944.5,24.498 L960.5,24.498 L965.5,24.192 L970.5,24.064 L976.5,23.428 L981.5,23.75 L997.5,24.17 L1003.5,24.628 L1008.5,26.1 L1013.5,26.252 L1019.5,25.404 L1035.5,24.61 L1040.5,25.528 L1045.5,24.62 L1045.5,30.5 L3.5,30.5 L3.5,23.202 Z" fill="#BBBBBB" stroke="#000" fill-opacity="0.5" stroke-width="1" stroke-opacity="0" class="amcharts-scrollbar-graph-fill"></path></g><g></g></g><g transform="translate(0,0)" class="amcharts-graph-line amcharts-graph-g1" clip-path="url(#AmChartsEl-6)"><g></g><g><path cs="100,100" d="M3.5,23.202 L8.5,24.13 L24.5,23.45 L29.5,23.494 L35.5,23.698 L40.5,25.222 L45.5,25.5 L61.5,24.942 L67.5,25.694 L72.5,26.52 L78.5,27.09 L83.5,26.088 L99.5,26.056 L104.5,24.986 L110.5,23.998 L115.5,24.286 L120.5,23.44 L136.5,24.05 L142.5,25.136 L147.5,23.684 L152.5,23.25 L158.5,22.804 L179.5,21.668 L184.5,23.148 L190.5,23.498 L195.5,24.146 L211.5,23.158 L217.5,23.402 L222.5,23.13 L227.5,23.06 L233.5,22.738 L249.5,22.818 L254.5,22.316 L259.5,22.346 L265.5,22.438 L270.5,21.67 L286.5,20.844 L291.5,19.864 L297.5,19.946 L302.5,19.6 L307.5,19.806 L323.5,19.232 L329.5,18.81 L334.5,18.916 L339.5,19.252 L345.5,18.21 L361.5,16.918 L366.5,16.928 L372.5,17.142 L377.5,18.054 L382.5,17.05 L398.5,17.104 L404.5,16.584 L409.5,15.95 L414.5,15.8 L420.5,16.416 L436.5,15.628 L441.5,13.268 L446.5,13.314 L452.5,13.944 L457.5,13.56 L473.5,13.482 L478.5,13.1 L484.5,12.51 L489.5,13.012 L495.5,12.926 L511.5,13.264 L516.5,12.142 L521.5,13.24 L527.5,15.406 L532.5,17.426 L548.5,19.748 L554.5,16.508 L559.5,17.278 L564.5,17.64 L570.5,17.222 L586.5,17.71 L591.5,16.73 L596.5,16.808 L607.5,16.192 L623.5,15.992 L628.5,15.538 L634.5,14.456 L639.5,13.642 L644.5,14.056 L660.5,14.728 L666.5,14.538 L671.5,13.4 L676.5,12.51 L682.5,11.64 L698.5,11.658 L703.5,12.792 L709.5,12.328 L714.5,12.134 L719.5,12.422 L735.5,13.62 L741.5,13.904 L746.5,13.876 L751.5,13.058 L757.5,11.718 L773.5,10.74 L783.5,10.71 L789.5,10.786 L794.5,10.534 L810.5,10.884 L821.5,11.532 L826.5,11.514 L831.5,14.49 L848.5,14.972 L853.5,16.25 L858.5,14.62 L864.5,14.896 L869.5,15.962 L885.5,14.744 L890.5,16.692 L896.5,18.572 L901.5,18.322 L906.5,18.228 L928.5,19.372 L933.5,22.686 L938.5,23.38 L944.5,24.498 L960.5,24.498 L965.5,24.192 L970.5,24.064 L976.5,23.428 L981.5,23.75 L997.5,24.17 L1003.5,24.628 L1008.5,26.1 L1013.5,26.252 L1019.5,25.404 L1035.5,24.61 L1040.5,25.528 L1045.5,24.62 M0,0 L0,0" fill="none" stroke-width="1" stroke-opacity="0" stroke="#888888" class="amcharts-scrollbar-graph-selected-stroke"></path><path cs="100,100" d="M3.5,23.202 L8.5,24.13 L24.5,23.45 L29.5,23.494 L35.5,23.698 L40.5,25.222 L45.5,25.5 L61.5,24.942 L67.5,25.694 L72.5,26.52 L78.5,27.09 L83.5,26.088 L99.5,26.056 L104.5,24.986 L110.5,23.998 L115.5,24.286 L120.5,23.44 L136.5,24.05 L142.5,25.136 L147.5,23.684 L152.5,23.25 L158.5,22.804 L179.5,21.668 L184.5,23.148 L190.5,23.498 L195.5,24.146 L211.5,23.158 L217.5,23.402 L222.5,23.13 L227.5,23.06 L233.5,22.738 L249.5,22.818 L254.5,22.316 L259.5,22.346 L265.5,22.438 L270.5,21.67 L286.5,20.844 L291.5,19.864 L297.5,19.946 L302.5,19.6 L307.5,19.806 L323.5,19.232 L329.5,18.81 L334.5,18.916 L339.5,19.252 L345.5,18.21 L361.5,16.918 L366.5,16.928 L372.5,17.142 L377.5,18.054 L382.5,17.05 L398.5,17.104 L404.5,16.584 L409.5,15.95 L414.5,15.8 L420.5,16.416 L436.5,15.628 L441.5,13.268 L446.5,13.314 L452.5,13.944 L457.5,13.56 L473.5,13.482 L478.5,13.1 L484.5,12.51 L489.5,13.012 L495.5,12.926 L511.5,13.264 L516.5,12.142 L521.5,13.24 L527.5,15.406 L532.5,17.426 L548.5,19.748 L554.5,16.508 L559.5,17.278 L564.5,17.64 L570.5,17.222 L586.5,17.71 L591.5,16.73 L596.5,16.808 L607.5,16.192 L623.5,15.992 L628.5,15.538 L634.5,14.456 L639.5,13.642 L644.5,14.056 L660.5,14.728 L666.5,14.538 L671.5,13.4 L676.5,12.51 L682.5,11.64 L698.5,11.658 L703.5,12.792 L709.5,12.328 L714.5,12.134 L719.5,12.422 L735.5,13.62 L741.5,13.904 L746.5,13.876 L751.5,13.058 L757.5,11.718 L773.5,10.74 L783.5,10.71 L789.5,10.786 L794.5,10.534 L810.5,10.884 L821.5,11.532 L826.5,11.514 L831.5,14.49 L848.5,14.972 L853.5,16.25 L858.5,14.62 L864.5,14.896 L869.5,15.962 L885.5,14.744 L890.5,16.692 L896.5,18.572 L901.5,18.322 L906.5,18.228 L928.5,19.372 L933.5,22.686 L938.5,23.38 L944.5,24.498 L960.5,24.498 L965.5,24.192 L970.5,24.064 L976.5,23.428 L981.5,23.75 L997.5,24.17 L1003.5,24.628 L1008.5,26.1 L1013.5,26.252 L1019.5,25.404 L1035.5,24.61 L1040.5,25.528 L1045.5,24.62 L1045.5,30.5 L3.5,30.5 L3.5,23.202 Z" fill="#888888" stroke="#000" fill-opacity="1" stroke-width="1" stroke-opacity="0" class="amcharts-scrollbar-graph-selected-fill"></path></g><g></g></g><g transform="translate(0,0)"></g><g transform="translate(0,0)" visibility="visible"></g><rect x="0.5" y="0.5" width="1049" height="30" rx="0" ry="0" stroke-width="0" fill="#000" stroke="#000" fill-opacity="0.005" stroke-opacity="0.005"></rect><rect x="75" y="0.5" width="80" height="30" rx="0" ry="0" stroke-width="0" fill="#000" stroke="#000" fill-opacity="0.005" stroke-opacity="0.005"></rect><g transform="translate(58,-2)"><image x="0" y="0" width="35" height="35" xlink:href="https://www.amcharts.com/lib/3/images/dragIconRoundBig.svg" class="amcharts-scrollbar-grip-left"></image><rect x="0.5" y="0.5" width="25" height="30" rx="0" ry="0" stroke-width="0" fill="#000" stroke="#000" fill-opacity="0.005" stroke-opacity="0.005" transform="translate(5,3)"></rect></g><g transform="translate(138,-2)"><image x="0" y="0" width="35" height="35" xlink:href="https://www.amcharts.com/lib/3/images/dragIconRoundBig.svg" class="amcharts-scrollbar-grip-right"></image><rect x="0.5" y="0.5" width="25" height="30" rx="0" ry="0" stroke-width="0" fill="#000" stroke="#000" fill-opacity="0.005" stroke-opacity="0.005" transform="translate(5,3)"></rect></g><clippath id="AmChartsEl-6"><rect x="75" y="0" width="80" height="31" rx="0" ry="0" stroke-width="0"></rect></clippath></g></g><g><g transform="translate(0,0)" class="amcharts-graph-line amcharts-graph-g1"></g><g transform="translate(0,0)" class="amcharts-graph-line amcharts-graph-g1"></g><g transform="translate(51,50)" class="amcharts-graph-ohlc amcharts-graph-g1"></g></g><g><g></g></g><g><g class="amcharts-value-axis value-axis-valueAxisAuto0_1460869534366" transform="translate(51,0)" visibility="hidden"></g><g class="amcharts-category-axis" transform="translate(51,50)" visibility="visible"><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(3,430)" class="amcharts-axis-label"><tspan y="7" x="0">Aug 15</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(143,430)" class="amcharts-axis-label"><tspan y="7" x="0">Aug 17</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(282,430)" class="amcharts-axis-label"><tspan y="7" x="0">Aug 19</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(422,430)" class="amcharts-axis-label"><tspan y="7" x="0">Aug 21</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(562,430)" class="amcharts-axis-label"><tspan y="7" x="0">Aug 23</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(702,430)" class="amcharts-axis-label"><tspan y="7" x="0">Aug 25</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(841,430)" class="amcharts-axis-label"><tspan y="7" x="0">Aug 27</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(981,430)" class="amcharts-axis-label"><tspan y="7" x="0">Aug 29</tspan></text></g><g class="amcharts-value-axis value-axis-valueAxisAuto0_1460869534366" transform="translate(51,50)" visibility="visible"><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="end" transform="translate(-12,414.5)" class="amcharts-axis-label"><tspan y="7" x="0">110</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="end" transform="translate(-12,362.5)" class="amcharts-axis-label"><tspan y="7" x="0">115</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="end" transform="translate(-12,310.5)" class="amcharts-axis-label"><tspan y="7" x="0">120</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="end" transform="translate(-12,258.5)" class="amcharts-axis-label"><tspan y="7" x="0">125</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="end" transform="translate(-12,206.5)" class="amcharts-axis-label"><tspan y="7" x="0">130</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="end" transform="translate(-12,154.5)" class="amcharts-axis-label"><tspan y="7" x="0">135</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="end" transform="translate(-12,102.5)" class="amcharts-axis-label"><tspan y="7" x="0">140</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="end" transform="translate(-12,50.5)" class="amcharts-axis-label"><tspan y="7" x="0">145</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="end" transform="translate(-12,-1.5)" class="amcharts-axis-label"><tspan y="7" x="0">150</tspan></text></g></g><g></g><g transform="translate(51,50)"></g><g><g transform="translate(1012,58)" visibility="visible"><rect x="0.5" y="0.5" width="96" height="33" rx="0" ry="0" stroke-width="1" fill="#000000" stroke="#000000" fill-opacity="1" stroke-opacity="1" opacity="0" transform="translate(-8,-8)" class="amcharts-zoom-out-bg"></rect><image x="0" y="0" width="19" height="19" xlink:href="https://www.amcharts.com/lib/3/images/lens.svg" class="amcharts-zoom-out-image"></image><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" class="amcharts-zoom-out-label" transform="translate(24,7)"><tspan y="7" x="0">Show all</tspan></text></g></g><g></g><clippath id="AmChartsEl-3"><rect x="0" y="0" width="1048" height="416" rx="0" ry="0" stroke-width="0"></rect></clippath></svg></div><div class="amcharts-export-menu amcharts-export-menu-bottom-right amExportButton"><ul><li class="export-main"><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>menu.label.undefined</span></a><ul><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>Download as ...</span></a><ul><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>PNG</span></a></li><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>JPG</span></a></li><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>SVG</span></a></li><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>PDF</span></a></li></ul></li><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>Save as ...</span></a><ul><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>CSV</span></a></li><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>XLSX</span></a></li><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>JSON</span></a></li></ul></li><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>Annotate ...</span></a></li><li><a href="https://www.amcharts.com/demos/ohlc-chart/#"><span>Print</span></a></li></ul></li></ul></div></div></div>							</div>
+</div>
+<div class="demo-flipper-back demo-panel-white fx-all-250" aria-hidden="true">
+<form id="jsfiddle" target="_amcharts" method="post" action="https://jsfiddle.net/api/post/library/pure/">
+<ul class="nav nav-tabs">
+<li class="active"><a href="https://www.amcharts.com/demos/ohlc-chart/#javascript" data-toggle="tab">Javascript</a></li>
+<li><a href="https://www.amcharts.com/demos/ohlc-chart/#html" data-toggle="tab">HTML</a></li>
+<li><a href="https://www.amcharts.com/demos/ohlc-chart/#css" data-toggle="tab">CSS</a></li>
+<li><a href="https://www.amcharts.com/demos/ohlc-chart/#resources" data-toggle="tab">Resources</a></li>
+<li class="pull-right"><a href="https://www.amcharts.com/demos/ohlc-chart/#" class="demo-flipper-codepen">Open in CodePen</a></li>
+<li class="pull-right"><a href="https://www.amcharts.com/demos/ohlc-chart/#" class="demo-flipper-jsfiddle">Open in JSFiddle</a></li>
+</ul>
+<div class="tab-content position-relative">
+<div id="javascript" class="tab-pane overflow-auto active">
+<div id="editor_js" style="height: 437px;"><div class="CodeMirror cm-s-default CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 50px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none; font-size: 4px;"></textarea></div><div class="CodeMirror-hscrollbar" style="left: 46px;"><div style="height: 1px; width: 0px;"></div></div><div class="CodeMirror-vscrollbar" style="display: block; bottom: 0px;"><div style="width: 1px; height: 12034px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-gutter-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 46px; min-height: 12034px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1; display: none;"></div><div class="CodeMirror-code"><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">1</div></div><pre><span class="cm-keyword">var</span> <span class="cm-variable">chart</span> = <span class="cm-variable">AmCharts</span>.<span class="cm-property">makeChart</span>( <span class="cm-string">"chartdiv"</span>, {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">2</div></div><pre>  <span class="cm-string cm-property">"type"</span>: <span class="cm-string">"serial"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">3</div></div><pre>  <span class="cm-string cm-property">"theme"</span>: <span class="cm-string">"light"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">4</div></div><pre>  <span class="cm-string cm-property">"dataDateFormat"</span>:<span class="cm-string">"YYYY-MM-DD"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">5</div></div><pre>  <span class="cm-string cm-property">"valueAxes"</span>: [ {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">6</div></div><pre> &nbsp;  <span class="cm-string cm-property">"position"</span>: <span class="cm-string">"left"</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">7</div></div><pre>  } ],</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">8</div></div><pre>  <span class="cm-string cm-property">"graphs"</span>: [ {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">9</div></div><pre> &nbsp;  <span class="cm-string cm-property">"id"</span>: <span class="cm-string">"g1"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">10</div></div><pre> &nbsp;  <span class="cm-string cm-property">"balloonText"</span>: <span class="cm-string">"Open:&lt;b&gt;[[open]]&lt;/b&gt;&lt;br&gt;Low:&lt;b&gt;[[low]]&lt;/b&gt;&lt;br&gt;High:&lt;b&gt;[[high]]&lt;/b&gt;&lt;br&gt;Close:&lt;b&gt;[[close]]&lt;/b&gt;&lt;br&gt;"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">11</div></div><pre> &nbsp;  <span class="cm-string cm-property">"closeField"</span>: <span class="cm-string">"close"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">12</div></div><pre> &nbsp;  <span class="cm-string cm-property">"fillColors"</span>: <span class="cm-string">"#7f8da9"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">13</div></div><pre> &nbsp;  <span class="cm-string cm-property">"highField"</span>: <span class="cm-string">"high"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">14</div></div><pre> &nbsp;  <span class="cm-string cm-property">"lineColor"</span>: <span class="cm-string">"#7f8da9"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">15</div></div><pre> &nbsp;  <span class="cm-string cm-property">"lineAlpha"</span>: <span class="cm-number">1</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">16</div></div><pre> &nbsp;  <span class="cm-string cm-property">"fillAlphas"</span>: <span class="cm-number">0</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">17</div></div><pre> &nbsp;  <span class="cm-string cm-property">"lowField"</span>: <span class="cm-string">"low"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">18</div></div><pre> &nbsp;  <span class="cm-string cm-property">"negativeFillColors"</span>: <span class="cm-string">"#db4c3c"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">19</div></div><pre> &nbsp;  <span class="cm-string cm-property">"negativeLineColor"</span>: <span class="cm-string">"#db4c3c"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">20</div></div><pre> &nbsp;  <span class="cm-string cm-property">"openField"</span>: <span class="cm-string">"open"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">21</div></div><pre> &nbsp;  <span class="cm-string cm-property">"title"</span>: <span class="cm-string">"Price:"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">22</div></div><pre> &nbsp;  <span class="cm-string cm-property">"type"</span>: <span class="cm-string">"ohlc"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">23</div></div><pre> &nbsp;  <span class="cm-string cm-property">"valueField"</span>: <span class="cm-string">"close"</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">24</div></div><pre>  } ],</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">25</div></div><pre>  <span class="cm-string cm-property">"chartScrollbar"</span>: {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">26</div></div><pre> &nbsp;  <span class="cm-string cm-property">"graph"</span>: <span class="cm-string">"g1"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">27</div></div><pre> &nbsp;  <span class="cm-string cm-property">"graphType"</span>: <span class="cm-string">"line"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">28</div></div><pre> &nbsp;  <span class="cm-string cm-property">"scrollbarHeight"</span>: <span class="cm-number">30</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">29</div></div><pre>  },</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">30</div></div><pre>  <span class="cm-string cm-property">"chartCursor"</span>: {},</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">31</div></div><pre>  <span class="cm-string cm-property">"categoryField"</span>: <span class="cm-string">"date"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">32</div></div><pre>  <span class="cm-string cm-property">"categoryAxis"</span>: {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">33</div></div><pre> &nbsp;  <span class="cm-string cm-property">"parseDates"</span>: <span class="cm-atom">true</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">34</div></div><pre>  },</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">35</div></div><pre>  <span class="cm-string cm-property">"dataProvider"</span>: [ {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">36</div></div><pre> &nbsp;  <span class="cm-string cm-property">"date"</span>: <span class="cm-string">"2011-08-01"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">37</div></div><pre> &nbsp;  <span class="cm-string cm-property">"open"</span>: <span class="cm-string">"136.65"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">38</div></div><pre> &nbsp;  <span class="cm-string cm-property">"high"</span>: <span class="cm-string">"136.96"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">39</div></div><pre> &nbsp;  <span class="cm-string cm-property">"low"</span>: <span class="cm-string">"134.15"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">40</div></div><pre> &nbsp;  <span class="cm-string cm-property">"close"</span>: <span class="cm-string">"136.49"</span></pre></div></div><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 14px;">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor" style="display: none;">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; top: 12034px;"></div><div class="CodeMirror-gutters" style="height: 12034px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 45px;"></div></div></div></div></div>
+<textarea id="code_js" name="js" class="hidden">var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "serial",
+  "theme": "light",
+  "dataDateFormat":"YYYY-MM-DD",
+  "valueAxes": [ {
+    "position": "left"
+  } ],
+  "graphs": [ {
+    "id": "g1",
+    "balloonText": "Open:&lt;b&gt;[[open]]&lt;/b&gt;&lt;br&gt;Low:&lt;b&gt;[[low]]&lt;/b&gt;&lt;br&gt;High:&lt;b&gt;[[high]]&lt;/b&gt;&lt;br&gt;Close:&lt;b&gt;[[close]]&lt;/b&gt;&lt;br&gt;",
+    "closeField": "close",
+    "fillColors": "#7f8da9",
+    "highField": "high",
+    "lineColor": "#7f8da9",
+    "lineAlpha": 1,
+    "fillAlphas": 0,
+    "lowField": "low",
+    "negativeFillColors": "#db4c3c",
+    "negativeLineColor": "#db4c3c",
+    "openField": "open",
+    "title": "Price:",
+    "type": "ohlc",
+    "valueField": "close"
+  } ],
+  "chartScrollbar": {
+    "graph": "g1",
+    "graphType": "line",
+    "scrollbarHeight": 30
+  },
+  "chartCursor": {},
+  "categoryField": "date",
+  "categoryAxis": {
+    "parseDates": true
+  },
+  "dataProvider": [ {
+    "date": "2011-08-01",
+    "open": "136.65",
+    "high": "136.96",
+    "low": "134.15",
+    "close": "136.49"
+  }, {
+    "date": "2011-08-02",
+    "open": "135.26",
+    "high": "135.95",
+    "low": "131.50",
+    "close": "131.85"
+  }, {
+    "date": "2011-08-05",
+    "open": "132.90",
+    "high": "135.27",
+    "low": "128.30",
+    "close": "135.25"
+  }, {
+    "date": "2011-08-06",
+    "open": "134.94",
+    "high": "137.24",
+    "low": "132.63",
+    "close": "135.03"
+  }, {
+    "date": "2011-08-07",
+    "open": "136.76",
+    "high": "136.86",
+    "low": "132.00",
+    "close": "134.01"
+  }, {
+    "date": "2011-08-08",
+    "open": "131.11",
+    "high": "133.00",
+    "low": "125.09",
+    "close": "126.39"
+  }, {
+    "date": "2011-08-09",
+    "open": "123.12",
+    "high": "127.75",
+    "low": "120.30",
+    "close": "125.00"
+  }, {
+    "date": "2011-08-12",
+    "open": "128.32",
+    "high": "129.35",
+    "low": "126.50",
+    "close": "127.79"
+  }, {
+    "date": "2011-08-13",
+    "open": "128.29",
+    "high": "128.30",
+    "low": "123.71",
+    "close": "124.03"
+  }, {
+    "date": "2011-08-14",
+    "open": "122.74",
+    "high": "124.86",
+    "low": "119.65",
+    "close": "119.90"
+  }, {
+    "date": "2011-08-15",
+    "open": "117.01",
+    "high": "118.50",
+    "low": "111.62",
+    "close": "117.05"
+  }, {
+    "date": "2011-08-16",
+    "open": "122.01",
+    "high": "123.50",
+    "low": "119.82",
+    "close": "122.06"
+  }, {
+    "date": "2011-08-19",
+    "open": "123.96",
+    "high": "124.50",
+    "low": "120.50",
+    "close": "122.22"
+  }, {
+    "date": "2011-08-20",
+    "open": "122.21",
+    "high": "128.96",
+    "low": "121.00",
+    "close": "127.57"
+  }, {
+    "date": "2011-08-21",
+    "open": "131.22",
+    "high": "132.75",
+    "low": "130.33",
+    "close": "132.51"
+  }, {
+    "date": "2011-08-22",
+    "open": "133.09",
+    "high": "133.34",
+    "low": "129.76",
+    "close": "131.07"
+  }, {
+    "date": "2011-08-23",
+    "open": "130.53",
+    "high": "135.37",
+    "low": "129.81",
+    "close": "135.30"
+  }, {
+    "date": "2011-08-26",
+    "open": "133.39",
+    "high": "134.66",
+    "low": "132.10",
+    "close": "132.25"
+  }, {
+    "date": "2011-08-27",
+    "open": "130.99",
+    "high": "132.41",
+    "low": "126.63",
+    "close": "126.82"
+  }, {
+    "date": "2011-08-28",
+    "open": "129.88",
+    "high": "134.18",
+    "low": "129.54",
+    "close": "134.08"
+  }, {
+    "date": "2011-08-29",
+    "open": "132.67",
+    "high": "138.25",
+    "low": "132.30",
+    "close": "136.25"
+  }, {
+    "date": "2011-08-30",
+    "open": "139.49",
+    "high": "139.65",
+    "low": "137.41",
+    "close": "138.48"
+  }, {
+    "date": "2011-09-03",
+    "open": "139.94",
+    "high": "145.73",
+    "low": "139.84",
+    "close": "144.16"
+  }, {
+    "date": "2011-09-04",
+    "open": "144.97",
+    "high": "145.84",
+    "low": "136.10",
+    "close": "136.76"
+  }, {
+    "date": "2011-09-05",
+    "open": "135.56",
+    "high": "137.57",
+    "low": "132.71",
+    "close": "135.01"
+  }, {
+    "date": "2011-09-06",
+    "open": "132.01",
+    "high": "132.30",
+    "low": "130.00",
+    "close": "131.77"
+  }, {
+    "date": "2011-09-09",
+    "open": "136.99",
+    "high": "138.04",
+    "low": "133.95",
+    "close": "136.71"
+  }, {
+    "date": "2011-09-10",
+    "open": "137.90",
+    "high": "138.30",
+    "low": "133.75",
+    "close": "135.49"
+  }, {
+    "date": "2011-09-11",
+    "open": "135.99",
+    "high": "139.40",
+    "low": "135.75",
+    "close": "136.85"
+  }, {
+    "date": "2011-09-12",
+    "open": "138.83",
+    "high": "139.00",
+    "low": "136.65",
+    "close": "137.20"
+  }, {
+    "date": "2011-09-13",
+    "open": "136.57",
+    "high": "138.98",
+    "low": "136.20",
+    "close": "138.81"
+  }, {
+    "date": "2011-09-16",
+    "open": "138.99",
+    "high": "140.59",
+    "low": "137.60",
+    "close": "138.41"
+  }, {
+    "date": "2011-09-17",
+    "open": "139.06",
+    "high": "142.85",
+    "low": "137.83",
+    "close": "140.92"
+  }, {
+    "date": "2011-09-18",
+    "open": "143.02",
+    "high": "143.16",
+    "low": "139.40",
+    "close": "140.77"
+  }, {
+    "date": "2011-09-19",
+    "open": "140.15",
+    "high": "141.79",
+    "low": "139.32",
+    "close": "140.31"
+  }, {
+    "date": "2011-09-20",
+    "open": "141.14",
+    "high": "144.65",
+    "low": "140.31",
+    "close": "144.15"
+  }, {
+    "date": "2011-09-23",
+    "open": "146.73",
+    "high": "149.85",
+    "low": "146.65",
+    "close": "148.28"
+  }, {
+    "date": "2011-09-24",
+    "open": "146.84",
+    "high": "153.22",
+    "low": "146.82",
+    "close": "153.18"
+  }, {
+    "date": "2011-09-25",
+    "open": "154.47",
+    "high": "155.00",
+    "low": "151.25",
+    "close": "152.77"
+  }, {
+    "date": "2011-09-26",
+    "open": "153.77",
+    "high": "154.52",
+    "low": "152.32",
+    "close": "154.50"
+  }, {
+    "date": "2011-09-27",
+    "open": "153.44",
+    "high": "154.60",
+    "low": "152.75",
+    "close": "153.47"
+  }, {
+    "date": "2011-09-30",
+    "open": "154.63",
+    "high": "157.41",
+    "low": "152.93",
+    "close": "156.34"
+  }, {
+    "date": "2011-10-01",
+    "open": "156.55",
+    "high": "158.59",
+    "low": "155.89",
+    "close": "158.45"
+  }, {
+    "date": "2011-10-02",
+    "open": "157.78",
+    "high": "159.18",
+    "low": "157.01",
+    "close": "157.92"
+  }, {
+    "date": "2011-10-03",
+    "open": "158.00",
+    "high": "158.08",
+    "low": "153.50",
+    "close": "156.24"
+  }, {
+    "date": "2011-10-04",
+    "open": "158.37",
+    "high": "161.58",
+    "low": "157.70",
+    "close": "161.45"
+  }, {
+    "date": "2011-10-07",
+    "open": "163.49",
+    "high": "167.91",
+    "low": "162.97",
+    "close": "167.91"
+  }, {
+    "date": "2011-10-08",
+    "open": "170.20",
+    "high": "171.11",
+    "low": "166.68",
+    "close": "167.86"
+  }, {
+    "date": "2011-10-09",
+    "open": "167.55",
+    "high": "167.88",
+    "low": "165.60",
+    "close": "166.79"
+  }, {
+    "date": "2011-10-10",
+    "open": "169.49",
+    "high": "171.88",
+    "low": "153.21",
+    "close": "162.23"
+  }, {
+    "date": "2011-10-11",
+    "open": "163.01",
+    "high": "167.28",
+    "low": "161.80",
+    "close": "167.25"
+  }, {
+    "date": "2011-10-14",
+    "open": "167.98",
+    "high": "169.57",
+    "low": "163.50",
+    "close": "166.98"
+  }, {
+    "date": "2011-10-15",
+    "open": "165.54",
+    "high": "170.18",
+    "low": "165.15",
+    "close": "169.58"
+  }, {
+    "date": "2011-10-16",
+    "open": "172.69",
+    "high": "173.04",
+    "low": "169.18",
+    "close": "172.75"
+  }, {
+    "date": "2011-10-17",
+    "open": "171.50",
+    "high": "174.19",
+    "low": "171.05",
+    "close": "173.50"
+  }, {
+    "date": "2011-10-18",
+    "open": "174.24",
+    "high": "174.63",
+    "low": "170.00",
+    "close": "170.42"
+  }, {
+    "date": "2011-10-21",
+    "open": "170.35",
+    "high": "174.90",
+    "low": "169.96",
+    "close": "174.36"
+  }, {
+    "date": "2011-10-22",
+    "open": "188.56",
+    "high": "188.60",
+    "low": "182.76",
+    "close": "186.16"
+  }, {
+    "date": "2011-10-23",
+    "open": "185.81",
+    "high": "187.21",
+    "low": "179.24",
+    "close": "185.93"
+  }, {
+    "date": "2011-10-24",
+    "open": "184.87",
+    "high": "185.90",
+    "low": "181.66",
+    "close": "182.78"
+  }, {
+    "date": "2011-10-25",
+    "open": "185.29",
+    "high": "185.37",
+    "low": "182.88",
+    "close": "184.70"
+  }, {
+    "date": "2011-10-28",
+    "open": "185.45",
+    "high": "186.59",
+    "low": "184.70",
+    "close": "185.09"
+  }, {
+    "date": "2011-10-29",
+    "open": "186.18",
+    "high": "189.37",
+    "low": "184.73",
+    "close": "187.00"
+  }, {
+    "date": "2011-10-30",
+    "open": "187.63",
+    "high": "190.12",
+    "low": "184.95",
+    "close": "189.95"
+  }, {
+    "date": "2011-10-31",
+    "open": "188.60",
+    "high": "190.10",
+    "low": "180.00",
+    "close": "187.44"
+  }, {
+    "date": "2011-11-01",
+    "open": "189.21",
+    "high": "189.44",
+    "low": "183.49",
+    "close": "187.87"
+  }, {
+    "date": "2011-11-04",
+    "open": "185.29",
+    "high": "188.96",
+    "low": "184.24",
+    "close": "186.18"
+  }, {
+    "date": "2011-11-05",
+    "open": "187.05",
+    "high": "192.00",
+    "low": "185.27",
+    "close": "191.79"
+  }, {
+    "date": "2011-11-06",
+    "open": "190.61",
+    "high": "192.68",
+    "low": "186.13",
+    "close": "186.30"
+  }, {
+    "date": "2011-11-07",
+    "open": "186.67",
+    "high": "186.90",
+    "low": "167.77",
+    "close": "175.47"
+  }, {
+    "date": "2011-11-08",
+    "open": "171.15",
+    "high": "175.12",
+    "low": "165.21",
+    "close": "165.37"
+  }, {
+    "date": "2011-11-11",
+    "open": "165.28",
+    "high": "167.70",
+    "low": "150.63",
+    "close": "153.76"
+  }, {
+    "date": "2011-11-12",
+    "open": "160.85",
+    "high": "170.98",
+    "low": "153.76",
+    "close": "169.96"
+  }, {
+    "date": "2011-11-13",
+    "open": "177.16",
+    "high": "177.57",
+    "low": "163.74",
+    "close": "166.11"
+  }, {
+    "date": "2011-11-14",
+    "open": "166.39",
+    "high": "169.59",
+    "low": "160.30",
+    "close": "164.30"
+  }, {
+    "date": "2011-11-15",
+    "open": "165.30",
+    "high": "167.02",
+    "low": "159.33",
+    "close": "166.39"
+  }, {
+    "date": "2011-11-18",
+    "open": "166.10",
+    "high": "168.20",
+    "low": "162.10",
+    "close": "163.95"
+  }, {
+    "date": "2011-11-19",
+    "open": "165.67",
+    "high": "171.79",
+    "low": "163.53",
+    "close": "168.85"
+  }, {
+    "date": "2011-11-20",
+    "open": "165.84",
+    "high": "172.35",
+    "low": "164.67",
+    "close": "168.46"
+  }, {
+    "date": "2011-11-22",
+    "open": "172.00",
+    "high": "172.05",
+    "low": "169.75",
+    "close": "171.54"
+  }, {
+    "date": "2011-11-25",
+    "open": "173.59",
+    "high": "177.27",
+    "low": "172.35",
+    "close": "172.54"
+  }, {
+    "date": "2011-11-26",
+    "open": "175.22",
+    "high": "175.79",
+    "low": "170.01",
+    "close": "174.81"
+  }, {
+    "date": "2011-11-27",
+    "open": "176.82",
+    "high": "180.60",
+    "low": "175.35",
+    "close": "180.22"
+  }, {
+    "date": "2011-11-28",
+    "open": "179.43",
+    "high": "185.17",
+    "low": "179.15",
+    "close": "184.29"
+  }, {
+    "date": "2011-11-29",
+    "open": "187.34",
+    "high": "187.70",
+    "low": "179.70",
+    "close": "182.22"
+  }, {
+    "date": "2011-12-02",
+    "open": "181.86",
+    "high": "184.14",
+    "low": "177.70",
+    "close": "178.86"
+  }, {
+    "date": "2011-12-03",
+    "open": "177.15",
+    "high": "180.90",
+    "low": "176.99",
+    "close": "179.81"
+  }, {
+    "date": "2011-12-04",
+    "open": "182.89",
+    "high": "186.00",
+    "low": "182.41",
+    "close": "185.50"
+  }, {
+    "date": "2011-12-05",
+    "open": "186.19",
+    "high": "190.10",
+    "low": "186.12",
+    "close": "189.95"
+  }, {
+    "date": "2011-12-06",
+    "open": "190.54",
+    "high": "194.99",
+    "low": "188.04",
+    "close": "194.30"
+  }, {
+    "date": "2011-12-09",
+    "open": "193.59",
+    "high": "195.66",
+    "low": "192.69",
+    "close": "194.21"
+  }, {
+    "date": "2011-12-10",
+    "open": "194.75",
+    "high": "196.83",
+    "low": "187.39",
+    "close": "188.54"
+  }, {
+    "date": "2011-12-11",
+    "open": "193.44",
+    "high": "194.48",
+    "low": "185.76",
+    "close": "190.86"
+  }, {
+    "date": "2011-12-12",
+    "open": "190.19",
+    "high": "192.12",
+    "low": "187.82",
+    "close": "191.83"
+  }, {
+    "date": "2011-12-13",
+    "open": "190.37",
+    "high": "193.20",
+    "low": "189.54",
+    "close": "190.39"
+  }, {
+    "date": "2011-12-16",
+    "open": "190.72",
+    "high": "192.65",
+    "low": "182.98",
+    "close": "184.40"
+  }, {
+    "date": "2011-12-17",
+    "open": "186.52",
+    "high": "187.33",
+    "low": "178.60",
+    "close": "182.98"
+  }, {
+    "date": "2011-12-18",
+    "open": "182.98",
+    "high": "184.64",
+    "low": "180.90",
+    "close": "183.12"
+  }, {
+    "date": "2011-12-19",
+    "open": "185.43",
+    "high": "187.83",
+    "low": "183.33",
+    "close": "187.21"
+  }, {
+    "date": "2011-12-20",
+    "open": "190.12",
+    "high": "193.91",
+    "low": "189.89",
+    "close": "193.91"
+  }, {
+    "date": "2011-12-23",
+    "open": "195.03",
+    "high": "199.33",
+    "low": "194.79",
+    "close": "198.80"
+  }, {
+    "date": "2011-12-25",
+    "open": "199.01",
+    "high": "200.96",
+    "low": "196.82",
+    "close": "198.95"
+  }, {
+    "date": "2011-12-26",
+    "open": "198.95",
+    "high": "202.96",
+    "low": "197.80",
+    "close": "198.57"
+  }, {
+    "date": "2011-12-27",
+    "open": "200.59",
+    "high": "201.56",
+    "low": "196.88",
+    "close": "199.83"
+  }, {
+    "date": "2011-12-30",
+    "open": "199.50",
+    "high": "200.50",
+    "low": "197.75",
+    "close": "198.08"
+  }, {
+    "date": "2012-01-01",
+    "open": "199.27",
+    "high": "200.26",
+    "low": "192.55",
+    "close": "194.84"
+  }, {
+    "date": "2012-01-02",
+    "open": "195.41",
+    "high": "197.39",
+    "low": "192.69",
+    "close": "194.93"
+  }, {
+    "date": "2012-01-03",
+    "open": "191.45",
+    "high": "193.00",
+    "low": "178.89",
+    "close": "180.05"
+  }, {
+    "date": "2012-01-06",
+    "open": "181.25",
+    "high": "183.60",
+    "low": "170.23",
+    "close": "177.64"
+  }, {
+    "date": "2012-01-07",
+    "open": "180.14",
+    "high": "182.46",
+    "low": "170.80",
+    "close": "171.25"
+  }, {
+    "date": "2012-01-08",
+    "open": "171.30",
+    "high": "179.50",
+    "low": "168.30",
+    "close": "179.40"
+  }, {
+    "date": "2012-01-09",
+    "open": "177.58",
+    "high": "181.00",
+    "low": "175.41",
+    "close": "178.02"
+  }, {
+    "date": "2012-01-10",
+    "open": "176.00",
+    "high": "177.85",
+    "low": "170.00",
+    "close": "172.69"
+  }, {
+    "date": "2012-01-13",
+    "open": "177.52",
+    "high": "179.42",
+    "low": "175.17",
+    "close": "178.78"
+  }, {
+    "date": "2012-01-14",
+    "open": "177.72",
+    "high": "179.22",
+    "low": "164.66",
+    "close": "169.04"
+  }, {
+    "date": "2012-01-15",
+    "open": "165.23",
+    "high": "169.01",
+    "low": "156.70",
+    "close": "159.64"
+  }, {
+    "date": "2012-01-16",
+    "open": "161.51",
+    "high": "165.36",
+    "low": "158.42",
+    "close": "160.89"
+  }, {
+    "date": "2012-01-17",
+    "open": "161.71",
+    "high": "165.75",
+    "low": "159.61",
+    "close": "161.36"
+  }, {
+    "date": "2012-01-21",
+    "open": "148.06",
+    "high": "159.98",
+    "low": "146.00",
+    "close": "155.64"
+  }, {
+    "date": "2012-01-22",
+    "open": "136.19",
+    "high": "140.00",
+    "low": "126.14",
+    "close": "139.07"
+  }, {
+    "date": "2012-01-23",
+    "open": "139.99",
+    "high": "140.70",
+    "low": "132.01",
+    "close": "135.60"
+  }, {
+    "date": "2012-01-24",
+    "open": "138.99",
+    "high": "139.09",
+    "low": "129.61",
+    "close": "130.01"
+  }, {
+    "date": "2012-01-27",
+    "open": "128.16",
+    "high": "133.20",
+    "low": "126.45",
+    "close": "130.01"
+  }, {
+    "date": "2012-01-28",
+    "open": "131.15",
+    "high": "132.79",
+    "low": "129.05",
+    "close": "131.54"
+  }, {
+    "date": "2012-01-29",
+    "open": "131.37",
+    "high": "135.45",
+    "low": "130.00",
+    "close": "132.18"
+  }, {
+    "date": "2012-01-30",
+    "open": "129.45",
+    "high": "136.65",
+    "low": "129.40",
+    "close": "135.36"
+  }, {
+    "date": "2012-01-31",
+    "open": "136.24",
+    "high": "136.59",
+    "low": "132.18",
+    "close": "133.75"
+  }, {
+    "date": "2012-02-03",
+    "open": "134.21",
+    "high": "135.90",
+    "low": "131.42",
+    "close": "131.65"
+  }, {
+    "date": "2012-02-04",
+    "open": "130.43",
+    "high": "134.00",
+    "low": "128.90",
+    "close": "129.36"
+  }, {
+    "date": "2012-02-05",
+    "open": "130.83",
+    "high": "131.92",
+    "low": "121.77",
+    "close": "122.00"
+  }, {
+    "date": "2012-02-06",
+    "open": "119.97",
+    "high": "124.78",
+    "low": "117.27",
+    "close": "121.24"
+  }, {
+    "date": "2012-02-07",
+    "open": "122.08",
+    "high": "125.70",
+    "low": "121.60",
+    "close": "125.48"
+  }, {
+    "date": "2012-02-10",
+    "open": "128.01",
+    "high": "129.98",
+    "low": "127.20",
+    "close": "129.45"
+  }, {
+    "date": "2012-02-11",
+    "open": "130.70",
+    "high": "131.00",
+    "low": "123.62",
+    "close": "124.86"
+  }, {
+    "date": "2012-02-12",
+    "open": "126.68",
+    "high": "129.78",
+    "low": "125.63",
+    "close": "129.40"
+  } ],
+  "export": {
+    "enabled": true,
+    "position": "bottom-right"
+  }
+} );
+
+chart.addListener( "rendered", zoomChart );
+zoomChart();
+
+// this method is called when chart is first inited as we listen for "dataUpdated" event
+function zoomChart() {
+  // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
+  chart.zoomToIndexes( 10, 20 );
+}</textarea>
+</div>
+<div id="html" class="tab-pane overflow-auto">
+<div id="editor_html" style="height: 437px;"><div class="CodeMirror cm-s-default CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none; font-size: 4px;"></textarea></div><div class="CodeMirror-hscrollbar"><div style="height: 1px;"></div></div><div class="CodeMirror-vscrollbar"><div style="width: 1px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-gutter-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"><div style="position: relative;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>x</span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code"></div><div class="CodeMirror-cursor">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px;"></div><div class="CodeMirror-gutters"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 1px;"></div></div></div></div></div>
+<textarea id="code_html" name="html" class="hidden">&lt;div id="chartdiv"&gt;&lt;/div&gt;							</textarea>
+</div>
+<div id="css" class="tab-pane overflow-auto">
+<div id="editor_css" style="height: 437px;"><div class="CodeMirror cm-s-default CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none; font-size: 4px;"></textarea></div><div class="CodeMirror-hscrollbar"><div style="height: 1px;"></div></div><div class="CodeMirror-vscrollbar"><div style="width: 1px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-gutter-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"><div style="position: relative;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>x</span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code"></div><div class="CodeMirror-cursor">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px;"></div><div class="CodeMirror-gutters"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 1px;"></div></div></div></div></div>
+<textarea id="code_css" name="css" class="hidden">#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}						</textarea>
+</div>
+<div id="resources" class="tab-pane overflow-auto">
+<div id="editor_resources" style="height: 437px;"><div class="CodeMirror cm-s-default CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none; font-size: 4px;"></textarea></div><div class="CodeMirror-hscrollbar"><div style="height: 1px;"></div></div><div class="CodeMirror-vscrollbar"><div style="width: 1px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-gutter-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"><div style="position: relative;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>x</span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code"></div><div class="CodeMirror-cursor">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px;"></div><div class="CodeMirror-gutters"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 1px;"></div></div></div></div></div>
+<textarea id="code_resources" name="resourcesDEF" class="hidden">&lt;script src="https://www.amcharts.com/lib/3/amcharts.js"&gt;&lt;/script&gt;
+&lt;script src="https://www.amcharts.com/lib/3/serial.js"&gt;&lt;/script&gt;
+&lt;script src="https://www.amcharts.com/lib/3/themes/none.js"&gt;&lt;/script&gt;
+</textarea>
+</div>
+<input type="hidden" name="normalize_css" value="yes">
+<input type="hidden" name="wrap" value="b">
+<input type="hidden" name="dtd" value="html 5">
+<input type="hidden" id="code_title" name="title" value="OHLC chart">
+<input type="hidden" id="code_description" name="description" value="OHLC or open-high-low-close chart is a type of chart used to illustrate how the price of a stock or bond changed over time. Vertical line on the chart shows the price range (the highest and lowest prices). Tick marks project from each side of the line indicating the opening price on the left, and the closing price on the right. Usually the bars are shown in different colors depending on whether prices rose or fell in that period.
+&lt;h2&gt;Making OHLC with amCharts&lt;/h2&gt;
+Our serial chart has a special graph type - &lt;strong&gt;ohlc&lt;/strong&gt;. To have such a graph you only need to set &lt;strong&gt;openField&lt;/strong&gt;, &lt;strong&gt;closeField&lt;/strong&gt;, &lt;strong&gt;highField&lt;/strong&gt; and &lt;strong&gt;lowField&lt;/strong&gt; for the graph and have these values in your data. OHLC graph is quite similar to &lt;a href=&quot;/demos/candlestick-chart/&quot;&gt;Candlestick graph&lt;/a&gt; type, which is also supported by our library.
+&lt;h2&gt;OHLC chart for long time periods&lt;/h2&gt;
+If you zoom-out this chart, you will notice that the bars are getting more and more narrow. At some point, if you&#39;d have even more data, they would become quite unreadable. To solve this, you could write a zoom-event handler which would change the graph type to a simple line chart if the number of data points exceeds some number X. As an alternative for this we recommend checking our &lt;a href=&quot;/demos/multiple-panels/&quot;&gt;Stock chart&lt;/a&gt; which accumulate data into longer periods - for example, if you have daily data but the selected time span is very long, our stock chart can accumulate daily data into weekly or monthly or even yearly data.">
+ 
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-8 app-content" style="padding-right: 60px;">
+<h1 class="app-font family-regular size-biggerer">
+OHLC chart </h1>
+<p>OHLC or open-high-low-close chart is a type of chart used to illustrate how the price of a stock or bond changed over time. Vertical line on the chart shows the price range (the highest and lowest prices). Tick marks project from each side of the line indicating the opening price on the left, and the closing price on the right. Usually the bars are shown in different colors depending on whether prices rose or fell in that period.</p>
+<h2>Making OHLC with amCharts</h2>
+<p>Our serial chart has a special graph type – <strong>ohlc</strong>. To have such a graph you only need to set <strong>openField</strong>, <strong>closeField</strong>, <strong>highField</strong> and <strong>lowField</strong> for the graph and have these values in your data. OHLC graph is quite similar to <a href="https://www.amcharts.com/demos/candlestick-chart/">Candlestick graph</a> type, which is also supported by our library.</p>
+<h2>OHLC chart for long time periods</h2>
+<p>If you zoom-out this chart, you will notice that the bars are getting more and more narrow. At some point, if you’d have even more data, they would become quite unreadable. To solve this, you could write a zoom-event handler which would change the graph type to a simple line chart if the number of data points exceeds some number X. As an alternative for this we recommend checking our <a href="https://www.amcharts.com/demos/multiple-panels/">Stock chart</a> which accumulate data into longer periods – for example, if you have daily data but the selected time span is very long, our stock chart can accumulate daily data into weekly or monthly or even yearly data.</p>
+<div class="simplesocialbuttons">
+<div class="simplesocialbutton ssb-button-googleplus"> <div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I3_1460869533694" name="I3_1460869533694" src="./OHLC chart demo _ amCharts_files/fastbutton(1).html" data-gapiattached="true" title="+1"></iframe></div></div>
+<div class="simplesocialbutton ssb-button-fblike"> <div id="fb-root"></div><div class="fb-like" data-href="https://www.amcharts.com/demos/ohlc-chart/" data-send="false" data-layout="button_count" data-show-faces="false"></div></div>
+<div class="simplesocialbutton ssb-button-twitter"> <a href="https://twitter.com/share" class="twitter-share-button" data-text="OHLC chart" data-url="https://www.amcharts.com/demos/ohlc-chart/" data-via="amcharts" rel="nofollow"></a></div>
+</div>
+ 
+<script type="text/javascript">
+//<![CDATA[
+// google plus
+window.___gcfg = {lang: 'en'};
+(function() {
+   var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+   po.src = 'https://apis.google.com/js/plusone.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+// facebook 
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+// twitter 
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+// ]]>
+</script>
+ 
+</div>
+<div class="col-md-4">
+<div class="demo-nav-pages">
+<div class="app-nav-page position-relative">
+<div class="align-left pull-left position-relative" style="z-index:1;">
+<a class="btn btn-flat btn-nav btn-outline-inverse amcharts-tooltip white-space-normal" href="https://www.amcharts.com/demos/exporting-chart-to-image/#theme-light" data-toggle="tooltip" data-title="" data-original-title="" title="">
+<i class="fa fa-angle-left"></i>
+</a>
+</div>
+<div class="align-right pull-right position-relative" style="z-index:1;">
+<a class="btn btn-flat btn-nav btn-outline-inverse amcharts-tooltip white-space-normal" href="https://www.amcharts.com/demos/bullet-chart/#theme-light" data-toggle="tooltip" data-title="" data-original-title="" title="">
+<i class="fa fa-angle-right"></i>
+</a>
+</div>
+<div class="align-center position-absolute full-width" style="z-index:0;">
+<a class="btn btn-nav less-margin less-padding amcharts-tooltip white-space-normal" href="https://www.amcharts.com/demos/#theme-light" data-toggle="tooltip" data-title="" data-original-title="" title="">
+<span class="less-padding">All Demos</span>
+</a>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<div class="app-content app-demo-list m-hide">
+<h3 class="family-bold transform-uppercase">Gauges &amp; Other demos</h3>
+<ul class="less-margin">
+<li><a class="" href="https://www.amcharts.com/demos/mekko-chart/#theme-light">Mekko chart</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/using-svg-filters/#theme-light">Using SVG Filters</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/css-animations/#theme-light">CSS animations</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/professional-candlesticks/#theme-light">Professional Candlesticks</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/combined-bullet-column-line-chart/#theme-light">Combined bullet/column and line graphs with multiple value axes</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/micro-charts-sparklines/#theme-light">Micro Charts &amp; Sparklines</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/candlestick-chart/#theme-light">Candlestick chart</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/exporting-chart-to-image/#theme-light">Exporting chart to image</a></li>
+<li><a class="disabled" href="https://www.amcharts.com/demos/ohlc-chart/#theme-light">OHLC chart</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/bullet-chart/#theme-light">Bullet Chart</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/cylinder-gauge/#theme-light">Cylinder gauge</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/waterfall-chart/#theme-light">Waterfall Chart</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/radar-chart/#theme-light">Radar Chart</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/polar-chart/#theme-light">Polar Chart</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/error-chart/#theme-light">Error Chart</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/polar-scatter/#theme-light">Polar Scatter</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/clock/#theme-light">Clock</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/clock-with-two-faces/#theme-light">Clock With Two Faces</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/angular-gauge/#theme-light">Angular Gauge</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/solid-gauge/#theme-light">Solid Gauge</a></li>
+<li><a class="" href="https://www.amcharts.com/demos/angular-gauge-with-two-axes/#theme-light">Angular Gauge With Two Axes</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>AmCharts.themes.light={AmChart:{color:"#000000",fontFamily:"Lato",fontSize:14},AmCoordinateChart:{colors:"#67b7dc #fdd400 #84b761 #cc4748 #cd82ad #2f4074 #448e4d #b7b83f #b9783f #b93e3d #913167".split(" ")},AmStockChart:{colors:"#67b7dc #fdd400 #84b761 #cc4748 #cd82ad #2f4074 #448e4d #b7b83f #b9783f #b93e3d #913167".split(" ")},AmSlicedChart:{outlineAlpha:1,outlineThickness:2,labelTickColor:"#000000",labelTickAlpha:0.3,colors:"#67b7dc #fdd400 #84b761 #cc4748 #cd82ad #2f4074 #448e4d #b7b83f #b9783f #b93e3d #913167".split(" ")},
+AmRectangularChart:{zoomOutButtonColor:"#000000",zoomOutButtonRollOverAlpha:0.15,zoomOutButtonImage:"lens"},AxisBase:{axisColor:"#000000",axisAlpha:0.3,gridAlpha:0.1,gridColor:"#000000"},ChartScrollbar:{backgroundColor:"#000000",backgroundAlpha:0.12,graphFillAlpha:0.5,graphLineAlpha:0,selectedBackgroundColor:"#FFFFFF",selectedBackgroundAlpha:0.4,gridAlpha:0.15},ChartCursor:{cursorColor:"#000000",color:"#FFFFFF",cursorAlpha:0.5},AmLegend:{color:"#000000"},AmGraph:{lineAlpha:0.9},GaugeArrow:{color:"#000000",
+alpha:0.8,nailAlpha:0,innerRadius:"40%",nailRadius:15,startWidth:15,borderAlpha:0.8,nailBorderAlpha:0},GaugeAxis:{tickColor:"#000000",tickAlpha:1,tickLength:15,minorTickLength:8,axisThickness:3,axisColor:"#000000",axisAlpha:1,bandAlpha:0.8},TrendLine:{lineColor:"#c03246",lineAlpha:0.8},AreasSettings:{alpha:0.8,color:"#67b7dc",colorSolid:"#003767",unlistedAreasAlpha:0.4,unlistedAreasColor:"#000000",outlineColor:"#FFFFFF",outlineAlpha:0.5,outlineThickness:0.5,rollOverColor:"#3c5bdc",rollOverOutlineColor:"#FFFFFF", selectedOutlineColor:"#FFFFFF",selectedColor:"#f15135",unlistedAreasOutlineColor:"#FFFFFF",unlistedAreasOutlineAlpha:0.5},LinesSettings:{color:"#000000",alpha:0.8},ImagesSettings:{alpha:0.8,labelColor:"#000000",color:"#000000",labelRollOverColor:"#3c5bdc"},ZoomControl:{buttonFillAlpha:0.7, buttonIconColor:"#a7a7a7"},SmallMap:{mapColor:"#5a73db",rectangleColor:"#ffffff",backgroundColor:"#FFFFFF",backgroundAlpha:0.7,borderThickness:1,borderAlpha:0.8},PeriodSelector:{color:"#000000"},PeriodButton:{color:"#000000",background:"transparent",opacity:0.7,border:"1px solid rgba(0, 0, 0, .3)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",boxSizing:"border-box"},PeriodButtonSelected:{color:"#000000",backgroundColor:"#b9cdf5",border:"1px solid rgba(0, 0, 0, .3)",MozBorderRadius:"5px",
+borderRadius:"5px",margin:"1px",outline:"none",opacity:1,boxSizing:"border-box"},PeriodInputField:{color:"#000000",background:"transparent",border:"1px solid rgba(0, 0, 0, .3)",outline:"none"},DataSetSelector:{color:"#000000",selectedBackgroundColor:"#b9cdf5",rollOverBackgroundColor:"#a8b0e4"},DataSetCompareList:{color:"#000000",lineHeight:"100%",boxSizing:"initial",webkitBoxSizing:"initial",border:"1px solid rgba(0, 0, 0, .3)"},DataSetSelect:{border:"1px solid rgba(0, 0, 0, .3)",outline:"none"}};</script>
+<script>AmCharts.themes.dark={themeName:"dark",AmChart:{color:"#e7e7e7",fontFamily:"Lato",fontSize:14},AmCoordinateChart:{colors:"#ae85c9 #aab9f7 #b6d2ff #c9e6f2 #c9f0e1 #e8d685 #e0ad63 #d48652 #d27362 #495fba #7a629b #8881cc".split(" ")},AmStockChart:{colors:"#639dbd #e8d685 #ae85c9 #c9f0e1 #d48652 #629b6d #719dc3 #719dc3".split(" ")},AmSlicedChart:{outlineAlpha:1,outlineThickness:2,labelTickColor:"#FFFFFF",labelTickAlpha:0.3,colors:"#495fba #e8d685 #ae85c9 #c9f0e1 #d48652 #629b6d #719dc3 #719dc3".split(" ")},
+AmRectangularChart:{zoomOutButtonColor:"#FFFFFF",zoomOutButtonRollOverAlpha:0.15,zoomOutButtonImage:"lensWhite"},AxisBase:{axisColor:"#FFFFFF",axisAlpha:0.3,gridAlpha:0.1,gridColor:"#FFFFFF",dashLength:3},ChartScrollbar:{backgroundColor:"#000000",backgroundAlpha:0.2,graphFillAlpha:0.2,graphLineAlpha:0,graphFillColor:"#FFFFFF",selectedGraphFillColor:"#FFFFFF",selectedGraphFillAlpha:0.4,selectedGraphLineColor:"#FFFFFF",selectedBackgroundColor:"#FFFFFF",selectedBackgroundAlpha:0.09,gridAlpha:0.15},
+ChartCursor:{cursorColor:"#FFFFFF",color:"#000000",cursorAlpha:0.5},AmLegend:{color:"#e7e7e7"},AmGraph:{lineAlpha:0.9},GaugeArrow:{color:"#FFFFFF",alpha:0.8,nailAlpha:0,innerRadius:"40%",nailRadius:15,startWidth:15,borderAlpha:0.8,nailBorderAlpha:0},GaugeAxis:{tickColor:"#FFFFFF",tickAlpha:1,tickLength:15,minorTickLength:8,axisThickness:3,axisColor:"#FFFFFF",axisAlpha:1,bandAlpha:0.8},TrendLine:{lineColor:"#c03246",lineAlpha:0.8},AreasSettings:{alpha:0.8,color:"#FFFFFF",colorSolid:"#000000",unlistedAreasAlpha:0.4,
+unlistedAreasColor:"#FFFFFF",outlineColor:"#000000",outlineAlpha:0.5,outlineThickness:0.5,rollOverColor:"#3c5bdc",rollOverOutlineColor:"#000000",selectedOutlineColor:"#000000",selectedColor:"#f15135",unlistedAreasOutlineColor:"#000000",unlistedAreasOutlineAlpha:0.5},LinesSettings:{color:"#FFFFFF",alpha:0.5},ImagesSettings:{alpha:0.8,labelColor:"#FFFFFF",color:"#FFFFFF",labelRollOverColor:"#3c5bdc"},ZoomControl:{buttonFillAlpha:0.7,buttonIconColor:"#494949"},SmallMap:{mapColor:"#FFFFFF",rectangleColor:"#ffffff",backgroundColor:"#000000",backgroundAlpha:0.7,borderThickness:1,borderAlpha:0.8},PeriodSelector:{color:"#e7e7e7"},PeriodButton:{color:"#e7e7e7",background:"transparent",opacity:0.7,border:"1px solid rgba(255, 255, 255, .15)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",
+boxSizing:"border-box"},PeriodButtonSelected:{color:"#e7e7e7",backgroundColor:"rgba(255, 255, 255, 0.1)",border:"1px solid rgba(255, 255, 255, .3)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",opacity:1,boxSizing:"border-box"},PeriodInputField:{color:"#e7e7e7",background:"transparent",border:"1px solid rgba(255, 255, 255, .15)",outline:"none"},DataSetSelector:{color:"#e7e7e7",selectedBackgroundColor:"rgba(255, 255, 255, .25)",rollOverBackgroundColor:"rgba(255, 255, 255, .15)"},
+DataSetCompareList:{color:"#e7e7e7",lineHeight:"100%",boxSizing:"initial",webkitBoxSizing:"initial",border:"1px solid rgba(255, 255, 255, .15)"},DataSetSelect:{border:"1px solid rgba(255, 255, 255, .15)",outline:"none"}};</script>
+<script>AmCharts.themes.chalk={themeName:"chalk",AmChart:{color:"#e7e7e7",fontFamily:"Covered By Your Grace",fontSize:18,handDrawn:!0},AmCoordinateChart:{colors:"#FFFFFF #e384a6 #f4d499 #4d90d6 #c7e38c #9986c8 #edf28c #ffd1d4 #5ee1dc #b0eead #fef85a #8badd2".split(" ")},AmSlicedChart:{outlineAlpha:1,labelTickColor:"#FFFFFF",labelTickAlpha:0.3,colors:"#FFFFFF #e384a6 #f4d499 #4d90d6 #c7e38c #9986c8 #edf28c #ffd1d4 #5ee1dc #b0eead #fef85a #8badd2".split(" ")},AmStockChart:{colors:"#FFFFFF #e384a6 #f4d499 #4d90d6 #c7e38c #9986c8 #edf28c #ffd1d4 #5ee1dc #b0eead #fef85a #8badd2".split(" ")},
+AmRectangularChart:{zoomOutButtonColor:"#FFFFFF",zoomOutButtonRollOverAlpha:0.15,zoomOutButtonImage:"lensWhite"},AxisBase:{axisColor:"#FFFFFF",gridColor:"#FFFFFF"},ChartScrollbar:{backgroundColor:"#FFFFFF",backgroundAlpha:0.2,graphFillAlpha:0.5,graphLineAlpha:0,selectedBackgroundColor:"#000000",selectedBackgroundAlpha:0.25,fontSize:15,gridAlpha:0.15},ChartCursor:{cursorColor:"#FFFFFF",color:"#000000"},AmLegend:{color:"#e7e7e7",markerSize:20},AmGraph:{lineAlpha:0.8},GaugeArrow:{color:"#FFFFFF",
+alpha:0.1,nailAlpha:0,innerRadius:"40%",nailRadius:15,startWidth:15,borderAlpha:0.8,nailBorderAlpha:0},GaugeAxis:{tickColor:"#FFFFFF",tickAlpha:0.8,tickLength:15,minorTickLength:8,axisThickness:3,axisColor:"#FFFFFF",axisAlpha:0.8,bandAlpha:0.4},TrendLine:{lineColor:"#c03246",lineAlpha:0.8},AmMap:{handDrawn:!1},AreasSettings:{alpha:0.8,color:"#FFFFFF",colorSolid:"#000000",unlistedAreasAlpha:0.4,unlistedAreasColor:"#FFFFFF",outlineColor:"#000000",outlineAlpha:0.5,outlineThickness:0.5,rollOverColor:"#4d90d6",
+rollOverOutlineColor:"#000000",selectedOutlineColor:"#000000",selectedColor:"#e384a6",unlistedAreasOutlineColor:"#000000",unlistedAreasOutlineAlpha:0.5},LinesSettings:{color:"#FFFFFF",alpha:0.8},ImagesSettings:{alpha:0.8,labelFontSize:16,labelColor:"#FFFFFF",color:"#FFFFFF",labelRollOverColor:"#4d90d6"},ZoomControl:{buttonRollOverColor:"#4d90d6",buttonFillColor:"#e384a6",buttonFillAlpha:0.8,buttonBorderColor:"#FFFFFF",gridBackgroundColor:"#FFFFFF",gridAlpha:0.8},SmallMap:{mapColor:"#FFFFFF",rectangleColor:"#e384a6",
+backgroundColor:"#000000",backgroundAlpha:0.7,borderThickness:1,borderAlpha:0.8},PeriodSelector:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7"},PeriodButton:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7",background:"transparent",opacity:0.7,border:"1px solid rgba(255, 255, 255, .15)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",boxSizing:"border-box"},PeriodButtonSelected:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7",
+backgroundColor:"rgba(255, 255, 255, 0.1)",border:"1px solid rgba(255, 255, 255, .3)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",opacity:1,boxSizing:"border-box"},PeriodInputField:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7",background:"transparent",border:"1px solid rgba(255, 255, 255, .15)",outline:"none"},DataSetSelector:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7",selectedBackgroundColor:"rgba(255, 255, 255, .25)",rollOverBackgroundColor:"rgba(255, 255, 255, .15)"},
+DataSetCompareList:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7",lineHeight:"100%",boxSizing:"initial",webkitBoxSizing:"initial",border:"1px solid rgba(255, 255, 255, .15)"},DataSetSelect:{fontFamily:"Covered By Your Grace",fontSize:"16px",border:"1px solid rgba(255, 255, 255, .15)",outline:"none"}};</script>
+<script></script>
+</div>
+</div>  
+<div class="app-footer">
+<div class="app-section background-white">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="col-5 col-md-4">
+<div><h3 class="family-black color-gray transform-uppercase">Products</h3><div class="menu-footer-products-container"><ul id="menu-footer-products" class="menu"><li id="menu-item-88" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-88"><a href="https://www.amcharts.com/javascript-charts/">JavaScript Charts</a></li>
+<li id="menu-item-87" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87"><a href="https://www.amcharts.com/stock-chart/">Javascript Stock Chart</a></li>
+<li id="menu-item-105" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-105"><a href="https://www.amcharts.com/javascript-maps/">Interactive JavaScript Maps</a></li>
+</ul></div></div> </div>
+<div class="col-5 col-md-4">
+<div><h3 class="family-black color-gray transform-uppercase">Related</h3><div class="menu-footer-related-container"><ul id="menu-footer-related" class="menu"><li id="menu-item-5943" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5943"><a href="http://pixelmap.amcharts.com/">Pixel Map Generator</a></li>
+<li id="menu-item-3098" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3098"><a href="https://www.amcharts.com/visited_countries/">Visited Countries Map</a></li>
+<li id="menu-item-3097" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3097"><a href="https://www.amcharts.com/visited_states/">Visited States Map</a></li>
+<li id="menu-item-3068" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3068"><a href="https://www.amcharts.com/about/">About</a></li>
+</ul></div></div> </div>
+<div class="col-5 col-md-4">
+<div><h3 class="family-black color-gray transform-uppercase">Get Social</h3><div class="menu-footer-social-container"><ul id="menu-footer-social" class="menu"><li id="menu-item-89" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-89"><a href="http://www.facebook.com/amcharts"><i class="fa fa-facebook-square color-gray"></i> Facebook</a></li>
+<li id="menu-item-90" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-90"><a href="http://www.twitter.com/amcharts"><i class="fa fa-twitter color-gray"></i> Twitter</a></li>
+<li id="menu-item-91" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-91"><a href="http://plus.google.com/+amcharts/"><i class="fa fa-google-plus-square color-gray"></i> Google+</a></li>
+<li id="menu-item-4929" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4929"><a href="http://www.linkedin.com/company/amcharts"><i class="fa fa-linkedin-square color-gray"></i> LinkedIn</a></li>
+</ul></div></div> </div>
+<div class="col-5 col-md-4">
+<div><h3 class="family-black color-gray transform-uppercase">Resources</h3><div class="menu-footer-resources-container"><ul id="menu-footer-resources" class="menu"><li id="menu-item-3209" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3209"><a href="https://www.amcharts.com/inspiration/">Inspiration Gallery</a></li>
+<li id="menu-item-2731" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2731"><a href="https://www.amcharts.com/svg-maps/">Free SVG Maps</a></li>
+<li id="menu-item-3852" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3852"><a href="http://feeds.feedburner.com/amcharts">RSS feed of our blog</a></li>
+<li id="menu-item-6156" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6156"><a href="https://www.amcharts.com/terms-conditions/">Terms &amp; Conditions</a></li>
+</ul></div></div> </div>
+<div class="col-5 col-md-4">
+<div><h3 class="family-black color-gray transform-uppercase">Contact Us</h3><div class="menu-footer-contact-container"><ul id="menu-footer-contact" class="menu"><li id="menu-item-110" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-110"><a href="mailto:contact@amcharts.com">contact@amcharts.com</a></li>
+<li id="menu-item-2563" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2563"><a href="https://www.amcharts.com/support/">Get Support</a></li>
+</ul></div></div> </div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div class="app-fieldset text-center">
+<div class="app-fieldset-legend color-lightgray">Copyright © 2015, amcharts.com. All rights reserved.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="app-wave wave-light"></div>
+</div>
+</div>
+</div>
+<textarea id="code_html" class="hidden">&lt;div id="chartdiv"&gt;&lt;/div&gt;
+</textarea>
+<textarea id="code_js" class="hidden">var chart = AmCharts.makeChart("chartdiv", {
+    "type": "serial",
+    "addClassNames": true,
+    "dataProvider": [[data]],
+    "graphs": [{
+    	"bullet": "round",
+        "valueField": "value",
+        "fillAlphas": .3,
+        "lineColor": "#1d8b3a",
+        "negativeLineColor": "#8b1d1d"
+    },{
+    	"type": "column",
+        "valueField": "value",
+        "fillAlphas": .3,
+        "lineColor": "#1d8b3a",
+        "fillColors": "#1d8b3a",
+        "negativeLineColor": "#8b1d1d",
+        "negativeFillColors": "#8b1d1d"
+    }],
+    "chartCursor": {
+    	graphBulletSize: 1.5
+    },
+    "dataDateFormat": "YYYY-MM-DD",
+    "categoryField": "date",
+    "categoryAxis": {
+        "parseDates": true
+    }
+});
+</textarea>
+<textarea id="code_css" class="hidden">#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}
+.[[classname]] {
+    -webkit-animation: am-pulsate 1s infinite;
+    animation: am-pulsate 1s infinite;
+}
+</textarea>
+<script>
+
+			 var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-22221037-1']);
+			_gaq.push(['_setDomainName', 'amcharts.com']);
+			_gaq.push(['_setAllowLinker', true]);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/bootstrap.min.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/codemirror.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/javascript.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/css.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/xml.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/htmlmixed.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/worldLow.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/continentsLow.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/usaLow.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/export.min.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/dataloader.min.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/animate.min.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/demo.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/browser-support.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/wp-embed.min.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/jquery.fancybox-1.3.7.min.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/jquery.easing.pack.js"></script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/jquery.mousewheel.min.js"></script>
+<script type="text/javascript">
+jQuery(document).on('ready post-load', easy_fancybox_handler );
+</script>
+ 
+<script>
+		/* <![CDATA[ */
+		var google_conversion_id = 975661256;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+		</script>
+<script type="text/javascript" src="./OHLC chart demo _ amCharts_files/conversion.js">
+		</script><iframe name="google_conversion_frame" title="Google conversion frame" width="300" height="13" src="./OHLC chart demo _ amCharts_files/saved_resource.html" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no"></iframe>
+<noscript>
+&lt;div style="display:inline;"&gt;
+&lt;img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/975661256/?value=0&amp;amp;guid=ON&amp;amp;script=0"/&gt;
+&lt;/div&gt;
+</noscript>
+
+
+ 
+ 
+ <div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div><iframe name="oauth2relay280815830" id="oauth2relay280815830" src="./OHLC chart demo _ amCharts_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>
