@@ -98,7 +98,7 @@ Given /^Code Tested$/  do
   #end
   begin
    #getPercentChannelBreakoutProfitLoss(0.7,1,0.2)
-   getPercentChannelBreakoutProfitLoss(0.72,0,0.28) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
+   getPercentChannelBreakoutProfitLoss(0.1,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.1)
   rescue Exception=>e
     puts 'Exception: ' +  e.message if !e.nil? && !e.message.to_s.empty?
