@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)https://www.amcharts.com/demos/stock-events/#theme-light -->
+<html id="__html" class="" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.amcharts.com/favicon.ico">
+<link rel="image_src" href="https://www.amcharts.com/wp-content/themes/amcharts/static/img/share_google.png">
+<style>@import url(//fonts.googleapis.com/css?family=Lato:300,400,700);</style>
+ 
+<script src="./Stock Events demo _ amCharts_files/cb=gapi.loaded_1" async=""></script><script src="./Stock Events demo _ amCharts_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./Stock Events demo _ amCharts_files/dc.js"></script><script id="twitter-wjs" src="https://platform.twitter.com/widgets.js"></script><script id="facebook-jssdk" src="https://connect.facebook.net/en_US/all.js#xfbml=1"></script><script type="text/javascript" async="" src="./Stock Events demo _ amCharts_files/plusone.js" gapi_processed="true"></script><script type="text/javascript" async="" src="./Stock Events demo _ amCharts_files/platform.js" gapi_processed="true"></script><script>
+		(function() {
+			var dMode		= document.documentMode;
+			var className	= "";
+			if ( dMode ) {
+				if ( dMode < 9 ) {
+					className += ' ieLT9 ';
+				}
+				className += 'ie' + dMode;
+				document.getElementById('__html').setAttribute('class',className);
+			}
+		})();
+	</script>
+ 
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.amcharts.com/xmlrpc.php">
+<script>
+		var ajaxurl = 'https://www.amcharts.com/wp-admin/admin-ajax.php';
+		var homeurl = 'https://www.amcharts.com';
+		var themeurl = 'https://www.amcharts.com/wp-content/themes/amcharts';
+	</script>
+ 
+<title>Stock Events demo | amCharts</title>
+<meta name="description" content="Our Stock chart can display different kind of annotations on the graph or on the axis. These annotations or stock events as we call them can mark important">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://www.amcharts.com/demos/stock-events/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stock Events demo | amCharts">
+<meta property="og:description" content="Our Stock chart can display different kind of annotations on the graph or on the axis. These annotations or stock events as we call them can mark important">
+<meta property="og:url" content="https://www.amcharts.com/demos/stock-events/">
+<meta property="og:site_name" content="amCharts">
+<meta property="article:publisher" content="https://www.facebook.com/amcharts">
+<meta property="fb:admins" content="1358808116">
+ 
+<link rel="alternate" type="application/rss+xml" title="amCharts » Feed" href="https://feeds.feedburner.com/amcharts/">
+<link rel="alternate" type="application/rss+xml" title="amCharts » Comments Feed" href="https://www.amcharts.com/comments/feed/">
+<link rel="stylesheet" id="amcharts-style-bootstrap-css" href="./Stock Events demo _ amCharts_files/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-fontawesome-css" href="./Stock Events demo _ amCharts_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-core-css" href="./Stock Events demo _ amCharts_files/core.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-mobile-css" href="./Stock Events demo _ amCharts_files/mobile.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-codemirror-css" href="./Stock Events demo _ amCharts_files/codemirror.css" type="text/css" media="all">
+<link rel="stylesheet" id="amexport-css" href="./Stock Events demo _ amCharts_files/export.css" type="text/css" media="all">
+<link rel="stylesheet" id="fancybox-css" href="./Stock Events demo _ amCharts_files/jquery.fancybox-1.3.7.min.css" type="text/css" media="screen">
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/jquery.min.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/core.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/amcharts.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/pie.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/serial.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/amstock.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/funnel.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/gauge.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/radar.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/xy.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/gantt.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/ammap_amcharts_extension.js"></script>
+<link rel="https://api.w.org/" href="https://www.amcharts.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.amcharts.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.amcharts.com/wp-includes/wlwmanifest.xml">
+<link rel="shortlink" href="https://www.amcharts.com/?p=884">
+<link rel="alternate" type="application/json+oembed" href="https://www.amcharts.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.amcharts.com%2Fdemos%2Fstock-events%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.amcharts.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.amcharts.com%2Fdemos%2Fstock-events%2F&amp;format=xml">
+ 
+<style type="text/css">div.simplesocialbuttons{height:20px;margin:10px auto 10px 0;text-align:left;clear:left;}div.simplesocialbutton{float:left;}div.ssb-button-googleplus{width:100px;}div.ssb-button-fblike{width:140px;line-height:1;}div.ssb-button-twitter{width:130px;}div.ssb-button-pinterest{width:100px;}.fb-like iframe{max-width:none!important;}</style>
+ 
+<meta property="og:image" content="http://www.amcharts.com/wp-content/uploads/2014/07/static_demo_884.png">
+ 
+<script type="text/javascript">
+/* <![CDATA[ */
+var fb_timeout = null;
+var fb_opts = { 'overlayShow' : true, 'hideOnOverlayClick' : true, 'showCloseButton' : true, 'centerOnScroll' : true, 'enableEscapeButton' : true, 'autoScale' : true };
+var easy_fancybox_handler = function(){
+	/* IMG */
+	var fb_IMG_select = 'a[href*=".jpg"]:not(.nofancybox,.pin-it-button), area[href*=".jpg"]:not(.nofancybox), a[href*=".jpeg"]:not(.nofancybox,.pin-it-button), area[href*=".jpeg"]:not(.nofancybox), a[href*=".png"]:not(.nofancybox,.pin-it-button), area[href*=".png"]:not(.nofancybox)';
+	jQuery(fb_IMG_select).addClass('fancybox image');
+	var fb_IMG_sections = jQuery('div.gallery ');
+	fb_IMG_sections.each(function() { jQuery(this).find(fb_IMG_select).attr('rel', 'gallery-' + fb_IMG_sections.index(this)); });
+	jQuery('a.fancybox, area.fancybox, li.fancybox a:not(li.nofancybox a)').fancybox( jQuery.extend({}, fb_opts, { 'transitionIn' : 'elastic', 'easingIn' : 'easeOutBack', 'transitionOut' : 'elastic', 'easingOut' : 'easeInBack', 'opacity' : false, 'hideOnContentClick' : false, 'titleShow' : true, 'titlePosition' : 'over', 'titleFromAlt' : true, 'showNavArrows' : true, 'enableKeyboardNav' : true, 'cyclic' : false }) );
+	/* Auto-click */ 
+	jQuery('#fancybox-auto').trigger('click');
+}
+/* ]]> */
+</script>
+<script src="./Stock Events demo _ amCharts_files/detect.js"></script><script type="text/javascript" src="./Stock Events demo _ amCharts_files/pdfmake.js" async=""></script><script type="text/javascript" src="./Stock Events demo _ amCharts_files/jszip.js" async=""></script><script type="text/javascript" src="./Stock Events demo _ amCharts_files/fabric.js" async=""></script><script type="text/javascript" src="./Stock Events demo _ amCharts_files/FileSaver.js" async=""></script><script type="text/javascript" src="./Stock Events demo _ amCharts_files/xlsx.js" async=""></script><script type="text/javascript" src="./Stock Events demo _ amCharts_files/vfs_fonts.js" async=""></script></head>
+<body class="single single-demos postid-884">
+<div class="app">
+<div class="app-header">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="navbar navbar-default" role="navigation">
+<a class="m-nav-opener m-only">MENU</a>
+<div class="app-nav-brand">
+<div class="app-nav-brand-inner">
+<a href="https://www.amcharts.com/"><img src="./Stock Events demo _ amCharts_files/logo.png" alt="amCharts: JavaScript Charts and Maps"></a>
+</div>
+</div>
+<ul id="menu-main-menu" class="nav navbar-nav navbar-main"><li id="nav-menu-item-151" class=" dropdown"><a href="https://www.amcharts.com/javascript-charts/"><span>Products</span></a>
+<ul class="dropdown-menu">
+<li id="nav-menu-item-104" class=""><a title="JavaScript Charts" href="https://www.amcharts.com/javascript-charts/"><i class="product-icon javascript-charts"></i><span>JavaScript</span><strong class="app-font transform-uppercase">Charts</strong></a></li>
+<li id="nav-menu-item-103" class=""><a title="JavaScript Stock Chart" href="https://www.amcharts.com/stock-chart/"><i class="product-icon stock-chart"></i><span>JavaScript</span><strong class="app-font transform-uppercase">Stock Chart</strong></a></li>
+<li id="nav-menu-item-102" class=""><a title="Interactive JavaScript Maps" href="https://www.amcharts.com/javascript-maps/"><i class="product-icon javascript-maps"></i><span>Interactive JavaScript</span><strong class="app-font transform-uppercase">Maps</strong></a></li>
+</ul>
+</li>
+<li id="nav-menu-item-112" class=" dropdown active"><a href="https://www.amcharts.com/demos/"><span>Demos</span></a>
+<ul class="dropdown-menu">
+<li id="nav-menu-item-113" class=" active"><a href="https://www.amcharts.com/demos/"><span>Charts and Maps</span></a></li>
+<li id="nav-menu-item-114" class=""><a href="https://www.amcharts.com/inspiration/"><span>Inspiration Gallery</span></a></li>
+</ul>
+</li>
+<li id="nav-menu-item-138" class=""><a href="https://www.amcharts.com/download/"><span>Download</span></a></li>
+<li id="nav-menu-item-96" class=""><a href="https://www.amcharts.com/online-store/"><span>Buy</span></a></li>
+<li id="nav-menu-item-100" class=""><a href="https://www.amcharts.com/support/"><span>Support</span></a></li>
+<li id="nav-menu-item-208" class=" dropdown"><a href="https://docs.amcharts.com/3/"><span>Docs</span></a>
+<ul class="dropdown-menu">
+<li id="nav-menu-item-210" class=""><a href="https://docs.amcharts.com/3/"><span>API Reference</span></a></li>
+<li id="nav-menu-item-972" class=""><a href="https://www.amcharts.com/tutorials/"><span>Tutorials</span></a></li>
+<li id="nav-menu-item-4331" class=""><a href="https://www.amcharts.com/tips/"><span>Quick Tips</span></a></li>
+</ul>
+</li>
+</ul> <ul class="nav navbar-nav navbar-social">
+<li>
+<a class="pull-left" href="https://www.facebook.com/amcharts" target="_blank"><i class="fa fa-facebook-square"></i></a>
+</li>
+<li>
+<a class="pull-left" href="https://www.twitter.com/amcharts" target="_blank"><i class="fa fa-twitter"></i></a>
+</li>
+<li>
+<a class="pull-left" href="https://feeds.feedburner.com/amcharts" target="_blank"><i class="fa fa-rss"></i></a>
+</li>
+<li>
+<div style="padding-top:12px; padding-left:15px;"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 24px; height: 15px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 24px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 15px;" tabindex="0" vspace="0" width="100%" id="I2_1460869633556" name="I2_1460869633556" src="./Stock Events demo _ amCharts_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div></div>
+<script type="text/javascript">
+									  (function() {
+									    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+									    po.src = 'https://apis.google.com/js/platform.js';
+									    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+									  })();
+									</script>
+</li>
+<li>
+<a class="btn btn-flat btn-liveeditor transform-uppercase" href="https://live.amcharts.com/">
+<span class="title">Live Editor</span>
+<span class="subtitle">Create charts online</span>
+</a>
+ 
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="app-body">
+<div class="demo-body">
+<div id="style_css"><style type="text/css">#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}											</style></div>
+<div class="app-section background-gray">
+<div class="container">
+<div class="row demo-headline">
+<div class="col-sm-12">
+<a class="demo-flipper-toggler btn btn-flat btn-blue less-margin pull-right transform-uppercase">
+<span>Edit</span>
+</a>
+<div class="demo-nav-top demo-themes pull-right ">
+<ul>
+<li>
+<span class="size-small family-light color-lightgray m-hide">Click to change theme:&nbsp;&nbsp;</span>
+<span class="size-small family-light color-lightgray m-only">Theme:&nbsp;&nbsp;</span>
+</li>
+<li class="demo-themes-item amcharts-tooltip active" data-theme="light" data-css="#chartdiv {
+	width		: 100%;
+	height		: 500px;
+	font-size	: 11px;
+}	" data-title="Light" data-original-title="" title="">
+<a class="fx-all-250" href="https://www.amcharts.com/demos/stock-events/#theme-light">
+<img width="36" height="35" src="./Stock Events demo _ amCharts_files/theme_light2.png" class="attachment-full size-full wp-post-image" alt="theme_light"> </a>
+</li>
+<li class="demo-themes-item amcharts-tooltip" data-theme="dark" data-css="background: #3f3f4f;color:#ffffff;						" data-title="Dark" data-original-title="" title="">
+<a class="fx-all-250" href="https://www.amcharts.com/demos/stock-events/#theme-dark">
+<img width="36" height="35" src="./Stock Events demo _ amCharts_files/theme_dark2.png" class="attachment-full size-full wp-post-image" alt="theme_dark"> </a>
+</li>
+<li class="demo-themes-item amcharts-tooltip" data-theme="chalk" data-css="background: #282828 url(&#39;http://www.amcharts.com/lib/3/patterns/chalk/bg.jpg&#39;);color: #fff;		" data-title="Chalk" data-original-title="" title="">
+<a class="fx-all-250" href="https://www.amcharts.com/demos/stock-events/#theme-chalk">
+<img width="36" height="35" src="./Stock Events demo _ amCharts_files/theme_chalk.png" class="attachment-full size-full wp-post-image" alt="theme_chalk"> </a>
+</li>
+<li class="demo-themes-item amcharts-tooltip" data-theme="patterns" data-css="#chartdiv {
+	width		: 100%;
+	height		: 500px;
+	font-size	: 11px;
+}	" data-title="Patterns" data-original-title="" title="">
+<a class="fx-all-250" href="https://www.amcharts.com/demos/stock-events/#theme-patterns">
+<img width="35" height="35" src="./Stock Events demo _ amCharts_files/theme_pattern2.png" class="attachment-full size-full wp-post-image" alt="theme_pattern"> </a>
+</li>
+<li class="demo-themes-item amcharts-tooltip" data-theme="none" data-css="" data-title="Default" data-original-title="" title="">
+<a class="fx-all-250" href="https://www.amcharts.com/demos/stock-events/#theme-none">
+<img width="36" height="35" src="./Stock Events demo _ amCharts_files/theme_none.png" class="attachment-full size-full wp-post-image" alt="theme_none"> </a>
+</li>
+</ul>
+</div>
+<h2 class="app-font family-light size-biggerer" style="padding: 0 0 0 20px;">
+<i class="product-icon stock-chart position-relative"></i>Javascript Stock Chart </h2>
+</div>
+</div>
+<div class="row demo-example">
+<div class="col-sm-12">
+<div class="demo-flipper">
+<div class="demo-flipper-container">
+<div class="demo-flipper-front demo-panel-white fx-all-250" style="#chartdiv {
+	width		: 100%;
+	height		: 500px;
+	font-size	: 11px;
+}	">
+<div id="container_html" class="chart-reset overflow-hidden" style="height: 100%;"><div id="chartdiv" style="overflow: visible;"><div class="amcharts-stock-div" style="position: relative;"><div class="amcharts-center-div"><div class="amcharts-panels-div" style="height: 429px;"><div class="amChartsPanel amcharts-stock-panel-div amcharts-stock-panel-div-stockPanel0" style="height: 429px; width: 100%; overflow: hidden; text-align: left;"><div class="amcharts-main-div" style="position: relative;"><div class="amChartsLegend amcharts-legend-div" style="overflow: hidden; position: relative; text-align: left; width: 1120px; height: 27px; cursor: default;"><svg version="1.1" style="position: absolute; width: 1120px; height: 27px;"><desc>JavaScript chart by amCharts 3.20.3</desc><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" font-weight="bold" text-anchor="start" class="amcharts-legend-title" transform="translate(0,11)"><tspan y="7" x="0">Value</tspan></text><g transform="translate(51,0)"><path cs="100,100" d="M0.5,0.5 L1068.5,0.5 L1068.5,26.5 L0.5,26.5 Z" fill="#FFFFFF" stroke="#000000" fill-opacity="0" stroke-width="1" stroke-opacity="0" class="amcharts-legend-bg"></path><g transform="translate(0,4)"><g cursor="pointer" class="amcharts-legend-item-g1" transform="translate(0,0)"><g transform="translate(8,8)" visibility="hidden" class="amcharts-legend-switch"><path cs="100,100" d="M-5.5,-5.5 L6.5,6.5" fill="none" stroke="#FFFFFF" stroke-width="3"></path><path cs="100,100" d="M-5.5,6.5 L6.5,-5.5" fill="none" stroke="#FFFFFF" stroke-width="3"></path></g><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" class="amcharts-legend-value" transform="translate(38,7)"> </text><rect x="16" y="0" width="72" height="21" rx="0" ry="0" stroke-width="0" stroke="none" fill="#fff" fill-opacity="0.005"></rect></g></g></g></svg></div><div class="amcharts-chart-div" style="overflow: hidden; position: relative; text-align: left; width: 1120px; height: 402px; padding: 0px; touch-action: none; cursor: default;"><svg version="1.1" style="position: absolute; width: 1120px; height: 402px; top: 0px; left: -0.5px;"><desc>JavaScript chart by amCharts 3.20.3</desc><g><path cs="100,100" d="M0.5,0.5 L1119.5,0.5 L1119.5,401.5 L0.5,401.5 Z" fill="#FFFFFF" stroke="#000000" fill-opacity="0" stroke-width="1" stroke-opacity="0" class="amcharts-bg"></path><path cs="100,100" d="M0.5,0.5 L1119.5,0.5 L1119.5,373.5 L0.5,373.5 L0.5,0.5 Z" fill="#FFFFFF" stroke="#000000" fill-opacity="0" stroke-width="1" stroke-opacity="0" class="amcharts-plot-area" transform="translate(0,0)"></path></g><g><g class="amcharts-category-axis" transform="translate(0,0)"><g><path cs="100,100" d="M36.5,373.5 L36.5,373.5 L36.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M171.5,373.5 L171.5,373.5 L171.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M306.5,373.5 L306.5,373.5 L306.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M437.5,373.5 L437.5,373.5 L437.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M573.5,373.5 L573.5,373.5 L573.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M708.5,373.5 L708.5,373.5 L708.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M846.5,373.5 L846.5,373.5 L846.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M981.5,373.5 L981.5,373.5 L981.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M1117.5,373.5 L1117.5,373.5 L1117.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g></g><g class="amcharts-value-axis value-axis-valueAxisAuto0_1460869633742" transform="translate(0,0)" visibility="visible"><g><path cs="100,100" d="M0.5,373.5 L0.5,373.5 L1119.5,373.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,339.5 L0.5,339.5 L1119.5,339.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,305.5 L0.5,305.5 L1119.5,305.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,271.5 L0.5,271.5 L1119.5,271.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,237.5 L0.5,237.5 L1119.5,237.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,203.5 L0.5,203.5 L1119.5,203.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,170.5 L0.5,170.5 L1119.5,170.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,136.5 L0.5,136.5 L1119.5,136.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,102.5 L0.5,102.5 L1119.5,102.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,68.5 L0.5,68.5 L1119.5,68.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,34.5 L0.5,34.5 L1119.5,34.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g><g><path cs="100,100" d="M0.5,0.5 L0.5,0.5 L1119.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000" class="amcharts-axis-grid"></path></g></g></g><g transform="translate(0,0)" clip-path="url(#AmChartsEl-2)"><g visibility="hidden"></g></g><g></g><g></g><g></g><g><g transform="translate(0,0)" class="amcharts-graph-line amcharts-graph-g1"><g></g><g clip-path="url(#AmChartsEl-4)"><path cs="100,100" d="M8.5,368.75273 L23.5,356.88455 L39.5,356.20636 L54.5,357.90182 L70.5,351.45909 L85.5,337.55636 L101.5,344.67727 L117.5,340.94727 L132.5,339.25182 L148.5,330.43545 L163.5,317.55 L179.5,326.70545 L194.5,308.39455 L210.5,299.57818 L225.5,327.72273 L241.5,288.04909 L257.5,306.02091 L272.5,307.03818 L288.5,289.74455 L303.5,276.85909 L319.5,291.77909 L334.5,311.78545 L350.5,291.10091 L365.5,281.60636 L381.5,261.6 L396.5,278.21545 L412.5,236.84636 L427.5,279.91091 L443.5,252.78364 L459.5,278.89364 L474.5,243.96727 L490.5,275.84182 L505.5,265.33 L521.5,239.22 L536.5,198.19 L552.5,250.07091 L567.5,268.04273 L583.5,194.79909 L598.5,184.62636 L614.5,247.35818 L629.5,270.07727 L645.5,193.10364 L660.5,196.15545 L676.5,191.74727 L692.5,172.41909 L707.5,204.29364 L723.5,212.09273 L738.5,250.74909 L754.5,151.05636 L769.5,207.34545 L785.5,120.87727 L800.5,193.44273 L816.5,152.75182 L831.5,172.41909 L847.5,237.52455 L862.5,239.55909 L878.5,116.80818 L894.5,199.20727 L909.5,234.47273 L925.5,165.97636 L940.5,214.46636 L956.5,86.96818 L971.5,218.87455 L987.5,82.56 L1002.5,133.08455 L1018.5,217.51818 L1034.5,52.04182 L1049.5,79.84727 L1065.5,161.90727 L1080.5,102.56636 L1096.5,67.97909 L1111.5,32.37455 M0,0 L0,0" fill="none" stroke-width="1" stroke-opacity="0.9" stroke="#b0de09" class="amcharts-graph-stroke"></path></g><clippath id="AmChartsEl-4"><rect x="0" y="0" width="1119" height="373" rx="0" ry="0" stroke-width="0"></rect></clippath><g></g></g></g><g></g><g><g class="amcharts-category-axis"><path cs="100,100" d="M0.5,0.5 L1119.5,0.5" fill="none" stroke-width="1" stroke-opacity="0" stroke="#000000" transform="translate(0,373)" class="amcharts-axis-line"></path></g><g class="amcharts-value-axis value-axis-valueAxisAuto0_1460869633742"><path cs="100,100" d="M0.5,0.5 L0.5,373.5" fill="none" stroke-width="1" stroke-opacity="0" stroke="#000000" transform="translate(0,0)" class="amcharts-axis-line" visibility="visible"></path></g></g><g><g transform="translate(0,0)" clip-path="url(#AmChartsEl-3)" style="pointer-events: none;"><path cs="100,100" d="M0.5,0.5 L0.5,0.5 L0.5,373.5" fill="none" stroke-width="1" stroke-opacity="0.5" stroke="#000000" class="amcharts-cursor-line amcharts-cursor-line-vertical" visibility="hidden" transform="translate(427,0)"></path><path cs="100,100" d="M0.5,0.5 L1119.5,0.5 L1119.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.5" stroke="#000000" class="amcharts-cursor-line amcharts-cursor-line-horizontal" visibility="hidden" transform="translate(0,365)"></path></g><clippath id="AmChartsEl-3"><rect x="0" y="0" width="1119" height="373" rx="0" ry="0" stroke-width="0"></rect></clippath></g><g></g><g><g transform="translate(0,0)" class="amcharts-graph-line amcharts-graph-g1"><g transform="translate(70,351)" role="img" aria-label=" 165" class="amcharts-graph-bullet"><g><g transform="translate(0,0)"><path cs="100,100" d="M0.5,0.5 L0.5,-7.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#888888"></path><circle r="9" cx="0" cy="0" fill="#85CDE6" stroke="#888888" fill-opacity="1" stroke-width="1" stroke-opacity="1" transform="translate(0,-17)"></circle><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" transform="translate(0,-19)"><tspan y="7" x="0">S</tspan></text></g></g></g><g transform="translate(210,299)" role="img" aria-label=" 318" class="amcharts-graph-bullet"><g><g transform="translate(0,0)"><path cs="100,100" d="M0.5,0.5 L0.5,-25.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#888888"></path><path cs="100,100" d="M0.5,0.5 L14.5,0.5 L14.5,18.5 L0.5,18.5 Z" fill="#FFFFFF" stroke="#888888" fill-opacity="0.5" stroke-width="1" stroke-opacity="1" transform="translate(0,-26)"></path><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" transform="translate(7,-19)"><tspan y="7" x="0">F</tspan></text></g></g></g><g transform="translate(257,306)" role="img" aria-label=" 299" class="amcharts-graph-bullet"><g><g transform="translate(0,67)"><path cs="100,100" d="M0.5,0.5 L9.5,-3.5 L9.5,-21.5 L-8.5,-21.5 L-8.5,-3.5 L0.5,0.5 Z" fill="#85CDE6" stroke="#888888" fill-opacity="1" stroke-width="1" stroke-opacity="1"></path><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" transform="translate(0,-13)"><tspan y="7" x="0">X</tspan></text></g></g></g><g transform="translate(288,289)" role="img" aria-label=" 347" class="amcharts-graph-bullet"><g><g transform="translate(0,84)"><path cs="100,100" d="M0.5,0.5 L9.5,-3.5 L9.5,-21.5 L-8.5,-21.5 L-8.5,-3.5 L0.5,0.5 Z" fill="#85CDE6" stroke="#888888" fill-opacity="1" stroke-width="1" stroke-opacity="1"></path><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" transform="translate(0,-13)"><tspan y="7" x="0">Z</tspan></text></g></g></g><g transform="translate(319,291)" role="img" aria-label=" 341" class="amcharts-graph-bullet"><g><g transform="translate(0,0)"><path cs="100,100" d="M0.5,0.5 L0.5,-7.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#888888"></path><circle r="9" cx="0" cy="0" fill="#85CDE6" stroke="#888888" fill-opacity="1" stroke-width="1" stroke-opacity="1" transform="translate(0,-17)"></circle><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" transform="translate(0,-19)"><tspan y="7" x="0">U</tspan></text></g></g></g><g transform="translate(381,261)" role="img" aria-label=" 430" class="amcharts-graph-bullet"><g><g transform="translate(0,0)"><path cs="100,100" d="M0.5,0.5 L0.5,-7.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#888888"></path><circle r="9" cx="0" cy="0" fill="#DADADA" stroke="#888888" fill-opacity="1" stroke-width="1" stroke-opacity="1" transform="translate(0,-17)"></circle><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" transform="translate(0,-19)"><tspan y="7" x="0">D</tspan></text></g></g></g><g transform="translate(521,239)" role="img" aria-label=" 496" class="amcharts-graph-bullet"><g><g transform="translate(0,0)"><path cs="100,100" d="M0.5,0.5 L0.5,-7.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#888888"></path><circle r="9" cx="0" cy="0" fill="#DADADA" stroke="#888888" fill-opacity="1" stroke-width="1" stroke-opacity="1" transform="translate(0,-17)"></circle><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" transform="translate(0,-19)"><tspan y="7" x="0">L</tspan></text></g><g transform="translate(0,-26)"><path cs="100,100" d="M0.5,0.5 L0.5,-7.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#888888"></path><circle r="9" cx="0" cy="0" fill="#DADADA" stroke="#888888" fill-opacity="1" stroke-width="1" stroke-opacity="1" transform="translate(0,-17)"></circle><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" transform="translate(0,-19)"><tspan y="7" x="0">R</tspan></text></g></g></g><g transform="translate(676,191)" role="img" aria-label=" 636" class="amcharts-graph-bullet"><g><g transform="translate(0,0)"><path cs="100,100" d="M0.5,0.5 L8.5,8.5 L4.5,8.5 L4.5,16.5 L-3.5,16.5 L-3.5,8.5 L-7.5,8.5 L0.5,0.5 Z" fill="#00CC00" stroke="#888888" fill-opacity="1" stroke-width="1" stroke-opacity="1"></path><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" visibility="hidden" transform="translate(0,0)"><tspan y="7" x="0"></tspan></text></g></g></g><g transform="translate(769,207)" role="img" aria-label=" 590" class="amcharts-graph-bullet"><g><g transform="translate(0,0)"><path cs="100,100" d="M0.5,0.5 L8.5,-7.5 L4.5,-7.5 L4.5,-15.5 L-3.5,-15.5 L-3.5,-7.5 L-7.5,-7.5 L0.5,0.5 Z" fill="#CC0000" stroke="#888888" fill-opacity="1" stroke-width="1" stroke-opacity="1"></path><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" visibility="hidden" transform="translate(0,0)"><tspan y="7" x="0"></tspan></text></g></g></g><g transform="translate(847,237)" role="img" aria-label=" 501" class="amcharts-graph-bullet"><g><g transform="translate(0,0)"><path cs="100,100" d="M-55.5,-4.5 L-4.5,-4.5 L0.5,0.5 L5.5,-4.5 L56.5,-4.5 L56.5,-44.5 L-55.5,-44.5 L-55.5,-4.5 Z" fill="#DADADA" stroke="#888888" fill-opacity="1" stroke-width="1" stroke-opacity="1"></path><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="middle" style="pointer-events: none;" transform="translate(0,-36)"><tspan y="7" x="0">Longer text can</tspan><tspan y="23" x="0">also be displayed</tspan></text></g></g></g></g></g><g><g></g></g><g><g class="amcharts-category-axis" transform="translate(0,0)" visibility="visible"><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(39,387)" class="amcharts-axis-label"><tspan y="7" x="0">Sep</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(174,387)" class="amcharts-axis-label"><tspan y="7" x="0">Nov</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" font-weight="bold" text-anchor="start" transform="translate(309,387)" class="amcharts-axis-label"><tspan y="7" x="0">2011</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(440,387)" class="amcharts-axis-label"><tspan y="7" x="0">Mar</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(576,387)" class="amcharts-axis-label"><tspan y="7" x="0">May</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(711,387)" class="amcharts-axis-label"><tspan y="7" x="0">Jul</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(849,387)" class="amcharts-axis-label"><tspan y="7" x="0">Sep</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(984,387)" class="amcharts-axis-label"><tspan y="7" x="0">Nov</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" font-weight="bold" text-anchor="start" transform="translate(1120,387)" class="amcharts-axis-label"><tspan y="7" x="0">2012</tspan></text></g><g class="amcharts-value-axis value-axis-valueAxisAuto0_1460869633742" transform="translate(0,0)" visibility="visible"><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,363.5)" class="amcharts-axis-label"><tspan y="7" x="0">100</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,329.5)" class="amcharts-axis-label"><tspan y="7" x="0">200</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,295.5)" class="amcharts-axis-label"><tspan y="7" x="0">300</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,261.5)" class="amcharts-axis-label"><tspan y="7" x="0">400</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,227.5)" class="amcharts-axis-label"><tspan y="7" x="0">500</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,193.5)" class="amcharts-axis-label"><tspan y="7" x="0">600</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,160.5)" class="amcharts-axis-label"><tspan y="7" x="0">700</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,126.5)" class="amcharts-axis-label"><tspan y="7" x="0">800</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,92.5)" class="amcharts-axis-label"><tspan y="7" x="0">900</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,58.5)" class="amcharts-axis-label"><tspan y="7" x="0">1k</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,24.5)" class="amcharts-axis-label"><tspan y="7" x="0">1.1k</tspan></text><text y="7" fill="#000000" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(4,-1)" class="amcharts-axis-label"><tspan y="7" x="0"> </tspan></text></g></g><g></g><g transform="translate(0,0)"></g><g></g><g></g><clippath id="AmChartsEl-2"><rect x="0" y="0" width="1119" height="373" rx="0" ry="0" stroke-width="0"></rect></clippath></svg></div></div></div></div><div class="amcharts-scrollbar-chart-div" style="height: 40px; overflow: hidden; text-align: left;"><div class="amcharts-main-div" style="position: relative;"><div class="amcharts-chart-div" style="overflow: hidden; position: relative; text-align: left; width: 1120px; height: 40px; padding: 0px; cursor: default; touch-action: auto;"><svg version="1.1" style="position: absolute; width: 1120px; height: 40px; top: 0px; left: -0.5px;"><desc>JavaScript chart by amCharts 3.20.3</desc><g><path cs="100,100" d="M0.5,0.5 L1119.5,0.5 L1119.5,39.5 L0.5,39.5 Z" fill="#FFFFFF" stroke="#000000" fill-opacity="0" stroke-width="1" stroke-opacity="0"></path><path cs="100,100" d="M0.5,0.5 L1119.5,0.5 L1119.5,0.5 L0.5,0.5 L0.5,0.5 Z" fill="#FFFFFF" stroke="#000000" fill-opacity="0" stroke-width="1" stroke-opacity="0" transform="translate(0,40)"></path></g><g><g transform="translate(0,0)" visibility="hidden"></g><g transform="translate(0,40)"><g><path cs="100,100" d="M29.5,0.5 L29.5,0.5 L29.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000"></path></g><g><path cs="100,100" d="M166.5,0.5 L166.5,0.5 L166.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000"></path></g><g><path cs="100,100" d="M302.5,0.5 L302.5,0.5 L302.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000"></path></g><g><path cs="100,100" d="M434.5,0.5 L434.5,0.5 L434.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000"></path></g><g><path cs="100,100" d="M571.5,0.5 L571.5,0.5 L571.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000"></path></g><g><path cs="100,100" d="M707.5,0.5 L707.5,0.5 L707.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000"></path></g><g><path cs="100,100" d="M846.5,0.5 L846.5,0.5 L846.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000"></path></g><g><path cs="100,100" d="M982.5,0.5 L982.5,0.5 L982.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000"></path></g><g><path cs="100,100" d="M1119.5,0.5 L1119.5,0.5 L1119.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.1" stroke="#000000"></path></g></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g><path cs="100,100" d="M0.5,40.5 L1120.5,40.5 L1120.5,40.5" fill="none" stroke-width="1" stroke-opacity="0" stroke="#000000" transform="translate(0,0)"></path><g><path cs="100,100" d="M0.5,0.5 L1119.5,0.5" fill="none" stroke-width="1" stroke-opacity="0" stroke="#000000" transform="translate(0,40)"></path></g><g><path cs="100,100" d="M0.5,0.5 L0.5,40.5" fill="none" stroke-width="1" stroke-opacity="0" stroke="#000000" transform="translate(0,0)" visibility="hidden"></path></g><g><path cs="100,100" d="M0.5,0.5 L1119.5,0.5" fill="none" stroke-width="1" stroke-opacity="0" stroke="#000000" transform="translate(0,40)"></path></g></g><g></g><g><g visibility="visible" transform="translate(0,0)" style="touch-action: none;"><rect x="0.5" y="0.5" width="1120" height="40" rx="0" ry="0" stroke-width="1" fill="#000000" stroke="#000000" fill-opacity="0.12" stroke-opacity="0.12"></rect><rect x="0.5" y="0.5" width="1119" height="41" rx="0" ry="0" stroke-width="0" fill="#FFFFFF" stroke="#FFFFFF" fill-opacity="0.4" stroke-opacity="0.4" transform="translate(0,0)"></rect><g transform="translate(0,0)"><g></g><g><path cs="100,100" d="M1.5,36.87333 L3.5,37.72667 L6.5,37.64667 L8.5,37.46 L10.5,37.3 L12.5,37.19333 L15.5,37.27333 L17.5,36.63333 L19.5,37.00667 L21.5,37.03333 L23.5,36.52667 L26.5,36.74 L28.5,37.3 L30.5,36.84667 L32.5,37.06 L35.5,37.03333 L37.5,36.58 L39.5,36.47333 L41.5,36.36667 L44.5,37.3 L46.5,36.52667 L48.5,36.26 L50.5,36.58 L53.5,35.59333 L55.5,36.60667 L57.5,36.55333 L59.5,36.1 L62.5,35.83333 L64.5,35.51333 L66.5,35.51333 L68.5,35.16667 L70.5,36.1 L73.5,36.18 L75.5,35.62 L77.5,35.83333 L79.5,35.38 L82.5,34.98 L84.5,36.36667 L86.5,35.00667 L88.5,35.16667 L91.5,34.79333 L93.5,34.98 L95.5,35.78 L97.5,34.95333 L100.5,34.58 L102.5,35.56667 L104.5,34.44667 L106.5,35.3 L109.5,35.67333 L111.5,35.78 L113.5,35.75333 L115.5,35.75333 L117.5,35.27333 L120.5,36.36667 L122.5,34.15333 L124.5,36.1 L126.5,33.86 L129.5,34.39333 L131.5,35.40667 L133.5,35.14 L135.5,33.94 L138.5,34.1 L140.5,33.67333 L142.5,33.96667 L144.5,34.34 L147.5,35.83333 L149.5,34.44667 L151.5,34.58 L153.5,33.64667 L156.5,35.03333 L158.5,35.72667 L160.5,34.66 L162.5,33.22 L164.5,33.43333 L167.5,34.20667 L169.5,33.59333 L171.5,33.99333 L174.5,33.16667 L176.5,35.64667 L178.5,34.58 L180.5,34.15333 L182.5,33.62 L185.5,33.00667 L187.5,33.56667 L189.5,34.9 L191.5,34.92667 L194.5,34.31333 L196.5,32.71333 L198.5,33.38 L200.5,35.14 L203.5,33.80667 L205.5,31.94 L207.5,35.16667 L209.5,33.48667 L212.5,32.019999999999996 L214.5,35.00667 L216.5,33.22 L218.5,34.5 L221.5,34.20667 L223.5,31.75333 L225.5,33.22 L227.5,34.23333 L229.5,31.56667 L232.5,31.59333 L234.5,33.08667 L236.5,32.84667 L238.5,34.15333 L241.5,31.32667 L243.5,31.11333 L245.5,34.71333 L247.5,34.52667 L250.5,31.48667 L252.5,34.39333 L254.5,32.07333 L256.5,31.86 L259.5,32.52667 L261.5,30.87333 L263.5,31.32667 L265.5,33.54 L268.5,31.08667 L270.5,33.08667 L272.5,31.00667 L274.5,32.60667 L276.5,30.87333 L279.5,34.23333 L281.5,32.473330000000004 L283.5,31.75333 L285.5,31.99333 L288.5,30.07333 L290.5,31.24667 L292.5,33.00667 L294.5,32.473330000000004 L297.5,31.35333 L299.5,33.00667 L301.5,30.20667 L303.5,31.86 L306.5,30.23333 L308.5,31.75333 L310.5,30.39333 L312.5,29.67333 L315.5,31.54 L317.5,33.38 L319.5,31.08667 L321.5,31.40667 L323.5,31.59333 L326.5,33.43333 L328.5,29.59333 L330.5,31.59333 L332.5,30.82 L335.5,31.67333 L337.5,32.98 L339.5,30.68667 L341.5,31.3 L344.5,28.76667 L346.5,32.39333 L348.5,29.14 L350.5,32.18 L353.5,31.35333 L355.5,33.22 L357.5,32.15333 L359.5,30.07333 L362.5,31.96667 L364.5,30.55333 L366.5,32.28667 L368.5,30.60667 L370.5,32.92667 L373.5,30.87333 L375.5,31.22 L377.5,30.68667 L379.5,32.95333 L382.5,30.68667 L384.5,29.03333 L386.5,31.62 L388.5,27.86 L391.5,32.82 L393.5,28.66 L395.5,31.67333 L397.5,30.47333 L400.5,30.34 L402.5,29.88667 L404.5,29.86 L406.5,29.27333 L408.5,31.54 L411.5,27.40667 L413.5,28.44667 L415.5,27.08667 L417.5,32.15333 L420.5,28.58 L422.5,28.02 L424.5,31.27333 L426.5,32.60667 L429.5,30.28667 L431.5,30.47333 L433.5,27.86 L435.5,28.34 L438.5,30.58 L440.5,30.63333 L442.5,30.98 L444.5,30.44667 L447.5,28.34 L449.5,27.54 L451.5,27.46 L453.5,30.1 L455.5,27.7 L458.5,28.76667 L460.5,28.52667 L462.5,30.39333 L464.5,29.64667 L467.5,30.76667 L469.5,29.51333 L471.5,30.52667 L473.5,29.35333 L476.5,31.24667 L478.5,27.64667 L480.5,25.56667 L482.5,29.62 L485.5,29.72667 L487.5,27.08667 L489.5,29.22 L491.5,27.27333 L493.5,30.15333 L496.5,30.74 L498.5,25.08667 L500.5,31.46 L502.5,25.64667 L505.5,30.55333 L507.5,27.64667 L509.5,29.32667 L511.5,29.78 L514.5,28.74 L516.5,29.96667 L518.5,26.68667 L520.5,30.39333 L523.5,31.16667 L525.5,27.27333 L527.5,26.71333 L529.5,29.72667 L531.5,29.91333 L534.5,31.32667 L536.5,26.66 L538.5,27.08667 L540.5,24.04667 L543.5,28.82 L545.5,24.74 L547.5,28.87333 L549.5,27.38 L552.5,23.86 L554.5,29.80667 L556.5,28.12667 L558.5,30.95333 L561.5,28.82 L563.5,25.91333 L565.5,28.87333 L567.5,25.14 L570.5,23.78 L572.5,29.54 L574.5,28.47333 L576.5,28.1 L578.5,24.15333 L581.5,24.95333 L583.5,28.79333 L585.5,23.59333 L587.5,23.78 L590.5,24.68667 L592.5,30.68667 L594.5,29.27333 L596.5,25.38 L599.5,22.68667 L601.5,26.34 L603.5,22.98 L605.5,29.54 L608.5,24.28667 L610.5,28.55333 L612.5,29.16667 L614.5,27.43333 L617.5,24.84667 L619.5,27.91333 L621.5,26.82 L623.5,26.44667 L625.5,24.36667 L628.5,22.15333 L630.5,23.11333 L632.5,24.98 L634.5,29.7 L637.5,26.76667 L639.5,25.83333 L641.5,25.86 L643.5,24.58 L646.5,24.12667 L648.5,25.56667 L650.5,23.64667 L652.5,22.95333 L655.5,25.51333 L657.5,29.7 L659.5,25.16667 L661.5,28.39333 L664.5,21.88667 L666.5,23.88667 L668.5,26.28667 L670.5,23.24667 L672.5,24.9 L675.5,28.52667 L677.5,29.40667 L679.5,23.06 L681.5,23.54 L684.5,24.82 L686.5,23.46 L688.5,25.38 L690.5,20.98 L693.5,22.63333 L695.5,28.42 L697.5,22.02 L699.5,26.02 L702.5,21.48667 L704.5,26.20667 L706.5,24.42 L708.5,22.04667 L711.5,27.80667 L713.5,24.52667 L715.5,25.27333 L717.5,24.42 L719.5,27.46 L722.5,20.44667 L724.5,23.96667 L726.5,22.79333 L728.5,25.14 L731.5,20.26 L733.5,20.76667 L735.5,21.46 L737.5,23.11333 L740.5,28.26 L742.5,23.35333 L744.5,28.18 L746.5,22.36667 L749.5,28.60667 L751.5,22.23333 L753.5,26.28667 L755.5,21.62 L757.5,26.9 L760.5,20.34 L762.5,27.32667 L764.5,25.48667 L766.5,23.91333 L769.5,18.63333 L771.5,22.92667 L773.5,24.84667 L775.5,24.76667 L778.5,24.92667 L780.5,18.47333 L782.5,26.60667 L784.5,20.44667 L787.5,20.28667 L789.5,27.22 L791.5,17.96667 L793.5,25.64667 L796.5,21.16667 L798.5,27.11333 L800.5,18.82 L802.5,23.59333 L804.5,20.20667 L807.5,23.67333 L809.5,23.64667 L811.5,25.80667 L813.5,20.9 L816.5,17.40667 L818.5,22.76667 L820.5,19.14 L822.5,20.47333 L825.5,24.76667 L827.5,27.48667 L829.5,17.91333 L831.5,19.83333 L834.5,27.3 L836.5,21.32667 L838.5,22.02 L840.5,18.47333 L843.5,27.72667 L845.5,24.84667 L847.5,23.14 L849.5,20.79333 L851.5,24.66 L854.5,27.14 L856.5,25.03333 L858.5,24.31333 L860.5,19.08667 L863.5,20.5 L865.5,23.56667 L867.5,21.75333 L869.5,27.3 L872.5,26.1 L874.5,19.06 L876.5,16.98 L878.5,18.95333 L881.5,25.40667 L883.5,22.55333 L885.5,17.64667 L887.5,24.42 L890.5,19.08667 L892.5,27.08667 L894.5,19.86 L896.5,22.95333 L898.5,19.38 L901.5,24.12667 L903.5,23.67333 L905.5,15.22 L907.5,17.00667 L910.5,16.79333 L912.5,26.28667 L914.5,19.06 L916.5,26.9 L919.5,19.59333 L921.5,25.43333 L923.5,22.98 L925.5,26.79333 L928.5,26.47333 L930.5,25.67333 L932.5,21.51333 L934.5,25.7 L937.5,15.06 L939.5,18.92667 L941.5,25.03333 L943.5,18.76667 L945.5,23.96667 L948.5,25.32667 L950.5,24.9 L952.5,24.5 L954.5,19.27333 L957.5,14.20667 L959.5,22.15333 L961.5,22.34 L963.5,15.3 L966.5,17.19333 L968.5,17.40667 L970.5,24.18 L972.5,19.03333 L975.5,23.96667 L977.5,20.36667 L979.5,25.67333 L981.5,23.54 L984.5,25.94 L986.5,22.76667 L988.5,17.46 L990.5,21.51333 L993.5,21.48667 L995.5,14.95333 L997.5,18.42 L999.5,17.59333 L1002.5,13.99333 L1004.5,21.38 L1006.5,18.68667 L1008.5,22.20667 L1010.5,18.92667 L1013.5,18.79333 L1015.5,19.16667 L1017.5,13.64667 L1019.5,15.46 L1022.5,19.16667 L1024.5,13.19333 L1026.5,25.56667 L1028.5,12.60667 L1031.5,21.06 L1033.5,15.67333 L1035.5,24.98 L1037.5,18.12667 L1040.5,25.24667 L1042.5,12.55333 L1044.5,14.04667 L1046.5,20.68667 L1049.5,18.55333 L1051.5,13.16667 L1053.5,24.1 L1055.5,17.80667 L1057.5,14.74 L1060.5,21.99333 L1062.5,15.94 L1064.5,20.07333 L1066.5,13.48667 L1069.5,17.19333 L1071.5,16.04667 L1073.5,21.19333 L1075.5,16.52667 L1078.5,17.16667 L1080.5,16.79333 L1082.5,23.94 L1084.5,22.76667 L1087.5,20.95333 L1089.5,16.52667 L1091.5,12.20667 L1093.5,10.98 L1096.5,14.07333 L1098.5,12.79333 L1100.5,14.66 L1102.5,22.26 L1104.5,13.80667 L1107.5,15.78 L1109.5,17.3 L1111.5,10.58 L1113.5,22.28667 L1116.5,10.47333 L1118.5,11.00667 M0,0 L0,0" fill="none" stroke-width="1" stroke-opacity="0" stroke="#BBBBBB"></path><path cs="100,100" d="M1.5,36.87333 L3.5,37.72667 L6.5,37.64667 L8.5,37.46 L10.5,37.3 L12.5,37.19333 L15.5,37.27333 L17.5,36.63333 L19.5,37.00667 L21.5,37.03333 L23.5,36.52667 L26.5,36.74 L28.5,37.3 L30.5,36.84667 L32.5,37.06 L35.5,37.03333 L37.5,36.58 L39.5,36.47333 L41.5,36.36667 L44.5,37.3 L46.5,36.52667 L48.5,36.26 L50.5,36.58 L53.5,35.59333 L55.5,36.60667 L57.5,36.55333 L59.5,36.1 L62.5,35.83333 L64.5,35.51333 L66.5,35.51333 L68.5,35.16667 L70.5,36.1 L73.5,36.18 L75.5,35.62 L77.5,35.83333 L79.5,35.38 L82.5,34.98 L84.5,36.36667 L86.5,35.00667 L88.5,35.16667 L91.5,34.79333 L93.5,34.98 L95.5,35.78 L97.5,34.95333 L100.5,34.58 L102.5,35.56667 L104.5,34.44667 L106.5,35.3 L109.5,35.67333 L111.5,35.78 L113.5,35.75333 L115.5,35.75333 L117.5,35.27333 L120.5,36.36667 L122.5,34.15333 L124.5,36.1 L126.5,33.86 L129.5,34.39333 L131.5,35.40667 L133.5,35.14 L135.5,33.94 L138.5,34.1 L140.5,33.67333 L142.5,33.96667 L144.5,34.34 L147.5,35.83333 L149.5,34.44667 L151.5,34.58 L153.5,33.64667 L156.5,35.03333 L158.5,35.72667 L160.5,34.66 L162.5,33.22 L164.5,33.43333 L167.5,34.20667 L169.5,33.59333 L171.5,33.99333 L174.5,33.16667 L176.5,35.64667 L178.5,34.58 L180.5,34.15333 L182.5,33.62 L185.5,33.00667 L187.5,33.56667 L189.5,34.9 L191.5,34.92667 L194.5,34.31333 L196.5,32.71333 L198.5,33.38 L200.5,35.14 L203.5,33.80667 L205.5,31.94 L207.5,35.16667 L209.5,33.48667 L212.5,32.019999999999996 L214.5,35.00667 L216.5,33.22 L218.5,34.5 L221.5,34.20667 L223.5,31.75333 L225.5,33.22 L227.5,34.23333 L229.5,31.56667 L232.5,31.59333 L234.5,33.08667 L236.5,32.84667 L238.5,34.15333 L241.5,31.32667 L243.5,31.11333 L245.5,34.71333 L247.5,34.52667 L250.5,31.48667 L252.5,34.39333 L254.5,32.07333 L256.5,31.86 L259.5,32.52667 L261.5,30.87333 L263.5,31.32667 L265.5,33.54 L268.5,31.08667 L270.5,33.08667 L272.5,31.00667 L274.5,32.60667 L276.5,30.87333 L279.5,34.23333 L281.5,32.473330000000004 L283.5,31.75333 L285.5,31.99333 L288.5,30.07333 L290.5,31.24667 L292.5,33.00667 L294.5,32.473330000000004 L297.5,31.35333 L299.5,33.00667 L301.5,30.20667 L303.5,31.86 L306.5,30.23333 L308.5,31.75333 L310.5,30.39333 L312.5,29.67333 L315.5,31.54 L317.5,33.38 L319.5,31.08667 L321.5,31.40667 L323.5,31.59333 L326.5,33.43333 L328.5,29.59333 L330.5,31.59333 L332.5,30.82 L335.5,31.67333 L337.5,32.98 L339.5,30.68667 L341.5,31.3 L344.5,28.76667 L346.5,32.39333 L348.5,29.14 L350.5,32.18 L353.5,31.35333 L355.5,33.22 L357.5,32.15333 L359.5,30.07333 L362.5,31.96667 L364.5,30.55333 L366.5,32.28667 L368.5,30.60667 L370.5,32.92667 L373.5,30.87333 L375.5,31.22 L377.5,30.68667 L379.5,32.95333 L382.5,30.68667 L384.5,29.03333 L386.5,31.62 L388.5,27.86 L391.5,32.82 L393.5,28.66 L395.5,31.67333 L397.5,30.47333 L400.5,30.34 L402.5,29.88667 L404.5,29.86 L406.5,29.27333 L408.5,31.54 L411.5,27.40667 L413.5,28.44667 L415.5,27.08667 L417.5,32.15333 L420.5,28.58 L422.5,28.02 L424.5,31.27333 L426.5,32.60667 L429.5,30.28667 L431.5,30.47333 L433.5,27.86 L435.5,28.34 L438.5,30.58 L440.5,30.63333 L442.5,30.98 L444.5,30.44667 L447.5,28.34 L449.5,27.54 L451.5,27.46 L453.5,30.1 L455.5,27.7 L458.5,28.76667 L460.5,28.52667 L462.5,30.39333 L464.5,29.64667 L467.5,30.76667 L469.5,29.51333 L471.5,30.52667 L473.5,29.35333 L476.5,31.24667 L478.5,27.64667 L480.5,25.56667 L482.5,29.62 L485.5,29.72667 L487.5,27.08667 L489.5,29.22 L491.5,27.27333 L493.5,30.15333 L496.5,30.74 L498.5,25.08667 L500.5,31.46 L502.5,25.64667 L505.5,30.55333 L507.5,27.64667 L509.5,29.32667 L511.5,29.78 L514.5,28.74 L516.5,29.96667 L518.5,26.68667 L520.5,30.39333 L523.5,31.16667 L525.5,27.27333 L527.5,26.71333 L529.5,29.72667 L531.5,29.91333 L534.5,31.32667 L536.5,26.66 L538.5,27.08667 L540.5,24.04667 L543.5,28.82 L545.5,24.74 L547.5,28.87333 L549.5,27.38 L552.5,23.86 L554.5,29.80667 L556.5,28.12667 L558.5,30.95333 L561.5,28.82 L563.5,25.91333 L565.5,28.87333 L567.5,25.14 L570.5,23.78 L572.5,29.54 L574.5,28.47333 L576.5,28.1 L578.5,24.15333 L581.5,24.95333 L583.5,28.79333 L585.5,23.59333 L587.5,23.78 L590.5,24.68667 L592.5,30.68667 L594.5,29.27333 L596.5,25.38 L599.5,22.68667 L601.5,26.34 L603.5,22.98 L605.5,29.54 L608.5,24.28667 L610.5,28.55333 L612.5,29.16667 L614.5,27.43333 L617.5,24.84667 L619.5,27.91333 L621.5,26.82 L623.5,26.44667 L625.5,24.36667 L628.5,22.15333 L630.5,23.11333 L632.5,24.98 L634.5,29.7 L637.5,26.76667 L639.5,25.83333 L641.5,25.86 L643.5,24.58 L646.5,24.12667 L648.5,25.56667 L650.5,23.64667 L652.5,22.95333 L655.5,25.51333 L657.5,29.7 L659.5,25.16667 L661.5,28.39333 L664.5,21.88667 L666.5,23.88667 L668.5,26.28667 L670.5,23.24667 L672.5,24.9 L675.5,28.52667 L677.5,29.40667 L679.5,23.06 L681.5,23.54 L684.5,24.82 L686.5,23.46 L688.5,25.38 L690.5,20.98 L693.5,22.63333 L695.5,28.42 L697.5,22.02 L699.5,26.02 L702.5,21.48667 L704.5,26.20667 L706.5,24.42 L708.5,22.04667 L711.5,27.80667 L713.5,24.52667 L715.5,25.27333 L717.5,24.42 L719.5,27.46 L722.5,20.44667 L724.5,23.96667 L726.5,22.79333 L728.5,25.14 L731.5,20.26 L733.5,20.76667 L735.5,21.46 L737.5,23.11333 L740.5,28.26 L742.5,23.35333 L744.5,28.18 L746.5,22.36667 L749.5,28.60667 L751.5,22.23333 L753.5,26.28667 L755.5,21.62 L757.5,26.9 L760.5,20.34 L762.5,27.32667 L764.5,25.48667 L766.5,23.91333 L769.5,18.63333 L771.5,22.92667 L773.5,24.84667 L775.5,24.76667 L778.5,24.92667 L780.5,18.47333 L782.5,26.60667 L784.5,20.44667 L787.5,20.28667 L789.5,27.22 L791.5,17.96667 L793.5,25.64667 L796.5,21.16667 L798.5,27.11333 L800.5,18.82 L802.5,23.59333 L804.5,20.20667 L807.5,23.67333 L809.5,23.64667 L811.5,25.80667 L813.5,20.9 L816.5,17.40667 L818.5,22.76667 L820.5,19.14 L822.5,20.47333 L825.5,24.76667 L827.5,27.48667 L829.5,17.91333 L831.5,19.83333 L834.5,27.3 L836.5,21.32667 L838.5,22.02 L840.5,18.47333 L843.5,27.72667 L845.5,24.84667 L847.5,23.14 L849.5,20.79333 L851.5,24.66 L854.5,27.14 L856.5,25.03333 L858.5,24.31333 L860.5,19.08667 L863.5,20.5 L865.5,23.56667 L867.5,21.75333 L869.5,27.3 L872.5,26.1 L874.5,19.06 L876.5,16.98 L878.5,18.95333 L881.5,25.40667 L883.5,22.55333 L885.5,17.64667 L887.5,24.42 L890.5,19.08667 L892.5,27.08667 L894.5,19.86 L896.5,22.95333 L898.5,19.38 L901.5,24.12667 L903.5,23.67333 L905.5,15.22 L907.5,17.00667 L910.5,16.79333 L912.5,26.28667 L914.5,19.06 L916.5,26.9 L919.5,19.59333 L921.5,25.43333 L923.5,22.98 L925.5,26.79333 L928.5,26.47333 L930.5,25.67333 L932.5,21.51333 L934.5,25.7 L937.5,15.06 L939.5,18.92667 L941.5,25.03333 L943.5,18.76667 L945.5,23.96667 L948.5,25.32667 L950.5,24.9 L952.5,24.5 L954.5,19.27333 L957.5,14.20667 L959.5,22.15333 L961.5,22.34 L963.5,15.3 L966.5,17.19333 L968.5,17.40667 L970.5,24.18 L972.5,19.03333 L975.5,23.96667 L977.5,20.36667 L979.5,25.67333 L981.5,23.54 L984.5,25.94 L986.5,22.76667 L988.5,17.46 L990.5,21.51333 L993.5,21.48667 L995.5,14.95333 L997.5,18.42 L999.5,17.59333 L1002.5,13.99333 L1004.5,21.38 L1006.5,18.68667 L1008.5,22.20667 L1010.5,18.92667 L1013.5,18.79333 L1015.5,19.16667 L1017.5,13.64667 L1019.5,15.46 L1022.5,19.16667 L1024.5,13.19333 L1026.5,25.56667 L1028.5,12.60667 L1031.5,21.06 L1033.5,15.67333 L1035.5,24.98 L1037.5,18.12667 L1040.5,25.24667 L1042.5,12.55333 L1044.5,14.04667 L1046.5,20.68667 L1049.5,18.55333 L1051.5,13.16667 L1053.5,24.1 L1055.5,17.80667 L1057.5,14.74 L1060.5,21.99333 L1062.5,15.94 L1064.5,20.07333 L1066.5,13.48667 L1069.5,17.19333 L1071.5,16.04667 L1073.5,21.19333 L1075.5,16.52667 L1078.5,17.16667 L1080.5,16.79333 L1082.5,23.94 L1084.5,22.76667 L1087.5,20.95333 L1089.5,16.52667 L1091.5,12.20667 L1093.5,10.98 L1096.5,14.07333 L1098.5,12.79333 L1100.5,14.66 L1102.5,22.26 L1104.5,13.80667 L1107.5,15.78 L1109.5,17.3 L1111.5,10.58 L1113.5,22.28667 L1116.5,10.47333 L1118.5,11.00667 L1118.5,40.5 L1.5,40.5 L1.5,36.87333 Z" fill="#BBBBBB" stroke="#000" fill-opacity="0.5" stroke-width="1" stroke-opacity="0"></path></g><g></g></g><g transform="translate(0,0)" clip-path="url(#AmChartsEl-1)"><g></g><g><path cs="100,100" d="M1.5,36.87333 L3.5,37.72667 L6.5,37.64667 L8.5,37.46 L10.5,37.3 L12.5,37.19333 L15.5,37.27333 L17.5,36.63333 L19.5,37.00667 L21.5,37.03333 L23.5,36.52667 L26.5,36.74 L28.5,37.3 L30.5,36.84667 L32.5,37.06 L35.5,37.03333 L37.5,36.58 L39.5,36.47333 L41.5,36.36667 L44.5,37.3 L46.5,36.52667 L48.5,36.26 L50.5,36.58 L53.5,35.59333 L55.5,36.60667 L57.5,36.55333 L59.5,36.1 L62.5,35.83333 L64.5,35.51333 L66.5,35.51333 L68.5,35.16667 L70.5,36.1 L73.5,36.18 L75.5,35.62 L77.5,35.83333 L79.5,35.38 L82.5,34.98 L84.5,36.36667 L86.5,35.00667 L88.5,35.16667 L91.5,34.79333 L93.5,34.98 L95.5,35.78 L97.5,34.95333 L100.5,34.58 L102.5,35.56667 L104.5,34.44667 L106.5,35.3 L109.5,35.67333 L111.5,35.78 L113.5,35.75333 L115.5,35.75333 L117.5,35.27333 L120.5,36.36667 L122.5,34.15333 L124.5,36.1 L126.5,33.86 L129.5,34.39333 L131.5,35.40667 L133.5,35.14 L135.5,33.94 L138.5,34.1 L140.5,33.67333 L142.5,33.96667 L144.5,34.34 L147.5,35.83333 L149.5,34.44667 L151.5,34.58 L153.5,33.64667 L156.5,35.03333 L158.5,35.72667 L160.5,34.66 L162.5,33.22 L164.5,33.43333 L167.5,34.20667 L169.5,33.59333 L171.5,33.99333 L174.5,33.16667 L176.5,35.64667 L178.5,34.58 L180.5,34.15333 L182.5,33.62 L185.5,33.00667 L187.5,33.56667 L189.5,34.9 L191.5,34.92667 L194.5,34.31333 L196.5,32.71333 L198.5,33.38 L200.5,35.14 L203.5,33.80667 L205.5,31.94 L207.5,35.16667 L209.5,33.48667 L212.5,32.019999999999996 L214.5,35.00667 L216.5,33.22 L218.5,34.5 L221.5,34.20667 L223.5,31.75333 L225.5,33.22 L227.5,34.23333 L229.5,31.56667 L232.5,31.59333 L234.5,33.08667 L236.5,32.84667 L238.5,34.15333 L241.5,31.32667 L243.5,31.11333 L245.5,34.71333 L247.5,34.52667 L250.5,31.48667 L252.5,34.39333 L254.5,32.07333 L256.5,31.86 L259.5,32.52667 L261.5,30.87333 L263.5,31.32667 L265.5,33.54 L268.5,31.08667 L270.5,33.08667 L272.5,31.00667 L274.5,32.60667 L276.5,30.87333 L279.5,34.23333 L281.5,32.473330000000004 L283.5,31.75333 L285.5,31.99333 L288.5,30.07333 L290.5,31.24667 L292.5,33.00667 L294.5,32.473330000000004 L297.5,31.35333 L299.5,33.00667 L301.5,30.20667 L303.5,31.86 L306.5,30.23333 L308.5,31.75333 L310.5,30.39333 L312.5,29.67333 L315.5,31.54 L317.5,33.38 L319.5,31.08667 L321.5,31.40667 L323.5,31.59333 L326.5,33.43333 L328.5,29.59333 L330.5,31.59333 L332.5,30.82 L335.5,31.67333 L337.5,32.98 L339.5,30.68667 L341.5,31.3 L344.5,28.76667 L346.5,32.39333 L348.5,29.14 L350.5,32.18 L353.5,31.35333 L355.5,33.22 L357.5,32.15333 L359.5,30.07333 L362.5,31.96667 L364.5,30.55333 L366.5,32.28667 L368.5,30.60667 L370.5,32.92667 L373.5,30.87333 L375.5,31.22 L377.5,30.68667 L379.5,32.95333 L382.5,30.68667 L384.5,29.03333 L386.5,31.62 L388.5,27.86 L391.5,32.82 L393.5,28.66 L395.5,31.67333 L397.5,30.47333 L400.5,30.34 L402.5,29.88667 L404.5,29.86 L406.5,29.27333 L408.5,31.54 L411.5,27.40667 L413.5,28.44667 L415.5,27.08667 L417.5,32.15333 L420.5,28.58 L422.5,28.02 L424.5,31.27333 L426.5,32.60667 L429.5,30.28667 L431.5,30.47333 L433.5,27.86 L435.5,28.34 L438.5,30.58 L440.5,30.63333 L442.5,30.98 L444.5,30.44667 L447.5,28.34 L449.5,27.54 L451.5,27.46 L453.5,30.1 L455.5,27.7 L458.5,28.76667 L460.5,28.52667 L462.5,30.39333 L464.5,29.64667 L467.5,30.76667 L469.5,29.51333 L471.5,30.52667 L473.5,29.35333 L476.5,31.24667 L478.5,27.64667 L480.5,25.56667 L482.5,29.62 L485.5,29.72667 L487.5,27.08667 L489.5,29.22 L491.5,27.27333 L493.5,30.15333 L496.5,30.74 L498.5,25.08667 L500.5,31.46 L502.5,25.64667 L505.5,30.55333 L507.5,27.64667 L509.5,29.32667 L511.5,29.78 L514.5,28.74 L516.5,29.96667 L518.5,26.68667 L520.5,30.39333 L523.5,31.16667 L525.5,27.27333 L527.5,26.71333 L529.5,29.72667 L531.5,29.91333 L534.5,31.32667 L536.5,26.66 L538.5,27.08667 L540.5,24.04667 L543.5,28.82 L545.5,24.74 L547.5,28.87333 L549.5,27.38 L552.5,23.86 L554.5,29.80667 L556.5,28.12667 L558.5,30.95333 L561.5,28.82 L563.5,25.91333 L565.5,28.87333 L567.5,25.14 L570.5,23.78 L572.5,29.54 L574.5,28.47333 L576.5,28.1 L578.5,24.15333 L581.5,24.95333 L583.5,28.79333 L585.5,23.59333 L587.5,23.78 L590.5,24.68667 L592.5,30.68667 L594.5,29.27333 L596.5,25.38 L599.5,22.68667 L601.5,26.34 L603.5,22.98 L605.5,29.54 L608.5,24.28667 L610.5,28.55333 L612.5,29.16667 L614.5,27.43333 L617.5,24.84667 L619.5,27.91333 L621.5,26.82 L623.5,26.44667 L625.5,24.36667 L628.5,22.15333 L630.5,23.11333 L632.5,24.98 L634.5,29.7 L637.5,26.76667 L639.5,25.83333 L641.5,25.86 L643.5,24.58 L646.5,24.12667 L648.5,25.56667 L650.5,23.64667 L652.5,22.95333 L655.5,25.51333 L657.5,29.7 L659.5,25.16667 L661.5,28.39333 L664.5,21.88667 L666.5,23.88667 L668.5,26.28667 L670.5,23.24667 L672.5,24.9 L675.5,28.52667 L677.5,29.40667 L679.5,23.06 L681.5,23.54 L684.5,24.82 L686.5,23.46 L688.5,25.38 L690.5,20.98 L693.5,22.63333 L695.5,28.42 L697.5,22.02 L699.5,26.02 L702.5,21.48667 L704.5,26.20667 L706.5,24.42 L708.5,22.04667 L711.5,27.80667 L713.5,24.52667 L715.5,25.27333 L717.5,24.42 L719.5,27.46 L722.5,20.44667 L724.5,23.96667 L726.5,22.79333 L728.5,25.14 L731.5,20.26 L733.5,20.76667 L735.5,21.46 L737.5,23.11333 L740.5,28.26 L742.5,23.35333 L744.5,28.18 L746.5,22.36667 L749.5,28.60667 L751.5,22.23333 L753.5,26.28667 L755.5,21.62 L757.5,26.9 L760.5,20.34 L762.5,27.32667 L764.5,25.48667 L766.5,23.91333 L769.5,18.63333 L771.5,22.92667 L773.5,24.84667 L775.5,24.76667 L778.5,24.92667 L780.5,18.47333 L782.5,26.60667 L784.5,20.44667 L787.5,20.28667 L789.5,27.22 L791.5,17.96667 L793.5,25.64667 L796.5,21.16667 L798.5,27.11333 L800.5,18.82 L802.5,23.59333 L804.5,20.20667 L807.5,23.67333 L809.5,23.64667 L811.5,25.80667 L813.5,20.9 L816.5,17.40667 L818.5,22.76667 L820.5,19.14 L822.5,20.47333 L825.5,24.76667 L827.5,27.48667 L829.5,17.91333 L831.5,19.83333 L834.5,27.3 L836.5,21.32667 L838.5,22.02 L840.5,18.47333 L843.5,27.72667 L845.5,24.84667 L847.5,23.14 L849.5,20.79333 L851.5,24.66 L854.5,27.14 L856.5,25.03333 L858.5,24.31333 L860.5,19.08667 L863.5,20.5 L865.5,23.56667 L867.5,21.75333 L869.5,27.3 L872.5,26.1 L874.5,19.06 L876.5,16.98 L878.5,18.95333 L881.5,25.40667 L883.5,22.55333 L885.5,17.64667 L887.5,24.42 L890.5,19.08667 L892.5,27.08667 L894.5,19.86 L896.5,22.95333 L898.5,19.38 L901.5,24.12667 L903.5,23.67333 L905.5,15.22 L907.5,17.00667 L910.5,16.79333 L912.5,26.28667 L914.5,19.06 L916.5,26.9 L919.5,19.59333 L921.5,25.43333 L923.5,22.98 L925.5,26.79333 L928.5,26.47333 L930.5,25.67333 L932.5,21.51333 L934.5,25.7 L937.5,15.06 L939.5,18.92667 L941.5,25.03333 L943.5,18.76667 L945.5,23.96667 L948.5,25.32667 L950.5,24.9 L952.5,24.5 L954.5,19.27333 L957.5,14.20667 L959.5,22.15333 L961.5,22.34 L963.5,15.3 L966.5,17.19333 L968.5,17.40667 L970.5,24.18 L972.5,19.03333 L975.5,23.96667 L977.5,20.36667 L979.5,25.67333 L981.5,23.54 L984.5,25.94 L986.5,22.76667 L988.5,17.46 L990.5,21.51333 L993.5,21.48667 L995.5,14.95333 L997.5,18.42 L999.5,17.59333 L1002.5,13.99333 L1004.5,21.38 L1006.5,18.68667 L1008.5,22.20667 L1010.5,18.92667 L1013.5,18.79333 L1015.5,19.16667 L1017.5,13.64667 L1019.5,15.46 L1022.5,19.16667 L1024.5,13.19333 L1026.5,25.56667 L1028.5,12.60667 L1031.5,21.06 L1033.5,15.67333 L1035.5,24.98 L1037.5,18.12667 L1040.5,25.24667 L1042.5,12.55333 L1044.5,14.04667 L1046.5,20.68667 L1049.5,18.55333 L1051.5,13.16667 L1053.5,24.1 L1055.5,17.80667 L1057.5,14.74 L1060.5,21.99333 L1062.5,15.94 L1064.5,20.07333 L1066.5,13.48667 L1069.5,17.19333 L1071.5,16.04667 L1073.5,21.19333 L1075.5,16.52667 L1078.5,17.16667 L1080.5,16.79333 L1082.5,23.94 L1084.5,22.76667 L1087.5,20.95333 L1089.5,16.52667 L1091.5,12.20667 L1093.5,10.98 L1096.5,14.07333 L1098.5,12.79333 L1100.5,14.66 L1102.5,22.26 L1104.5,13.80667 L1107.5,15.78 L1109.5,17.3 L1111.5,10.58 L1113.5,22.28667 L1116.5,10.47333 L1118.5,11.00667 M0,0 L0,0" fill="none" stroke-width="1" stroke-opacity="0" stroke="#888888"></path><path cs="100,100" d="M1.5,36.87333 L3.5,37.72667 L6.5,37.64667 L8.5,37.46 L10.5,37.3 L12.5,37.19333 L15.5,37.27333 L17.5,36.63333 L19.5,37.00667 L21.5,37.03333 L23.5,36.52667 L26.5,36.74 L28.5,37.3 L30.5,36.84667 L32.5,37.06 L35.5,37.03333 L37.5,36.58 L39.5,36.47333 L41.5,36.36667 L44.5,37.3 L46.5,36.52667 L48.5,36.26 L50.5,36.58 L53.5,35.59333 L55.5,36.60667 L57.5,36.55333 L59.5,36.1 L62.5,35.83333 L64.5,35.51333 L66.5,35.51333 L68.5,35.16667 L70.5,36.1 L73.5,36.18 L75.5,35.62 L77.5,35.83333 L79.5,35.38 L82.5,34.98 L84.5,36.36667 L86.5,35.00667 L88.5,35.16667 L91.5,34.79333 L93.5,34.98 L95.5,35.78 L97.5,34.95333 L100.5,34.58 L102.5,35.56667 L104.5,34.44667 L106.5,35.3 L109.5,35.67333 L111.5,35.78 L113.5,35.75333 L115.5,35.75333 L117.5,35.27333 L120.5,36.36667 L122.5,34.15333 L124.5,36.1 L126.5,33.86 L129.5,34.39333 L131.5,35.40667 L133.5,35.14 L135.5,33.94 L138.5,34.1 L140.5,33.67333 L142.5,33.96667 L144.5,34.34 L147.5,35.83333 L149.5,34.44667 L151.5,34.58 L153.5,33.64667 L156.5,35.03333 L158.5,35.72667 L160.5,34.66 L162.5,33.22 L164.5,33.43333 L167.5,34.20667 L169.5,33.59333 L171.5,33.99333 L174.5,33.16667 L176.5,35.64667 L178.5,34.58 L180.5,34.15333 L182.5,33.62 L185.5,33.00667 L187.5,33.56667 L189.5,34.9 L191.5,34.92667 L194.5,34.31333 L196.5,32.71333 L198.5,33.38 L200.5,35.14 L203.5,33.80667 L205.5,31.94 L207.5,35.16667 L209.5,33.48667 L212.5,32.019999999999996 L214.5,35.00667 L216.5,33.22 L218.5,34.5 L221.5,34.20667 L223.5,31.75333 L225.5,33.22 L227.5,34.23333 L229.5,31.56667 L232.5,31.59333 L234.5,33.08667 L236.5,32.84667 L238.5,34.15333 L241.5,31.32667 L243.5,31.11333 L245.5,34.71333 L247.5,34.52667 L250.5,31.48667 L252.5,34.39333 L254.5,32.07333 L256.5,31.86 L259.5,32.52667 L261.5,30.87333 L263.5,31.32667 L265.5,33.54 L268.5,31.08667 L270.5,33.08667 L272.5,31.00667 L274.5,32.60667 L276.5,30.87333 L279.5,34.23333 L281.5,32.473330000000004 L283.5,31.75333 L285.5,31.99333 L288.5,30.07333 L290.5,31.24667 L292.5,33.00667 L294.5,32.473330000000004 L297.5,31.35333 L299.5,33.00667 L301.5,30.20667 L303.5,31.86 L306.5,30.23333 L308.5,31.75333 L310.5,30.39333 L312.5,29.67333 L315.5,31.54 L317.5,33.38 L319.5,31.08667 L321.5,31.40667 L323.5,31.59333 L326.5,33.43333 L328.5,29.59333 L330.5,31.59333 L332.5,30.82 L335.5,31.67333 L337.5,32.98 L339.5,30.68667 L341.5,31.3 L344.5,28.76667 L346.5,32.39333 L348.5,29.14 L350.5,32.18 L353.5,31.35333 L355.5,33.22 L357.5,32.15333 L359.5,30.07333 L362.5,31.96667 L364.5,30.55333 L366.5,32.28667 L368.5,30.60667 L370.5,32.92667 L373.5,30.87333 L375.5,31.22 L377.5,30.68667 L379.5,32.95333 L382.5,30.68667 L384.5,29.03333 L386.5,31.62 L388.5,27.86 L391.5,32.82 L393.5,28.66 L395.5,31.67333 L397.5,30.47333 L400.5,30.34 L402.5,29.88667 L404.5,29.86 L406.5,29.27333 L408.5,31.54 L411.5,27.40667 L413.5,28.44667 L415.5,27.08667 L417.5,32.15333 L420.5,28.58 L422.5,28.02 L424.5,31.27333 L426.5,32.60667 L429.5,30.28667 L431.5,30.47333 L433.5,27.86 L435.5,28.34 L438.5,30.58 L440.5,30.63333 L442.5,30.98 L444.5,30.44667 L447.5,28.34 L449.5,27.54 L451.5,27.46 L453.5,30.1 L455.5,27.7 L458.5,28.76667 L460.5,28.52667 L462.5,30.39333 L464.5,29.64667 L467.5,30.76667 L469.5,29.51333 L471.5,30.52667 L473.5,29.35333 L476.5,31.24667 L478.5,27.64667 L480.5,25.56667 L482.5,29.62 L485.5,29.72667 L487.5,27.08667 L489.5,29.22 L491.5,27.27333 L493.5,30.15333 L496.5,30.74 L498.5,25.08667 L500.5,31.46 L502.5,25.64667 L505.5,30.55333 L507.5,27.64667 L509.5,29.32667 L511.5,29.78 L514.5,28.74 L516.5,29.96667 L518.5,26.68667 L520.5,30.39333 L523.5,31.16667 L525.5,27.27333 L527.5,26.71333 L529.5,29.72667 L531.5,29.91333 L534.5,31.32667 L536.5,26.66 L538.5,27.08667 L540.5,24.04667 L543.5,28.82 L545.5,24.74 L547.5,28.87333 L549.5,27.38 L552.5,23.86 L554.5,29.80667 L556.5,28.12667 L558.5,30.95333 L561.5,28.82 L563.5,25.91333 L565.5,28.87333 L567.5,25.14 L570.5,23.78 L572.5,29.54 L574.5,28.47333 L576.5,28.1 L578.5,24.15333 L581.5,24.95333 L583.5,28.79333 L585.5,23.59333 L587.5,23.78 L590.5,24.68667 L592.5,30.68667 L594.5,29.27333 L596.5,25.38 L599.5,22.68667 L601.5,26.34 L603.5,22.98 L605.5,29.54 L608.5,24.28667 L610.5,28.55333 L612.5,29.16667 L614.5,27.43333 L617.5,24.84667 L619.5,27.91333 L621.5,26.82 L623.5,26.44667 L625.5,24.36667 L628.5,22.15333 L630.5,23.11333 L632.5,24.98 L634.5,29.7 L637.5,26.76667 L639.5,25.83333 L641.5,25.86 L643.5,24.58 L646.5,24.12667 L648.5,25.56667 L650.5,23.64667 L652.5,22.95333 L655.5,25.51333 L657.5,29.7 L659.5,25.16667 L661.5,28.39333 L664.5,21.88667 L666.5,23.88667 L668.5,26.28667 L670.5,23.24667 L672.5,24.9 L675.5,28.52667 L677.5,29.40667 L679.5,23.06 L681.5,23.54 L684.5,24.82 L686.5,23.46 L688.5,25.38 L690.5,20.98 L693.5,22.63333 L695.5,28.42 L697.5,22.02 L699.5,26.02 L702.5,21.48667 L704.5,26.20667 L706.5,24.42 L708.5,22.04667 L711.5,27.80667 L713.5,24.52667 L715.5,25.27333 L717.5,24.42 L719.5,27.46 L722.5,20.44667 L724.5,23.96667 L726.5,22.79333 L728.5,25.14 L731.5,20.26 L733.5,20.76667 L735.5,21.46 L737.5,23.11333 L740.5,28.26 L742.5,23.35333 L744.5,28.18 L746.5,22.36667 L749.5,28.60667 L751.5,22.23333 L753.5,26.28667 L755.5,21.62 L757.5,26.9 L760.5,20.34 L762.5,27.32667 L764.5,25.48667 L766.5,23.91333 L769.5,18.63333 L771.5,22.92667 L773.5,24.84667 L775.5,24.76667 L778.5,24.92667 L780.5,18.47333 L782.5,26.60667 L784.5,20.44667 L787.5,20.28667 L789.5,27.22 L791.5,17.96667 L793.5,25.64667 L796.5,21.16667 L798.5,27.11333 L800.5,18.82 L802.5,23.59333 L804.5,20.20667 L807.5,23.67333 L809.5,23.64667 L811.5,25.80667 L813.5,20.9 L816.5,17.40667 L818.5,22.76667 L820.5,19.14 L822.5,20.47333 L825.5,24.76667 L827.5,27.48667 L829.5,17.91333 L831.5,19.83333 L834.5,27.3 L836.5,21.32667 L838.5,22.02 L840.5,18.47333 L843.5,27.72667 L845.5,24.84667 L847.5,23.14 L849.5,20.79333 L851.5,24.66 L854.5,27.14 L856.5,25.03333 L858.5,24.31333 L860.5,19.08667 L863.5,20.5 L865.5,23.56667 L867.5,21.75333 L869.5,27.3 L872.5,26.1 L874.5,19.06 L876.5,16.98 L878.5,18.95333 L881.5,25.40667 L883.5,22.55333 L885.5,17.64667 L887.5,24.42 L890.5,19.08667 L892.5,27.08667 L894.5,19.86 L896.5,22.95333 L898.5,19.38 L901.5,24.12667 L903.5,23.67333 L905.5,15.22 L907.5,17.00667 L910.5,16.79333 L912.5,26.28667 L914.5,19.06 L916.5,26.9 L919.5,19.59333 L921.5,25.43333 L923.5,22.98 L925.5,26.79333 L928.5,26.47333 L930.5,25.67333 L932.5,21.51333 L934.5,25.7 L937.5,15.06 L939.5,18.92667 L941.5,25.03333 L943.5,18.76667 L945.5,23.96667 L948.5,25.32667 L950.5,24.9 L952.5,24.5 L954.5,19.27333 L957.5,14.20667 L959.5,22.15333 L961.5,22.34 L963.5,15.3 L966.5,17.19333 L968.5,17.40667 L970.5,24.18 L972.5,19.03333 L975.5,23.96667 L977.5,20.36667 L979.5,25.67333 L981.5,23.54 L984.5,25.94 L986.5,22.76667 L988.5,17.46 L990.5,21.51333 L993.5,21.48667 L995.5,14.95333 L997.5,18.42 L999.5,17.59333 L1002.5,13.99333 L1004.5,21.38 L1006.5,18.68667 L1008.5,22.20667 L1010.5,18.92667 L1013.5,18.79333 L1015.5,19.16667 L1017.5,13.64667 L1019.5,15.46 L1022.5,19.16667 L1024.5,13.19333 L1026.5,25.56667 L1028.5,12.60667 L1031.5,21.06 L1033.5,15.67333 L1035.5,24.98 L1037.5,18.12667 L1040.5,25.24667 L1042.5,12.55333 L1044.5,14.04667 L1046.5,20.68667 L1049.5,18.55333 L1051.5,13.16667 L1053.5,24.1 L1055.5,17.80667 L1057.5,14.74 L1060.5,21.99333 L1062.5,15.94 L1064.5,20.07333 L1066.5,13.48667 L1069.5,17.19333 L1071.5,16.04667 L1073.5,21.19333 L1075.5,16.52667 L1078.5,17.16667 L1080.5,16.79333 L1082.5,23.94 L1084.5,22.76667 L1087.5,20.95333 L1089.5,16.52667 L1091.5,12.20667 L1093.5,10.98 L1096.5,14.07333 L1098.5,12.79333 L1100.5,14.66 L1102.5,22.26 L1104.5,13.80667 L1107.5,15.78 L1109.5,17.3 L1111.5,10.58 L1113.5,22.28667 L1116.5,10.47333 L1118.5,11.00667 L1118.5,40.5 L1.5,40.5 L1.5,36.87333 Z" fill="#888888" stroke="#000" fill-opacity="1" stroke-width="1" stroke-opacity="0"></path></g><g></g></g><g transform="translate(0,0)"><g><path cs="100,100" d="M29.5,40.5 L29.5,40.5 L29.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.15" stroke="#FFFFFF"></path></g><g><path cs="100,100" d="M166.5,40.5 L166.5,40.5 L166.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.15" stroke="#FFFFFF"></path></g><g><path cs="100,100" d="M302.5,40.5 L302.5,40.5 L302.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.15" stroke="#FFFFFF"></path></g><g><path cs="100,100" d="M434.5,40.5 L434.5,40.5 L434.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.15" stroke="#FFFFFF"></path></g><g><path cs="100,100" d="M571.5,40.5 L571.5,40.5 L571.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.15" stroke="#FFFFFF"></path></g><g><path cs="100,100" d="M707.5,40.5 L707.5,40.5 L707.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.15" stroke="#FFFFFF"></path></g><g><path cs="100,100" d="M846.5,40.5 L846.5,40.5 L846.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.15" stroke="#FFFFFF"></path></g><g><path cs="100,100" d="M982.5,40.5 L982.5,40.5 L982.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.15" stroke="#FFFFFF"></path></g><g><path cs="100,100" d="M1119.5,40.5 L1119.5,40.5 L1119.5,0.5" fill="none" stroke-width="1" stroke-opacity="0.15" stroke="#FFFFFF"></path></g></g><g transform="translate(0,0)" visibility="visible"><text y="7" fill="#FFFFFF" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(32,27)"><tspan y="7" x="0">Sep</tspan></text><text y="7" fill="#FFFFFF" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(169,27)"><tspan y="7" x="0">Nov</tspan></text><text y="7" fill="#FFFFFF" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(305,27)"><tspan y="7" x="0">2011</tspan></text><text y="7" fill="#FFFFFF" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(437,27)"><tspan y="7" x="0">Mar</tspan></text><text y="7" fill="#FFFFFF" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(574,27)"><tspan y="7" x="0">May</tspan></text><text y="7" fill="#FFFFFF" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(710,27)"><tspan y="7" x="0">Jul</tspan></text><text y="7" fill="#FFFFFF" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(849,27)"><tspan y="7" x="0">Sep</tspan></text><text y="7" fill="#FFFFFF" font-family="Lato" font-size="14px" opacity="1" text-anchor="start" transform="translate(985,27)"><tspan y="7" x="0">Nov</tspan></text></g><rect x="0.5" y="0.5" width="1120" height="40" rx="0" ry="0" stroke-width="0" fill="#000" stroke="#000" fill-opacity="0.005" stroke-opacity="0.005"></rect><rect x="0" y="0.5" width="1119" height="40" rx="0" ry="0" stroke-width="0" fill="#000" stroke="#000" fill-opacity="0.005" stroke-opacity="0.005" style="cursor: cursor: grab; cursor:-moz-grab; cursor:-webkit-grab;"></rect><g transform="translate(-17,3)" visibility="visible"><image x="0" y="0" width="35" height="35" xlink:href="https://www.amcharts.com/lib/3/images/dragIconRoundBig.svg"></image><rect x="0.5" y="0.5" width="25" height="40" rx="0" ry="0" stroke-width="0" fill="#000" stroke="#000" fill-opacity="0.005" stroke-opacity="0.005" transform="translate(5,-2)"></rect></g><g transform="translate(1102,3)" visibility="visible"><image x="0" y="0" width="35" height="35" xlink:href="https://www.amcharts.com/lib/3/images/dragIconRoundBig.svg"></image><rect x="0.5" y="0.5" width="25" height="40" rx="0" ry="0" stroke-width="0" fill="#000" stroke="#000" fill-opacity="0.005" stroke-opacity="0.005" transform="translate(5,-2)"></rect></g><clippath id="AmChartsEl-1"><rect x="0" y="0" width="1119" height="41" rx="0" ry="0" stroke-width="0"></rect></clippath></g></g><g><g transform="translate(0,0)"></g><g transform="translate(0,0)"></g></g><g><g></g></g><g><g transform="translate(0,0)" visibility="hidden"></g><g transform="translate(0,40)" visibility="visible"></g></g><g></g><g transform="translate(0,40)"></g><g></g><g></g></svg></div></div></div><div class="amChartsPeriodSelector amcharts-period-selector-div" style="margin-top: 8px; color: rgb(0, 0, 0);"><div style="display: inline;">From: <input class="amChartsInputField amcharts-start-date-input" style="border: 1px solid rgba(0, 0, 0, 0.298039); color: rgb(0, 0, 0); outline: none; text-align: center; width: 100px; background: transparent;"> to: <input class="amChartsInputField amcharts-end-date-input" style="border: 1px solid rgba(0, 0, 0, 0.298039); color: rgb(0, 0, 0); outline: none; text-align: center; width: 100px; background: transparent;"></div><div style="float: right; display: inline;">Zoom: <input type="button" value="10 days" class="amChartsButton amcharts-period-input" style="border: 1px solid rgba(0, 0, 0, 0.298039); border-radius: 5px; box-sizing: border-box; color: rgb(0, 0, 0); margin: 1px; opacity: 0.7; outline: none; display: inline; background: transparent;"><input type="button" value="1 month" class="amChartsButton amcharts-period-input" style="border: 1px solid rgba(0, 0, 0, 0.298039); border-radius: 5px; box-sizing: border-box; color: rgb(0, 0, 0); margin: 1px; opacity: 0.7; outline: none; display: inline; background: transparent;"><input type="button" value="1 year" class="amChartsButton amcharts-period-input" style="border: 1px solid rgba(0, 0, 0, 0.298039); border-radius: 5px; box-sizing: border-box; color: rgb(0, 0, 0); margin: 1px; opacity: 0.7; outline: none; display: inline; background: transparent;"><input type="button" value="YTD" class="amChartsButton amcharts-period-input" style="border: 1px solid rgba(0, 0, 0, 0.298039); border-radius: 5px; box-sizing: border-box; color: rgb(0, 0, 0); margin: 1px; opacity: 0.7; outline: none; display: none; background: transparent;"><input type="button" value="MAX" class="amChartsButtonSelected amcharts-period-input-selected" style="border: 1px solid rgba(0, 0, 0, 0.298039); border-radius: 5px; box-sizing: border-box; color: rgb(0, 0, 0); margin: 1px; opacity: 1; outline: none; display: inline; background: rgb(185, 205, 245);"></div></div></div><div class="amcharts-export-menu amcharts-export-menu-top-right amExportButton"><ul><li class="export-main"><a href="https://www.amcharts.com/demos/stock-events/#"><span>menu.label.undefined</span></a><ul><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>Download as ...</span></a><ul><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>PNG</span></a></li><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>JPG</span></a></li><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>SVG</span></a></li><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>PDF</span></a></li></ul></li><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>Save as ...</span></a><ul><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>CSV</span></a></li><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>XLSX</span></a></li><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>JSON</span></a></li></ul></li><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>Annotate ...</span></a></li><li><a href="https://www.amcharts.com/demos/stock-events/#"><span>Print</span></a></li></ul></li></ul></div></div></div>											</div>
+</div>
+<div class="demo-flipper-back demo-panel-white fx-all-250" aria-hidden="true">
+<form id="jsfiddle" target="_amcharts" method="post" action="https://jsfiddle.net/api/post/library/pure/">
+<ul class="nav nav-tabs">
+<li class="active"><a href="https://www.amcharts.com/demos/stock-events/#javascript" data-toggle="tab">Javascript</a></li>
+<li><a href="https://www.amcharts.com/demos/stock-events/#html" data-toggle="tab">HTML</a></li>
+<li><a href="https://www.amcharts.com/demos/stock-events/#css" data-toggle="tab">CSS</a></li>
+<li><a href="https://www.amcharts.com/demos/stock-events/#resources" data-toggle="tab">Resources</a></li>
+<li class="pull-right"><a href="https://www.amcharts.com/demos/stock-events/#" class="demo-flipper-codepen">Open in CodePen</a></li>
+<li class="pull-right"><a href="https://www.amcharts.com/demos/stock-events/#" class="demo-flipper-jsfiddle">Open in JSFiddle</a></li>
+</ul>
+<div class="tab-content position-relative">
+<div id="javascript" class="tab-pane overflow-auto active">
+<div id="editor_js" style="height: 437px;"><div class="CodeMirror cm-s-default CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 50px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none; font-size: 4px;"></textarea></div><div class="CodeMirror-hscrollbar" style="left: 46px;"><div style="height: 1px; width: 0px;"></div></div><div class="CodeMirror-vscrollbar" style="display: block; bottom: 0px;"><div style="width: 1px; height: 2416px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-gutter-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 46px; min-height: 2416px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1; display: none;"></div><div class="CodeMirror-code"><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">1</div></div><pre><span class="cm-keyword">var</span> <span class="cm-variable">chartData</span> = [];</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">2</div></div><pre><span class="cm-variable">generateChartData</span>();</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">3</div></div><pre>&nbsp;</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">4</div></div><pre><span class="cm-keyword">function</span> <span class="cm-variable">generateChartData</span>() {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">5</div></div><pre>  <span class="cm-keyword">var</span> <span class="cm-variable">firstDate</span> = <span class="cm-keyword">new</span> <span class="cm-variable">Date</span>( <span class="cm-number">2012</span>, <span class="cm-number">0</span>, <span class="cm-number">1</span> );</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">6</div></div><pre>  <span class="cm-variable">firstDate</span>.<span class="cm-variable">setDate</span>( <span class="cm-variable">firstDate</span>.<span class="cm-variable">getDate</span>() - <span class="cm-number">500</span> );</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">7</div></div><pre>  <span class="cm-variable">firstDate</span>.<span class="cm-variable">setHours</span>( <span class="cm-number">0</span>, <span class="cm-number">0</span>, <span class="cm-number">0</span>, <span class="cm-number">0</span> );</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">8</div></div><pre>&nbsp;</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">9</div></div><pre>  <span class="cm-keyword">for</span> ( <span class="cm-keyword">var</span> <span class="cm-variable">i</span> = <span class="cm-number">0</span>; <span class="cm-variable">i</span> &lt; <span class="cm-number">500</span>; <span class="cm-variable">i</span>++ ) {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">10</div></div><pre> &nbsp;  <span class="cm-keyword">var</span> <span class="cm-variable">newDate</span> = <span class="cm-keyword">new</span> <span class="cm-variable">Date</span>( <span class="cm-variable">firstDate</span> );</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">11</div></div><pre> &nbsp;  <span class="cm-variable">newDate</span>.<span class="cm-variable">setDate</span>( <span class="cm-variable">newDate</span>.<span class="cm-variable">getDate</span>() + <span class="cm-variable">i</span> );</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">12</div></div><pre>&nbsp;</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">13</div></div><pre> &nbsp;  <span class="cm-keyword">var</span> <span class="cm-variable">a</span> = <span class="cm-variable">Math</span>.<span class="cm-variable">round</span>( <span class="cm-variable">Math</span>.<span class="cm-variable">random</span>() * ( <span class="cm-number">40</span> + <span class="cm-variable">i</span> ) ) + <span class="cm-number">100</span> + <span class="cm-variable">i</span>;</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">14</div></div><pre> &nbsp;  <span class="cm-keyword">var</span> <span class="cm-variable">b</span> = <span class="cm-variable">Math</span>.<span class="cm-variable">round</span>( <span class="cm-variable">Math</span>.<span class="cm-variable">random</span>() * <span class="cm-number">100000000</span> );</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">15</div></div><pre>&nbsp;</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">16</div></div><pre> &nbsp;  <span class="cm-variable">chartData</span>.<span class="cm-variable">push</span>( {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">17</div></div><pre> &nbsp; &nbsp;  <span class="cm-variable">date</span>: <span class="cm-variable">newDate</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">18</div></div><pre> &nbsp; &nbsp;  <span class="cm-variable">value</span>: <span class="cm-variable">a</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">19</div></div><pre> &nbsp; &nbsp;  <span class="cm-variable">volume</span>: <span class="cm-variable">b</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">20</div></div><pre> &nbsp;  } );</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">21</div></div><pre>  }</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">22</div></div><pre>}</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">23</div></div><pre>&nbsp;</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">24</div></div><pre><span class="cm-keyword">var</span> <span class="cm-variable">chart</span> = <span class="cm-variable">AmCharts</span>.<span class="cm-variable">makeChart</span>( <span class="cm-string">"chartdiv"</span>, {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">25</div></div><pre>  <span class="cm-variable">type</span>: <span class="cm-string">"stock"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">26</div></div><pre>  <span class="cm-string">"theme"</span>: <span class="cm-string">"light"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">27</div></div><pre>  <span class="cm-variable">dataSets</span>: [ {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">28</div></div><pre> &nbsp;  <span class="cm-variable">color</span>: <span class="cm-string">"#b0de09"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">29</div></div><pre> &nbsp;  <span class="cm-variable">fieldMappings</span>: [ {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">30</div></div><pre> &nbsp; &nbsp;  <span class="cm-variable">fromField</span>: <span class="cm-string">"value"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">31</div></div><pre> &nbsp; &nbsp;  <span class="cm-variable">toField</span>: <span class="cm-string">"value"</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">32</div></div><pre> &nbsp;  }, {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">33</div></div><pre> &nbsp; &nbsp;  <span class="cm-variable">fromField</span>: <span class="cm-string">"volume"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">34</div></div><pre> &nbsp; &nbsp;  <span class="cm-variable">toField</span>: <span class="cm-string">"volume"</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">35</div></div><pre> &nbsp;  } ],</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">36</div></div><pre> &nbsp;  <span class="cm-variable">dataProvider</span>: <span class="cm-variable">chartData</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">37</div></div><pre> &nbsp;  <span class="cm-variable">categoryField</span>: <span class="cm-string">"date"</span>,</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">38</div></div><pre> &nbsp;  <span class="cm-comment">// EVENTS</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">39</div></div><pre> &nbsp;  <span class="cm-variable">stockEvents</span>: [ {</pre></div><div style="position: relative;"><div style="position: absolute; left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 37px;">40</div></div><pre> &nbsp; &nbsp;  <span class="cm-property">date</span>: <span class="cm-keyword">new</span> <span class="cm-variable">Date</span>( <span class="cm-number">2010</span>, <span class="cm-number">8</span>, <span class="cm-number">19</span> ),</pre></div></div><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 14px;">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor" style="display: none;">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; top: 2416px;"></div><div class="CodeMirror-gutters" style="height: 2416px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 45px;"></div></div></div></div></div>
+<textarea id="code_js" name="js" class="hidden">var chartData = [];
+generateChartData();
+
+function generateChartData() {
+  var firstDate = new Date( 2012, 0, 1 );
+  firstDate.setDate( firstDate.getDate() - 500 );
+  firstDate.setHours( 0, 0, 0, 0 );
+
+  for ( var i = 0; i &lt; 500; i++ ) {
+    var newDate = new Date( firstDate );
+    newDate.setDate( newDate.getDate() + i );
+
+    var a = Math.round( Math.random() * ( 40 + i ) ) + 100 + i;
+    var b = Math.round( Math.random() * 100000000 );
+
+    chartData.push( {
+      date: newDate,
+      value: a,
+      volume: b
+    } );
+  }
+}
+
+var chart = AmCharts.makeChart( "chartdiv", {
+  type: "stock",
+  "theme": "light",
+  dataSets: [ {
+    color: "#b0de09",
+    fieldMappings: [ {
+      fromField: "value",
+      toField: "value"
+    }, {
+      fromField: "volume",
+      toField: "volume"
+    } ],
+    dataProvider: chartData,
+    categoryField: "date",
+    // EVENTS
+    stockEvents: [ {
+      date: new Date( 2010, 8, 19 ),
+      type: "sign",
+      backgroundColor: "#85CDE6",
+      graph: "g1",
+      text: "S",
+      description: "This is description of an event"
+    }, {
+      date: new Date( 2010, 10, 19 ),
+      type: "flag",
+      backgroundColor: "#FFFFFF",
+      backgroundAlpha: 0.5,
+      graph: "g1",
+      text: "F",
+      description: "Some longerntext can alson be added"
+    }, {
+      date: new Date( 2010, 11, 10 ),
+      showOnAxis: true,
+      backgroundColor: "#85CDE6",
+      type: "pin",
+      text: "X",
+      graph: "g1",
+      description: "This is description of an event"
+    }, {
+      date: new Date( 2010, 11, 26 ),
+      showOnAxis: true,
+      backgroundColor: "#85CDE6",
+      type: "pin",
+      text: "Z",
+      graph: "g1",
+      description: "This is description of an event"
+    }, {
+      date: new Date( 2011, 0, 3 ),
+      type: "sign",
+      backgroundColor: "#85CDE6",
+      graph: "g1",
+      text: "U",
+      description: "This is description of an event"
+    }, {
+      date: new Date( 2011, 1, 6 ),
+      type: "sign",
+      graph: "g1",
+      text: "D",
+      description: "This is description of an event"
+    }, {
+      date: new Date( 2011, 3, 5 ),
+      type: "sign",
+      graph: "g1",
+      text: "L",
+      description: "This is description of an event"
+    }, {
+      date: new Date( 2011, 3, 5 ),
+      type: "sign",
+      graph: "g1",
+      text: "R",
+      description: "This is description of an event"
+    }, {
+      date: new Date( 2011, 5, 15 ),
+      type: "arrowUp",
+      backgroundColor: "#00CC00",
+      graph: "g1",
+      description: "This is description of an event"
+    }, {
+      date: new Date( 2011, 6, 25 ),
+      type: "arrowDown",
+      backgroundColor: "#CC0000",
+      graph: "g1",
+      description: "This is description of an event"
+    }, {
+      date: new Date( 2011, 8, 1 ),
+      type: "text",
+      graph: "g1",
+      text: "Longer text can\nalso be displayed",
+      description: "This is description of an event"
+    } ]
+  } ],
+
+
+  panels: [ {
+    title: "Value",
+    percentHeight: 70,
+
+    stockGraphs: [ {
+      id: "g1",
+      valueField: "value"
+    } ],
+
+    stockLegend: {
+      valueTextRegular: " ",
+      markerType: "none"
+    }
+  } ],
+
+  chartScrollbarSettings: {
+    graph: "g1"
+  },
+
+  chartCursorSettings: {
+    valueBalloonsEnabled: true,
+    graphBulletSize: 1,
+    valueLineBalloonEnabled: true,
+    valueLineEnabled: true,
+    valueLineAlpha: 0.5
+  },
+
+  periodSelector: {
+    periods: [ {
+      period: "DD",
+      count: 10,
+      label: "10 days"
+    }, {
+      period: "MM",
+      count: 1,
+      label: "1 month"
+    }, {
+      period: "YYYY",
+      count: 1,
+      label: "1 year"
+    }, {
+      period: "YTD",
+      label: "YTD"
+    }, {
+      period: "MAX",
+      label: "MAX"
+    } ]
+  },
+
+  panelsSettings: {
+    usePrefixes: true
+  },
+  "export": {
+    "enabled": true
+  }
+} );</textarea>
+										</div>
+										<div id="html" class="tab-pane overflow-auto">
+											<div id="editor_html" style="height: 437px;"><div class="CodeMirror cm-s-default CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none; font-size: 4px;"></textarea></div><div class="CodeMirror-hscrollbar"><div style="height: 1px;"></div></div><div class="CodeMirror-vscrollbar"><div style="width: 1px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-gutter-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"><div style="position: relative;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>x</span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code"></div><div class="CodeMirror-cursor">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px;"></div><div class="CodeMirror-gutters"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 1px;"></div></div></div></div></div>
+											<textarea id="code_html" name="html" class="hidden">&lt;div id="chartdiv"&gt;&lt;/div&gt;											</textarea>
+										</div>
+										<div id="css" class="tab-pane overflow-auto">
+											<div id="editor_css" style="height: 437px;"><div class="CodeMirror cm-s-default CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none; font-size: 4px;"></textarea></div><div class="CodeMirror-hscrollbar"><div style="height: 1px;"></div></div><div class="CodeMirror-vscrollbar"><div style="width: 1px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-gutter-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"><div style="position: relative;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>x</span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code"></div><div class="CodeMirror-cursor">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px;"></div><div class="CodeMirror-gutters"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 1px;"></div></div></div></div></div>
+											<textarea id="code_css" name="css" class="hidden">#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}											</textarea>
+										</div>
+										<div id="resources" class="tab-pane overflow-auto">
+											<div id="editor_resources" style="height: 437px;"><div class="CodeMirror cm-s-default CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none; font-size: 4px;"></textarea></div><div class="CodeMirror-hscrollbar"><div style="height: 1px;"></div></div><div class="CodeMirror-vscrollbar"><div style="width: 1px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-gutter-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer"><div style="position: relative;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>x</span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code"></div><div class="CodeMirror-cursor">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px;"></div><div class="CodeMirror-gutters"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 1px;"></div></div></div></div></div>
+											<textarea id="code_resources" name="resourcesDEF" class="hidden">&lt;script src="https://www.amcharts.com/lib/3/amcharts.js"&gt;&lt;/script&gt;
+&lt;script src="https://www.amcharts.com/lib/3/serial.js"&gt;&lt;/script&gt;
+&lt;script src="https://www.amcharts.com/lib/3/themes/none.js"&gt;&lt;/script&gt;
+&lt;script src="https://www.amcharts.com/lib/3/amstock.js"&gt;&lt;/script&gt;
+</textarea>
+										</div>
+										<input type="hidden" name="normalize_css" value="yes">
+										<input type="hidden" name="wrap" value="b">
+										<input type="hidden" name="dtd" value="html 5">
+										<input type="hidden" id="code_title" name="title" value="Stock Events">
+										<input type="hidden" id="code_description" name="description" value="Our Stock chart can display different kind of annotations on the graph or on the axis. These annotations or stock events as we call them can mark important news or events connected to the security or bond. As you see, there is a wide variety of event types - they can look like a flag or sign or pin and have a letter inside or even contain more text. When user rolls-over the event, you can show a more detailed description or register this event and display some information outside the chart. The events are nicely stacked one on another if there is more than one for the same date.
+&lt;h2&gt;Chart Scrollbar with a graph inside&lt;/h2&gt;
+In the bottom (it can also be on the top) of the chart you have a chart scrollbar which can be used to zoom-in or zoom-out the chart. This scrollbar can be just a simple one or have a graph inside it to show a rough view of how data changed over the whole period of the data available.">
+										<!-- JS fiddle issue: https://github.com/jsfiddle/jsfiddle-issues/issues/399 
+										<input type="hidden" name="resources" value="<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+,<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+,<script src="https://www.amcharts.com/lib/3/themes/none.js"></script>
+,<script src="https://www.amcharts.com/lib/3/amstock.js"></script>
+" />
+										-->
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8 app-content" style="padding-right: 60px;">
+					<h1 class="app-font family-regular size-biggerer">
+						Stock Events					</h1>
+					<p>Our Stock chart can display different kind of annotations on the graph or on the axis. These annotations or stock events as we call them can mark important news or events connected to the security or bond. As you see, there is a wide variety of event types – they can look like a flag or sign or pin and have a letter inside or even contain more text. When user rolls-over the event, you can show a more detailed description or register this event and display some information outside the chart. The events are nicely stacked one on another if there is more than one for the same date.</p>
+<h2>Chart Scrollbar with a graph inside</h2>
+<p>In the bottom (it can also be on the top) of the chart you have a chart scrollbar which can be used to zoom-in or zoom-out the chart. This scrollbar can be just a simple one or have a graph inside it to show a rough view of how data changed over the whole period of the data available.</p>
+          <div class="simplesocialbuttons">
+<div class="simplesocialbutton ssb-button-googleplus"><!-- Google Plus One--><div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I3_1460869633565" name="I3_1460869633565" src="./Stock Events demo _ amCharts_files/fastbutton(1).html" data-gapiattached="true" title="+1"></iframe></div></div>
+<div class="simplesocialbutton ssb-button-fblike"><!-- Facebook like--><div id="fb-root"></div><div class="fb-like" data-href="https://www.amcharts.com/demos/stock-events/" data-send="false" data-layout="button_count" data-show-faces="false"></div></div>
+<div class="simplesocialbutton ssb-button-twitter"><!-- Twitter--><a href="https://twitter.com/share" class="twitter-share-button" data-text="Stock Events" data-url="https://www.amcharts.com/demos/stock-events/" data-via="amcharts" rel="nofollow"></a></div>
+</div>
+
+<!-- Simple Social Buttons plugin -->
+<script type="text/javascript">
+//<![CDATA[
+// google plus
+window.___gcfg = {lang: 'en'};
+(function() {
+   var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+   po.src = 'https://apis.google.com/js/plusone.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+// facebook 
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+// twitter 
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+// ]]>
+</script>
+<!-- /End of Simple Social Buttons -->
+
+				</div>
+				<div class="col-md-4">
+					<div class="demo-nav-pages">
+						
+	<div class="app-nav-page position-relative">
+		<div class="align-left pull-left position-relative" style="z-index:1;">
+			<a class="btn btn-flat btn-nav btn-outline-inverse amcharts-tooltip white-space-normal" href="https://www.amcharts.com/demos/stock-comparing-external-data/#theme-light" data-toggle="tooltip" data-title="" data-original-title="" title="">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		</div>
+		<div class="align-right pull-right position-relative" style="z-index:1;">
+			<a class="btn btn-flat btn-nav btn-outline-inverse amcharts-tooltip white-space-normal" href="https://www.amcharts.com/demos/drawing-trend-lines/#theme-light" data-toggle="tooltip" data-title="" data-original-title="" title="">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</div>
+		<div class="align-center position-absolute full-width" style="z-index:0;">
+			<a class="btn btn-nav less-margin less-padding amcharts-tooltip white-space-normal" href="https://www.amcharts.com/demos/#theme-light" data-toggle="tooltip" data-title="" data-original-title="" title="">
+				<span class="less-padding">All Demos</span>
+			</a>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+						</div>
+					<div class="app-content app-demo-list m-hide">
+						<h3 class="family-bold transform-uppercase">Javascript Stock Chart demos</h3>
+						<ul class="less-margin">
+													<li><a class="" href="https://www.amcharts.com/demos/multiple-data-sets/#theme-light">Multiple Data Sets</a></li>
+													<li><a class="" href="https://www.amcharts.com/demos/stock-comparing-external-data/#theme-light">Comparing stock indices (using external data)</a></li>
+													<li><a class="disabled" href="https://www.amcharts.com/demos/stock-events/#theme-light">Stock Events</a></li>
+													<li><a class="" href="https://www.amcharts.com/demos/drawing-trend-lines/#theme-light">Drawing Trend Lines</a></li>
+													<li><a class="" href="https://www.amcharts.com/demos/multiple-panels/#theme-light">Multiple Panels</a></li>
+													<li><a class="" href="https://www.amcharts.com/demos/intraday-data/#theme-light">Intraday Data</a></li>
+													<li><a class="" href="https://www.amcharts.com/demos/adding-removing-panel/#theme-light">Adding and removing panel</a></li>
+												</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+			<script>AmCharts.themes.light={AmChart:{color:"#000000",fontFamily:"Lato",fontSize:14},AmCoordinateChart:{colors:"#67b7dc #fdd400 #84b761 #cc4748 #cd82ad #2f4074 #448e4d #b7b83f #b9783f #b93e3d #913167".split(" ")},AmStockChart:{colors:"#67b7dc #fdd400 #84b761 #cc4748 #cd82ad #2f4074 #448e4d #b7b83f #b9783f #b93e3d #913167".split(" ")},AmSlicedChart:{outlineAlpha:1,outlineThickness:2,labelTickColor:"#000000",labelTickAlpha:0.3,colors:"#67b7dc #fdd400 #84b761 #cc4748 #cd82ad #2f4074 #448e4d #b7b83f #b9783f #b93e3d #913167".split(" ")},
+AmRectangularChart:{zoomOutButtonColor:"#000000",zoomOutButtonRollOverAlpha:0.15,zoomOutButtonImage:"lens"},AxisBase:{axisColor:"#000000",axisAlpha:0.3,gridAlpha:0.1,gridColor:"#000000"},ChartScrollbar:{backgroundColor:"#000000",backgroundAlpha:0.12,graphFillAlpha:0.5,graphLineAlpha:0,selectedBackgroundColor:"#FFFFFF",selectedBackgroundAlpha:0.4,gridAlpha:0.15},ChartCursor:{cursorColor:"#000000",color:"#FFFFFF",cursorAlpha:0.5},AmLegend:{color:"#000000"},AmGraph:{lineAlpha:0.9},GaugeArrow:{color:"#000000",
+alpha:0.8,nailAlpha:0,innerRadius:"40%",nailRadius:15,startWidth:15,borderAlpha:0.8,nailBorderAlpha:0},GaugeAxis:{tickColor:"#000000",tickAlpha:1,tickLength:15,minorTickLength:8,axisThickness:3,axisColor:"#000000",axisAlpha:1,bandAlpha:0.8},TrendLine:{lineColor:"#c03246",lineAlpha:0.8},AreasSettings:{alpha:0.8,color:"#67b7dc",colorSolid:"#003767",unlistedAreasAlpha:0.4,unlistedAreasColor:"#000000",outlineColor:"#FFFFFF",outlineAlpha:0.5,outlineThickness:0.5,rollOverColor:"#3c5bdc",rollOverOutlineColor:"#FFFFFF", selectedOutlineColor:"#FFFFFF",selectedColor:"#f15135",unlistedAreasOutlineColor:"#FFFFFF",unlistedAreasOutlineAlpha:0.5},LinesSettings:{color:"#000000",alpha:0.8},ImagesSettings:{alpha:0.8,labelColor:"#000000",color:"#000000",labelRollOverColor:"#3c5bdc"},ZoomControl:{buttonFillAlpha:0.7, buttonIconColor:"#a7a7a7"},SmallMap:{mapColor:"#5a73db",rectangleColor:"#ffffff",backgroundColor:"#FFFFFF",backgroundAlpha:0.7,borderThickness:1,borderAlpha:0.8},PeriodSelector:{color:"#000000"},PeriodButton:{color:"#000000",background:"transparent",opacity:0.7,border:"1px solid rgba(0, 0, 0, .3)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",boxSizing:"border-box"},PeriodButtonSelected:{color:"#000000",backgroundColor:"#b9cdf5",border:"1px solid rgba(0, 0, 0, .3)",MozBorderRadius:"5px",
+borderRadius:"5px",margin:"1px",outline:"none",opacity:1,boxSizing:"border-box"},PeriodInputField:{color:"#000000",background:"transparent",border:"1px solid rgba(0, 0, 0, .3)",outline:"none"},DataSetSelector:{color:"#000000",selectedBackgroundColor:"#b9cdf5",rollOverBackgroundColor:"#a8b0e4"},DataSetCompareList:{color:"#000000",lineHeight:"100%",boxSizing:"initial",webkitBoxSizing:"initial",border:"1px solid rgba(0, 0, 0, .3)"},DataSetSelect:{border:"1px solid rgba(0, 0, 0, .3)",outline:"none"}};</script>
+			<script>AmCharts.themes.dark={themeName:"dark",AmChart:{color:"#e7e7e7",fontFamily:"Lato",fontSize:14},AmCoordinateChart:{colors:"#ae85c9 #aab9f7 #b6d2ff #c9e6f2 #c9f0e1 #e8d685 #e0ad63 #d48652 #d27362 #495fba #7a629b #8881cc".split(" ")},AmStockChart:{colors:"#639dbd #e8d685 #ae85c9 #c9f0e1 #d48652 #629b6d #719dc3 #719dc3".split(" ")},AmSlicedChart:{outlineAlpha:1,outlineThickness:2,labelTickColor:"#FFFFFF",labelTickAlpha:0.3,colors:"#495fba #e8d685 #ae85c9 #c9f0e1 #d48652 #629b6d #719dc3 #719dc3".split(" ")},
+AmRectangularChart:{zoomOutButtonColor:"#FFFFFF",zoomOutButtonRollOverAlpha:0.15,zoomOutButtonImage:"lensWhite"},AxisBase:{axisColor:"#FFFFFF",axisAlpha:0.3,gridAlpha:0.1,gridColor:"#FFFFFF",dashLength:3},ChartScrollbar:{backgroundColor:"#000000",backgroundAlpha:0.2,graphFillAlpha:0.2,graphLineAlpha:0,graphFillColor:"#FFFFFF",selectedGraphFillColor:"#FFFFFF",selectedGraphFillAlpha:0.4,selectedGraphLineColor:"#FFFFFF",selectedBackgroundColor:"#FFFFFF",selectedBackgroundAlpha:0.09,gridAlpha:0.15},
+ChartCursor:{cursorColor:"#FFFFFF",color:"#000000",cursorAlpha:0.5},AmLegend:{color:"#e7e7e7"},AmGraph:{lineAlpha:0.9},GaugeArrow:{color:"#FFFFFF",alpha:0.8,nailAlpha:0,innerRadius:"40%",nailRadius:15,startWidth:15,borderAlpha:0.8,nailBorderAlpha:0},GaugeAxis:{tickColor:"#FFFFFF",tickAlpha:1,tickLength:15,minorTickLength:8,axisThickness:3,axisColor:"#FFFFFF",axisAlpha:1,bandAlpha:0.8},TrendLine:{lineColor:"#c03246",lineAlpha:0.8},AreasSettings:{alpha:0.8,color:"#FFFFFF",colorSolid:"#000000",unlistedAreasAlpha:0.4,
+unlistedAreasColor:"#FFFFFF",outlineColor:"#000000",outlineAlpha:0.5,outlineThickness:0.5,rollOverColor:"#3c5bdc",rollOverOutlineColor:"#000000",selectedOutlineColor:"#000000",selectedColor:"#f15135",unlistedAreasOutlineColor:"#000000",unlistedAreasOutlineAlpha:0.5},LinesSettings:{color:"#FFFFFF",alpha:0.5},ImagesSettings:{alpha:0.8,labelColor:"#FFFFFF",color:"#FFFFFF",labelRollOverColor:"#3c5bdc"},ZoomControl:{buttonFillAlpha:0.7,buttonIconColor:"#494949"},SmallMap:{mapColor:"#FFFFFF",rectangleColor:"#ffffff",backgroundColor:"#000000",backgroundAlpha:0.7,borderThickness:1,borderAlpha:0.8},PeriodSelector:{color:"#e7e7e7"},PeriodButton:{color:"#e7e7e7",background:"transparent",opacity:0.7,border:"1px solid rgba(255, 255, 255, .15)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",
+boxSizing:"border-box"},PeriodButtonSelected:{color:"#e7e7e7",backgroundColor:"rgba(255, 255, 255, 0.1)",border:"1px solid rgba(255, 255, 255, .3)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",opacity:1,boxSizing:"border-box"},PeriodInputField:{color:"#e7e7e7",background:"transparent",border:"1px solid rgba(255, 255, 255, .15)",outline:"none"},DataSetSelector:{color:"#e7e7e7",selectedBackgroundColor:"rgba(255, 255, 255, .25)",rollOverBackgroundColor:"rgba(255, 255, 255, .15)"},
+DataSetCompareList:{color:"#e7e7e7",lineHeight:"100%",boxSizing:"initial",webkitBoxSizing:"initial",border:"1px solid rgba(255, 255, 255, .15)"},DataSetSelect:{border:"1px solid rgba(255, 255, 255, .15)",outline:"none"}};</script>
+			<script>AmCharts.themes.chalk={themeName:"chalk",AmChart:{color:"#e7e7e7",fontFamily:"Covered By Your Grace",fontSize:18,handDrawn:!0},AmCoordinateChart:{colors:"#FFFFFF #e384a6 #f4d499 #4d90d6 #c7e38c #9986c8 #edf28c #ffd1d4 #5ee1dc #b0eead #fef85a #8badd2".split(" ")},AmSlicedChart:{outlineAlpha:1,labelTickColor:"#FFFFFF",labelTickAlpha:0.3,colors:"#FFFFFF #e384a6 #f4d499 #4d90d6 #c7e38c #9986c8 #edf28c #ffd1d4 #5ee1dc #b0eead #fef85a #8badd2".split(" ")},AmStockChart:{colors:"#FFFFFF #e384a6 #f4d499 #4d90d6 #c7e38c #9986c8 #edf28c #ffd1d4 #5ee1dc #b0eead #fef85a #8badd2".split(" ")},
+AmRectangularChart:{zoomOutButtonColor:"#FFFFFF",zoomOutButtonRollOverAlpha:0.15,zoomOutButtonImage:"lensWhite"},AxisBase:{axisColor:"#FFFFFF",gridColor:"#FFFFFF"},ChartScrollbar:{backgroundColor:"#FFFFFF",backgroundAlpha:0.2,graphFillAlpha:0.5,graphLineAlpha:0,selectedBackgroundColor:"#000000",selectedBackgroundAlpha:0.25,fontSize:15,gridAlpha:0.15},ChartCursor:{cursorColor:"#FFFFFF",color:"#000000"},AmLegend:{color:"#e7e7e7",markerSize:20},AmGraph:{lineAlpha:0.8},GaugeArrow:{color:"#FFFFFF",
+alpha:0.1,nailAlpha:0,innerRadius:"40%",nailRadius:15,startWidth:15,borderAlpha:0.8,nailBorderAlpha:0},GaugeAxis:{tickColor:"#FFFFFF",tickAlpha:0.8,tickLength:15,minorTickLength:8,axisThickness:3,axisColor:"#FFFFFF",axisAlpha:0.8,bandAlpha:0.4},TrendLine:{lineColor:"#c03246",lineAlpha:0.8},AmMap:{handDrawn:!1},AreasSettings:{alpha:0.8,color:"#FFFFFF",colorSolid:"#000000",unlistedAreasAlpha:0.4,unlistedAreasColor:"#FFFFFF",outlineColor:"#000000",outlineAlpha:0.5,outlineThickness:0.5,rollOverColor:"#4d90d6",
+rollOverOutlineColor:"#000000",selectedOutlineColor:"#000000",selectedColor:"#e384a6",unlistedAreasOutlineColor:"#000000",unlistedAreasOutlineAlpha:0.5},LinesSettings:{color:"#FFFFFF",alpha:0.8},ImagesSettings:{alpha:0.8,labelFontSize:16,labelColor:"#FFFFFF",color:"#FFFFFF",labelRollOverColor:"#4d90d6"},ZoomControl:{buttonRollOverColor:"#4d90d6",buttonFillColor:"#e384a6",buttonFillAlpha:0.8,buttonBorderColor:"#FFFFFF",gridBackgroundColor:"#FFFFFF",gridAlpha:0.8},SmallMap:{mapColor:"#FFFFFF",rectangleColor:"#e384a6",
+backgroundColor:"#000000",backgroundAlpha:0.7,borderThickness:1,borderAlpha:0.8},PeriodSelector:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7"},PeriodButton:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7",background:"transparent",opacity:0.7,border:"1px solid rgba(255, 255, 255, .15)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",boxSizing:"border-box"},PeriodButtonSelected:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7",
+backgroundColor:"rgba(255, 255, 255, 0.1)",border:"1px solid rgba(255, 255, 255, .3)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",opacity:1,boxSizing:"border-box"},PeriodInputField:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7",background:"transparent",border:"1px solid rgba(255, 255, 255, .15)",outline:"none"},DataSetSelector:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7",selectedBackgroundColor:"rgba(255, 255, 255, .25)",rollOverBackgroundColor:"rgba(255, 255, 255, .15)"},
+DataSetCompareList:{fontFamily:"Covered By Your Grace",fontSize:"16px",color:"#e7e7e7",lineHeight:"100%",boxSizing:"initial",webkitBoxSizing:"initial",border:"1px solid rgba(255, 255, 255, .15)"},DataSetSelect:{fontFamily:"Covered By Your Grace",fontSize:"16px",border:"1px solid rgba(255, 255, 255, .15)",outline:"none"}};</script>
+			<script>AmCharts.themes.patterns={themeName:"patterns",AmChart:{color:"#000000"},AmCoordinateChart:{colors:"#000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000".split(" "),patterns:[{url:"/lib/3/patterns/black/pattern1.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern2.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern3.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern4.png",
+width:4,height:4},{url:"/lib/3/patterns/black/pattern5.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern6.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern7.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern8.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern9.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern10.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern11.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern12.png",width:4,height:4},
+{url:"/lib/3/patterns/black/pattern13.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern14.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern15.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern16.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern17.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern18.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern19.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern20.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern21.png",
+width:4,height:4}]},AmStockChart:{colors:"#000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000".split(" ")},AmPieChart:{depth3D:0,angle:0,labelRadius:10},AmSlicedChart:{outlineAlpha:0.3,colors:"#000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000 #000000".split(" "),outlineThickness:1,
+outlineColor:"#000000",labelTickColor:"#000000",labelTickAlpha:0.3,patterns:[{url:"/lib/3/patterns/black/pattern1.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern2.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern3.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern4.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern5.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern6.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern7.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern8.png",
+width:4,height:4},{url:"/lib/3/patterns/black/pattern9.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern10.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern11.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern12.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern13.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern14.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern15.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern16.png",width:4,height:4},
+{url:"/lib/3/patterns/black/pattern17.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern18.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern19.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern20.png",width:4,height:4},{url:"/lib/3/patterns/black/pattern21.png",width:4,height:4}]},AmRectangularChart:{zoomOutButtonColor:"#000000",zoomOutButtonRollOverAlpha:0.15,zoomOutButtonImage:"lens"},AxisBase:{axisColor:"#000000",axisAlpha:0.3,gridAlpha:0.05,gridColor:"#000000"},ChartScrollbar:{backgroundColor:"#000000",
+backgroundAlpha:0.13,graphFillAlpha:0.4,selectedGraphFillAlpha:0.7,graphLineAlpha:0,selectedBackgroundColor:"#FFFFFF",selectedBackgroundAlpha:0.9,gridAlpha:0.15},ChartCursor:{cursorColor:"#000000",color:"#FFFFFF",cursorAlpha:0.5},AmLegend:{color:"#000000",markerBorderAlpha:0.1,markerSize:20,switchColor:"#000000"},AmGraph:{lineAlpha:0.4,fillAlphas:0.5},AmAngularGauge:{faceAlpha:0.5,facePattern:{url:"/lib/3/patterns/black/pattern1.png",width:4,height:4}},GaugeArrow:{color:"#000000",alpha:1,nailAlpha:1,
+innerRadius:"0%",nailRadius:15,startWidth:15,borderAlpha:1,radius:"70%",nailBorderAlpha:1},GaugeAxis:{tickColor:"#000000",tickAlpha:1,tickLength:15,minorTickLength:8,axisThickness:1,axisColor:"#000000",axisAlpha:1,bandAlpha:1},TrendLine:{lineColor:"#c03246",lineAlpha:0.8},AreasSettings:{alpha:0.8,color:"#000000",colorSolid:"#000000",unlistedAreasAlpha:0.4,unlistedAreasColor:"#000000",outlineColor:"#FFFFFF",outlineAlpha:0.5,outlineThickness:0.5,rollOverColor:"#3c5bdc",rollOverOutlineColor:"#FFFFFF",
+selectedOutlineColor:"#FFFFFF",selectedColor:"#f15135",unlistedAreasOutlineColor:"#FFFFFF",unlistedAreasOutlineAlpha:0.5},LinesSettings:{color:"#000000",alpha:0.8},ImagesSettings:{alpha:0.8,labelColor:"#000000",color:"#000000",labelRollOverColor:"#3c5bdc"},ZoomControl:{buttonRollOverColor:"#3c5bdc",buttonFillColor:"#f15135",buttonFillAlpha:0.8,buttonBorderColor:"#000000",gridBackgroundColor:"#000000",gridAlpha:0.8},SmallMap:{mapColor:"#000000",rectangleColor:"#f15135",backgroundColor:"#FFFFFF",backgroundAlpha:0.7,
+borderThickness:1,borderAlpha:0.8},PeriodSelector:{color:"#000000"},PeriodButton:{color:"#000000",background:"transparent",opacity:0.7,border:"1px solid rgba(0, 0, 0, .3)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",boxSizing:"border-box"},PeriodButtonSelected:{color:"#000000",backgroundColor:"rgba(0, 0, 0, 0.1)",border:"1px solid rgba(0, 0, 0, .3)",MozBorderRadius:"5px",borderRadius:"5px",margin:"1px",outline:"none",opacity:1,boxSizing:"border-box"},PeriodInputField:{color:"#000000",
+background:"transparent",border:"1px solid rgba(0, 0, 0, .3)",outline:"none"},DataSetSelector:{color:"#000000",selectedBackgroundColor:"rgba(0, 0, 0, .25)",rollOverBackgroundColor:"rgba(0, 0, 0, .15)"},DataSetCompareList:{color:"#000000",lineHeight:"100%",boxSizing:"initial",webkitBoxSizing:"initial",border:"1px solid rgba(0, 0, 0, .3)"},DataSetSelect:{border:"1px solid rgba(0, 0, 0, .3)",outline:"none"}};</script>
+			<script></script>
+	</div>
+			</div> <!-- app-body -->
+			
+						<div class="app-footer">
+				<div class="app-section background-white">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="col-5 col-md-4">
+									<div><h3 class="family-black color-gray transform-uppercase">Products</h3><div class="menu-footer-products-container"><ul id="menu-footer-products" class="menu"><li id="menu-item-88" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-88"><a href="https://www.amcharts.com/javascript-charts/">JavaScript Charts</a></li>
+<li id="menu-item-87" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87"><a href="https://www.amcharts.com/stock-chart/">Javascript Stock Chart</a></li>
+<li id="menu-item-105" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-105"><a href="https://www.amcharts.com/javascript-maps/">Interactive JavaScript Maps</a></li>
+</ul></div></div>								</div>
+								<div class="col-5 col-md-4">
+									<div><h3 class="family-black color-gray transform-uppercase">Related</h3><div class="menu-footer-related-container"><ul id="menu-footer-related" class="menu"><li id="menu-item-5943" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5943"><a href="http://pixelmap.amcharts.com/">Pixel Map Generator</a></li>
+<li id="menu-item-3098" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3098"><a href="https://www.amcharts.com/visited_countries/">Visited Countries Map</a></li>
+<li id="menu-item-3097" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3097"><a href="https://www.amcharts.com/visited_states/">Visited States Map</a></li>
+<li id="menu-item-3068" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3068"><a href="https://www.amcharts.com/about/">About</a></li>
+</ul></div></div>								</div>
+								<div class="col-5 col-md-4">
+									<div><h3 class="family-black color-gray transform-uppercase">Get Social</h3><div class="menu-footer-social-container"><ul id="menu-footer-social" class="menu"><li id="menu-item-89" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-89"><a href="http://www.facebook.com/amcharts"><i class="fa fa-facebook-square color-gray"></i> Facebook</a></li>
+<li id="menu-item-90" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-90"><a href="http://www.twitter.com/amcharts"><i class="fa fa-twitter color-gray"></i>  Twitter</a></li>
+<li id="menu-item-91" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-91"><a href="http://plus.google.com/+amcharts/"><i class="fa fa-google-plus-square color-gray"></i> Google+</a></li>
+<li id="menu-item-4929" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4929"><a href="http://www.linkedin.com/company/amcharts"><i class="fa fa-linkedin-square color-gray"></i> LinkedIn</a></li>
+</ul></div></div>								</div>
+								<div class="col-5 col-md-4">
+									<div><h3 class="family-black color-gray transform-uppercase">Resources</h3><div class="menu-footer-resources-container"><ul id="menu-footer-resources" class="menu"><li id="menu-item-3209" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3209"><a href="https://www.amcharts.com/inspiration/">Inspiration Gallery</a></li>
+<li id="menu-item-2731" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2731"><a href="https://www.amcharts.com/svg-maps/">Free SVG Maps</a></li>
+<li id="menu-item-3852" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3852"><a href="http://feeds.feedburner.com/amcharts">RSS feed of our blog</a></li>
+<li id="menu-item-6156" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6156"><a href="https://www.amcharts.com/terms-conditions/">Terms &amp; Conditions</a></li>
+</ul></div></div>								</div>
+								<div class="col-5 col-md-4">
+									<div><h3 class="family-black color-gray transform-uppercase">Contact Us</h3><div class="menu-footer-contact-container"><ul id="menu-footer-contact" class="menu"><li id="menu-item-110" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-110"><a href="mailto:contact@amcharts.com">contact@amcharts.com</a></li>
+<li id="menu-item-2563" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2563"><a href="https://www.amcharts.com/support/">Get Support</a></li>
+</ul></div></div>								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="app-fieldset text-center">
+									<div class="app-fieldset-legend color-lightgray">Copyright © 2015, amcharts.com. All rights reserved.</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="app-wave wave-light"></div>
+				</div>
+			</div>
+					</div>
+
+<textarea id="code_html" class="hidden">&lt;div id="chartdiv"&gt;&lt;/div&gt;
+</textarea>
+<textarea id="code_js" class="hidden">var chart = AmCharts.makeChart("chartdiv", {
+    "type": "serial",
+    "addClassNames": true,
+    "dataProvider": [[data]],
+    "graphs": [{
+    	"bullet": "round",
+        "valueField": "value",
+        "fillAlphas": .3,
+        "lineColor": "#1d8b3a",
+        "negativeLineColor": "#8b1d1d"
+    },{
+    	"type": "column",
+        "valueField": "value",
+        "fillAlphas": .3,
+        "lineColor": "#1d8b3a",
+        "fillColors": "#1d8b3a",
+        "negativeLineColor": "#8b1d1d",
+        "negativeFillColors": "#8b1d1d"
+    }],
+    "chartCursor": {
+    	graphBulletSize: 1.5
+    },
+    "dataDateFormat": "YYYY-MM-DD",
+    "categoryField": "date",
+    "categoryAxis": {
+        "parseDates": true
+    }
+});
+</textarea>
+<textarea id="code_css" class="hidden">#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}
+.[[classname]] {
+    -webkit-animation: am-pulsate 1s infinite;
+    animation: am-pulsate 1s infinite;
+}
+</textarea>
+		<script>
+
+			 var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-22221037-1']);
+			_gaq.push(['_setDomainName', 'amcharts.com']);
+			_gaq.push(['_setAllowLinker', true]);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+		
+	<script type="text/javascript" src="./Stock Events demo _ amCharts_files/bootstrap.min.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/codemirror.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/javascript.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/css.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/xml.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/htmlmixed.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/worldLow.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/continentsLow.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/usaLow.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/export.min.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/dataloader.min.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/animate.min.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/demo.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/browser-support.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/wp-embed.min.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/jquery.fancybox-1.3.7.min.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/jquery.easing.pack.js"></script>
+<script type="text/javascript" src="./Stock Events demo _ amCharts_files/jquery.mousewheel.min.js"></script>
+
+<script type="text/javascript">
+jQuery(document).on('ready post-load', easy_fancybox_handler );
+</script>
+	
+			<!-- Google Code for Remarketing Tag -->
+		<script>
+		/* <![CDATA[ */
+		var google_conversion_id = 975661256;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="./Stock Events demo _ amCharts_files/conversion.js">
+		</script><iframe name="google_conversion_frame" title="Google conversion frame" width="300" height="13" src="./Stock Events demo _ amCharts_files/saved_resource.html" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no"></iframe>
+		<noscript>
+		&lt;div style="display:inline;"&gt;
+		&lt;img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/975661256/?value=0&amp;amp;guid=ON&amp;amp;script=0"/&gt;
+		&lt;/div&gt;
+		</noscript>
+		
+	
+
+<!-- Dynamic page generated in 1.159 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2016-04-17 02:29:33 -->
+
+<!-- super cache --><div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div><iframe name="oauth2relay896711957" id="oauth2relay896711957" src="./Stock Events demo _ amCharts_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>

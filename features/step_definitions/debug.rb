@@ -76,8 +76,8 @@ Given /^Code Tested$/  do
 =end
 
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
-  ###file_name = 'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
-  file_name = 'EURUSD000TOM_050101_160214_1.txt'  #'EURUSD000TOM_050101_160214_1.txt' 'USD000UTSTOM_160101_160214.txt'
+  file_name = 'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
+  #file_name = 'EURUSD000TOM_050101_160214_1.txt'  #'EURUSD000TOM_050101_160214_1.txt' 'USD000UTSTOM_160101_160214.txt'
   readCsvFile(Dir.getwd+"/logs/"+file_name)#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
   #getAvgChannelBreakoutProfitLoss
@@ -97,8 +97,8 @@ Given /^Code Tested$/  do
     ###logToJsFile($source_hash)
   #end
   begin
-   #getPercentChannelBreakoutProfitLoss(0.7,1,0.2)
-   getPercentChannelBreakoutProfitLoss(0.1,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
+   getPercentChannelBreakoutProfitLoss(0.7,0,0.2)
+   #getPercentChannelBreakoutProfitLoss(0.1,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.1)
   rescue Exception=>e
     puts 'Exception: ' +  e.message if !e.nil? && !e.message.to_s.empty?
@@ -108,7 +108,11 @@ Given /^Code Tested$/  do
 
 end
 
-
+#TODO
+#jscharts
+#http://stackoverflow.com/questions/11406458/highcharts-scrollbar-not-appearing
+#http://www.highcharts.com/stock/demo/intraday-candlestick
+#http://www.advsofteng.com/cdruby.html
 
 
 $source_hash=nil

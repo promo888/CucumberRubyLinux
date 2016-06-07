@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://www.amcharts.com/tutorials/using-data-loader-plugin/ -->
+<html id="__html" class="" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.amcharts.com/favicon.ico">
+<link rel="image_src" href="https://www.amcharts.com/wp-content/themes/amcharts/static/img/share_google.png">
+<style>@import url(//fonts.googleapis.com/css?family=Lato:300,400,700);</style>
+ 
+<script src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/cb=gapi.loaded_1" async=""></script><script src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/dc.js"></script><script id="twitter-wjs" src="https://platform.twitter.com/widgets.js"></script><script id="facebook-jssdk" src="https://connect.facebook.net/en_US/all.js#xfbml=1"></script><script type="text/javascript" async="" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/plusone.js" gapi_processed="true"></script><script type="text/javascript" async="" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/platform.js" gapi_processed="true"></script><script>
+		(function() {
+			var dMode		= document.documentMode;
+			var className	= "";
+			if ( dMode ) {
+				if ( dMode < 9 ) {
+					className += ' ieLT9 ';
+				}
+				className += 'ie' + dMode;
+				document.getElementById('__html').setAttribute('class',className);
+			}
+		})();
+	</script>
+ 
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.amcharts.com/xmlrpc.php">
+<script>
+		var ajaxurl = 'https://www.amcharts.com/wp-admin/admin-ajax.php';
+		var homeurl = 'https://www.amcharts.com';
+		var themeurl = 'https://www.amcharts.com/wp-content/themes/amcharts';
+	</script>
+ 
+<title>Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial | amCharts</title>
+<meta name="description" content="Description By default all amCharts libraries accept data in JSON format. It needs to be there when the web page loads, defined in-line or loaded via custo">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://www.amcharts.com/tutorials/using-data-loader-plugin/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial | amCharts">
+<meta property="og:description" content="Description By default all amCharts libraries accept data in JSON format. It needs to be there when the web page loads, defined in-line or loaded via custo">
+<meta property="og:url" content="https://www.amcharts.com/tutorials/using-data-loader-plugin/">
+<meta property="og:site_name" content="amCharts">
+<meta property="article:publisher" content="https://www.facebook.com/amcharts">
+<meta property="fb:admins" content="1358808116">
+ 
+<link rel="alternate" type="application/rss+xml" title="amCharts » Feed" href="https://feeds.feedburner.com/amcharts/">
+<link rel="alternate" type="application/rss+xml" title="amCharts » Comments Feed" href="https://www.amcharts.com/comments/feed/">
+<link rel="stylesheet" id="amcharts-style-bootstrap-css" href="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-fontawesome-css" href="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-core-css" href="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/core.css" type="text/css" media="all">
+<link rel="stylesheet" id="amcharts-style-mobile-css" href="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/mobile.css" type="text/css" media="all">
+<link rel="stylesheet" id="fancybox-css" href="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/jquery.fancybox-1.3.7.min.css" type="text/css" media="screen">
+<script type="text/javascript" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/jquery.min.js"></script>
+<script type="text/javascript" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/core.js"></script>
+<link rel="https://api.w.org/" href="https://www.amcharts.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.amcharts.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.amcharts.com/wp-includes/wlwmanifest.xml">
+<link rel="shortlink" href="https://www.amcharts.com/?p=5487">
+<link rel="alternate" type="application/json+oembed" href="https://www.amcharts.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.amcharts.com%2Ftutorials%2Fusing-data-loader-plugin%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.amcharts.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.amcharts.com%2Ftutorials%2Fusing-data-loader-plugin%2F&amp;format=xml">
+ 
+<style type="text/css">div.simplesocialbuttons{height:20px;margin:10px auto 10px 0;text-align:left;clear:left;}div.simplesocialbutton{float:left;}div.ssb-button-googleplus{width:100px;}div.ssb-button-fblike{width:140px;line-height:1;}div.ssb-button-twitter{width:130px;}div.ssb-button-pinterest{width:100px;}.fb-like iframe{max-width:none!important;}</style>
+ 
+ 
+<script type="text/javascript">
+/* <![CDATA[ */
+var fb_timeout = null;
+var fb_opts = { 'overlayShow' : true, 'hideOnOverlayClick' : true, 'showCloseButton' : true, 'centerOnScroll' : true, 'enableEscapeButton' : true, 'autoScale' : true };
+var easy_fancybox_handler = function(){
+	/* IMG */
+	var fb_IMG_select = 'a[href*=".jpg"]:not(.nofancybox,.pin-it-button), area[href*=".jpg"]:not(.nofancybox), a[href*=".jpeg"]:not(.nofancybox,.pin-it-button), area[href*=".jpeg"]:not(.nofancybox), a[href*=".png"]:not(.nofancybox,.pin-it-button), area[href*=".png"]:not(.nofancybox)';
+	jQuery(fb_IMG_select).addClass('fancybox image');
+	var fb_IMG_sections = jQuery('div.gallery ');
+	fb_IMG_sections.each(function() { jQuery(this).find(fb_IMG_select).attr('rel', 'gallery-' + fb_IMG_sections.index(this)); });
+	jQuery('a.fancybox, area.fancybox, li.fancybox a:not(li.nofancybox a)').fancybox( jQuery.extend({}, fb_opts, { 'transitionIn' : 'elastic', 'easingIn' : 'easeOutBack', 'transitionOut' : 'elastic', 'easingOut' : 'easeInBack', 'opacity' : false, 'hideOnContentClick' : false, 'titleShow' : true, 'titlePosition' : 'over', 'titleFromAlt' : true, 'showNavArrows' : true, 'enableKeyboardNav' : true, 'cyclic' : false }) );
+	/* Auto-click */ 
+	jQuery('#fancybox-auto').trigger('click');
+}
+/* ]]> */
+</script>
+</head>
+<body class="single single-tutorials postid-5487">
+<div class="app">
+<div class="app-header">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="navbar navbar-default" role="navigation">
+<a class="m-nav-opener m-only">MENU</a>
+<div class="app-nav-brand">
+<div class="app-nav-brand-inner">
+<a href="https://www.amcharts.com/"><img src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/logo.png" alt="amCharts: JavaScript Charts and Maps"></a>
+</div>
+</div>
+<ul id="menu-main-menu" class="nav navbar-nav navbar-main"><li id="nav-menu-item-151" class=" dropdown"><a href="https://www.amcharts.com/javascript-charts/"><span>Products</span></a>
+<ul class="dropdown-menu">
+<li id="nav-menu-item-104" class=""><a title="JavaScript Charts" href="https://www.amcharts.com/javascript-charts/"><i class="product-icon javascript-charts"></i><span>JavaScript</span><strong class="app-font transform-uppercase">Charts</strong></a></li>
+<li id="nav-menu-item-103" class=""><a title="JavaScript Stock Chart" href="https://www.amcharts.com/stock-chart/"><i class="product-icon stock-chart"></i><span>JavaScript</span><strong class="app-font transform-uppercase">Stock Chart</strong></a></li>
+<li id="nav-menu-item-102" class=""><a title="Interactive JavaScript Maps" href="https://www.amcharts.com/javascript-maps/"><i class="product-icon javascript-maps"></i><span>Interactive JavaScript</span><strong class="app-font transform-uppercase">Maps</strong></a></li>
+</ul>
+</li>
+<li id="nav-menu-item-112" class=" dropdown"><a href="https://www.amcharts.com/demos/"><span>Demos</span></a>
+<ul class="dropdown-menu">
+<li id="nav-menu-item-113" class=""><a href="https://www.amcharts.com/demos/"><span>Charts and Maps</span></a></li>
+<li id="nav-menu-item-114" class=""><a href="https://www.amcharts.com/inspiration/"><span>Inspiration Gallery</span></a></li>
+</ul>
+</li>
+<li id="nav-menu-item-138" class=""><a href="https://www.amcharts.com/download/"><span>Download</span></a></li>
+<li id="nav-menu-item-96" class=""><a href="https://www.amcharts.com/online-store/"><span>Buy</span></a></li>
+<li id="nav-menu-item-100" class=""><a href="https://www.amcharts.com/support/"><span>Support</span></a></li>
+<li id="nav-menu-item-208" class=" dropdown"><a href="https://docs.amcharts.com/3/"><span>Docs</span></a>
+<ul class="dropdown-menu">
+<li id="nav-menu-item-210" class=""><a href="https://docs.amcharts.com/3/"><span>API Reference</span></a></li>
+<li id="nav-menu-item-972" class=""><a href="https://www.amcharts.com/tutorials/"><span>Tutorials</span></a></li>
+<li id="nav-menu-item-4331" class=""><a href="https://www.amcharts.com/tips/"><span>Quick Tips</span></a></li>
+</ul>
+</li>
+</ul> <ul class="nav navbar-nav navbar-social">
+<li>
+<a class="pull-left" href="https://www.facebook.com/amcharts" target="_blank"><i class="fa fa-facebook-square"></i></a>
+</li>
+<li>
+<a class="pull-left" href="https://www.twitter.com/amcharts" target="_blank"><i class="fa fa-twitter"></i></a>
+</li>
+<li>
+<a class="pull-left" href="https://feeds.feedburner.com/amcharts" target="_blank"><i class="fa fa-rss"></i></a>
+</li>
+<li>
+<div style="padding-top:12px; padding-left:15px;"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 24px; height: 15px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 24px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 15px;" tabindex="0" vspace="0" width="100%" id="I2_1460869702243" name="I2_1460869702243" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div></div>
+<script type="text/javascript">
+									  (function() {
+									    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+									    po.src = 'https://apis.google.com/js/platform.js';
+									    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+									  })();
+									</script>
+</li>
+<li>
+<a class="btn btn-flat btn-liveeditor transform-uppercase" href="https://live.amcharts.com/">
+<span class="title">Live Editor</span>
+<span class="subtitle">Create charts online</span>
+</a>
+ 
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="app-body">
+<div class="app-section section-overview background-lightblue">
+<div class="container">
+<div class="row">
+<div class="col-sm-4">
+<h2 class="size-headline">Tutorials</h2>
+</div>
+<div class="col-sm-8">
+<form role="form" class="form-search position-relative" action="https://www.amcharts.com/tutorials/" method="post">
+<button type="submit" class="position-absolute size-big" tabindex="2">
+<i class="fa fa-search"></i>
+</button>
+<input type="search" name="s" tabindex="1" class="form-control family-light size-bigger" placeholder="Search..." value="">
+</form> </div>
+</div>
+</div>
+</div>
+<div class="app-section section-overview less-padding-bottom">
+<div class="container">
+<div class="row">
+<div class="col-sm-9">
+<div class="app-content">
+<h1>Using Data Loader plugin to load external data in CSV or JSON formats</h1>
+<h5 style="margin-bottom: 40px;"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<a href="https://www.amcharts.com/tutorials/">Tutorials</a>&nbsp;&nbsp;|&nbsp;&nbsp;April 24, 2015</h5>
+<div class="simplesocialbuttons">
+<div class="simplesocialbutton ssb-button-googleplus"> <div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I3_1460869702252" name="I3_1460869702252" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/fastbutton(1).html" data-gapiattached="true" title="+1"></iframe></div></div>
+<div class="simplesocialbutton ssb-button-fblike"> <div id="fb-root"></div><div class="fb-like" data-href="https://www.amcharts.com/tutorials/using-data-loader-plugin/" data-send="false" data-layout="button_count" data-show-faces="false"></div></div>
+<div class="simplesocialbutton ssb-button-twitter"> <a href="https://twitter.com/share" class="twitter-share-button" data-text="Using Data Loader plugin to load external data in CSV or JSON formats" data-url="https://www.amcharts.com/tutorials/using-data-loader-plugin/" data-via="amcharts" rel="nofollow"></a></div>
+</div>
+ 
+<script type="text/javascript">
+//<![CDATA[
+// google plus
+window.___gcfg = {lang: 'en'};
+(function() {
+   var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+   po.src = 'https://apis.google.com/js/plusone.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+// facebook 
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+// twitter 
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+// ]]>
+</script>
+ 
+<h2>Description</h2>
+<p>By default all amCharts libraries accept data in JSON format. It needs to be&nbsp;there when the web page loads, defined in-line or loaded via custom code.</p>
+<p>This plugin introduces a native wrapper that enables automatic loading of data&nbsp;from external data data sources in CSV and JSON formats.</p>
+<p>Most of the times you will just need to provide a URL of the external data&nbsp;source – static file or dynamically generated – and it will do the rest.</p>
+<h2><a id="user-content-important-notice" class="anchor" href="https://www.amcharts.com/tutorials/using-data-loader-plugin/#important-notice"></a>Important notice</h2>
+<p>Due to security measures implemented in most of the browsers, the external data&nbsp;loader will work only when the page with the chart or map is loaded via web&nbsp;server.</p>
+<p>So, any of the examples loaded locally (file:///) will not work.</p>
+<p>The page needs to be loaded via web server (http://) in order to work properly.</p>
+<p>Loading data from another domain than the web page is loaded is possible but is&nbsp;a subject for <code>Access-Control-Allow-Origin</code> policies defined by the web server&nbsp;you are loading data from.</p>
+<p>For more about loading data across domains use the following thread:<br>
+<a href="http://stackoverflow.com/questions/1653308/access-control-allow-origin-multiple-origin-domains">http://stackoverflow.com/questions/1653308/access-control-allow-origin-multiple-origin-domains</a></p>
+<h2><a id="user-content-usage" class="anchor" href="https://www.amcharts.com/tutorials/using-data-loader-plugin/#usage"></a>Usage</h2>
+<h3>1) Include the minified version of file of this plugin. I.e.:</h3>
+<pre><code>&lt;script src="amcharts/plugins/dataloader/dataloader.min.js" type="text/javascript"&gt;&lt;/script&gt;
+</code></pre>
+<p>(this needs to go after all the other amCharts includes)</p>
+<h3>2) Add data source properties to your chart configuration.</h3>
+<p>Regular (Serial, Pie, etc.) charts:</p>
+<pre><code>AmCharts.makeChart( "chartdiv", {
+  ...,
+  "dataLoader": {
+    "url": "data.json",
+    "format": "json"
+  }
+} );
+</code></pre>
+<p>Stock chart:</p>
+<pre><code>AmCharts.makeChart( "chartdiv", {
+  ...,
+  "dataSets": [{
+    ...,
+    "dataLoader": {
+      "url": "data.csv"
+      "format": "csv",
+      "delimiter": ",",       // column separator
+      "useColumnNames": true, // use first row for column names
+      "skip": 1               // skip header row
+    }
+  }]
+} );
+</code></pre>
+<p>That’s it. The plugin will make sure the files are loaded and dataProvider is populated with their content <em>before</em> the chart is built.</p>
+<p>Some formats, like CSV, will require additional parameters needed to parse the data, such as “separator”.</p>
+<p>If the “format” is omitted, the plugin will assume JSON.</p>
+<h2><a id="user-content-complete-list-of-available-dataloader-settings" class="anchor" href="https://www.amcharts.com/tutorials/using-data-loader-plugin/#complete-list-of-available-dataloader-settings"></a>Complete list of available dataLoader settings</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>async</td>
+<td>true</td>
+<td>If set to false (not recommended) everything will wait until data is fully loaded</td>
+</tr>
+<tr>
+<td>complete</td>
+<td></td>
+<td>Callback function to execute when loader is done</td>
+</tr>
+<tr>
+<td>delimiter</td>
+<td>,</td>
+<td>[CSV only] a delimiter for columns (use \t for tab delimiters)</td>
+</tr>
+<tr>
+<td>error</td>
+<td></td>
+<td>Callback function to execute if file load fails</td>
+</tr>
+<tr>
+<td>format</td>
+<td>json</td>
+<td>Type of data: json, csv</td>
+</tr>
+<tr>
+<td>load</td>
+<td></td>
+<td>Callback function to execute when file is successfully loaded (might be invoked multiple times)</td>
+</tr>
+<tr>
+<td>noStyles</td>
+<td>false</td>
+<td>If set to true no styles will be applied to “Data loading” curtain</td>
+</tr>
+<tr>
+<td>postProcess</td>
+<td></td>
+<td>If set to function reference, that function will be called to “post-process” loaded data before passing it on to chart</td>
+</tr>
+<tr>
+<td>showErrors</td>
+<td>true</td>
+<td>Show loading errors in a chart curtain</td>
+</tr>
+<tr>
+<td>showCurtain</td>
+<td>true</td>
+<td>Show curtain over the chart area when loading data</td>
+</tr>
+<tr>
+<td>reload</td>
+<td>0</td>
+<td>Reload data every X seconds</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>false</td>
+<td>[CSV only] add data points in revers order</td>
+</tr>
+<tr>
+<td>skip</td>
+<td>0</td>
+<td>[CSV only] skip X first rows in data (includes first row if useColumnNames is used)</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>false</td>
+<td>Add current timestamp to data URLs (to avoid caching)</td>
+</tr>
+<tr>
+<td>useColumnNames</td>
+<td>false</td>
+<td>[CSV only] Use first row in data as column names when parsing</td>
+</tr>
+</tbody>
+</table>
+<h2>Using in JavaScript Stock Chart</h2>
+<p>In JavaScript Stock Chart it works exactly the same as in other chart types, with the exception that <code>dataLoader</code> is set as a property to the data set definition. I.e.:</p>
+<pre><code>var chart = AmCharts.makeChart("chartdiv", {
+  "type": "stock",
+  ...
+  "dataSets": [{
+    "title": "MSFT",
+      "fieldMappings": [{
+        "fromField": "Open",
+        "toField": "open"
+      }, {
+        "fromField": "High",
+        "toField": "high"
+      }, {
+        "fromField": "Low",
+        "toField": "low"
+      }, {
+        "fromField": "Close",
+        "toField": "close"
+      }, {
+        "fromField": "Volume",
+        "toField": "volume"
+      }],
+      "compared": false,
+      "categoryField": "Date",
+      "dataLoader": {
+        "url": "data/MSFT.csv",
+        "format": "csv",
+        "showCurtain": true,
+        "showErrors": true,
+        "async": true,
+        "reverse": true,
+        "delimiter": ",",
+        "useColumnNames": true
+      }
+    }
+  }]
+});
+</code></pre>
+<h3>Can I also load event data the same way?</h3>
+<p>Sure. You just add a <code>eventDataLoader</code> object to your data set. All the same settings apply.</p>
+<h2>Translating into other languages</h2>
+<p>Depending on configuration options the plugin will display a small number of text prompts, like ‘Data loading…’.</p>
+<p>Plugin will try matching chart’s <code>language</code> property and display text prompts in a corresponding language. For that the plugin needs to have the translations.</p>
+<p>Some of the plugin translations are in <strong>lang</strong> subdirectory. Simply include the one you need.</p>
+<p>If there is no translation to your language readily available, just grab en.js, copy it and translate.</p>
+<p>The structure is simple:</p>
+<pre><code>'The phrase in English': 'Translation'
+</code></pre>
+<p>The phrase in English must be left intact.</p>
+<p>When you’re done, you can include your language as a JavaScript file.</p>
+<p>P.S. send us your translation so we can include it for the benefits of other users. Thanks!</p>
+<h2>Requirements</h2>
+<p>This plugin requires at least 3.13 version of JavaScript Charts, JavaScript Stock Chart or JavaScript Maps.</p>
+</div> </div>
+</div>
+</div>
+</div>
+<div class="app-section less-padding" style="margin: 20px 0 40px 0;">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="app-nav-page position-relative">
+<div class="align-left pull-left position-relative" style="z-index:1;">
+<a class="btn btn-nav less-margin less-padding amcharts-tooltip white-space-normal" href="https://www.amcharts.com/tutorials/use-amcharts-to-visualize-google-analytics-data/" data-toggle="tooltip" data-title="Previous" data-original-title="" title="">
+<i class="fa fa-angle-left"></i><span>Use amCharts to visualize Google Analytics data</span>
+</a>
+</div>
+<div class="align-right pull-right position-relative" style="z-index:1;">
+<a class="btn btn-nav less-margin less-padding amcharts-tooltip white-space-normal" href="https://www.amcharts.com/tutorials/intro-exporting-charts/" data-toggle="tooltip" data-title="Next" data-original-title="" title="">
+<span>Exporting charts and maps: Quick Intro</span><i class="fa fa-angle-right"></i>
+</a>
+</div>
+<div class="align-center position-absolute full-width" style="z-index:0;">
+<a class="btn btn-nav less-margin less-padding amcharts-tooltip white-space-normal" href="https://www.amcharts.com/tutorials/" data-toggle="tooltip" data-title="Back" data-original-title="" title="">
+<span class="less-padding">All Tutorials</span>
+</a>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>  
+<div class="app-footer">
+<div class="app-section background-gray">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="col-5 col-md-4">
+<div><h3 class="family-black color-gray transform-uppercase">Products</h3><div class="menu-footer-products-container"><ul id="menu-footer-products" class="menu"><li id="menu-item-88" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-88"><a href="https://www.amcharts.com/javascript-charts/">JavaScript Charts</a></li>
+<li id="menu-item-87" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87"><a href="https://www.amcharts.com/stock-chart/">Javascript Stock Chart</a></li>
+<li id="menu-item-105" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-105"><a href="https://www.amcharts.com/javascript-maps/">Interactive JavaScript Maps</a></li>
+</ul></div></div> </div>
+<div class="col-5 col-md-4">
+<div><h3 class="family-black color-gray transform-uppercase">Related</h3><div class="menu-footer-related-container"><ul id="menu-footer-related" class="menu"><li id="menu-item-5943" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5943"><a href="http://pixelmap.amcharts.com/">Pixel Map Generator</a></li>
+<li id="menu-item-3098" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3098"><a href="https://www.amcharts.com/visited_countries/">Visited Countries Map</a></li>
+<li id="menu-item-3097" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3097"><a href="https://www.amcharts.com/visited_states/">Visited States Map</a></li>
+<li id="menu-item-3068" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3068"><a href="https://www.amcharts.com/about/">About</a></li>
+</ul></div></div> </div>
+<div class="col-5 col-md-4">
+<div><h3 class="family-black color-gray transform-uppercase">Get Social</h3><div class="menu-footer-social-container"><ul id="menu-footer-social" class="menu"><li id="menu-item-89" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-89"><a href="http://www.facebook.com/amcharts"><i class="fa fa-facebook-square color-gray"></i> Facebook</a></li>
+<li id="menu-item-90" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-90"><a href="http://www.twitter.com/amcharts"><i class="fa fa-twitter color-gray"></i> Twitter</a></li>
+<li id="menu-item-91" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-91"><a href="http://plus.google.com/+amcharts/"><i class="fa fa-google-plus-square color-gray"></i> Google+</a></li>
+<li id="menu-item-4929" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4929"><a href="http://www.linkedin.com/company/amcharts"><i class="fa fa-linkedin-square color-gray"></i> LinkedIn</a></li>
+</ul></div></div> </div>
+<div class="col-5 col-md-4">
+<div><h3 class="family-black color-gray transform-uppercase">Resources</h3><div class="menu-footer-resources-container"><ul id="menu-footer-resources" class="menu"><li id="menu-item-3209" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3209"><a href="https://www.amcharts.com/inspiration/">Inspiration Gallery</a></li>
+<li id="menu-item-2731" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2731"><a href="https://www.amcharts.com/svg-maps/">Free SVG Maps</a></li>
+<li id="menu-item-3852" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3852"><a href="http://feeds.feedburner.com/amcharts">RSS feed of our blog</a></li>
+<li id="menu-item-6156" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6156"><a href="https://www.amcharts.com/terms-conditions/">Terms &amp; Conditions</a></li>
+</ul></div></div> </div>
+<div class="col-5 col-md-4">
+<div><h3 class="family-black color-gray transform-uppercase">Contact Us</h3><div class="menu-footer-contact-container"><ul id="menu-footer-contact" class="menu"><li id="menu-item-110" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-110"><a href="mailto:contact@amcharts.com">contact@amcharts.com</a></li>
+<li id="menu-item-2563" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2563"><a href="https://www.amcharts.com/support/">Get Support</a></li>
+</ul></div></div> </div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div class="app-fieldset text-center">
+<div class="app-fieldset-legend color-lightgray">Copyright © 2015, amcharts.com. All rights reserved.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="app-wave wave-dark"></div>
+</div>
+</div>
+</div>
+<textarea id="code_html" class="hidden">&lt;div id="chartdiv"&gt;&lt;/div&gt;
+</textarea>
+<textarea id="code_js" class="hidden">var chart = AmCharts.makeChart("chartdiv", {
+    "type": "serial",
+    "addClassNames": true,
+    "dataProvider": [[data]],
+    "graphs": [{
+    	"bullet": "round",
+        "valueField": "value",
+        "fillAlphas": .3,
+        "lineColor": "#1d8b3a",
+        "negativeLineColor": "#8b1d1d"
+    },{
+    	"type": "column",
+        "valueField": "value",
+        "fillAlphas": .3,
+        "lineColor": "#1d8b3a",
+        "fillColors": "#1d8b3a",
+        "negativeLineColor": "#8b1d1d",
+        "negativeFillColors": "#8b1d1d"
+    }],
+    "chartCursor": {
+    	graphBulletSize: 1.5
+    },
+    "dataDateFormat": "YYYY-MM-DD",
+    "categoryField": "date",
+    "categoryAxis": {
+        "parseDates": true
+    }
+});
+</textarea>
+<textarea id="code_css" class="hidden">#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}
+.[[classname]] {
+    -webkit-animation: am-pulsate 1s infinite;
+    animation: am-pulsate 1s infinite;
+}
+</textarea>
+<script>
+
+			 var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-22221037-1']);
+			_gaq.push(['_setDomainName', 'amcharts.com']);
+			_gaq.push(['_setAllowLinker', true]);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+<script type="text/javascript" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/bootstrap.min.js"></script>
+<script type="text/javascript" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/browser-support.js"></script>
+<script type="text/javascript" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/wp-embed.min.js"></script>
+<script type="text/javascript" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/jquery.fancybox-1.3.7.min.js"></script>
+<script type="text/javascript" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/jquery.easing.pack.js"></script>
+<script type="text/javascript" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/jquery.mousewheel.min.js"></script>
+<script type="text/javascript">
+jQuery(document).on('ready post-load', easy_fancybox_handler );
+</script>
+ 
+<script>
+		/* <![CDATA[ */
+		var google_conversion_id = 975661256;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+		</script>
+<script type="text/javascript" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/conversion.js">
+		</script><iframe name="google_conversion_frame" title="Google conversion frame" width="300" height="13" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/saved_resource.html" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no"></iframe>
+<noscript>
+&lt;div style="display:inline;"&gt;
+&lt;img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/975661256/?value=0&amp;amp;guid=ON&amp;amp;script=0"/&gt;
+&lt;/div&gt;
+</noscript>
+
+
+ 
+ 
+ <div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div><iframe name="oauth2relay1278347745" id="oauth2relay1278347745" src="./Using Data Loader plugin to load external data in CSV or JSON formats - Tutorial _ amCharts_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>
