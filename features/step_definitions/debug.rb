@@ -76,7 +76,7 @@ Given /^Code Tested$/  do
 =end
 
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
-  file_name = 'EURUSD000TOM_050101_160214_1.txt'  #'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
+  file_name = 'DjaHistoricalPrices2000-2016.csv' #16/1 'EURUSD000TOM_050101_160214_1.txt'  #'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
   #file_name = 'EURUSD000TOM_050101_160214_1.txt'  #'EURUSD000TOM_050101_160214_1.txt' 'USD000UTSTOM_160101_160214.txt'
   readCsvFile(Dir.getwd+"/logs/"+file_name)#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
@@ -124,9 +124,12 @@ $lot_multiplier = 2
 $portfolio={'long_size'=>0,'short_size'=>0,'last_long_price'=>0,'last_short_price'=>0} #entries+exits trades_arr
 $trades=[] #positionType = entry-'open' or exit-'close' position
 Trade = Struct.new(:barDateTime,:orderType,:price,:qty,:positionStatus,:barHigh,:barLow,:indicatorsValues)
-$stop_loss_percent = 0.011 #0.011=1.1%
+$stop_loss_percent = 0.011 #0.011=1.1% #TODO 3limits each time SL decrease on a half
 $take_profit_percent = 0.011 #0.011=1.1%
+$take_profit_percent2 = 0.0055 #0.0055=0.55% #TODO 3limits each time TP decrease on a half
+$take_profit_percent_tmp = 0.011 #0.011=1.1% Like initial TP,used to interchange from position_limit to open new position
 $strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'max_qty'=>0} #compare random runs
+$max_position_lots_size = 10
 
 def getRandomBarIndex(bars_before_end,bars_length,bars_after_before=0)
   total=bars_length-1
@@ -223,6 +226,12 @@ end
 
 def adjustMartin(startBarIndex,endBarIndex=nil)
    fail('Not appropriate Start or End') if(startBarIndex>$source_hash.length-1 || (!endBarIndex.nil? && endBarIndex>$source_hash.length-1))
+
+   if($portfolio['long_size']+$portfolio['short_size']>=$max_position_lots_size) #decrease TP in order to close ALL positions faster
+      $take_profit_percent = $take_profit_percent_tmp/2 #TODO to continue
+   else
+      $take_profit_percent = $take_profit_percent
+   end
 
    $source_hash.each_with_index { |bar,index|
     next if(index<startBarIndex)
