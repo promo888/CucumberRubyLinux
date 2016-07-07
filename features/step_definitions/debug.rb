@@ -76,7 +76,7 @@ Given /^Code Tested$/  do
 =end
 
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
-  file_name = 'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
+  file_name = 'EURUSD000TOM_050101_160214_1.txt'  #'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
   #file_name = 'EURUSD000TOM_050101_160214_1.txt'  #'EURUSD000TOM_050101_160214_1.txt' 'USD000UTSTOM_160101_160214.txt'
   readCsvFile(Dir.getwd+"/logs/"+file_name)#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
@@ -97,7 +97,15 @@ Given /^Code Tested$/  do
     ###logToJsFile($source_hash)
   #end
   begin
-   getPercentChannelBreakoutProfitLoss(0.7,0,0.2)
+   $i=0
+   while $i<100
+     startMartin()
+     #puts 'Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max lot multiplier: '+$strat_stats['max_qty'].to_s
+     $i +=1
+   end
+   puts 'Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max lot multiplier: '+$strat_stats['max_qty'].to_s
+
+   #####getPercentChannelBreakoutProfitLoss(0.99,0,0.99)
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.1)
   rescue Exception=>e
@@ -108,6 +116,195 @@ Given /^Code Tested$/  do
 
 end
 
+
+
+######### Martin Start
+$lot_start_size = 1
+$lot_multiplier = 2
+$portfolio={'long_size'=>0,'short_size'=>0,'last_long_price'=>0,'last_short_price'=>0} #entries+exits trades_arr
+$trades=[] #positionType = entry-'open' or exit-'close' position
+Trade = Struct.new(:barDateTime,:orderType,:price,:qty,:positionStatus,:barHigh,:barLow,:indicatorsValues)
+$stop_loss_percent = 0.011 #0.011=1.1%
+$take_profit_percent = 0.011 #0.011=1.1%
+$strat_stats={'max_closes'=>0,'max_qty'=>0} #compare random runs
+
+def getRandomBarIndex(bars_before_end,bars_length,bars_after_before=0)
+  total=bars_length-1
+  if(total-bars_before_end<0 || bars_before_end>total)
+    fail('Please define appropriate range for bar  total: '+total.to_s)
+    #return nil
+
+  end
+  startRange=total-bars_before_end
+  endRange=total
+  endRange=startRange+bars_after_before if(bars_after_before>0 && total-startRange>=bars_after_before)
+  random_bar_index=rand(startRange..endRange)
+
+  return random_bar_index
+end
+
+def startRandomTrade(bar,random_order_type=true,orderType=nil,price=nil) #Buy or Sell can/should? be customized with trend filters like <>MA20...
+    return nil if($portfolio['long_size']!=0 || $portfolio['short_size']!=0)
+    entry_price=nil
+    order_type=nil
+    if(random_order_type)
+      r=rand(1..2)
+      orderType=BUY_FIELD if(r==1)
+      orderType=SELL_FIELD if(r==2)
+      l=bar[LOW_FIELD].to_f
+      h=bar[HIGH_FIELD].to_f
+      entry_price=rand(l..h)
+    else
+      fail('NOT valid orderType,price ') if(orderType.nil? || !orderType.include?(BUY_FIELD||SELL_FIELD) || price.nil? || !price.is_number?)
+      return nil
+      entry_price=price
+
+    end
+
+  createTrade(bar[DATE_FIELD],orderType,entry_price,$lot_start_size,'Open',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil)
+
+
+  return entry_price
+end
+
+
+
+def createTrade(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,indicatorsValues)
+   #currentTrade=Trade.new(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,indicatorsValues)
+   #$trades.push(currentTrade)
+   if(positionStatus.to_s.downcase==('open'))
+     currentTrade=Trade.new(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,indicatorsValues)
+     $trades.push(currentTrade)
+     case orderType
+       when BUY_FIELD
+         $portfolio['long_size']=$lot_start_size
+         $portfolio['short_size']=0
+         $portfolio['last_long_price']=price
+         $portfolio['last_short_price']=0
+       when SELL_FIELD
+         $portfolio['long_size']=0
+         $portfolio['short_size']=$lot_start_size
+         $portfolio['last_long_price']=0
+         $portfolio['last_short_price']=price
+     end
+
+   end
+   if(positionStatus.to_s.downcase==('close')) #ToDo to leave 1lot for Continious trading
+     currentTrade=Trade.new(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,indicatorsValues)
+     $trades.push(currentTrade)
+   case orderType # Close/Trade an opposite
+     when BUY_FIELD #closing opposite Sell
+       if($portfolio['long_size']>0)
+         currentTrade=Trade.new(barDateTime,SELL_FIELD,price,$portfolio['long_size'],'Opposite Close',barHigh,barLow,indicatorsValues)
+         $trades.push(currentTrade)
+       end
+     when SELL_FIELD #closing opposite Buy
+       if($portfolio['short_size']>0)
+         currentTrade=Trade.new(barDateTime,BUY_FIELD,price,$portfolio['short_size'],'Opposite Close',barHigh,barLow,indicatorsValues)
+         $trades.push(currentTrade)
+       end
+   end
+
+     $portfolio['long_size']=0
+     $portfolio['short_size']=0
+     $portfolio['last_long_price']=0
+     $portfolio['last_short_price']=0
+   end
+   if(positionStatus.to_s.downcase==('multiply'))
+     currentTrade=Trade.new(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,indicatorsValues)
+     $trades.push(currentTrade)
+     $portfolio['long_size']=$portfolio['long_size'].to_f+qty.to_f if(orderType==BUY_FIELD)
+     $portfolio['last_long_price']=price.to_f if(orderType==BUY_FIELD)
+     $portfolio['short_size']=$portfolio['short_size'].to_f+qty.to_f if(orderType==SELL_FIELD)
+     $portfolio['last_short_price']=price.to_f if(orderType==SELL_FIELD)
+   end
+end
+
+
+def adjustMartin(startBarIndex,endBarIndex=nil)
+   fail('Not appropriate Start or End') if(startBarIndex>$source_hash.length-1 || (!endBarIndex.nil? && endBarIndex>$source_hash.length-1))
+
+   $source_hash.each_with_index { |bar,index|
+    next if(index<startBarIndex)
+    #break if(index>$source_hash.length-1 && endBarIndex.nil?)
+    #break if(index>endBarIndex && !endBarIndex.nil?)
+
+   #If No position
+   startRandomTrade(bar,true) if($portfolio['short_size']==0 && $portfolio['long_size']==0)
+
+   #in Long position when SL met [Opposite movement]
+   if ($portfolio['long_size']>$portfolio['short_size'] && bar[LOW_FIELD].to_f<=$portfolio['last_long_price'].to_f*(1-$stop_loss_percent))
+
+      #Multiply - Add to leg+TODO Trailing stops
+      multiply_price=$portfolio['last_long_price'].to_f*(1-$stop_loss_percent)
+      createTrade(bar[DATE_FIELD],SELL_FIELD,multiply_price,$lot_multiplier,'Multiply',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
+
+
+   end
+
+
+   #in Short position when SL met [Opposite movement]
+    if ($portfolio['short_size']>$portfolio['long_size'] && bar[HIGH_FIELD].to_f>=$portfolio['last_short_price'].to_f*(1+$stop_loss_percent))
+
+      #Multiply - Add to leg +TODO Trailing stops
+      multiply_price=$portfolio['last_short_price'].to_f*(1+$stop_loss_percent)
+      createTrade(bar[DATE_FIELD],BUY_FIELD,multiply_price,$lot_multiplier,'Multiply',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
+
+
+    end
+
+
+   #in Long position when TP met
+   if ($portfolio['long_size']>$portfolio['short_size'] && $portfolio['last_long_price'].to_f*(1+$take_profit_percent)<=bar[HIGH_FIELD].to_f)
+        #TODO to quad positions if bi-directional
+
+        #Close portfolio
+        exit_price=$portfolio['last_long_price'].to_f*(1+$take_profit_percent)
+        createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$portfolio['long_size'],'Close',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']>0)
+
+        next
+   end
+
+
+   #in Short position when TP met
+   if ($portfolio['short_size']>$portfolio['long_size'] && $portfolio['last_short_price'].to_f*(1-$take_profit_percent)>=bar[LOW_FIELD].to_f)
+      #TODO to quad positions if bi-directional
+
+      #Close portfolio
+      exit_price=$portfolio['last_short_price'].to_f*(1-$take_profit_percent)
+      createTrade(bar[DATE_FIELD],BUY_FIELD,exit_price,$portfolio['short_size'],'Close',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['short_size']>0)
+      #createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$portfolio['long_size'],'Opposite Close',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']>0)
+
+      next
+   end
+
+
+   }
+end
+
+
+
+
+def startMartin()
+    $trades=[]
+    #+ Last 200-250 bars or last 10% compare with full series+100 or 1/2 random from where to start
+    #Don't Enter if current bar is the LastBar in sereis
+    #random_index=getRandomBarIndex($source_hash.length-1,$source_hash.length,100)
+    random_index=getRandomBarIndex($source_hash.length-1,$source_hash.length,100) #until random_index<$source_hash.length-2
+    random_bar=$source_hash[random_index]
+    startRandomTrade(random_bar,true)
+    adjustMartin(random_index)
+
+
+   #$trades.each{|trade| puts trade}
+   max_closes = $trades.select{|trade| trade['positionStatus'].to_s.downcase=='close'}.length
+   max_qty =  $trades.collect{|trade| trade['qty']}.max
+   $strat_stats['max_closes'] = max_closes if(max_closes>$strat_stats['max_closes'])
+   $strat_stats['max_qty'] = max_qty if(max_qty>$strat_stats['max_qty'])
+
+
+end
+######### Martin End
 #TODO
 #jscharts
 #http://stackoverflow.com/questions/11406458/highcharts-scrollbar-not-appearing
@@ -617,8 +814,8 @@ def getPercentChannelBreakoutProfitLoss(percentFromClose,nextBarsPL,percentPL)
   bi_breakout_signals = $source_hash.each_with_index.select {|bar,index| index != 0 && \
                          ( (bar['<HIGH>'].to_f / $source_hash[index-1]['<CLOSE>'].to_f-1)*100 >= percentFromClose  \
                         && ($source_hash[index-1]['<CLOSE>'].to_f / bar['<LOW>'].to_f - 1)*100 >= percentFromClose )}
-  $select.push '=====bi_breakout_signals: ' + bi_breakout_signals.length.to_s
-
+  $select.push '=====bi_breakout_signals from close: ' + bi_breakout_signals.length.to_s
+  $select.push bi_breakout_signals.map{|bar| bar[0]["<DATE>"]}.to_s
 
   #select bi-profit trades
   bi_profit_trades = $source_hash.each_with_index.select {|bar,index| index != 0 && \
