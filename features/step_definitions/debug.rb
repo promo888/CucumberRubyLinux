@@ -76,7 +76,7 @@ Given /^Code Tested$/  do
 =end
 
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
-  file_name = 'EURUSD000TOM_050101_160214_1.txt'  #'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
+  file_name = 'USD000000TOD_160101_160214.txt' #'EURUSD000TOM_050101_160214_1.txt'  #'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
   #file_name = 'EURUSD000TOM_050101_160214_1.txt'  #'EURUSD000TOM_050101_160214_1.txt' 'USD000UTSTOM_160101_160214.txt'
   readCsvFile(Dir.getwd+"/logs/"+file_name)#USD000UTSTOM_160101_160214.txt USD000UTSTOM_050101_160214_1.txt
   #calculateBarsSpread($avg_period,0)
@@ -103,7 +103,7 @@ Given /^Code Tested$/  do
      #puts 'Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max lot multiplier: '+$strat_stats['max_qty'].to_s
      $i +=1
    end
-   puts 'Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max lot multiplier: '+$strat_stats['max_qty'].to_s
+   puts ' Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max lot multiplier: '+$strat_stats['max_qty'].to_s
 
    #####getPercentChannelBreakoutProfitLoss(0.99,0,0.99)
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
@@ -126,7 +126,7 @@ $trades=[] #positionType = entry-'open' or exit-'close' position
 Trade = Struct.new(:barDateTime,:orderType,:price,:qty,:positionStatus,:barHigh,:barLow,:indicatorsValues)
 $stop_loss_percent = 0.011 #0.011=1.1%
 $take_profit_percent = 0.011 #0.011=1.1%
-$strat_stats={'max_closes'=>0,'max_qty'=>0} #compare random runs
+$strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'max_qty'=>0} #compare random runs
 
 def getRandomBarIndex(bars_before_end,bars_length,bars_after_before=0)
   total=bars_length-1
@@ -301,7 +301,7 @@ def startMartin()
    max_qty =  $trades.collect{|trade| trade['qty']}.max
    $strat_stats['max_closes'] = max_closes if(max_closes>$strat_stats['max_closes'])
    $strat_stats['max_qty'] = max_qty if(max_qty>$strat_stats['max_qty'])
-
+   $strat_stats['min_closes'] = max_closes if(max_closes<$strat_stats['min_closes'])
 
 end
 ######### Martin End
