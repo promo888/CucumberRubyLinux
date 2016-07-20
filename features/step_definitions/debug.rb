@@ -75,6 +75,7 @@ Given /^Code Tested$/  do
   array.map{|x| x[:price]}
 =end
 
+begin
   #USD000000TOD_160101_160214.txt EURUSD000TOM_050101_160214_1.txt /DjaHistoricalPrices2000-2016.csv
   file_name = 'EURUSD000TOM_050101_160214_1.txt'  #'DjaHistoricalPrices2000-2016.csv' #16/1 'EURUSD000TOM_050101_160214_1.txt'  #'DjaHistoricalPrices2000-2016.csv' #'USD000000TOD_160101_160214.txt' #'DjaHistoricalPrices2000-2016.csv'
   #file_name = 'EURUSD000TOM_050101_160214_1.txt'  #'EURUSD000TOM_050101_160214_1.txt' 'USD000UTSTOM_160101_160214.txt'
@@ -96,10 +97,55 @@ Given /^Code Tested$/  do
   #else
     ###logToJsFile($source_hash)
   #end
-  begin
-    #ma=0
-    $source_hash.each_with_index {|bar,index|
-      bar['ma_close20']=getAvgValue(20,index+1,$source_hash,"close").to_f if(index>20 && index<$source_hash.length-1-1)
+
+#GAPS TODO
+#  $source_hash.each_with_index{|bar,index| ((1-$source_hash[index-1][CLOSE_FIELD].to_f/bar[OPEN_FIELD].to_f)*100>1 || (bar[OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1)*100>1) && index>1}
+# $source_hash.each_with_index{|bar,index| p index if((1-$source_hash[index-1][CLOSE_FIELD].to_f/bar[OPEN_FIELD].to_f)*100>1 || (bar[OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1)*100>1) && index>1}
+# $source_hash.each_with_index.select{|bar,index| p index if((1-$source_hash[index-1][CLOSE_FIELD].to_f/bar[OPEN_FIELD].to_f)*100>1 || (bar[OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1)*100>1) && index>1}
+
+#$source_hash.each_with_index.select{|bar,index| p index if (bar[CLOSE_FIELD].to_f>$source_hash[index-1][CLOSE_FIELD].to_f && bar[CLOSE_FIELD].to_f>bar['ma_close20'].to_f) || (bar[CLOSE_FIELD].to_f<$source_hash[index-1][CLOSE_FIELD].to_f && bar[CLOSE_FIELD].to_f<bar['ma_close20'].to_f) && index>20}
+#$source_hash.each_with_index.select{|bar,index| p index if (bar[CLOSE_FIELD].to_f>$source_hash[index-1][CLOSE_FIELD].to_f && $source_hash[index-1][CLOSE_FIELD].to_f>bar['ma_close20'].to_f) || (bar[CLOSE_FIELD].to_f<$source_hash[index-1][CLOSE_FIELD].to_f && $source_hash[index-1][CLOSE_FIELD].to_f<bar['ma_close20'].to_f) && index>20}
+#1042 vs 808 from 1710
+
+#EUR/USD tom futures Micex  1710 daily bars 2009-2016
+#gaps <>1% 24/1710
+  #$source_hash.each_with_index.select{|bar,index| p index if((1-$source_hash[index-1][CLOSE_FIELD].to_f/bar[OPEN_FIELD].to_f)*100>1 || (bar[OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1)*100>1) && index>1}
+#no gaps < 0.001% prev bar close = current bar open 875/1710=50% [1118/1710(0.1) 1427/1710(0.3) 1565(0.5%) 1663/1710(0.8%) 1684(<1%)+24(>1%)==1708/1710-2bars]
+  #$source_hash.each_with_index.select{|bar,index| p index if((1-$source_hash[index-1][CLOSE_FIELD].to_f/bar[OPEN_FIELD].to_f)*100<0.001 || (bar[OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1)*100<0.001) && index>1}
+#close prediction
+  #$source_hash.each_with_index.select{|bar,index| p index if (bar[CLOSE_FIELD].to_f>$source_hash[index-1][CLOSE_FIELD].to_f && $source_hash[index-1][CLOSE_FIELD].to_f>bar['ma_close50'].to_f) || (bar[CLOSE_FIELD].to_f<$source_hash[index-1][CLOSE_FIELD].to_f && $source_hash[index-1][CLOSE_FIELD].to_f<bar['ma_close50'].to_f) && index>20}
+#observed 222-444 for 3,5closema 870 for 50,100,200 closeMA inDirectionWithMa+prevBar if prev bar <>ma tested on 1710bars of
+#about 200-400 (25-44%) bars observed gaps Open=PrevClose
+#TODO other markets
+
+  # ma=0
+     $source_hash.each_with_index {|bar,index|
+=begin
+       bar['ma_close3']=getAvgValue(3,index+1,$source_hash,"close").to_f if(index>3 && index<$source_hash.length-1-1)
+       bar['ma_high3']=getAvgValue(3,index+1,$source_hash,"high").to_f if(index>3 && index<$source_hash.length-1-1)
+       bar['ma_low3']=getAvgValue(3,index+1,$source_hash,"low").to_f if(index>3 && index<$source_hash.length-1-1)
+       bar['ma_close5']=getAvgValue(5,index+1,$source_hash,"close").to_f if(index>5 && index<$source_hash.length-1-1)
+       bar['ma_high5']=getAvgValue(5,index+1,$source_hash,"high").to_f if(index>5 && index<$source_hash.length-1-1)
+       bar['ma_low5']=getAvgValue(5,index+1,$source_hash,"low").to_f if(index>5 && index<$source_hash.length-1-1)
+       bar['ma_close10']=getAvgValue(10,index+1,$source_hash,"close").to_f if(index>10 && index<$source_hash.length-1-1)
+       bar['ma_high10']=getAvgValue(10,index+1,$source_hash,"high").to_f if(index>10 && index<$source_hash.length-1-1)
+       bar['ma_low10']=getAvgValue(10,index+1,$source_hash,"low").to_f if(index>10 && index<$source_hash.length-1-1)
+       bar['ma_close20']=getAvgValue(20,index+1,$source_hash,"close").to_f if(index>20 && index<$source_hash.length-1-1)
+       bar['ma_high20']=getAvgValue(20,index+1,$source_hash,"high").to_f if(index>20 && index<$source_hash.length-1-1)
+       bar['ma_low20']=getAvgValue(20,index+1,$source_hash,"low").to_f if(index>20 && index<$source_hash.length-1-1)
+=end
+       bar['ma_close50']=getAvgValue(50,index+1,$source_hash,"close").to_f if(index>50 && index<$source_hash.length-1-1)
+       bar['ma_high50']=getAvgValue(50,index+1,$source_hash,"high").to_f if(index>50 && index<$source_hash.length-1-1)
+       bar['ma_low50']=getAvgValue(50,index+1,$source_hash,"low").to_f if(index>50 && index<$source_hash.length-1-1)
+=begin
+       bar['ma_close100']=getAvgValue(100,index+1,$source_hash,"close").to_f if(index>100 && index<$source_hash.length-1-1)
+       bar['ma_high100']=getAvgValue(100,index+1,$source_hash,"high").to_f if(index>100 && index<$source_hash.length-1-1)
+       bar['ma_low100']=getAvgValue(100,index+1,$source_hash,"low").to_f if(index>100 && index<$source_hash.length-1-1)
+       bar['ma_close200']=getAvgValue(200,index+1,$source_hash,"close").to_f if(index>200 && index<$source_hash.length-1-1)
+       bar['ma_high200']=getAvgValue(200,index+1,$source_hash,"high").to_f if(index>200 && index<$source_hash.length-1-1)
+       bar['ma_low200']=getAvgValue(200,index+1,$source_hash,"low").to_f if(index>200 && index<$source_hash.length-1-1)
+=end
+
       #ma=0
       #bar['ma_close20']=$source_hash.select{|bar| ma+=bar['close'].to_f } if(index>20-1 && index<$source_hash.length-1)
     } #TODO to continue
@@ -111,8 +157,10 @@ Given /^Code Tested$/  do
       #$trades.select{|trade| trade['barDateTime'].include?('2014') && trade['positionStatus'].include?('Close')} #25-50 trades yearly 1-0.5% range
       #$trades.select{|trade| trade['qty']>5 && trade['positionStatus'].include?('Close')} #32/500 on 0.5 range
 
-    loopMartinRandomEntry(1000)
-    puts ' Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max position size: '+($strat_stats['max_qty']+$strat_stats['max_qty']-1).to_s+ ' MaxTotalLots: '+($strat_stats['total_qty']/2).to_s+' MaxTotalProfit: '+($strat_stats['total_profit']*100).to_s+'%'
+    ###loopMartinRandomEntry(1000)
+     loopMartinMaEntry(1000,50,CLOSE_FIELD)
+    #startMartinMaEntry(50,CLOSE_FIELD)
+    puts ' Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max position size: '+($strat_stats['max_qty']+$strat_stats['max_qty']-1).to_s+ ' MaxTotalLots: '+($strat_stats['total_qty']/2).to_s+' MaxTotalProfit: '+($strat_stats['max_total_profit']*100).to_f.round(2).to_s+'%'+' MinTotalProfit: '+($strat_stats['min_total_profit']*100).to_f.round(2).to_s+'%'
 
    #####getPercentChannelBreakoutProfitLoss(0.99,0,0.99)
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
@@ -135,9 +183,9 @@ $trades=[] #positionType = entry-'open' or exit-'close' position
 Trade = Struct.new(:barDateTime,:orderType,:price,:qty,:positionStatus,:profitPercent,:barHigh,:barLow,:indicatorsValues)
 $range_entry  = 0.011 #0.0055 #0.011 0.033-0.055 dof DJI and indexes or exchange bc gaps..
 $stop_loss_percent = $range_entry  #0.011=1.1% #TODO 3limits each time SL decrease on a half
-$take_profit_percent = $range_entry  #0.011=1.1%
+$take_profit_percent = $range_entry #* 1.5  #0.011=1.1%
 $take_profit_percent_initial = $take_profit_percent #0.0055 #0.011=1.1% Like initial TP,used to interchange from position_limit to open new position
-$strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'max_qty'=>0,'min_profit'=>100000000000000000,'max_profit'=>0,'total_profit'=>0,'total_qty'=>0} #compare random runs
+$strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'max_qty'=>0,'min_profit'=>100000000000000000,'max_profit'=>0,'total_profit'=>0,'total_qty'=>0,'max_total_profit'=>0,'min_total_profit'=>100000000000000000} #compare random runs
 $max_position_lots_size = 1 #TODO optimize for faster execution+below row
 $take_profit_percent2 = 0.0055 #0.0055=0.55% #TODO 3limits each time TP decrease on a half
 #TODO EXACT PRICE LEVEL BY ENTRY
@@ -169,7 +217,7 @@ def startRandomTrade(bar,random_order_type=true,orderType=nil,price=nil) #Buy or
       h=bar[HIGH_FIELD].to_f
       entry_price=rand(l..h)
     else
-      fail('NOT valid orderType,price ') if(orderType.nil? || !orderType.include?(BUY_FIELD||SELL_FIELD) || price.nil? || !price.is_number?)
+      fail('NOT valid orderType,price ') if(orderType.nil? || !orderType.include?(BUY_FIELD) || !orderType.include?(SELL_FIELD) || price.nil? || !price.is_number?)
       return nil
       entry_price=price
 
@@ -182,12 +230,14 @@ def startRandomTrade(bar,random_order_type=true,orderType=nil,price=nil) #Buy or
 end
 
 
-$ma1=20
-def startMaTrade(bar,bar_index,bars_array,random_order_type=false,orderType=nil,price=nil) #Buy or Sell at random price if previous close and previous HighLoe <>MA20[Closes,Lows,Highs]...
+$ma1=50
+def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE_FIELD,ma_period=50,orderType=nil,price=nil) #Buy or Sell at random price if previous close and previous HighLoe <>MA20[Closes,Lows,Highs]...
   return nil if($portfolio['long_size']!=0 || $portfolio['short_size']!=0)
   return nil if(bar_index-$ma1-1<0 || bar_index-1>bars_array.length-1)
 
-  ma_close_price = bars_array[bar_index-1]['ma_close20'].to_f #getAvgValue($ma1,bar_index-1,bars_array,"close")
+  previous_bar_price = bars_array[bar_index-1][CLOSE_FIELD].to_f
+  ma_previous_bar_price_avg = bars_array[bar_index-1]['ma_close'+ma_period.to_s].to_f #getAvgValue($ma1,bar_index-1,bars_array,"close")
+
 
   entry_price=nil
   order_type=nil
@@ -201,24 +251,31 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,orderType=nil,
   else
     l=bar[LOW_FIELD].to_f
     h=bar[HIGH_FIELD].to_f
-    entry_price=rand(l..h)
-    #ToDO simulating with trend entry NOT by random
-    #orderType = BUY_FIELD if(bars_array[bar_index-1][CLOSE_FIELD].to_f >= ma_close_price && entry_price>=ma_close_price)#ToDo && bars_array[bar_index-1][LOW_FIELD].to_f > ma_close_price)
-    #orderType = SELL_FIELD if(bars_array[bar_index-1][CLOSE_FIELD].to_f < ma_close_price && entry_price<ma_close_price)#ToDo && bars_array[bar_index-1][HIGH_FIELD].to_f < ma_close_price)
-    orderType = BUY_FIELD if(entry_price>=ma_close_price)#ToDo && bars_array[bar_index-1][LOW_FIELD].to_f > ma_close_price)
-    orderType = SELL_FIELD if(entry_price<ma_close_price)#ToDo && bars_array[bar_index-1][HIGH_FIELD].to_f < ma_close_price)
 
+    #ToDO enter Random or Satisfiying MA rules entry
+    #random entry
+=begin
+    entry_price=rand(l..h)
+    orderType = BUY_FIELD if(entry_price>=previous_bar_price && previous_bar_price>ma_previous_bar_price_avg )#ToDo && bars_array[bar_index-1][LOW_FIELD].to_f > ma_close_price)
+    orderType = SELL_FIELD if(entry_price<=previous_bar_price && previous_bar_price<ma_previous_bar_price_avg)#ToDo && bars_array[bar_index-1][HIGH_FIELD].to_f < ma_close_price)
+=end
+
+    #ma adjusted entry
+    entry_price=(l+h)/2 # avg of HL
+    #entry_price=previous_bar_price  #previous close ToDo by HL
+    orderType = BUY_FIELD if(entry_price>=previous_bar_price && previous_bar_price>ma_previous_bar_price_avg )#ToDo && bars_array[bar_index-1][LOW_FIELD].to_f > ma_close_price)
+    orderType = SELL_FIELD if(entry_price<=previous_bar_price && previous_bar_price<ma_previous_bar_price_avg)#ToDo && bars_array[bar_index-1][HIGH_FIELD].to_f < ma_close_price
 
 
     #fail('NOT valid orderType,price '+bar_index.to_s)
-    if(orderType.nil? || !orderType.include?(BUY_FIELD||SELL_FIELD) || entry_price.nil? || !entry_price.is_number? || ma_close_price.nil?)
+    if(orderType.nil? || (!orderType.include?(BUY_FIELD) && !orderType.include?(SELL_FIELD)) || entry_price.nil? || !entry_price.is_number? ) #|| ma_previous_close_price_avg?)
       #fail('NOT valid orderType,price '+bar_index.to_s)
-      puts 'NIL================================='+bar_index.to_s
-      return nil
+      puts 'NIL==========NO ENTRY======================='+bar_index.to_s
+      return #nil
     end
   end
 
-  createTrade(bar[DATE_FIELD],orderType,entry_price,$lot_start_size,'Open',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if(entry_price.nil?)
+  createTrade(bar[DATE_FIELD],orderType,entry_price,$lot_start_size,'Open',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if(!entry_price.nil? && !orderType.nil?)
 
 
   return entry_price
@@ -280,7 +337,11 @@ def createTrade(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,in
 end
 
 
-def adjustMartinRandomEntry(startBarIndex,endBarIndex=nil)
+
+
+
+
+def adjustMartinEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,oppositeTpEntry=true)
    fail('Not appropriate Start or End') if(startBarIndex>$source_hash.length-1 || (!endBarIndex.nil? && endBarIndex>$source_hash.length-1))
 
 
@@ -300,8 +361,12 @@ def adjustMartinRandomEntry(startBarIndex,endBarIndex=nil)
 =end
 
    #If No position
-   startRandomTrade(bar,true) if(current_portfolio_size==0)
-     #startMaTrade(bar,index,$source_hash,false) if(current_portfolio_size==0) #ToDo to continue
+   if(random)
+      startRandomTrade(bar,true) if(current_portfolio_size==0)
+   else
+      next if index<=ma_period
+      startMaTrade(bar,index,$source_hash,false,CLOSE_FIELD,ma_period) if(current_portfolio_size==0) #ToDo to continue
+   end
 
    #in Long position when SL met [Opposite movement]
    if ($portfolio['long_size']>$portfolio['short_size'] && bar[LOW_FIELD].to_f<=$portfolio['last_long_price'].to_f*(1-$stop_loss_percent))
@@ -334,7 +399,7 @@ def adjustMartinRandomEntry(startBarIndex,endBarIndex=nil)
         createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$portfolio['long_size'],'Close',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']>0)
 
         #Opposite Entry to TP Close
-        createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$lot_start_size,'Opposite Opening',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']==0 && $portfolio['short_size']==0)
+        createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$lot_start_size,'Opposite Opening',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']==0 && $portfolio['short_size']==0 && oppositeTpEntry)
         next
    end
 
@@ -348,7 +413,7 @@ def adjustMartinRandomEntry(startBarIndex,endBarIndex=nil)
       createTrade(bar[DATE_FIELD],BUY_FIELD,exit_price,$portfolio['short_size'],'Close',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['short_size']>0)
 
       #Opposite Entry to TP Close
-      createTrade(bar[DATE_FIELD],BUY_FIELD,exit_price,$lot_start_size,'Opposite Opening',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']==0 && $portfolio['short_size']==0)
+      createTrade(bar[DATE_FIELD],BUY_FIELD,exit_price,$lot_start_size,'Opposite Opening',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']==0 && $portfolio['short_size']==0 && oppositeTpEntry)
       next
    end
 
@@ -357,17 +422,18 @@ def adjustMartinRandomEntry(startBarIndex,endBarIndex=nil)
 end
 
 
+#$source_hash.each_with_index.select{|bar,index| p index if (bar[CLOSE_FIELD].to_f>$source_hash[index-1][CLOSE_FIELD].to_f && $source_hash[index-1][CLOSE_FIELD].to_f>bar['ma_close50'].to_f) || (bar[CLOSE_FIELD].to_f<$source_hash[index-1][CLOSE_FIELD].to_f && $source_hash[index-1][CLOSE_FIELD].to_f<bar['ma_close50'].to_f) && index>20}
 
 
 def startMartinRandomEntry()
     $trades=[]
-    #+ Last 200-250 bars or last 10% compare with full series+100 or 1/2 random from where to start
-    #Don't Enter if current bar is the LastBar in sereis
+    #TODO + Last 200-250 bars or last 10% compare with full series+100 or 1/2 random from where to start
+    #Don't Enter if current bar is the LastBar in series
     #random_index=getRandomBarIndex($source_hash.length-1,$source_hash.length,100)
     random_index=getRandomBarIndex($source_hash.length-1,$source_hash.length,100) #until random_index<$source_hash.length-2
     random_bar=$source_hash[random_index]
     startRandomTrade(random_bar,true)
-    adjustMartinRandomEntry(random_index)
+    adjustMartinEntry(random_index)
 
 
    #$trades.each{|trade| puts trade}
@@ -383,9 +449,11 @@ def startMartinRandomEntry()
    $strat_stats['max_closes'] = max_closes if(max_closes>$strat_stats['max_closes'])
    $strat_stats['max_qty'] = max_qty if(max_qty>$strat_stats['max_qty'])
    $strat_stats['min_closes'] = max_closes if(max_closes<$strat_stats['min_closes'])
-   $strat_stats['min_profit'] = min_profit if(min_profit<$strat_stats['min_profit'])
    $strat_stats['max_profit'] = max_profit if(max_profit>$strat_stats['max_profit'])
+   $strat_stats['min_profit'] = min_profit if(min_profit<$strat_stats['min_profit'])
    $strat_stats['total_profit'] = total_profit if(total_profit>$strat_stats['total_profit'])
+   $strat_stats['max_total_profit'] = total_profit if(total_profit>$strat_stats['max_total_profit'])
+   $strat_stats['min_total_profit'] = total_profit if(total_profit<$strat_stats['min_total_profit'])
    $strat_stats['total_qty'] = total_qty if(total_qty>$strat_stats['total_qty'])
 
 end
@@ -398,6 +466,52 @@ def loopMartinRandomEntry(loop_count)
     $i +=1
   end
 end
+
+
+def startMartinMaEntry(ma_period,ma_avg_field)
+  $trades=[]
+  #TODO + Last 200-250 bars or last 10% compare with full series+100 or 1/2 random from where to start
+  #Don't Enter if current bar is the LastBar in series
+  #random_index=getRandomBarIndex($source_hash.length-1,$source_hash.length,100)
+  random_index=getRandomBarIndex($source_hash.length-1-ma_period-1,$source_hash.length,100) #until random_index<$source_hash.length-2
+  random_bar=$source_hash[random_index]
+  startMaTrade(random_bar,random_index,$source_hash,false,CLOSE_FIELD,50)
+  adjustMartinEntry(random_index,nil,false,50,false)
+
+
+  if(!$trades.nil? && !$trades.empty?)
+    #$trades.each{|trade| puts trade}
+    max_closes = $trades.select{|trade| trade['positionStatus'].to_s.downcase=='close'}.length
+    max_qty =  $trades.collect{|trade| trade['qty']}.max
+    total_qty = 0
+    $trades.each{|trade| total_qty+=trade['qty']}
+    min_profit =  $trades.collect{|trade| trade['profitPercent']}.min
+    max_profit =  $trades.collect{|trade| trade['profitPercent']}.max
+    total_profit = 0
+    $trades.each{|trade| total_profit+=trade['profitPercent']}
+
+    $strat_stats['max_closes'] = max_closes if(max_closes>$strat_stats['max_closes'])
+    $strat_stats['max_qty'] = max_qty if(max_qty>$strat_stats['max_qty'])
+    $strat_stats['min_closes'] = max_closes if(max_closes<$strat_stats['min_closes'])
+    $strat_stats['max_profit'] = max_profit if(max_profit>$strat_stats['max_profit'])
+    $strat_stats['min_profit'] = min_profit if(min_profit<$strat_stats['min_profit'])
+    $strat_stats['total_profit'] = total_profit if(total_profit>$strat_stats['total_profit'])
+    $strat_stats['max_total_profit'] = total_profit if(total_profit>$strat_stats['max_total_profit'])
+    $strat_stats['min_total_profit'] = total_profit if(total_profit<$strat_stats['min_total_profit'])
+    $strat_stats['total_qty'] = total_qty if(total_qty>$strat_stats['total_qty'])
+  end
+
+end
+
+def loopMartinMaEntry(loop_count,ma_period,ma_avg_field)
+  $i=0
+  while $i<loop_count
+    startMartinMaEntry(ma_period,ma_avg_field)
+    #puts 'Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max lot multiplier: '+$strat_stats['max_qty'].to_s
+    $i +=1
+  end
+end
+
 
 ######### Martin End
 #TODO
