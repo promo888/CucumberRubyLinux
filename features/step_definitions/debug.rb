@@ -118,7 +118,10 @@ begin
 #about 200-400 (25-44%) bars observed gaps Open=PrevClose
 #TODO other markets
 
-  # ma=0
+  #TODO profit/loss % Close/ma# close/nextDayHL 2-5d closeNext#daysHL
+   ma_distribution_profit_stats={:ma_type=>'normal',:ma_period=>50,:closeToNextHLavgPercent=>0,:closeToNextHLminPercent=>1000000000000000000,:closeToNextHLmaxPercent=>0}
+   ma_distribution_profit=[]# used for in trend close to next bar High if Buy,to next bar Low for Sell - its Profit oriented #TODO opposite to measure drawdowns % from ma
+   #ma_distribution_drawdown=[]
      $source_hash.each_with_index {|bar,index|
 =begin
        bar['ma_close3']=getAvgValue(3,index+1,$source_hash,"close").to_f if(index>3 && index<$source_hash.length-1-1)
@@ -137,6 +140,9 @@ begin
        bar['ma_close50']=getAvgValue(50,index+1,$source_hash,"close").to_f if(index>50 && index<$source_hash.length-1-1)
        bar['ma_high50']=getAvgValue(50,index+1,$source_hash,"high").to_f if(index>50 && index<$source_hash.length-1-1)
        bar['ma_low50']=getAvgValue(50,index+1,$source_hash,"low").to_f if(index>50 && index<$source_hash.length-1-1)
+       if(index>50 && index<$source_hash.length-1-2)
+         #if bar[CLOSE_FIELD]>bar[index-1]['ma_close50']
+       end
 =begin
        bar['ma_close100']=getAvgValue(100,index+1,$source_hash,"close").to_f if(index>100 && index<$source_hash.length-1-1)
        bar['ma_high100']=getAvgValue(100,index+1,$source_hash,"high").to_f if(index>100 && index<$source_hash.length-1-1)
@@ -159,10 +165,10 @@ begin
       #$trades.select{|trade| trade['barDateTime'].include?('2014') && trade['positionStatus'].include?('Close')} #25-50 trades yearly 1-0.5% range
       #$trades.select{|trade| trade['qty']>5 && trade['positionStatus'].include?('Close')} #32/500 on 0.5 range
 
-    loopMartinRandomEntry(3000)
+    ###loopMartinRandomEntry(3000)
     ###startMartinRandomEntry
-    ###loopMartinMaEntry(1000,50,CLOSE_FIELD)
-    ###startMartinMaEntry(50,CLOSE_FIELD)
+    ######loopMartinMaEntry(5000,50,CLOSE_FIELD)
+    startMartinMaEntry(50,CLOSE_FIELD)
     puts ' Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max position size: '+($strat_stats['max_qty']+$strat_stats['max_qty']-1).to_s+ ' MaxTotalLots: '+($strat_stats['total_qty']/2).to_s+' MaxTotalProfit: '+($strat_stats['max_total_profit']*100).to_f.round(2).to_s+'%'+' MinTotalProfit: '+($strat_stats['min_total_profit']*100).to_f.round(2).to_s+'%'
     puts 'debug'
    #####getPercentChannelBreakoutProfitLoss(0.99,0,0.99)
@@ -175,6 +181,22 @@ begin
 
 
 end
+
+#TODO to continue
+#same day HL distribution
+#$source_hash.collect { |bar| (bar[HIGH_FIELD].to_f/bar[LOW_FIELD].to_f-1)*100.to_f.round(2) }
+#next 1-5d HL distribution from close
+#$source_hash.collect { |bar| (bar[HIGH_FIELD].to_f/bar[LOW_FIELD].to_f-1)*100.to_f.round(2) }#High
+#$source_hash.collect { |bar| (bar[HIGH_FIELD].to_f/bar[LOW_FIELD].to_f-1)*100.to_f.round(2) }#Low
+
+=begin
+close % ABOVE avg distribution
+b=$source_hash.map{|item|(item[CLOSE_FIELD].to_f>item['ma_close50'].to_f && (item[CLOSE_FIELD].to_f/item['ma_close50'].to_f-1)*100.to_f.round(2))}.reject{|item2| item2==Float::INFINITY || item2==false }
+
+
+close % BELOW avg distribution
+b=$source_hash.map{|item|(item[CLOSE_FIELD].to_f<item['ma_close50'].to_f && (item[CLOSE_FIELD].to_f/item['ma_close50'].to_f-1)*100.to_f.round(2))}.reject{|item2| item2==Float::INFINITY || item2==false }
+=end
 
 
 
