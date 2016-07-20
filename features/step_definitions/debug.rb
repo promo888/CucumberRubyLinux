@@ -168,7 +168,8 @@ begin
     ###loopMartinRandomEntry(3000)
     ###startMartinRandomEntry
     ######loopMartinMaEntry(5000,50,CLOSE_FIELD)
-    startMartinMaEntry(50,CLOSE_FIELD)
+    startMartinMaEntry(50,CLOSE_FIELD,false)
+    $trades.each{|trade| puts trade}
     puts ' Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max position size: '+($strat_stats['max_qty']+$strat_stats['max_qty']-1).to_s+ ' MaxTotalLots: '+($strat_stats['total_qty']/2).to_s+' MaxTotalProfit: '+($strat_stats['max_total_profit']*100).to_f.round(2).to_s+'%'+' MinTotalProfit: '+($strat_stats['min_total_profit']*100).to_f.round(2).to_s+'%'
     puts 'debug'
    #####getPercentChannelBreakoutProfitLoss(0.99,0,0.99)
@@ -493,15 +494,15 @@ def loopMartinRandomEntry(loop_count)
 end
 
 
-def startMartinMaEntry(ma_period,ma_avg_field)
+def startMartinMaEntry(ma_period,ma_avg_field,oppositeTpEntry)
   $trades=[]
   #TODO + Last 200-250 bars or last 10% compare with full series+100 or 1/2 random from where to start
   #Don't Enter if current bar is the LastBar in series
   #random_index=getRandomBarIndex($source_hash.length-1,$source_hash.length,100)
   random_index=getRandomBarIndex($source_hash.length-1-ma_period-1,$source_hash.length,100) #until random_index<$source_hash.length-2
   random_bar=$source_hash[random_index]
-  startMaTrade(random_bar,random_index,$source_hash,false,CLOSE_FIELD,50)
-  adjustMartinEntry(random_index,nil,false,50,false)
+  startMaTrade(random_bar, random_index, $source_hash, false, ma_avg_field, ma_period)
+  adjustMartinEntry(random_index, nil, false, ma_period,oppositeTpEntry)
 
 
   if(!$trades.nil? && !$trades.empty?)
