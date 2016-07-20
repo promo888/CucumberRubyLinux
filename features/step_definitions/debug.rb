@@ -150,18 +150,21 @@ begin
       #bar['ma_close20']=$source_hash.select{|bar| ma+=bar['close'].to_f } if(index>20-1 && index<$source_hash.length-1)
     } #TODO to continue
 
+
 =begin
     startMartinRandomEntry
     $trades.each{|trade| puts trade}
 =end
+
       #$trades.select{|trade| trade['barDateTime'].include?('2014') && trade['positionStatus'].include?('Close')} #25-50 trades yearly 1-0.5% range
       #$trades.select{|trade| trade['qty']>5 && trade['positionStatus'].include?('Close')} #32/500 on 0.5 range
 
-    ###loopMartinRandomEntry(1000)
-     loopMartinMaEntry(1000,50,CLOSE_FIELD)
-    #startMartinMaEntry(50,CLOSE_FIELD)
+    loopMartinRandomEntry(3000)
+    ###startMartinRandomEntry
+    ###loopMartinMaEntry(1000,50,CLOSE_FIELD)
+    ###startMartinMaEntry(50,CLOSE_FIELD)
     puts ' Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max position size: '+($strat_stats['max_qty']+$strat_stats['max_qty']-1).to_s+ ' MaxTotalLots: '+($strat_stats['total_qty']/2).to_s+' MaxTotalProfit: '+($strat_stats['max_total_profit']*100).to_f.round(2).to_s+'%'+' MinTotalProfit: '+($strat_stats['min_total_profit']*100).to_f.round(2).to_s+'%'
-
+    puts 'debug'
    #####getPercentChannelBreakoutProfitLoss(0.99,0,0.99)
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.1)
@@ -261,8 +264,8 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE
 =end
 
     #ma adjusted entry
-    entry_price=(l+h)/2 # avg of HL
-    #entry_price=previous_bar_price  #previous close ToDo by HL
+    #entry_price=(l+h)/2 # avg of HL
+    entry_price=previous_bar_price  #previous close ToDo by HL
     orderType = BUY_FIELD if(entry_price>=previous_bar_price && previous_bar_price>ma_previous_bar_price_avg )#ToDo && bars_array[bar_index-1][LOW_FIELD].to_f > ma_close_price)
     orderType = SELL_FIELD if(entry_price<=previous_bar_price && previous_bar_price<ma_previous_bar_price_avg)#ToDo && bars_array[bar_index-1][HIGH_FIELD].to_f < ma_close_price
 
@@ -270,7 +273,7 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE
     #fail('NOT valid orderType,price '+bar_index.to_s)
     if(orderType.nil? || (!orderType.include?(BUY_FIELD) && !orderType.include?(SELL_FIELD)) || entry_price.nil? || !entry_price.is_number? ) #|| ma_previous_close_price_avg?)
       #fail('NOT valid orderType,price '+bar_index.to_s)
-      puts 'NIL==========NO ENTRY======================='+bar_index.to_s
+      ###puts 'NIL==========NO ENTRY======================='+bar_index.to_s
       return #nil
     end
   end
@@ -433,7 +436,7 @@ def startMartinRandomEntry()
     random_index=getRandomBarIndex($source_hash.length-1,$source_hash.length,100) #until random_index<$source_hash.length-2
     random_bar=$source_hash[random_index]
     startRandomTrade(random_bar,true)
-    adjustMartinEntry(random_index)
+    adjustMartinEntry(random_index,nil,true,50,true)
 
 
    #$trades.each{|trade| puts trade}
