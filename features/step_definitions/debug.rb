@@ -323,7 +323,7 @@ $take_profit_percent_initial = $take_profit_percent #0.0055 #0.011=1.1% Like ini
 $strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'max_qty'=>0,'min_profit'=>100000000000000000,'max_profit'=>0,'total_profit'=>0,'total_qty'=>0,'max_total_profit'=>0,'min_total_profit'=>100000000000000000} #compare random runs
 $max_position_lots_size = 1 #TODO optimize for faster execution+below row
 $take_profit_percent2 = 0.00#55 #0.0055=0.55%  #TODO 3limits each time TP decrease on a half
-$ma_close_optimization_percent = 0.00333#3 #0.00333 #0.0055 # [0.0055 qty grows+less 20% profit, tp0.009(0=0.0055 no optim need) tp>0.09 eurusd qty grows !]
+$ma_close_optimization_percent = 0.00#333#3 #0.00333 #0.0055 # [0.0055 qty grows+less 20% profit, tp0.009(0=0.0055 no optim need) tp>0.09 eurusd qty grows !]
 #( when TP 0.9 MaxPos varies 11-13(0.3-0.33) or when TP 1.1 MaxPos=13-15 and when TP 0.9 MaxPos=11)
 #TODO Optimization per asset/period - due to minor influence of 3rd after zero -> perform regression on all period,last 200d period,and between period covariance -> this is optimization
 #TODO !!!realtime qty and direction from balance/portfolio assets [Last Deal Direction/Price/Quantity]+price level from first position+GAP LOSS STRAT for slippage!!!
@@ -600,7 +600,7 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
 
       #Multiply - Add to leg+TODO Trailing stops
       multiply_price=$portfolio['last_long_price'].to_f*(1-$range_entry)
-      return if !(bar[LOW_FIELD].to_f<=multiply_price && multiply_price<bar[HIGH_FIELD].to_f)
+      next if !(bar[LOW_FIELD].to_f<=multiply_price && multiply_price<bar[HIGH_FIELD].to_f)
       createTrade(bar[DATE_FIELD],SELL_FIELD,multiply_price,$lot_multiplier,'Multiply',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
 
 
@@ -612,7 +612,7 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
 
       #Multiply - Add to leg +TODO Trailing stops
       multiply_price=$portfolio['last_short_price'].to_f*(1+$range_entry)
-      return if !(bar[LOW_FIELD].to_f<multiply_price && multiply_price<=bar[HIGH_FIELD].to_f)
+      next if !(bar[LOW_FIELD].to_f<multiply_price && multiply_price<=bar[HIGH_FIELD].to_f)
       createTrade(bar[DATE_FIELD],BUY_FIELD,multiply_price,$lot_multiplier,'Multiply',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
 
 
@@ -625,7 +625,7 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
 
       #Close portfolio
       exit_price=$portfolio['last_long_price'].to_f*(1+$take_profit_percent)
-      return if !(bar[LOW_FIELD].to_f<=exit_price && exit_price<bar[HIGH_FIELD].to_f)
+      next if !(bar[LOW_FIELD].to_f<=exit_price && exit_price<bar[HIGH_FIELD].to_f)
       createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$portfolio['long_size'],'Close',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']>0)
 
       #Opposite Entry to TP Close
@@ -640,7 +640,7 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
 
       #Close portfolio
       exit_price=$portfolio['last_short_price'].to_f*(1-$take_profit_percent)
-      return if !(bar[LOW_FIELD].to_f<exit_price && exit_price<=bar[HIGH_FIELD].to_f)
+      next if !(bar[LOW_FIELD].to_f<exit_price && exit_price<=bar[HIGH_FIELD].to_f)
       createTrade(bar[DATE_FIELD],BUY_FIELD,exit_price,$portfolio['short_size'],'Close',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['short_size']>0)
 
       #Opposite Entry to TP Close
