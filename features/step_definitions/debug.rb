@@ -84,14 +84,15 @@ def displayRangeStats
   }
   puts 'range_entry ' + $range_entry.to_s+'% '+optimized_ma_count2.length.to_s+' good closes with ma50 optimized entry '+($ma_close_optimization_percent*100).to_f.round(2).to_s+'%  from previous ma close - total '+$source_hash.length.to_s+' bars'
 
-  gap_count=$source_hash.each_with_index.select { |bar, index|
+  $gap_count=$source_hash.each_with_index.select { |bar, index|
     ((index>0 &&
         $source_hash[index][OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1>=$range_entry) || #up
         (index>0 &&
             1-$source_hash[index][OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f>=$range_entry) #down
     )
   }
-  puts 'range_entry ' + $range_entry.to_s+'% '+gap_count.length.to_s+' gaps with  Open +- '+($range_entry*100).to_f.round(2).to_s+'% from PrevClose - total '+$source_hash.length.to_s+' bars'
+  puts 'range_entry ' + $range_entry.to_s+'% '+$gap_count.length.to_s+' gaps with  Open +- '+($range_entry*100).to_f.round(2).to_s+'% from PrevClose - total '+$source_hash.length.to_s+' bars'
+
 
   gap_retrace_count1=$source_hash.each_with_index.select { |bar, index|
     ((index>0 &&
@@ -265,8 +266,12 @@ begin
     #startMartinRandomEntry
     #loopMartinMaEntry(1000,50,CLOSE_FIELD)
     startMartinMaEntry(50,CLOSE_FIELD,false)
-    $trades.each{|trade| puts trade}
-
+    #$trades.each{|trade| puts trade} #ToDO add bar index to trades struct
+    $trades.each{|trade|
+      $gap_count.each{|gap|
+        puts trade if trade.to_h['barDateTime'.to_sym].to_s==gap[0][DATE_FIELD].to_s && (trade.to_h[:price]<trade.to_h[:barLow] || trade.to_h[:price]>trade.to_h[:barHigh])
+      }
+    }
     puts ''
     puts 'Range_EntryStop: '+($range_entry.*100).to_f.round(2).to_s+'% TakeProfit: ' + ($take_profit_percent*100).to_f.round(2).to_s+'% StopLoss: '+($stop_loss_percent*100).to_f.round(2).to_s+'% Ma50EntryLevel +- '+($ma_close_optimization_percent*100).to_f.round(2).to_s+'%'
     puts 'Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max position size: '+($strat_stats['max_qty']+$strat_stats['max_qty']-1).to_s+ ' MaxTotalLots: '+($strat_stats['total_qty']/2).to_s+' MaxTotalProfit: '+($strat_stats['max_total_profit']*100).to_f.round(2).to_s+'%'+' MinTotalProfit: '+($strat_stats['min_total_profit']*100).to_f.round(2).to_s+'%'
