@@ -57,6 +57,8 @@ $avg_period = 50
 
 
 def displayRangeStats
+  puts ''
+  #TODO gap retracements,gap>TP or Range or SL
   optimized_ma_count=$source_hash.each_with_index.select { |bar, index|
     ((index>0 &&
         $source_hash[index-1][CLOSE_FIELD].to_f>$source_hash[index-1]['ma_close50'].to_f &&
@@ -71,32 +73,45 @@ def displayRangeStats
 
   optimized_ma_count2=$source_hash.each_with_index.select { |bar, index|
     ((index>0 &&
-        $source_hash[index-1][CLOSE_FIELD].to_f>$source_hash[index-1]['ma_close50'].to_f &&
+        $source_hash[index-1][CLOSE_FIELD].to_f>$source_hash[index-1]['ma_close50'].to_f && #Long
         $source_hash[index-1][CLOSE_FIELD].to_f/$source_hash[index][LOW_FIELD].to_f-1>=$ma_close_optimization_percent) &&
         $source_hash[index][LOW_FIELD].to_f<$source_hash[index][CLOSE_FIELD].to_f ||
         (index>0 &&
-            $source_hash[index-1][CLOSE_FIELD].to_f<$source_hash[index-1]['ma_close50'].to_f &&
+            $source_hash[index-1][CLOSE_FIELD].to_f<$source_hash[index-1]['ma_close50'].to_f && #Short
             $source_hash[index][HIGH_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1>=$ma_close_optimization_percent) &&
             $source_hash[index][HIGH_FIELD].to_f>$source_hash[index][CLOSE_FIELD].to_f
     )
   }
-  puts 'range_entry ' + $range_entry.to_s+'% '+optimized_ma_count2.length.to_s+' closes with ma50 optimized entry '+($ma_close_optimization_percent*100).to_f.round(2).to_s+'%  from previous ma close - total '+$source_hash.length.to_s+' bars'
+  puts 'range_entry ' + $range_entry.to_s+'% '+optimized_ma_count2.length.to_s+' good closes with ma50 optimized entry '+($ma_close_optimization_percent*100).to_f.round(2).to_s+'%  from previous ma close - total '+$source_hash.length.to_s+' bars'
 
   gap_count=$source_hash.each_with_index.select { |bar, index|
     ((index>0 &&
-        $source_hash[index][OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1>=$range_entry) ||
+        $source_hash[index][OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1>=$range_entry) || #up
         (index>0 &&
-            1-$source_hash[index][OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f>=$range_entry)
+            1-$source_hash[index][OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f>=$range_entry) #down
     )
   }
   puts 'range_entry ' + $range_entry.to_s+'% '+gap_count.length.to_s+' gaps with  Open +- '+($range_entry*100).to_f.round(2).to_s+'% from PrevClose - total '+$source_hash.length.to_s+' bars'
 
+  gap_retrace_count1=$source_hash.each_with_index.select { |bar, index|
+    ((index>0 &&
+        $source_hash[index][OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1>=$range_entry &&#up
+        $source_hash[index][LOW_FIELD].to_f<=$source_hash[index][OPEN_FIELD].to_f*(1-$ma_close_optimization_percent)) ||
+     (index>0 &&
+         1-$source_hash[index][OPEN_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f>=$range_entry && #down
+         $source_hash[index][HIGH_FIELD].to_f>=$source_hash[index][OPEN_FIELD].to_f*(1+$ma_close_optimization_percent)
+     )
+    )
+  }
+  puts 'range_entry ' + $range_entry.to_s+'% '+gap_retrace_count1.length.to_s+' gaps with  Open +- '+($range_entry*100).to_f.round(2).to_s+'% with retracement of '+($ma_close_optimization_percent*100).to_s+'% '
+
+
 
   hl_count=$source_hash.each_with_index.select { |bar, index|
     ((index>0 &&
-        $source_hash[index][HIGH_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1>=$range_entry) &&
+        $source_hash[index][HIGH_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f-1>=$range_entry) && #up
         (index>0 &&
-            1-$source_hash[index][LOW_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f>=$range_entry)
+            1-$source_hash[index][LOW_FIELD].to_f/$source_hash[index-1][CLOSE_FIELD].to_f>=$range_entry) #down
     )
   }
   puts 'range_entry ' + $range_entry.to_s+'% '+hl_count.length.to_s+' Bi-Directional HighAndLow intraday '+($range_entry*100).to_f.round(2).to_s+'% from previous close - total '+$source_hash.length.to_s+' bars'
@@ -131,7 +146,7 @@ def displayRangeStats
 
 =end
 
-
+  puts ''
 end
 
 Given /^Code Tested$/  do
@@ -248,10 +263,13 @@ begin
 
     #loopMartinRandomEntry(3000)
     #startMartinRandomEntry
-    ###loopMartinMaEntry(1000,50,CLOSE_FIELD)
+    #loopMartinMaEntry(1000,50,CLOSE_FIELD)
     startMartinMaEntry(50,CLOSE_FIELD,false)
     $trades.each{|trade| puts trade}
-    puts 'range_entry: '+$range_entry.to_s+'% Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max position size: '+($strat_stats['max_qty']+$strat_stats['max_qty']-1).to_s+ ' MaxTotalLots: '+($strat_stats['total_qty']/2).to_s+' MaxTotalProfit: '+($strat_stats['max_total_profit']*100).to_f.round(2).to_s+'%'+' MinTotalProfit: '+($strat_stats['min_total_profit']*100).to_f.round(2).to_s+'%'
+
+    puts ''
+    puts 'Range_EntryStop: '+($range_entry.*100).to_f.round(2).to_s+'% TakeProfit: ' + ($take_profit_percent*100).to_f.round(2).to_s+'% StopLoss: '+($stop_loss_percent*100).to_f.round(2).to_s+'% Ma50EntryLevel +- '+($ma_close_optimization_percent*100).to_f.round(2).to_s+'%'
+    puts 'Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max position size: '+($strat_stats['max_qty']+$strat_stats['max_qty']-1).to_s+ ' MaxTotalLots: '+($strat_stats['total_qty']/2).to_s+' MaxTotalProfit: '+($strat_stats['max_total_profit']*100).to_f.round(2).to_s+'%'+' MinTotalProfit: '+($strat_stats['min_total_profit']*100).to_f.round(2).to_s+'%'
     puts 'debug'
    #####getPercentChannelBreakoutProfitLoss(0.99,0,0.99)
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
@@ -288,14 +306,17 @@ $lot_multiplier = $lot_start_size+1 #2 #ToDo  Reinvest = $lot_start_size+1
 $portfolio={'long_size'=>0,'short_size'=>0,'last_long_price'=>0,'last_short_price'=>0} #entries+exits trades_arr
 $trades=[] #positionType = entry-'open' or exit-'close' position
 Trade = Struct.new(:barDateTime,:orderType,:price,:qty,:positionStatus,:profitPercent,:barHigh,:barLow,:indicatorsValues)
-$range_entry  = 0.011 #009 011 #0.0055  0.009-1! #0.011(big multiply?) 0.033-0.055 dof DJI and indexes or exchange bc gaps..
+$range_entry  = 0.009 #>009 eurusd qty grows ! ,011 #0.0055  0.009-1! #0.011(big multiply?) 0.033-0.055 dof DJI and indexes or exchange bc gaps..
 $stop_loss_percent = $range_entry   #0.011=1.1% #TODO 3limits each time SL decrease on a half
-$take_profit_percent = $range_entry*2   #TODO Multiply and oppositeClose at range or SL * 2 #* 1.5  #0.011=1.1%
+$take_profit_percent = $range_entry*1   #TODO Multiply and oppositeClose at range or SL * 2 #* 1.5  #0.011=1.1%
 $take_profit_percent_initial = $take_profit_percent #0.0055 #0.011=1.1% Like initial TP,used to interchange from position_limit to open new position
 $strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'max_qty'=>0,'min_profit'=>100000000000000000,'max_profit'=>0,'total_profit'=>0,'total_qty'=>0,'max_total_profit'=>0,'min_total_profit'=>100000000000000000} #compare random runs
 $max_position_lots_size = 1 #TODO optimize for faster execution+below row
-$take_profit_percent2 = 0.0055 #0.0055=0.55% #TODO 3limits each time TP decrease on a half
-$ma_close_optimization_percent = 0.0033 #33 #55
+$take_profit_percent2 = 0.00#55 #0.0055=0.55%  #TODO 3limits each time TP decrease on a half
+$ma_close_optimization_percent = 0.00333#3 #0.00333 #0.0055 # [0.0055 qty grows+less 20% profit, tp0.009(0=0.0055 no optim need) tp>0.09 eurusd qty grows !]
+#( when TP 0.9 MaxPos varies 11-13(0.3-0.33) or when TP 1.1 MaxPos=13-15 and when TP 0.9 MaxPos=11)
+#TODO Optimization per asset/period - due to minor influence of 3rd after zero -> perform regression on all period,last 200d period,and between period covariance -> this is optimization
+#TODO !!!realtime qty and direction from balance/portfolio assets [Last Deal Direction/Price/Quantity]+price level from first position+GAP LOSS STRAT for slippage!!!
 
 def getRandomBarIndex(bars_before_end,bars_length,bars_after_before=0)
   total=bars_length-1
@@ -367,17 +388,19 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE
     orderType = SELL_FIELD if(entry_price<=previous_bar_close && previous_bar_close<ma_previous_bar_price_avg)#ToDo && bars_array[bar_index-1][HIGH_FIELD].to_f < ma_close_price)
 =end
 
-    #ma adjusted entry
+    #ma adjusted entry TODO boolean flag for testing
     #entry_price=(l+h)/2 # avg of HL
     #entry_price=previous_bar_close  #previous close ToDo by HL
     if ($ma_close_optimization_percent>0)
       entry_price=previous_bar_close*(1-$ma_close_optimization_percent) if(previous_bar_close>ma_previous_bar_price_avg && previous_bar_close*(1-$ma_close_optimization_percent)>=l )
       entry_price=previous_bar_close*(1+$ma_close_optimization_percent) if(previous_bar_close<ma_previous_bar_price_avg && previous_bar_close*(1+$ma_close_optimization_percent)<=h )
+      return if entry_price.nil?
     else
-      #entry_price=previous_bar_close if ((previous_bar_close>=l && previous_bar_close<h) || previous_bar_close>l && previous_bar_close<=h)
-      return #Srat can perform 1type of entry,sicne we are not predicting the price movement
+      entry_price=previous_bar_close if ((previous_bar_close>=l && previous_bar_close<h) || previous_bar_close>l && previous_bar_close<=h)
+      #return #Srat can perform 1type of entry,sicne we are not predicting the price movement
+      return if entry_price.nil?
     end
-    return if entry_price.nil?
+
     orderType = BUY_FIELD if(previous_bar_close>ma_previous_bar_price_avg )#ToDo && bars_array[bar_index-1][LOW_FIELD].to_f > ma_close_price)
     orderType = SELL_FIELD if(previous_bar_close<ma_previous_bar_price_avg)#ToDo && bars_array[bar_index-1][HIGH_FIELD].to_f < ma_close_price
 
