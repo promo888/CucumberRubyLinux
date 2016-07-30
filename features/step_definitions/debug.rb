@@ -374,7 +374,8 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE
       entry_price=previous_bar_close*(1-$ma_close_optimization_percent) if(previous_bar_close>ma_previous_bar_price_avg && previous_bar_close*(1-$ma_close_optimization_percent)>=l )
       entry_price=previous_bar_close*(1+$ma_close_optimization_percent) if(previous_bar_close<ma_previous_bar_price_avg && previous_bar_close*(1+$ma_close_optimization_percent)<=h )
     else
-      entry_price=previous_bar_close if ((previous_bar_close>=l && previous_bar_close<h) || previous_bar_close>l && previous_bar_close<=h)
+      #entry_price=previous_bar_close if ((previous_bar_close>=l && previous_bar_close<h) || previous_bar_close>l && previous_bar_close<=h)
+      return #Srat can perform 1type of entry,sicne we are not predicting the price movement
     end
     return if entry_price.nil?
     orderType = BUY_FIELD if(previous_bar_close>ma_previous_bar_price_avg )#ToDo && bars_array[bar_index-1][LOW_FIELD].to_f > ma_close_price)
