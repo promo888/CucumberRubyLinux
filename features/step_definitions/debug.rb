@@ -282,7 +282,7 @@ begin
     puts '======================Gaps Test End===================='
     puts ''
     puts 'Range_EntryStop: '+($range_entry.*100).to_f.round(2).to_s+'% TakeProfit: ' + ($take_profit_percent*100).to_f.round(2).to_s+'% StopLoss: '+($stop_loss_percent*100).to_f.round(2).to_s+'% Ma50EntryLevel +- '+($ma_close_optimization_percent*100).to_f.round(2).to_s+'%'
-    puts 'Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max position size: '+($strat_stats['max_qty']+$strat_stats['max_qty']-1).to_s+ ' MaxTotalLots: '+($strat_stats['total_qty']/2).to_s+' MaxTotalProfit: '+($strat_stats['max_total_profit']*100).to_f.round(2).to_s+'%'+' MinTotalProfit: '+($strat_stats['min_total_profit']*100).to_f.round(2).to_s+'%'
+    puts 'Min Profit Closes: '+$strat_stats['min_closes'].to_s+' Max Profit Closes: '+ $strat_stats['max_closes'].to_s + ', Max position size: '+($strat_stats['max_qty']+$strat_stats['max_qty']-1).to_s+' MaxTotalLoss: '+$strat_stats['max_total_loss'].to_s+'% MaxTotalProfit: '+($strat_stats['max_total_profit']*100).to_f.round(2).to_s+'%'+' MinTotalProfit: '+($strat_stats['min_total_profit']*100).to_f.round(2).to_s+'%' # MaxTotalLots: ($strat_stats['total_qty']/2).to_s+
     puts 'debug'
    #####getPercentChannelBreakoutProfitLoss(0.99,0,0.99)
    #getPercentChannelBreakoutProfitLoss(0.1,0,0.2) #TODO for now is limited till 1%; usd/rub - 0.555,0,0.5 ; #0.8,1,0.5 8/2  8/3 7/3 7/2 #eurusd - 0.222 -[0.555] -{0.22/0.33} 0.333,0,0.33
@@ -323,7 +323,7 @@ $range_entry  = 0.011 #>009 eurusd qty grows ! ,011 #0.0055  0.009-1! #0.011(big
 $stop_loss_percent = $range_entry * 2  #0.011=1.1% #TODO 3limits each time SL decrease on a half
 $take_profit_percent = $range_entry * 1   #TODO Multiply and oppositeClose at range or SL * 2 #* 1.5  #0.011=1.1%
 $take_profit_percent_initial = $take_profit_percent #0.0055 #0.011=1.1% Like initial TP,used to interchange from position_limit to open new position
-$strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'max_qty'=>0,'min_profit'=>100000000000000000,'max_profit'=>0,'total_profit'=>0,'total_qty'=>0,'max_total_profit'=>0,'min_total_profit'=>100000000000000000} #compare random runs
+$strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'min_qty'=>10000000000000,'max_qty'=>0,'min_profit'=>100000000000000000,'max_profit'=>0,'total_profit'=>0,'max_total_loss'=>0,'max_total_profit'=>0,'min_total_profit'=>100000000000000000,'total_qty'=>0} #compare random runs
 $max_position_lots_size = 1 #TODO optimize for faster execution+below row
 $take_profit_percent2 = 0.00#55 #0.0055=0.55%  #TODO 3limits each time TP decrease on a half
 $ma_close_optimization_percent = 0.00333#3 #0.00333 #0.0055 # [0.0055 qty grows+less 20% profit, tp0.009(0=0.0055 no optim need) tp>0.09 eurusd qty grows !]
@@ -753,6 +753,7 @@ def setStratStats #TODO add all consts for each strat details
   if (!$trades.nil? && !$trades.empty?)
     #$trades.each{|trade| puts trade}
     max_closes = $trades.select { |trade| trade['positionStatus'].to_s.downcase=='close' }.length
+    min_qty = $trades.collect { |trade| trade['qty'] }.min
     max_qty = $trades.collect { |trade| trade['qty'] }.max
     total_qty = 0
     $trades.each { |trade| total_qty+=trade['qty'] }
@@ -760,13 +761,18 @@ def setStratStats #TODO add all consts for each strat details
     max_profit = $trades.collect { |trade| trade['profitPercent'] }.max
     total_profit = 0
     $trades.each { |trade| total_profit+=trade['profitPercent'] } #if trade['profitPercent'].to_f>0 }
+    max_total_loss = 0
+    #$trades.each{ |trade| total_profit+=trade['profitPercent']*-1  if trade['profitPercent'].to_f<0 }
+    $trades.select { |trade| trade['profitPercent'].to_f<0 }.collect{|trade| max_total_loss+=trade['profitPercent'].to_f}
 
     $strat_stats['max_closes'] = max_closes if (max_closes>$strat_stats['max_closes'])
+    $strat_stats['min_qty'] = min_qty if (min_qty<$strat_stats['min_qty'])
     $strat_stats['max_qty'] = max_qty if (max_qty>$strat_stats['max_qty'])
     $strat_stats['min_closes'] = max_closes if (max_closes<$strat_stats['min_closes'])
     $strat_stats['max_profit'] = max_profit if (max_profit>$strat_stats['max_profit'])
     $strat_stats['min_profit'] = min_profit if (min_profit<$strat_stats['min_profit'])
     $strat_stats['total_profit'] = total_profit if (total_profit>$strat_stats['total_profit'])
+    $strat_stats['max_total_loss'] = max_total_loss if (max_total_loss<$strat_stats['max_total_loss'])
     $strat_stats['max_total_profit'] = total_profit if (total_profit>$strat_stats['max_total_profit'])
     $strat_stats['min_total_profit'] = total_profit if (total_profit<$strat_stats['min_total_profit'])
     $strat_stats['total_qty'] = total_qty if (total_qty>$strat_stats['total_qty'])
