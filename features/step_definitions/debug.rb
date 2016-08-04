@@ -265,7 +265,7 @@ begin
 
     #loopMartinRandomEntry(3000)
     #startMartinRandomEntry
-    loopMartinMaEntry(3,50,CLOSE_FIELD)
+    loopMartinMaEntry(1000,50,CLOSE_FIELD)
     #startMartinMaEntry(50,CLOSE_FIELD,false)
     puts ''
     puts '=======================Trades List======================='
@@ -379,7 +379,6 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE
   previous_bar_close = bars_array[bar_index-1][CLOSE_FIELD].to_f
   ma_previous_bar_price_avg = bars_array[bar_index-1]['ma_close'+ma_period.to_s].to_f #getAvgValue($ma1,bar_index-1,bars_array,"close")
 
-
   entry_price=nil
   order_type=nil
   if(random_order_type)
@@ -408,6 +407,7 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE
       entry_price=previous_bar_close*(1-$ma_close_optimization_percent) if(previous_bar_close>ma_previous_bar_price_avg && previous_bar_close*(1-$ma_close_optimization_percent)>=l )
       entry_price=previous_bar_close*(1+$ma_close_optimization_percent) if(previous_bar_close<ma_previous_bar_price_avg && previous_bar_close*(1+$ma_close_optimization_percent)<=h )
       return if entry_price.nil?
+
     else
       entry_price=previous_bar_close if ((previous_bar_close>=l && previous_bar_close<h) || previous_bar_close>l && previous_bar_close<=h)
       #return #Srat can perform 1type of entry,sicne we are not predicting the price movement
@@ -433,6 +433,7 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE
   entry_price=buy_level if orderType == BUY_FIELD
   entry_price=sell_level if orderType == SELL_FIELD
   createTrade(bar[DATE_FIELD],orderType,entry_price,$lot_start_size,'Open',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if(!entry_price.nil? && !orderType.nil?)
+  #puts "startMaTrade bar_index: #{bar_index}"
 
   return entry_price
 end
@@ -810,6 +811,12 @@ end
 
 def startMartinMaEntry(ma_period,ma_avg_field,oppositeTpEntry)
   $trades=[]
+  $portfolio['long_size']=0
+  $portfolio['short_size']=0
+  $portfolio['last_long_price']=0
+  $portfolio['last_short_price']=0
+
+
   #TODO + Last 200-250 bars or last 10% compare with full series+100 or 1/2 random from where to start
   #Don't Enter if current bar is the LastBar in series
   #random_index=getRandomBarIndex($source_hash.length-1,$source_hash.length,100)
