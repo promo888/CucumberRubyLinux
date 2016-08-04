@@ -262,7 +262,8 @@ begin
 
     displayRangeStats
 
-
+#ToDo report by month,year,dawdown,consecutive PL
+#search in console: 2014"(.*) positionStatus="Close"
     #loopMartinRandomEntry(3000)
     #startMartinRandomEntry
     loopMartinMaEntry(1000,50,CLOSE_FIELD)
@@ -326,7 +327,7 @@ $take_profit_percent_initial = $take_profit_percent #0.0055 #0.011=1.1% Like ini
 $strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'min_qty'=>10000000000000,'max_qty'=>0,'min_profit'=>100000000000000000,'max_profit'=>0,'total_profit'=>0,'max_total_loss'=>0,'max_total_profit'=>0,'min_total_profit'=>100000000000000000,'total_qty'=>0} #compare random runs
 $max_position_lots_size = 1 #TODO optimize for faster execution+below row
 $take_profit_percent2 = 0.00#33 #0.0055=0.55%  #TODO 3limits each time TP decrease on a half
-$ma_close_optimization_percent = 0.00 #333#3 #0.00333 #0.0055 # [0.0055 qty grows+less 20% profit, tp0.009(0=0.0055 no optim need) tp>0.09 eurusd qty grows !]
+$ma_close_optimization_percent = 0.00 #333#3 #0.00333 #0.0055 # [0.00333-0.00555 qty grows+less 50% profit+less positions(0-17,3-13,5-11), tp0.009(0=0.0055 no optim need) tp>0.09 eurusd qty grows !]
 #( when TP 0.9 MaxPos varies 11-13(0.3-0.33) or when TP 1.1 MaxPos=13-15 and when TP 0.9 MaxPos=11)
 #TODO Optimization per asset/period - due to minor influence of 3rd after zero -> perform regression on all period,last 200d period,and between period covariance -> this is optimization
 #TODO !!!realtime qty and direction from balance/portfolio assets [Last Deal Direction/Price/Quantity]+price level from first position+GAP LOSS STRAT for slippage!!!
