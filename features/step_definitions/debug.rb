@@ -265,8 +265,8 @@ begin
 
     #loopMartinRandomEntry(3000)
     #startMartinRandomEntry
-    #loopMartinMaEntry(1000,50,CLOSE_FIELD)
-    startMartinMaEntry(50,CLOSE_FIELD,false)
+    loopMartinMaEntry(3,50,CLOSE_FIELD)
+    #startMartinMaEntry(50,CLOSE_FIELD,false)
     puts ''
     puts '=======================Trades List======================='
     $trades.each{|trade| puts trade} #ToDO add bar index to trades struct
@@ -325,7 +325,7 @@ $take_profit_percent = $range_entry * 1   #TODO Multiply and oppositeClose at ra
 $take_profit_percent_initial = $take_profit_percent #0.0055 #0.011=1.1% Like initial TP,used to interchange from position_limit to open new position
 $strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'min_qty'=>10000000000000,'max_qty'=>0,'min_profit'=>100000000000000000,'max_profit'=>0,'total_profit'=>0,'max_total_loss'=>0,'max_total_profit'=>0,'min_total_profit'=>100000000000000000,'total_qty'=>0} #compare random runs
 $max_position_lots_size = 1 #TODO optimize for faster execution+below row
-$take_profit_percent2 = 0.00#55 #0.0055=0.55%  #TODO 3limits each time TP decrease on a half
+$take_profit_percent2 = 0.00#33 #0.0055=0.55%  #TODO 3limits each time TP decrease on a half
 $ma_close_optimization_percent = 0.00 #333#3 #0.00333 #0.0055 # [0.0055 qty grows+less 20% profit, tp0.009(0=0.0055 no optim need) tp>0.09 eurusd qty grows !]
 #( when TP 0.9 MaxPos varies 11-13(0.3-0.33) or when TP 1.1 MaxPos=13-15 and when TP 0.9 MaxPos=11)
 #TODO Optimization per asset/period - due to minor influence of 3rd after zero -> perform regression on all period,last 200d period,and between period covariance -> this is optimization
@@ -477,21 +477,22 @@ def createTrade(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,in
 
        currentTrade=Trade.new(barDateTime,orderType,modified_price,qty,positionStatus,profit_percent,barHigh,barLow,indicatorsValues)
      elsif positionStatus.to_s.downcase.include?('stoploss') #stoploss
+       last_price=$trades.last[:price].to_f
        if orderType==BUY_FIELD
-         loss_percent=price/$trades.last[:price].to_f-1
+         loss_percent=price/last_price-1
          modified_price=price #not modified
        elsif
         orderType==BUY_FIELD &&   barLow>price
-        loss_percent=barLow/$trades.last[:price].to_f-1
+        loss_percent=barLow/last_price-1
         modified_price=barLow #MaxLoss
        elsif orderType==SELL_FIELD
-         loss_percent=$trades.last[:price].to_f/price-1
+         loss_percent=last_price/price-1
          modified_price=price #not modified
        elsif orderType==SELL_FIELD &&  barHigh<price
-        loss_percent=$trades.last[:price].to_f/barHigh-1
+        loss_percent=last_price/barHigh-1
         modified_price=barHigh #MaxLoss
        else
-         loss_percent=price/$trades.last[:price].to_f-1
+         loss_percent=price/last_price-1
          modified_price=price #StratLoss
        end
        currentTrade=Trade.new(barDateTime,orderType,modified_price,qty,positionStatus,-loss_percent,barHigh,barLow,indicatorsValues)
@@ -812,9 +813,19 @@ def startMartinMaEntry(ma_period,ma_avg_field,oppositeTpEntry)
   #TODO + Last 200-250 bars or last 10% compare with full series+100 or 1/2 random from where to start
   #Don't Enter if current bar is the LastBar in series
   #random_index=getRandomBarIndex($source_hash.length-1,$source_hash.length,100)
-  random_index=getRandomBarIndex($source_hash.length-1-ma_period-1,$source_hash.length,100) #until random_index<$source_hash.length-2
-  random_bar=$source_hash[random_index]
-  startMaTrade(random_bar, random_index, $source_hash, false, ma_avg_field, ma_period)
+  tries_count=$source_hash.length/10
+  start_count = 0
+  while $trades.empty? && start_count<tries_count
+    random_index=getRandomBarIndex($source_hash.length-1-ma_period-1,$source_hash.length,100) #until random_index<$source_hash.length-2
+    random_bar=$source_hash[random_index]
+    startMaTrade(random_bar, random_index, $source_hash, false, ma_avg_field, ma_period)
+    start_count+=1
+  end
+  # startRandomTrade(random_bar,true)
+  if $trades.empty?
+    puts 'Exit iteration with trials: '+tries_count.to_s
+    return
+  end
   #adjustMartinEntry(random_index, nil, false, ma_period,oppositeTpEntry)
   adjustMartinMaEntry(random_index, nil, false, ma_period,oppositeTpEntry)
   setStratStats
