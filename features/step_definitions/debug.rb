@@ -665,7 +665,7 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
         exit_price=$portfolio['last_long_price'].to_f*(1-$stop_loss_percent)
         #break
         if !(exit_price<bar[LOW_FIELD].to_f )
-           createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$portfolio['long_size'].to_,'stoploss SL',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
+           createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$portfolio['long_size'].to_f,'stoploss SL',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
         end
 
       #end
@@ -734,7 +734,7 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
           exit_price=$portfolio['last_short_price'].to_f*(1+$stop_loss_percent)
           #break
           if !(exit_price>bar[HIGH_FIELD].to_f) #TODO test slippage & max drawdowns by trades stats NinMax% between Open&Close
-             createTrade(bar[DATE_FIELD],BUY_FIELD,exit_price,$portfolio['short_size'].to_,'stoploss',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
+             createTrade(bar[DATE_FIELD],BUY_FIELD,exit_price,$portfolio['short_size'].to_f,'stoploss',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
           end
         end
       #end
