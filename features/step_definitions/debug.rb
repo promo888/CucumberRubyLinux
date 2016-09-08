@@ -316,16 +316,16 @@ b=$source_hash.map{|item|(item[CLOSE_FIELD].to_f<item['ma_close50'].to_f && (ite
 
 ######### Martin Start
 $lot_start_size = 1
-$lot_multiplier = 1 #2 #ToDo  Reinvest = $lot_start_size+1
+$lot_multiplier = 3 #2 #ToDo  Reinvest = $lot_start_size+1
 $portfolio={'long_size'=>0,'short_size'=>0,'last_long_price'=>0,'last_short_price'=>0} #entries+exits trades_arr
 $trades=[] #positionType = entry-'open' or exit-'close' position
 Trade = Struct.new(:barDateTime,:orderType,:price,:qty,:positionStatus,:profitPercent,:barHigh,:barLow,:indicatorsValues)
 $range_entry  = 0.011 #>009 eurusd qty grows ! ,011 #0.0055  0.009-1! #0.011(big multiply?) 0.033-0.055 dof DJI and indexes or exchange bc gaps..
-$stop_loss_percent = $range_entry * 2  #0.011=1.1% #TODO 3limits each time SL decrease on a half
+$stop_loss_percent = $range_entry * 1 #0.011=1.1% #TODO 3limits each time SL decrease on a half
 $take_profit_percent = $range_entry * 1   #TODO Multiply and oppositeClose at range or SL * 2 #* 1.5  #0.011=1.1%
 $take_profit_percent_initial = $take_profit_percent #0.0055 #0.011=1.1% Like initial TP,used to interchange from position_limit to open new position
 $strat_stats={'min_closes'=>100000000000000000,'max_closes'=>0,'min_qty'=>10000000000000,'max_qty'=>0,'min_profit'=>100000000000000000,'max_profit'=>0,'total_profit'=>0,'max_total_loss'=>0,'max_total_profit'=>0,'min_total_profit'=>100000000000000000,'total_qty'=>0} #compare random runs
-$max_position_lots_size = 1 #TODO optimize for faster execution+below row
+$max_position_lots_size = 10 #TODO optimize for faster execution+below row
 $take_profit_percent2 = 0.00#33 #0.0055=0.55%  #TODO 3limits each time TP decrease on a half
 $ma_close_optimization_percent = 0.00 #333#3 #0.00333 #0.0055 # [0.00333-0.00555 qty grows+less 50% profit+less positions(0-17,3-13,5-11), tp0.009(0=0.0055 no optim need) tp>0.09 eurusd qty grows !]
 #( when TP 0.9 MaxPos varies 11-13(0.3-0.33) or when TP 1.1 MaxPos=13-15 and when TP 0.9 MaxPos=11)
@@ -349,7 +349,7 @@ end
 
 def startRandomTrade(bar,random_order_type=true,orderType=nil,price=nil) #Buy or Sell can/should? be customized with trend filters like <>MA20...
     return nil if($portfolio['long_size']!=0 || $portfolio['short_size']!=0)
-    $lot_multiplier=1
+    $lot_multiplier=3
     entry_price=nil
     order_type=nil
     if(random_order_type)
@@ -381,7 +381,7 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE
 
   previous_bar_close = bars_array[bar_index-1][CLOSE_FIELD].to_f
   ma_previous_bar_price_avg = bars_array[bar_index-1]['ma_close'+ma_period.to_s].to_f #getAvgValue($ma1,bar_index-1,bars_array,"close")
-  $lot_multiplier=1
+  $lot_multiplier=3
   entry_price=nil
   order_type=nil
 
@@ -425,7 +425,7 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE
     if(orderType.nil? || (!orderType.include?(BUY_FIELD) && !orderType.include?(SELL_FIELD)) || entry_price.nil? || !entry_price.is_number? ) #|| ma_previous_close_price_avg?)
       #fail('NOT valid orderType,price '+bar_index.to_s)
       ###puts 'NIL==========NO ENTRY======================='+bar_index.to_s
-      $lot_multiplier=1
+      $lot_multiplier=3
       return #nil
     end
 
@@ -437,7 +437,7 @@ def startMaTrade(bar,bar_index,bars_array,random_order_type=false,ma_field=CLOSE
   return if ((orderType.nil? || entry_price.nil?) || (orderType == BUY_FIELD && (buy_level < l || buy_level > h ) )  || (orderType == SELL_FIELD && sell_level < l || sell_level > h ) )
   entry_price=buy_level if orderType == BUY_FIELD
   entry_price=sell_level if orderType == SELL_FIELD
-  $lot_multiplier=1
+  $lot_multiplier=3
   createTrade(bar[DATE_FIELD],orderType,entry_price,$lot_start_size,'Open MaMartin',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if(!entry_price.nil? && !orderType.nil?)
 
   #puts "startMaTrade bar_index: #{bar_index}"
@@ -456,7 +456,7 @@ def createTrade(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,in
 
      currentTrade=Trade.new(barDateTime,orderType,price,qty,positionStatus,0,barHigh,barLow,indicatorsValues)
      $trades.push(currentTrade)
-     $lot_multiplier=1
+     $lot_multiplier=3
      case orderType
        when BUY_FIELD
          $portfolio['long_size']=$lot_start_size
@@ -469,8 +469,12 @@ def createTrade(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,in
          $portfolio['last_long_price']=0
          $portfolio['last_short_price']=price
      end
-
+     if barDateTime.to_s.include?('13/8/2010')
+       puts $lot_multiplier.to_s #debug
+     end
+     $lot_multiplier = 3 #TODO INITIAL_LOTS_MULTIPLIER
    end
+
    if(positionStatus.to_s.downcase.include?('close') || positionStatus.to_s.downcase.include?('stoploss') ) #ToDo to leave 1lot for Continious trading
      profit_percent=currentProfitPercent
      loss_percent=currentProfitPercent
@@ -487,7 +491,7 @@ def createTrade(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,in
        end
 
        currentTrade=Trade.new(barDateTime,orderType,modified_price,qty,positionStatus,profit_percent,barHigh,barLow,indicatorsValues)
-       $lot_multiplier = 1
+
      elsif positionStatus.to_s.downcase.include?('stoploss') #stoploss
        last_price=$trades.last[:price].to_f
        if orderType==BUY_FIELD
@@ -508,11 +512,11 @@ def createTrade(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,in
          modified_price=price #StratLoss
        end
        currentTrade=Trade.new(barDateTime,orderType,modified_price,qty,positionStatus,-loss_percent,barHigh,barLow,indicatorsValues)
-       $lot_multiplier = 1
+
 
      end
      $trades.push(currentTrade) #TODO price correction when multiply+stat for max range count
-     #$lot_multiplier = 1
+
 
    case orderType # Close/Trade an opposite
      when BUY_FIELD #closing opposite Sell - Opposite to Open
@@ -520,14 +524,14 @@ def createTrade(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,in
          #currentTrade=Trade.new(barDateTime,SELL_FIELD,price,$portfolio['long_size'],'Opposite Closing',-currentProfitPercent,barHigh,barLow,indicatorsValues)
          currentTrade=Trade.new(barDateTime,SELL_FIELD,modified_price,$portfolio['long_size'],'Opposite Closing',0,barHigh,barLow,indicatorsValues)
          $trades.push(currentTrade)
-         $lot_multiplier=1
+         $lot_multiplier=3
        end
      when SELL_FIELD #closing opposite Buy - Opposite to Open
        if($portfolio['short_size']>0)
          #currentTrade=Trade.new(barDateTime,BUY_FIELD,price,$portfolio['short_size'],'Opposite Closing',-currentProfitPercent,barHigh,barLow,indicatorsValues)
          currentTrade=Trade.new(barDateTime,BUY_FIELD,modified_price,$portfolio['short_size'],'Opposite Closing',0,barHigh,barLow,indicatorsValues)
          $trades.push(currentTrade)
-         $lot_multiplier=1
+
        end
    end
 
@@ -535,7 +539,7 @@ def createTrade(barDateTime,orderType,price,qty,positionStatus,barHigh,barLow,in
      $portfolio['short_size']=0
      $portfolio['last_long_price']=0
      $portfolio['last_short_price']=0
-     $lot_multiplier=1
+     $lot_multiplier=3
    end
    if(positionStatus.to_s.downcase.include?('multiply')) #TODO Handle Gaps/Slippage which are not handled by StopLoss
      return if price<barLow || price>barHigh
@@ -585,21 +589,21 @@ def adjustMartinEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,opp
          next if index<=ma_period
          startMaTrade(bar,index,$source_hash,false,CLOSE_FIELD,ma_period)
        end
-       $lot_multiplier=1
+       $lot_multiplier=3
      end
 
      #in Long position when SL met [Opposite movement]
      if ($portfolio['long_size']>$portfolio['short_size'] && bar[LOW_FIELD].to_f<=$portfolio['last_long_price'].to_f*(1-$stop_loss_percent))
 
        #Multiply - Add to leg+TODO Trailing stops
-       $lot_multiplier=$lot_multiplier*2+1
-       if $lot_multiplier==7
+       ###$lot_multiplier=$lot_multiplier*2+1
+       if $lot_multiplier==7 && bar[DATE_FIELD].to_s.include?('25/8/2010')
          Actions.c "#{bar[DATE_FIELD].to_s}-"+$portfolio['short_size'].to_s+" "+$portfolio['long_size'].to_s #'debug'
        end
        multiply_price=$portfolio['last_long_price'].to_f*(1-$stop_loss_percent)
        createTrade(bar[DATE_FIELD],SELL_FIELD,multiply_price,$lot_multiplier,'Multiply',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
 
-
+       $lot_multiplier=3 #???
      end
 
 
@@ -607,14 +611,14 @@ def adjustMartinEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,opp
      if ($portfolio['short_size']>$portfolio['long_size'] && bar[HIGH_FIELD].to_f>=$portfolio['last_short_price'].to_f*(1+$stop_loss_percent))
 
        #Multiply - Add to leg +TODO Trailing stops
-       $lot_multiplier=$lot_multiplier*2+1
-       if $lot_multiplier==7
+       ###$lot_multiplier=$lot_multiplier*2+1
+       if $lot_multiplier==7 && bar[DATE_FIELD].to_s.include?('25/8/2010')
          Actions.c "#{bar[DATE_FIELD].to_s}-"+$portfolio['short_size'].to_s+" "+$portfolio['long_size'].to_s #'debug'
        end
        multiply_price=$portfolio['last_short_price'].to_f*(1+$stop_loss_percent)
        createTrade(bar[DATE_FIELD],BUY_FIELD,multiply_price,$lot_multiplier,'Multiply',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
 
-
+       $lot_multiplier=3 #???
      end
 
 
@@ -628,7 +632,7 @@ def adjustMartinEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,opp
 
        #Opposite Entry to TP Close
        createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$lot_start_size,'Opposite Opening',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']==0 && $portfolio['short_size']==0 && oppositeTpEntry)
-       $lot_multiplier=1
+       $lot_multiplier=3
        next
      end
 
@@ -643,7 +647,7 @@ def adjustMartinEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,opp
 
        #Opposite Entry to TP Close
        createTrade(bar[DATE_FIELD],BUY_FIELD,exit_price,$lot_start_size,'Opposite Opening',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']==0 && $portfolio['short_size']==0 && oppositeTpEntry)
-       $lot_multiplier=1
+       $lot_multiplier=3
        next
      end
 
@@ -671,11 +675,13 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
     #in Long position when GAP met [Opposite movement]
     if ($portfolio['long_size']>$portfolio['short_size'] )
 
+
+
       #Gap StopLoss #TODO toThik Multiply or StopLossExit TODO flag
       if $portfolio['last_long_price'].to_f/bar[OPEN_FIELD].to_f-1>=$stop_loss_percent #*2
         createTrade(bar[DATE_FIELD],SELL_FIELD,bar[OPEN_FIELD].to_f,$portfolio['long_size'].to_f,'stoploss Gap',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil)
       #next
-        $lot_multiplier = 1
+        $lot_multiplier = 3
       end
 
       #TODO not valid for LOCKER position - todo with SL strat
@@ -692,12 +698,12 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
 =end
 
       #GAPs during the day are possible - NOT ALWAYS
-      if (bar[LOW_FIELD].to_f<=$portfolio['last_long_price'].to_f*(1-$stop_loss_percent)) && $portfolio['long_size']>$portfolio['short_size']
+      if ((bar[LOW_FIELD].to_f<=$portfolio['last_long_price'].to_f*(1-$stop_loss_percent)) && $portfolio['long_size']>$portfolio['short_size'] && $portfolio['long_size']+$portfolio['short_size'] >= $max_position_lots_size)
         exit_price=$portfolio['last_long_price'].to_f*(1-$stop_loss_percent)
         #break
         if !(exit_price<bar[LOW_FIELD].to_f )
-           createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$portfolio['long_size'].to_f,'stoploss SL',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
-           $lot_multiplier = 1
+           createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$portfolio['long_size'].to_f,'stoploss',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
+           $lot_multiplier = 3
         end
 
       #end
@@ -708,8 +714,8 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
         multiply_price=$portfolio['last_long_price'].to_f*(1-$range_entry)
         #break
         if !(multiply_price<bar[LOW_FIELD].to_f )
-          $lot_multiplier=$lot_multiplier*2+1
-          if $lot_multiplier==7
+          $lot_multiplier=$lot_multiplier*2 if $portfolio['long_size'].to_i>1
+          if $lot_multiplier==7 && bar[DATE_FIELD].to_s.include?('25/8/2010')
             Actions.c "#{bar[DATE_FIELD].to_s}-"+$portfolio['short_size'].to_s+" "+$portfolio['long_size'].to_s #'debug'
           end
           createTrade(bar[DATE_FIELD],SELL_FIELD,multiply_price,$lot_multiplier,'Multiply Range',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
@@ -730,7 +736,7 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
 
           #Opposite Entry to TP Close
           createTrade(bar[DATE_FIELD],SELL_FIELD,exit_price,$lot_start_size,'Opposite Opening',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']==0 && $portfolio['short_size']==0 && oppositeTpEntry)
-          $lot_multiplier = 1
+          $lot_multiplier = 3
           next # in real search same day entry
 
         end
@@ -749,7 +755,7 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
       if bar[OPEN_FIELD].to_f/$portfolio['last_short_price'].to_f-1>=$stop_loss_percent #*2
           createTrade(bar[DATE_FIELD],BUY_FIELD,bar[OPEN_FIELD].to_f,$portfolio['short_size'].to_f,'stoploss Gap',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil)
           #next
-          $lot_multiplier = 1
+          $lot_multiplier = 3
       end
 
       #TODO not valid for LOCKER position - todo with SL strat
@@ -768,14 +774,14 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
 =end
 
       #Gaps are possible during the day - NOT ALWAYS
-      if (bar[HIGH_FIELD].to_f>=$portfolio['last_short_price'].to_f*(1+$stop_loss_percent))
+      if ((bar[HIGH_FIELD].to_f>=$portfolio['last_short_price'].to_f*(1+$stop_loss_percent)  && $portfolio['long_size']>$portfolio['short_size']) && $portfolio['long_size']+$portfolio['short_size'] >= $max_position_lots_size)
         #Multiply - Add to leg +TODO Trailing stops
         if bar[HIGH_FIELD].to_f>=$portfolio['last_short_price'].to_f*(1+$stop_loss_percent) && $portfolio['short_size']>$portfolio['long_size']
           exit_price=$portfolio['last_short_price'].to_f*(1+$stop_loss_percent)
           #break
           if !(exit_price>bar[HIGH_FIELD].to_f) #TODO test slippage & max drawdowns by trades stats NinMax% between Open&Close
              createTrade(bar[DATE_FIELD],BUY_FIELD,exit_price,$portfolio['short_size'].to_f,'stoploss',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
-             $lot_multiplier = 1
+             $lot_multiplier = 3
           end
         end
       #end
@@ -787,8 +793,8 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
           multiply_price=$portfolio['last_short_price'].to_f*(1+$range_entry)
           #break
           if !(multiply_price>bar[HIGH_FIELD].to_f) #TODO test slippage & max drawdowns by trades stats NinMax% between Open&Close
-            $lot_multiplier=$lot_multiplier*2+1
-            if $lot_multiplier==7
+            $lot_multiplier=$lot_multiplier*2  if $portfolio['short_size'].to_i>1
+            if $lot_multiplier==7 && bar[DATE_FIELD].to_s.include?('25/8/2010')
               Actions.c "#{bar[DATE_FIELD].to_s}-"+$portfolio['short_size'].to_s+" "+$portfolio['long_size'].to_s #'debug'
             end
             createTrade(bar[DATE_FIELD],BUY_FIELD,multiply_price,$lot_multiplier,'Multiply Range',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) #if($portfolio['short_size']>0)
@@ -810,7 +816,7 @@ def adjustMartinMaEntry(startBarIndex,endBarIndex=nil,random=true,ma_period=50,o
 
           #Opposite Entry to TP Close
           createTrade(bar[DATE_FIELD],BUY_FIELD,exit_price,$lot_start_size,'Opposite Opening',bar[HIGH_FIELD].to_f,bar[LOW_FIELD].to_f,nil) if($portfolio['long_size']==0 && $portfolio['short_size']==0 && oppositeTpEntry)
-          $lot_multiplier = 1
+          $lot_multiplier = 3
           next # in real search same day entry
 
         end
