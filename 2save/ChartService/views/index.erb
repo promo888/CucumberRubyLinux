@@ -1,0 +1,407 @@
+<!-- Styles -->
+<style>
+    #chartdiv {
+        width	: 100%;
+        height	: 500px;
+    }
+    th {
+        border: 3px solid;
+        font-weight : bold;
+        color: blue;
+    }
+
+    th, td {
+        border: 1px solid;
+    }
+
+</style>
+
+<!-- Local Resources -->
+<script src="js/lib/3/amcharts.js"></script>
+<script src="js/lib/3/serial.js"></script>
+<script src="js/lib/3/themes/light.js"></script>
+<script src="js/lib/3/plugins/export.min.js"></script>
+<link rel="stylesheet" href="js/export.css" type="text/css" media="all" />
+<script src="js/fabric.min.js"></script>
+<script src="js/FileSaver.min.js"></script>
+<script src="js/pdfmake.min.js"></script>
+<script src="js/jszip.min.js"></script>
+<script src="js/xlsx.min.js"></script>
+<script src="js/jquery.min.js"></script-->
+
+
+<!-- Web Resources -->
+<!--
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+-->
+<!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script-->
+
+<!-- HTML -->
+<div id="loading"></div>
+<script type="text/javascript">
+
+    //data=<%#= @csvData.to_s %>;//debug
+    //console.log(data); //debug
+
+</script>
+<center> <img id="loading" src="loading.gif" alt="Wait..." width="100px" height="100px" /> </center>
+<div id="printTable">
+  <center><h1>Latency Details - Automation Test Report PK_<%= Time.new %> </h1> </center>
+  <center><h2>Treshold = <%= @treshhold_ms %> ms (<font color="green">Passed</font>,<font color="red">Failed</font>) </h2> </center>
+</div>
+
+<!--a href="javascript:showhide('chartdiv');javascript:showhide('selectId');">  Click to show/hide Chart </a-->
+    <div id="latency_tables" style="width:800px; margin:0 auto;"> <%= @latency_tables %> </div>
+<p>
+
+<p>
+<a href="javascript:showhide('chartdiv');javascript:showhide('selectId');">  Click to show/hide Chart </a>
+<p>
+<div id="selectId" hidden="true"><center><input type="text" id="rowId" value="0"><button onclick="refreshGeneralChartByRowId(document.getElementById('rowId').value);">BarNumber to display +-100values</button></center></div>
+<p>
+<div id="chartdiv" hidden="true"></div>
+
+<!-- Chart code -->
+<script>
+    var chartPlots = null;
+    var chartData = null;
+    var chartData2 = null;
+    getCsvChartData(); //getDataFromCsvFile("js_chart_test100k.csv");
+    //data=<%#= @csvData.to_s %>;//debug
+    //console.log(data); //debug
+
+    var chart = AmCharts.makeChart("chartdiv", {
+        "type": "serial",
+        "theme": "light",
+        "legend": {
+            "useGraphSettings": true
+        },
+        "dataProvider": chartData,
+        "synchronizeGrid":true,
+        "valueAxes": [],
+        "graphs": [],
+        "chartScrollbar": {},
+        "chartCursor": {
+            "cursorPosition": "mouse"
+        },
+        "categoryField": "id",
+        "categoryAxis": {
+            //"parseDates": true,
+            "axisColor": "#DADADA",
+            //"minorGridEnabled": true
+        },
+        "export": {
+            "enabled": true,
+            "position": "bottom-right"
+        }
+    });
+
+    //Display ONLY last 20 records
+    displayLastRecords();
+
+    chart.addListener("dataUpdated", zoomChart);
+    chart.addListener("zoomed", handleZoomIn);
+    zoomChart();
+
+    function hideShowAll() {
+        var e =  document.getElementsByClassName("amcharts-zoom-out-bg")[0]; //"amcharts-zoom-out-bg")[0]
+        e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+    }
+
+    // WAIT UNTIL CHART HAS BEEN RENDERED
+    //chart.addListener( "rendered", embedFullGraph );
+    //chart.addListener( "rendered",  hideShowAll );
+
+    function embedFullGraph(e) {
+        console.log('Graph rendered');
+        // WAIT FOR FABRIC
+        var interval = setInterval( function() {
+            if ( window.fabric ) {
+                clearTimeout( interval );
+
+                // CAPTURE CHART
+                e.chart["export"].capture( {}, function() {
+
+                    // SAVE TO JPG
+                    this.toJPG( {}, function( base64 ) {
+
+
+                        // LOG IMAGE DATA
+                        //console.log( base64 );
+
+                        // CREATE LINK TO OPEN BASE64 IMAGE IN NEW TAB
+                        var a = document.createElement("a");
+                        a.setAttribute("href", base64);
+                        a.setAttribute("target", "_blank");
+                        a.setAttribute("style", "display: block; margin-top: 10px;");
+                        a.innerHTML = "Open embedded Full Graph";
+
+                        var div = document.createElement("div");
+                        div.setAttribute("style", "position: absolute; height: 600px; width: 400px; top:100; bottom: 0; background-color: rgba(255,255,255,.9); z-index: 1337; display: block;text-align: center;");
+                        div.appendChild(a);
+
+                        this.setup.chart.div.appendChild(div);
+                    } );
+                } );
+            }
+        }, 100 );
+    }
+
+
+
+    function displayLastRecords() {
+        startRow = (chartData.length > 20) ? chartData.length - 20 : 0;
+        endRow = chartData.length - 1
+
+        chartData2 = chartData.slice(startRow, endRow);
+        console.log('Display Last Records by numberOrDate from: ' + startRow + ' to: ' + endRow);
+        //console.log('chart: '+ chart);
+        chart.dataProvider = chartData2;
+        //chart.validateData();
+    }
+
+    function getCsvChartData() {
+        chartPlots=<%= @csvHeaders %>
+                chartData=<%= @csvData %>;
+        //console.log(chartData);
+        for (i = 0; i < chartData.length; i++) {
+            for (item in chartData[i]) {
+                if(item!='date') {chartData[i][item] = parseFloat(chartData[i][item]);} //escape date column
+            }
+        }
+
+        //displayLastRecords();
+        return chartData;
+    }
+
+
+    function getDataFromCsvFile(file_path) { //1st Line ALWAYS are HEADERS
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: file_path,
+                dataType: "text",
+                success: function (data) {
+                    processData(data,',');
+                }
+            });
+        });
+    }
+
+    function processData(data,separator) {
+        var allTextLines = data.split(/\r\n|\n/);
+        var headers = allTextLines[0].split(',');
+        var chartData = [];
+
+        //console.log("data: "+data);
+        for (var i=1; i<allTextLines.length; i++) {
+            var data = allTextLines[i].split(separator); //
+            //if (data.length == headers.length) { //VALIDATION for data integrity
+
+            var tarr = [];
+            for (var j=0; j<headers.length; j++) {
+                //console.log(headers[j]+":"+data[j]);
+                tarr.push(headers[j]+":"+data[j]);
+            }
+            chartData.push(tarr);
+
+        }
+        // console.log(chartData);
+        return chartData;
+    }
+
+    function zoomChart(){
+        chart.zoomToIndexes(chart.dataProvider.length - 20, chart.dataProvider.length - 1);
+    }
+
+    function handleZoomIn(event) {
+        //console.log(event);
+        chart.zoomToIndexes(parseInt(event['startIndex']), parseInt(event['startIndex'])+20);
+        $("#chartdiv > div > div.amcharts-chart-div > svg > g:nth-child(18) > g").hide(); //Disable Show All btn
+    }
+
+
+    <% 2.upto(@csvHeaders.length) do |num|  %> //0-reserved for id X axis plotting,1-for date NOT plotting
+    chart.valueAxes[<%= num.to_s %>]={
+        // "id":"<%#= 'v'+(num+1).to_s %>",
+        //"axisColor": "#FF6600",
+        //"axisThickness": 2,
+        //"axisAlpha": 1,
+        //"position": "left"
+    }
+
+    colors=["#FF4000","#FF8000","#04B404","#04B4AE","#6E6E6E","#0431B4","#5F04B4","#FE2EF7","#FA5858","#B40431","#2EFE2E","#FFFF00","#FA5858","#01DFD7","#585858","#0A2A22","#3B170B"]
+    chart.graphs[<%= num.to_s %>]={
+        //"valueAxis":"<%#= 'v'+(num+1).to_s %>",
+        "lineColor": colors[<%= (num+1).to_s %>],
+        "bullet"   :"round",
+        "bulletBorderThickness":1,
+        "hideBulletsCount":30,
+        "title": "<%= @csvHeaders[num].to_s %>",
+        "valueField": "<%= @csvHeaders[num].to_s %>",
+        //"fillAlphas": 0
+    }
+    <% end %>
+
+    var loadingElm = document.getElementById('loading');
+    $("img#loading").hide();
+
+
+    function showhide(id) {
+        var e = document.getElementById(id);
+        e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+    }
+
+
+
+    function getChartSortedByColumnLatency(fromArrOfObjs,byField,floatPercent){
+        rowsLength = getLengthOfNotEmptyValues(fromArrOfObjs,byField); //(sortedChartData.map(function(a) {return a[byField];})).length;
+        sortedChartData = sortChartDataTableByColumnDesc(fromArrOfObjs,byField,rowsLength); //fromArrOfObjs.slice();
+        upPercentRowsAmount = rowsLength-Math.floor( rowsLength * floatPercent / 100 ); //Math.ceil Math.round - roundUp,Math.floor - roundDown
+        console.log('rowsLength: ' + rowsLength + ' byField: ' + byField );
+        //console.log('upPercentRowsAmount: '+upPercentRowsAmount);
+        //console.log('byField: '+byField);
+        //console.log('floatPercent: '+floatPercent);
+        html_table=getChartDataTableLastRowsTable(sortedChartData,upPercentRowsAmount,rowsLength-1,byField,floatPercent);
+        //console.log(html_table);
+        displayHtmlTableInNewWindow(byField,html_table);
+
+        //Redraw Chart with % data
+        /*
+        startRow = rowsLength-1-upPercentRowsAmount-100 >=0 ? rowsLength-1-upPercentRowsAmount-100 : 0; //100 bars left or from the start
+        endRow = startRow+2*100<=rowsLength-1 ? startRow+2*100 : rowsLength-1; //100bars right or up to the end
+        chartData2 = chartData.slice(startRow,endRow);
+        console.log('Revalidate Chart from: ' +startRow + ' to: '+endRow);
+        chart.dataProvider = chartData2;
+        chart.validateData();
+        */
+    }
+
+
+    function getLengthOfNotEmptyValues(fromArrOfObjs,byField) {
+        length = 0;
+        for (var i = 0; i < fromArrOfObjs.length; i++ ){
+	        if(!fromArrOfObjs[i][byField].isNaN && fromArrOfObjs[i][byField] !== undefined && fromArrOfObjs[i][byField] !== null && fromArrOfObjs[i][byField]>0) {
+		        length++;
+		    }
+	    }
+
+	return length;
+   }
+
+
+
+    function sortChartDataTableByColumnDesc(fromArrOfObjs,byField,rowsLength){
+        sortedChartData = fromArrOfObjs.slice(0,rowsLength);
+        //sortedChartData.reverse();
+        sortedChartData.sort(function(a, b){
+            //return a.byField == b.byField ? 0 : +(a.byField > b.byField) || -1; //Sort Asc
+            return (a[byField] == b[byField] ) ? 0 : +(b[byField] > a[byField]) || -1; //Sort Desc
+        });
+
+        //console.log('sortChartDataTableByColumnDesc sortedChartData.length: ' + sortedChartData.length + ' byField: ' + byField);
+        //console.log('BEFORE RETURN sortChartDataTableByColumnDesc');
+        return sortedChartData;
+
+    }
+
+
+    function getChartDataTableLastRowsTable(fromArrOfObjs,rowsLength,columnLength,byField,floatPercent) {
+        s= `<html>
+            <head>
+            <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+                color: blue;
+            }
+
+            td {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+            </head>
+        <body>`;
+
+        p =  '<p><h1>'+byField+' '+floatPercent+'% Latency records'+ '</h1>';
+        t_start = '<p><table><tr><th>Count</th><th>TimeOrTicketID</th><th>'+byField+'</th></tr>';
+
+        //for (i=fromArrOfObjs.length-rowsLength-2; i>=0 && i<fromArrOfObjs.length; i++) { //+1 for 100%
+        for (i=0 && i<fromArrOfObjs.length-1; i>=0 && i<rowsLength+1; i++) {
+            //console.log('getChartDataTableLastRowsTable loop: ' + i);
+            //console.log('fromArrOfObjs[rowsLength][date]: ' + fromArrOfObjs[rowsLength]['date']);
+            //console.log('fromArrOfObjs[i]['+byField+']: ' + fromArrOfObjs[i][byField]);
+            //t_start+='<tr><td><font color="blue">'+fromArrOfObjs[i]['date']+'</font></td><td>'+fromArrOfObjs[i][byField]+'</td></tr>'
+            t_start+='<tr><td onclick="window.opener.refreshGeneralChartByRowId('+chartData[fromArrOfObjs[i]['id']-1]['id']+');"><font color="blue">'+fromArrOfObjs[i]['id']+'</font></td><td>'+fromArrOfObjs[i]['date']+'</td><td>'+fromArrOfObjs[i][byField]+'</td></tr>'
+
+        }
+        t_end = '</table></html>';
+
+        //console.log('BEFORE RETURN getChartDataTableLastRowsTable');
+        return s+p+t_start+t_end;
+    }
+
+
+    function displayHtmlTableInNewWindow(byField,tableToShow)
+    {
+        var left = screen.width  / 3;
+        var top =  screen.height / 3;
+        var popupWindow = window.open("", byField+" Details", "menubar=no, scrollbars=no, resizable=no,width=600, height=400" + ', top=' + top + ', left=' + left);
+        popupWindow.document.write(tableToShow);
+    }
+
+
+    function refreshChartByLatencyDateOrNumber(dateOrNumber) { //100bars left and write
+        //window.close();//ToDo close? parent window
+        rowsLength = sortedChartData.length; //(sortedChartData.map(function(a) {return a[byField];})).length;
+        upPercentRowsAmount = rowsLength-Math.floor( rowsLength * floatPercent / 100 );
+        startRow = rowsLength-1-upPercentRowsAmount-100 >=0 ? rowsLength-1-upPercentRowsAmount-100 : rowsLength-1-upPercentRowsAmount; //100 bars left or from the start
+        endRow = rowsLength-1-upPercentRowsAmount+100<=rowsLength-1 ? rowsLength-1-upPercentRowsAmount+100 : rowsLength-1; //100bars right or up to the end
+        chartData2 = chartData.slice(startRow,endRow);
+        console.log('Revalidate Chart by Latency numberOrDate from: ' +startRow + ' to: '+endRow);
+        chart.dataProvider = chartData2;
+        chart.validateData();
+
+        //chart.zoomToIndexes(startRow, endRow);
+    }
+
+
+    function refreshGeneralChartByRowId(id) { //100bars left and write
+        //window.refreshGeneralChartByRowId = refreshGeneralChartByRowId(dateOrNumber);
+
+        id = parseInt(id);
+        rowsLength = chartData.length; //(chartData.map(function(a) {return a;})).length;
+        //console.log('dateOrNumber: ' + dateOrNumber + ' rowsLength: ' + rowsLength);
+        startRow = rowsLength-1-100-id >= 0  ? id : 0; //100 bars left or from the start
+        if(id<rowsLength-1) {startRow = (id-100 >= 0) ? id-100 : 0;}
+        if(id>rowsLength-1) {startRow = (rowsLength-1-100 >= 0 ) ? rowsLength-1-100 : 0;}
+        //console.log('startRow: '+startRow);
+        endRow = parseInt(startRow)+100*2 <= rowsLength-1 ? parseInt(startRow)+100*2 : rowsLength-1; //100bars right or up to the end
+        //console.log('endRow: '+endRow);
+
+        chartData2 = chartData.slice(startRow,endRow);
+        console.log('Revalidate General Chart by numberOrDate from: ' +startRow + ' to: '+endRow);
+        chart.dataProvider = chartData2;
+        chart.validateData();
+
+        //chart.zoomToIndexes(startRow, endRow);
+    }
+
+</script>

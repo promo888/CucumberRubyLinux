@@ -1,0 +1,17 @@
+<div id="loading">Form Expected</div>
+<%= @kvData %>
+
+<% if(@kvData.length > 0) %>
+	<form method="POST" action="/saveKvFile">
+	  <table>
+	  <% @kvData.each{|k,v|
+		#next if k.nil? || k.empty?
+		%> 
+			<tr><td> <%= k.to_s %> </td> <td> <input type="text" name="<%=k.to_s%>" value=" <%= v.nil? ? "" : v.to_s %> " > </td></tr>		
+		<% } %>  
+	  <tr><td colspan=2 align="center"><input type="submit"></td></tr>
+	  </table>
+	</form>
+<% else %>
+	NO DATA !!!
+<% end %>	
